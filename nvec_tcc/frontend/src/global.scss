@@ -31,7 +31,7 @@
     font-family: 'Poppins', sans-serif
 }
 
-//PRINCIPAL * background/texto/grafico e etc
+/* //PRINCIPAL * background/texto/grafico e etc
 $cor-principal: #006EFF;
 $cor-secundaria: #FFAC4A;  //Segunda que "mais aparece" 
 $cor-terciaria: #59BF85; //Terceira que "mais aparece" 
@@ -49,10 +49,107 @@ $cor-btn-input-outline: #DCDFE4;
 //Cor dos cards (no final é a cor)
 $cor-card-azul-opaco: #F1F2F4;
 $cor-card-amarelo: #FFF7D6;
-$cor-card-principal: #006EFF;
+$cor-card-principal: #006EFF; */
 
+//Spacing
+$spaceXSmall: 4px;
+$spaceSmall: 8px;
+$spaceMedium: 12px;
+$spaceLarge: 16px;
+$spaceXLarge: 20px;
+$spaceXXLarge: 24px;
+$spaceXXXLarge: 28px;
+$spaceXXXXLarge: 32px;
+$spaceExtra: 64px;
+$spaceXExtra: 128px;
+$spaceBig: 256px;
 
-//TEXTOS
+//ColorsScheme
+
+//brand
+$brand1: #006EEF;
+$brand2: #FFAC4A;
+
+//neutralLight
+$N0: #FFFFFF;
+$N100: #F7F8F9;
+$N200: #F1F2F4;
+$N300: #DCDFE4;
+$N400: #B3B9C4;
+$N500: #8590A2;
+$N600: #758195;
+$N700: #626F86;
+$N800: #44546F;
+$N900: #2C3E5D;
+$N1000: #172B4D;
+
+//neutralDark
+$N0D: #161A1D;
+$N100D: #1D2125;
+$N200D: #22272B;
+$N300D: #2C333A;
+$N400D: #454F59;
+$N500D: #596773;
+$N600D: #738496;
+$N700D: #8C9BAB;
+$N800D: #9FADBC;
+$N900D: #B6C2CF;
+$N1000D: #C7D1DB;
+
+//info
+$B0: #E9F2FF;
+$B100: #CCE0FF;
+$B200: #85B8FF;
+$B300: #579DFF;
+$B400: #388BFF;
+$B500-info: #006EFF;
+$B600: #0C66E4;
+$B700: #0055CC;
+$B800: #09326C;
+$B900: #092957;
+
+//sucess
+$G0: #DFFCF0;
+$G100: #BAF3DB;
+$G200: #7EE2B8;
+$G300: #4BCE97;
+$G400-sucess: #27AE60;
+$G500: #22A06B;
+$G600: #1F845A;
+$G700: #216E4E;
+$G800: #164B35;
+$G900: #143C2B;
+
+//warning
+$Y0: #FFF7D6;
+$Y100: #F8E6A0;
+$Y200: #FFAC4A;
+$Y300-warning: #E2B203;
+$Y400: #CF9F02;
+$Y500: #B38600;
+$Y600: #949F00;
+$Y700: #7F5F01;
+$Y800: #533F04;
+$Y900: #3F3102;
+
+//danger
+$R0: #FFECEC;
+$R100: #FDD0F0;
+$R200: #F79797;
+$R300: #E77474;
+$R400: #DA6262;
+$R500: #CD5151;
+$R600-danger: #AE4747;
+$R700: #943D3D;
+$R800: #502525;
+$R900: #421F1F;
+
+//mutued
+$mutued: #626F86;
+$title: #172B4D;
+$bg: #F1F2FA;
+
+//Text
 $headeH1:56px;
 $headeH2:48px;
 $headeH3:40px;
@@ -77,6 +174,7 @@ $textBig: 35px;
 $textBigBold: 35px;
 
 //BORDAS
+
 
 //EFECTS
 $dropShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40);
