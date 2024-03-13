@@ -53,9 +53,32 @@ $cor-card-principal: #006EFF;
 
 
 //TEXTOS
+$headeH1:56px;
+$headeH2:48px;
+$headeH3:40px;
+$headeH4:32px;
+$headeH5:24px;
+$headeH6:20px;
 
-$text-titulo: 34px;
-$text-subtitulo: 20px;
-$text-btn: 16px;
-$text-medio: 12px;
-$text-mini: 8px;
+$textSmalling: 8px;
+$textSmaller: 12px;
+$textSmallerBold: 12px; 
+$textSmall: 14px;
+$textSmallBold: 14px;
+$textNormal: 16px;
+$textNormalBold: 16px;
+$textMedium: 18px;
+$textMediumBold: 18px;
+$textLarge: 20px;
+$textLargeBold: 20px;
+$textExtraLarge: 24px;
+$textExtraLargeBold: 24px;
+$textBig: 35px;
+$textBigBold: 35px;
+
+//BORDAS
+
+//EFECTS
+$dropShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40);
+$innerShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40) inset;
+$glassEffect: blur(10px);
