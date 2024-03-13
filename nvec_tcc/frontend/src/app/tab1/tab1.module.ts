@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { CardListasComponent } from 'src/components/cards/card-listas/card-listas.component';
 import { RouterModule } from '@angular/router';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { ButtonBigComponent } from 'src/components/buttons/button-big/button-big.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     Tab1PageRoutingModule,
     RouterModule.forChild([{path: '../../../components/cards/card-listas', component: CardListasComponent}])
   ],
-  declarations: [Tab1Page, CardListasComponent]
+  declarations: [Tab1Page, CardListasComponent, ButtonBigComponent]
 })
 export class Tab1PageModule {}

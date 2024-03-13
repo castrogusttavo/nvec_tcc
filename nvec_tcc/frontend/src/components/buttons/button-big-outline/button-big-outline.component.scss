@@ -1,0 +1,9 @@
+.buttonBig{
+    display: inline-flex;
+    padding: 12px 64px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: var(--Space-8, 8px);
+    background: var(--Color-brand1, #006EFF);
+}
