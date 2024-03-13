@@ -24,3 +24,38 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif
+}
+
+//PRINCIPAL * background/texto/grafico e etc
+$cor-principal: #006EFF;
+$cor-secundaria: #FFAC4A;  //Segunda que "mais aparece" 
+$cor-terciaria: #59BF85; //Terceira que "mais aparece" 
+$cor-quartenaria: #CD5151; //Quarta que "mais aparece" 
+
+//Cores neutras
+$branco: #fff5fa;
+$preto: #121212;
+$cinza-input-subtitulo:  #9FADBC;
+
+//Outline Components
+$cor-search-outline: #74B0FF;
+$cor-btn-input-outline: #DCDFE4;
+
+//Cor dos cards (no final é a cor)
+$cor-card-azul-opaco: #F1F2F4;
+$cor-card-amarelo: #FFF7D6;
+$cor-card-principal: #006EFF;
+
+
+//TEXTOS
+
+$text-titulo: 34px;
+$text-subtitulo: 20px;
+$text-btn: 16px;
+$text-medio: 12px;
+$text-mini: 8px;
