@@ -1,0 +1,20 @@
+.buttonMedium{
+    display: flex;
+    width: 215px;
+    padding: var(--Space-12, 12px) var(--Space-64, 64px);
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: var(--Space-8, 8px);
+    background: var(--Color-brand1, #006EFF);
+    width: 213px;
+    height: 47px;
+}
+
+.buttonText{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22.4px;
+    color: #FFF;
+}

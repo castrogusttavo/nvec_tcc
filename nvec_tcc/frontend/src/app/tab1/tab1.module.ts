@@ -8,6 +8,8 @@ import { CardListasComponent } from 'src/components/cards/card-listas/card-lista
 import { RouterModule } from '@angular/router';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ButtonBigComponent } from 'src/components/buttons/button-big/button-big.component';
+import { ButtonMediumComponent } from 'src/components/buttons/button-medium/button-medium.component';
+import { ButtonMediumOutlineComponent } from 'src/components/buttons/button-medium-outline/button-medium-outline.component';
 
 @NgModule({
   imports: [
@@ -18,6 +20,6 @@ import { ButtonBigComponent } from 'src/components/buttons/button-big/button-big
     Tab1PageRoutingModule,
     RouterModule.forChild([{path: '../../../components/cards/card-listas', component: CardListasComponent}])
   ],
-  declarations: [Tab1Page, CardListasComponent, ButtonBigComponent]
+  declarations: [Tab1Page, CardListasComponent, ButtonBigComponent, ButtonMediumComponent, ButtonMediumOutlineComponent]
 })
 export class Tab1PageModule {}
