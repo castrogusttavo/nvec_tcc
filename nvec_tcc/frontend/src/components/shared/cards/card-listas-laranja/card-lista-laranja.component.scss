@@ -1,13 +1,13 @@
 ion-card{
-    width: 300px;
-    height: 400px;
+    width: 220px;
+    height: 350px;
     border-radius: 16px;
 }
 ion-card-header{
     color: white;
     width: 100%;
     height: 50%;
-    background-color: #006EFF;
+    background-color: #FFAC4A;
 }
 ion-card-content{
     width: 100%;
@@ -26,6 +26,9 @@ ion-icon{
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+.dt-lista span{
+    font-size: 8px;
 }
 .visu-gastos{
     display: flex;

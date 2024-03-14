@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
-
 @Component({
-  selector: 'app-card-listas',
+  selector: 'app-card-listas-azul',
   templateUrl: './card-listas.component.html',
   styleUrls: ['./card-listas.component.scss'],
 })
