@@ -10,6 +10,7 @@ import { CardBannerYellowComponent } from './cards/card-banner-yellow/card-banne
 import { CardItemComponent } from './cards/card-item/card-item.component';
 import { CardListaLaranjaComponent } from './cards/card-listas-laranja/card-lista-laranja.component';
 import { CardListasComponent } from './cards/card-listas-azul/card-listas.component';
+import { CardIconHomeComponent } from './cards/card-icon-home/card-icon-home.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CardListasComponent } from './cards/card-listas-azul/card-listas.compon
     CardListaLaranjaComponent,
     CardItemComponent,
     CardBannerYellowComponent,
-    CardBannerBlueComponent
+    CardBannerBlueComponent,
+    CardIconHomeComponent
 
   ],
   imports: [
@@ -31,7 +33,8 @@ import { CardListasComponent } from './cards/card-listas-azul/card-listas.compon
     RouterModule.forChild([{path: '../../../components/shared/cards/card-listas-laranja', component: CardListaLaranjaComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-item', component: CardItemComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-banner-yellow', component: CardBannerYellowComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-banner-blue', component: CardBannerBlueComponent}])
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-banner-blue', component: CardBannerBlueComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-icon-home', component: CardIconHomeComponent}])
     
   ],
   exports: [
@@ -43,7 +46,8 @@ import { CardListasComponent } from './cards/card-listas-azul/card-listas.compon
     CardListaLaranjaComponent,
     CardItemComponent,
     CardBannerYellowComponent,
-    CardBannerBlueComponent // Também exporte o CommonModule se você estiver usando diretivas do Angular como *ngFor ou *ngIf em seus componentes compartilhados
+    CardBannerBlueComponent, // Também exporte o CommonModule se você estiver usando diretivas do Angular como *ngFor ou *ngIf em seus componentes compartilhados
+    CardIconHomeComponent
   ]
 })
 export class SharedModule { }
