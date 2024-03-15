@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card-icon-home',
@@ -8,7 +8,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardIconHomeComponent  implements OnInit {
 
   constructor() { }
-  @Input() imagePath: string | undefined;
 
   ngOnInit() {}
 
