@@ -11,8 +11,12 @@ import { CardItemComponent } from './cards/card-item/card-item.component';
 import { CardListaLaranjaComponent } from './cards/card-listas-laranja/card-lista-laranja.component';
 import { CardListasComponent } from './cards/card-listas-azul/card-listas.component';
 import { CardIconHomeComponent } from './cards/card-icon-home/card-icon-home.component';
+<<<<<<< Updated upstream
 import { InputComponent } from './inputs/input/input.component';
 import { CardBannerComponent } from './cards/card-banner/card-banner.component';
+=======
+
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -24,9 +28,14 @@ import { CardBannerComponent } from './cards/card-banner/card-banner.component';
     CardItemComponent,
     CardBannerYellowComponent,
     CardBannerBlueComponent,
+<<<<<<< Updated upstream
     CardIconHomeComponent,
     InputComponent,
     CardBannerComponent
+=======
+    CardIconHomeComponent
+
+>>>>>>> Stashed changes
   ],
   imports: [
     IonicModule,
@@ -50,9 +59,13 @@ import { CardBannerComponent } from './cards/card-banner/card-banner.component';
     CardItemComponent,
     CardBannerYellowComponent,
     CardBannerBlueComponent, // Também exporte o CommonModule se você estiver usando diretivas do Angular como *ngFor ou *ngIf em seus componentes compartilhados
+<<<<<<< Updated upstream
     CardIconHomeComponent,
     InputComponent,
     CardBannerComponent
+=======
+    CardIconHomeComponent
+>>>>>>> Stashed changes
   ]
 })
 export class SharedModule { }

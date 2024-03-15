@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -7,7 +7,9 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['./card-banner-yellow.component.scss'],
 })
 export class CardBannerYellowComponent  implements OnInit {
-
+  @Input() imagePath: string | undefined; 
+  @Input() titulo: string | undefined; 
+  @Input() conteudo: string | undefined; 
   constructor() { }
 
   ngOnInit() {}
