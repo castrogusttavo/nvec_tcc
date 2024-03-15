@@ -1,0 +1,9 @@
+@import "../../../../global.scss";
+
+:host{
+    ion-card{
+        width: 84px;
+        height: 40px;
+        --background: #{$N200};
+    }
+}
