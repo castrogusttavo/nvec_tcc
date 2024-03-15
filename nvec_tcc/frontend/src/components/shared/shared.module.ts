@@ -12,7 +12,7 @@ import { CardListaLaranjaComponent } from './cards/card-listas-laranja/card-list
 import { CardListasComponent } from './cards/card-listas-azul/card-listas.component';
 import { CardIconHomeComponent } from './cards/card-icon-home/card-icon-home.component';
 import { InputComponent } from './inputs/input/input.component';
-
+import { CardBannerComponent } from './cards/card-banner/card-banner.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { InputComponent } from './inputs/input/input.component';
     CardBannerYellowComponent,
     CardBannerBlueComponent,
     CardIconHomeComponent,
-    InputComponent
+    InputComponent,
+    CardBannerComponent
   ],
   imports: [
     IonicModule,
@@ -35,7 +36,8 @@ import { InputComponent } from './inputs/input/input.component';
     RouterModule.forChild([{path: '../../../components/shared/cards/card-item', component: CardItemComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-banner-yellow', component: CardBannerYellowComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-banner-blue', component: CardBannerBlueComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-icon-home', component: CardIconHomeComponent}])
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-icon-home', component: CardIconHomeComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-banner', component: CardBannerComponent}])
     
   ],
   exports: [
@@ -49,7 +51,8 @@ import { InputComponent } from './inputs/input/input.component';
     CardBannerYellowComponent,
     CardBannerBlueComponent, // Também exporte o CommonModule se você estiver usando diretivas do Angular como *ngFor ou *ngIf em seus componentes compartilhados
     CardIconHomeComponent,
-    InputComponent
+    InputComponent,
+    CardBannerComponent
   ]
 })
 export class SharedModule { }
