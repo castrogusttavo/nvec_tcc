@@ -11,6 +11,7 @@ import { CardItemComponent } from './cards/card-item/card-item.component';
 import { CardListaLaranjaComponent } from './cards/card-listas-laranja/card-lista-laranja.component';
 import { CardListasComponent } from './cards/card-listas-azul/card-listas.component';
 import { CardIconHomeComponent } from './cards/card-icon-home/card-icon-home.component';
+import { InputComponent } from './inputs/input/input.component';
 
 
 @NgModule({
@@ -23,8 +24,8 @@ import { CardIconHomeComponent } from './cards/card-icon-home/card-icon-home.com
     CardItemComponent,
     CardBannerYellowComponent,
     CardBannerBlueComponent,
-    CardIconHomeComponent
-
+    CardIconHomeComponent,
+    InputComponent
   ],
   imports: [
     IonicModule,
@@ -47,7 +48,8 @@ import { CardIconHomeComponent } from './cards/card-icon-home/card-icon-home.com
     CardItemComponent,
     CardBannerYellowComponent,
     CardBannerBlueComponent, // Também exporte o CommonModule se você estiver usando diretivas do Angular como *ngFor ou *ngIf em seus componentes compartilhados
-    CardIconHomeComponent
+    CardIconHomeComponent,
+    InputComponent
   ]
 })
 export class SharedModule { }

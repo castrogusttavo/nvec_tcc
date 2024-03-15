@@ -1,0 +1,22 @@
+@import "../../../../global.scss";
+
+.inputNormal {
+  width: 382px;
+  height: 55px;
+  flex-shrink: 0;
+  border-radius: var(--Space-8, 8px);
+  border: var(--Space-space-025, 2px) solid
+    var(--Color-inverted-inverted300, #dcdfe4);
+    background: transparent;
+}
+
+::placeholder {
+    color: var(--Color-Neutral-Dark-N800, #9FADBC);
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; /* 133.333% */
+}
+
+/*  */
