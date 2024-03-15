@@ -1,0 +1,32 @@
+<<<<<<< Updated upstream
+=======
+@import "../../../../global.scss";
+
+:host{
+    ion-card{
+        width: auto;
+        height: 40px;
+        --background: #{$N200};
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        border-radius: 8px;
+    }
+    p{
+        font-size: $spaceSmall;
+        display: flex;
+        justify-content: center; 
+    }
+    .criar{
+        background-color: $brand2;
+        border-radius: 2px;
+        color: white;
+        display: block;
+        height: 12px;
+        justify-content: center;
+        align-items: center;
+        // gap: 10px;
+        // flex-shrink: 0;
+    }
+}
+>>>>>>> Stashed changes
