@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-card-user-community',
@@ -7,6 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardUserCommunityComponent  implements OnInit {
 
+  @Input() greeting: string | undefined;
+  @Input() userName: string | undefined;
+  @Input() imagePath: string | undefined;
+  @Input() numCreatedCommunity: string | undefined;
+  @Input() numEnteredCommunity: string | undefined;
+  @Input() numInvitesCommunity: string | undefined;
+  @Input() state: string | undefined;
   constructor() { }
 
   ngOnInit() {}

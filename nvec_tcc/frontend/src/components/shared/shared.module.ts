@@ -14,6 +14,8 @@ import { ButtonSmallComponent } from './buttons/button-small/button-small.compon
 import { ButtonSocialComponent } from './buttons/button-social/button-social.component';
 import { CardListSmallComponent } from './cards/card-list-small/card-list-small.component';
 import { CardHomeCommunityComponent } from './cards/card-home-community/card-home-community.component';
+import { CardUserCommunityComponent } from './cards/card-user-community/card-user-community.component';
+import { CardListSquareComponent } from './cards/card-list-square/card-list-square.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { CardHomeCommunityComponent } from './cards/card-home-community/card-hom
     ButtonSmallComponent,
     ButtonSocialComponent,
     CardListSmallComponent,
-    CardHomeCommunityComponent
+    CardHomeCommunityComponent,
+    CardUserCommunityComponent,
+    CardListSquareComponent
 
   ],
   imports: [
@@ -40,7 +44,9 @@ import { CardHomeCommunityComponent } from './cards/card-home-community/card-hom
     RouterModule.forChild([{path: '../../../components/shared/cards/card-banner', component: CardBannerComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list', component: CardListComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-small', component: CardListSmallComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-home-community', component: CardHomeCommunityComponent}])
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-home-community', component: CardHomeCommunityComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-user-community', component: CardUserCommunityComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}])
     
   ],
   exports: [
@@ -57,7 +63,9 @@ import { CardHomeCommunityComponent } from './cards/card-home-community/card-hom
     ButtonSmallComponent,
     ButtonSocialComponent,
     CardListSmallComponent,
-    CardHomeCommunityComponent
+    CardHomeCommunityComponent,
+    CardUserCommunityComponent,
+    CardListSquareComponent
   ]
 })
 export class SharedModule { }
