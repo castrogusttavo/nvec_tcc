@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-card-home-community',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./card-home-community.component.scss'],
 })
 export class CardHomeCommunityComponent  implements OnInit {
+
+  @Input() title: string | undefined; // titulo modificavel
+  @Input() content: string | undefined;  // conteudo modificavel
 
   constructor() { }
 
