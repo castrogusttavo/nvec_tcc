@@ -10,6 +10,8 @@ import { CardIconHomeComponent } from './cards/card-icon-home/card-icon-home.com
 import { InputComponent } from './inputs/input/input.component';
 import { CardBannerComponent } from './cards/card-banner/card-banner.component';
 import { CardListComponent } from './cards/card-list/card-list.component';
+import { ButtonSmallComponent } from './buttons/button-small/button-small.component';
+import { ButtonSocialComponent } from './buttons/button-social/button-social.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CardListComponent } from './cards/card-list/card-list.component';
     InputComponent,
     CardBannerComponent,
     CardIconHomeComponent,
-    CardListComponent
+    CardListComponent,
+    ButtonSmallComponent,
+    ButtonSocialComponent
 
   ],
   imports: [
@@ -43,7 +47,9 @@ import { CardListComponent } from './cards/card-list/card-list.component';
     InputComponent,
     CardBannerComponent,
     CardIconHomeComponent,
-    CardListComponent
+    CardListComponent,
+    ButtonSmallComponent,
+    ButtonSocialComponent
   ]
 })
 export class SharedModule { }
