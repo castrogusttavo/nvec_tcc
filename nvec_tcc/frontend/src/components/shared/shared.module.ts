@@ -12,6 +12,7 @@ import { CardBannerComponent } from './cards/card-banner/card-banner.component';
 import { CardListComponent } from './cards/card-list/card-list.component';
 import { ButtonSmallComponent } from './buttons/button-small/button-small.component';
 import { ButtonSocialComponent } from './buttons/button-social/button-social.component';
+import { CardListSmallComponent } from './cards/card-list-small/card-list-small.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ButtonSocialComponent } from './buttons/button-social/button-social.com
     CardIconHomeComponent,
     CardListComponent,
     ButtonSmallComponent,
-    ButtonSocialComponent
+    ButtonSocialComponent,
+    CardListSmallComponent
 
   ],
   imports: [
@@ -34,7 +36,8 @@ import { ButtonSocialComponent } from './buttons/button-social/button-social.com
     RouterModule.forChild([{path: '../../../components/shared/cards/card-item', component: CardItemComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-icon-home', component: CardIconHomeComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-banner', component: CardBannerComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-list', component: CardListComponent}])
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-list', component: CardListComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-small', component: CardListSmallComponent}])
     
   ],
   exports: [
@@ -49,7 +52,8 @@ import { ButtonSocialComponent } from './buttons/button-social/button-social.com
     CardIconHomeComponent,
     CardListComponent,
     ButtonSmallComponent,
-    ButtonSocialComponent
+    ButtonSocialComponent,
+    CardListSmallComponent
   ]
 })
 export class SharedModule { }
