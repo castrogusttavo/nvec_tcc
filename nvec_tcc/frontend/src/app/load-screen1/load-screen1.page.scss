@@ -1,0 +1,53 @@
+.body{
+    background: var(--Color-brand1, #006EFF);
+    width: 430px;
+    height: 932px;
+}
+
+.boxSombra1{
+    width: 387px;
+    height: 560.7px;
+    flex-shrink: 0;
+    border-radius: 43.2px 43.2px 0px 0px;
+    opacity: 0.5;
+    background: var(--Color-inverted-inverted100, #F7F8F9);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 70px;
+    margin: auto;
+}
+
+// .box{
+//     border-radius: 48px 48px 0px 0px;
+//     background: var(--Color-inverted-inverted0, #FFF);
+//     width: 430px;
+//     height: 615px;
+//     flex-shrink: 0;
+//     z-index: 2;
+// }
+
+.box{
+    width: 430px;
+    height: 615px;
+    flex-shrink: 0;
+    border-radius: 48px 48px 0px 0px;
+    background: var(--Color-inverted-inverted0, #FFF);
+    position:fixed;
+    justify-content: end;
+    z-index:  3;
+    bottom: 0;
+}
+
+.boxSombra2{
+    width: 387px;
+    height: 560.7px;
+    flex-shrink: 0;
+    border-radius: 43.2px 43.2px 0px 0px;
+    opacity: 0.5;
+    background: var(--Color-inverted-inverted100, #F7F8F9);
+    backdrop-filter: blur(10px);
+    z-index:2;
+}
