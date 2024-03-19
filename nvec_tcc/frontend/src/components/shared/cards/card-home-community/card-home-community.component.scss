@@ -15,21 +15,18 @@
     button{
         width: 24px;
         height: 24px;
-        position: absolute;
-        left: 1px;
-        top: 1px;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 10px;
         background: var(--Color-brand1, #006EFF);
         border-radius: 50%;
+        margin: 0 0 0 15px;
     }
-    .text-btn{
+    .community .text-btn{
         display: flex;
+        justify-content: space-around;
         align-items: center;
-        justify-content: space-between;
-        gap: 16px;
     }
     h6{
         color: var(--Normal0, #161A1D);
