@@ -1,17 +1,18 @@
 <ion-card class="cardLista">
   <ion-card-header>
-    <h5>Lanche da escola</h5>
+    <h5>{{title}}</h5>
     <div class="ctg-lista">
-      <span>Mercado</span>
+      <span>{{category}}</span>
       <div class="visu-gastos">
         <h5>R$888/R$999</h5>
-        <ion-icon class="eye-icon" name="eye"></ion-icon>
+        <button><img src="./../../../../assets/svg/eye.svg" alt=""></button>
       </div>
     </div>
   </ion-card-header>
   <ion-card-content>
     <div class="dt-lista">
-      <span>00/00/0000</span>
-      <ion-icon name="arrow-forward-circle"></ion-icon></div>
+      <span>{{date}}</span>
+      <button><img src="./../../../../assets/svg/arrow_forward_home.svg" alt=""></button>
+    </div>
   </ion-card-content>
 </ion-card>

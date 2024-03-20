@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/components/shared/shared.module';
+import { IonicModule } from '@ionic/angular';
 
-import { HomeScreenPageRoutingModule } from './home-screen-routing.module';
+import { LoadScreen1PageRoutingModule } from './load-screen1-routing.module';
 
-import { HomeScreenPage } from './home-screen.page';
+import { LoadScreen1Page } from './load-screen1.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomeScreenPageRoutingModule,
+    LoadScreen1PageRoutingModule,
     SharedModule
   ],
-  declarations: [HomeScreenPage]
+  declarations: [LoadScreen1Page]
 })
-export class HomeScreenPageModule {}
+export class LoadScreen1PageModule {}
