@@ -3,13 +3,14 @@
 
     <div class="header">
       <img src="../../assets/svg/arrow.svg" alt="" class="arrow">
-      <span>Já possui uma conta?</span>
-      <app-button-small class="buttonSmall">Entrar</app-button-small>
+      <div>
+        <span class="span-top">Já possui uma conta?</span>
+        <app-button-small class="buttonSmall">Entrar</app-button-small>
+      </div>
     </div>
       
     <h1>Na Volta Eu Compro</h1>
-    <div class="boxSombra">
-    </div>
+    <div class="boxSombra"></div>
 
     <div class="box"> 
       <p>Comece Gratuitamente</p>
@@ -20,17 +21,18 @@
         <app-input placeholder="Title" class="inputTitle">Title </app-input>
       </div>
       <app-button-big class="buttonCreate">Cadastrar</app-button-big>
-      <div id="linha">
-        <span class="spanTwo">Ou cadastrar por</span>
-      </div>
-      <hr />
+
+      <div class="line">
+        <div ></div>
+        <span>Ou cadastrar por</span>
+        <div ></div>
+      </div>      
 
       <div class="buttonSocial">
-        <app-button-social> <img src="../../assets/svg/google.svg"  alt="" class="imgGoogle">Google </app-button-social>
-        <app-button-social> <img src="../../assets/svg/facebook.svg" alt="" class="imgFacebook">Facebook </app-button-social>  
+        <app-button-social [imageSocial]="'../../assets/svg/google.svg'" texto="Midia social"></app-button-social>
+        <app-button-social [imageSocial]="'../../assets/svg/facebook.svg'" texto="Midia social"></app-button-social>
       </div>
    
     </div>
-
   </div>
 </ion-content>

@@ -1,7 +1,7 @@
 .buttonSocial{
     display: flex;
     width: 183px;
-    padding: 12px 40px;
+    padding: 12px 12px;
     justify-content: center;
     align-items: center;
     gap: 16px;
@@ -10,11 +10,19 @@
     background-color: #fff;
 }
 
-.buttonText{
+.buttonContent{
     color: var(--Normal0, #161A1D);
     font-family: 'Poppins';
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 22.4px; 
+    display: contents;
+
+}
+
+img{
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 }
