@@ -16,7 +16,12 @@
         width: 114px;
         height: 24px;
         border-radius: 4px!important;
-        gap: 8px
+        gap: 8px;
+        
+    }
+    .card-image-btn{
+        display: grid;
+        align-items: center;
     }
     h6{
         font-size: 20px;
@@ -30,19 +35,19 @@
 
 // o :host.NOME-DA-CLASSE cria uma classe variavel, que serve para alterar uma parte especifica
 
-:host.card-banner-orage ion-card{
+:host.card-banner-blue ion-card{
     background: #006EFF;
     color: white;
 }
-:host.card-banner-orage button{
-    background: #ff8400;
+:host.card-banner-blue button{
+    background: var(--brand2, #FFAC4A);
     color: white;
 }
-:host.card-banner-blue ion-card{
+:host.card-banner-yellow ion-card{
     background: #FFF7D6;
     color: black;
 }
-:host.card-banner-blue button{
+:host.card-banner-yellow button{
     background: #006EFF;
     color: white;
 }
