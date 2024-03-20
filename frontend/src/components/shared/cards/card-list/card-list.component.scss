@@ -1,0 +1,51 @@
+:host{
+    ion-card{
+        width: 220px;
+        height: 350px;
+        border-radius: 16px;
+    }
+    ion-card-header{
+        color: white;
+        width: 100%;
+        height: 50%;
+        // background-color: #006EFF;
+    }
+    ion-card-content{
+        width: 100%;
+        background: #F1F2F4;
+        height: 50%;
+        display: flex;
+        align-items:end;
+    }
+    .ctg-lista{
+        margin: 20% 0 0 0;
+    }
+    .dt-lista{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .dt-lista span{
+        font-size: 8px;
+    }
+    .visu-gastos{
+        display: flex;
+        justify-content: space-between;
+    }
+    .eye-icon{
+        margin-top: 8%;
+    }
+    button{
+        background: none;
+    }
+    
+
+}
+
+:host.card-blue ion-card-header{
+    background: var(--brand1, #006EEF);
+}
+
+:host.card-orange ion-card-header{
+    background: var(--brand2, #FFAC4A);
+}
