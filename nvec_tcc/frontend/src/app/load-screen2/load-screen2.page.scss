@@ -1,6 +1,5 @@
 .body{
-    background: var(--Color-brand1, #006EFF);
-}
+    background: var(--Color-brand1, #006EFF);}
 
 .box{
     width: 430px;
@@ -16,23 +15,8 @@
 
 }
 
-.boxSombra1{
-    width: 330px;
-    height: 420px;
-    flex-shrink: 0;
-    border-radius: var(--Space-28, 28px)    var(--Space-28, 28px) 0px 0px;;
-    opacity: 0.2;
-    background:  var(--Color-inverted-inverted0, #FFF);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    bottom: 235px;
-    margin: auto;
-}
 
-.boxSombra2{
+.boxSombra1{
     width: 387px;
     height: 560.7px;
     flex-shrink: 0;
@@ -62,8 +46,8 @@ h1{
 
 .peopleList{
     display: flex;
-    width: 300px;
-    height: 300px;
+    width: 330px;
+    height: 330px;
     padding: 16.448px 11.296px 16.406px 0px;
     align-items: center;
     flex-shrink: 0;
@@ -121,6 +105,8 @@ app-button-medium{
     display: flex;
     justify-content: center;
     align-items: center;
+
+
 }
 
 h1{
