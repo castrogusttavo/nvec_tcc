@@ -1,0 +1,50 @@
+
+.peopleList{
+    display: flex;
+    width: 510.218px;
+    height: 405.196px;
+    flex-shrink: 0;
+    align-items: center;
+    flex-shrink: 0;
+    background: #FFF;
+    left: 0;
+    right: 0;
+    margin: auto;
+    justify-content: center;
+ padding-top:  -50%;
+}
+
+
+.containerHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+h1{
+    padding-top: 20% ;
+    color: var(--Color-Neutral-Dark-N100, #1D2125);
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 35.2px; 
+}
+
+
+.img{
+    padding-top: 20%;
+
+}
+
+.button{
+    float: right;
+    margin-right: 32px;
+    position: fixed;
+    right: 0;
+    bottom: 32px;
+
+}

@@ -8,12 +8,15 @@ import { PrePagePageRoutingModule } from './pre-page-routing.module';
 
 import { PrePagePage } from './pre-page.page';
 
+import { SharedModule } from 'src/components/shared/shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrePagePageRoutingModule
+    PrePagePageRoutingModule,
+    SharedModule
   ],
   declarations: [PrePagePage]
 })
