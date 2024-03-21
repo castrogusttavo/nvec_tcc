@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'splash-screen',
     loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
+  },
+  {
+    path: 'home-screen',
+    loadChildren: () => import('./home-screen/home-screen.module').then( m => m.HomeScreenPageModule)
   }
 
 
