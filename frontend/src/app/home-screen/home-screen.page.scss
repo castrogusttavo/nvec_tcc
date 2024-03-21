@@ -1,14 +1,15 @@
 :host{
-    ion-header{
+    .header{
         box-shadow: none;
         display: flex;
         justify-content: space-between;
-        margin: 20px 0 0 24px; 
-        height: 24px;
+        height: 50px;
+        margin: 16px 24px ;
+        align-items: center;
         align-items: center;
     }
-    ion-content{
-        margin: 84px!important;
+    .content{
+        margin: 24px!important;
     }
     .user img {
         width: 50px;
@@ -37,11 +38,16 @@
     }
     span a{
         color: var(--Normal0, #161A1D);
+        text-decoration: none;
+        padding: 0 8px 0 0;
 
     }
     .card-banners,
     .card-communities{
         padding: 15px 0px;
         display: flex;
+    }
+    p{
+        font-size: 12px;
     }
 }
