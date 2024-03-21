@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button-social',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./button-social.component.scss'],
 })
 export class ButtonSocialComponent  implements OnInit {
+
+  @Input() imageSocial: string | undefined;
+  @Input() texto: string | undefined;
+
 
   constructor() { }
 
