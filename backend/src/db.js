@@ -17,4 +17,16 @@ connection.connect((err) => {
     console.log('Conexão com o banco de dados estabelecida!');
 });
 
-module.exports = connection;
+const db_query = async (query, params) => {
+    return new Promise((resolve, reject) => {
+        connection.query(query, params, (err, result) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(result);
+        });
+    });
+}
+
+module.exports = { connection, db_query };
