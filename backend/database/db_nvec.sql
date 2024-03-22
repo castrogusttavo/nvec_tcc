@@ -22,13 +22,13 @@ create table if not exists tb_assinatura (
 
 create table if not exists tb_pais (
 	id_pais int not null auto_increment,
-	nm_pais varchar(30),
+	nm_pais varchar(40),
     primary key (id_pais)
     ) default character set utf8;
     
 create table if not exists tb_uf (
 	id_uf int auto_increment not null,
-    nm_uf varchar(30) not null,
+    nm_uf varchar(40) not null,
     id_pais int not null,
     primary key (id_uf),
 	index pais (id_Pais asc) visible,
@@ -38,7 +38,7 @@ create table if not exists tb_uf (
         
 create table if not exists tb_cidade (
 	id_cidade int not null auto_increment,
-    nm_cidade varchar(100),
+    nm_cidade varchar(40),
     id_uf int not null,
     primary key (id_cidade),
     index uf (id_uf asc) visible,
@@ -48,7 +48,7 @@ create table if not exists tb_cidade (
         
 create table if not exists tb_bairro (
 	id_bairro int auto_increment not null,
-    nm_bairro varchar(100),
+    nm_bairro varchar(40),
     id_cidade int not null,
     primary key (id_bairro),
     index cidade (id_cidade asc) visible,
@@ -68,8 +68,8 @@ create table if not exists tb_endereco (
 create table if not exists tb_usuario (
 	id_usuario int not null auto_increment,
     nm_usuario varchar(100) not null,
-    email_usuario varchar(200) not null,
     senha_usuario varchar(16) not null,
+    email_usuario varchar(200) not null,
     id_assinatura int not null,
     primary key (id_usuario),
     index assinatura(id_assinatura asc) visible,
