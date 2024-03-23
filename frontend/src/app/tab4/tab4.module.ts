@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/components/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 
-import { PrePagePageRoutingModule } from './pre-page-routing.module';
+import { Tab4PageRoutingModule } from './tab4-routing.module';
 
-import { PrePagePage } from './pre-page.page';
+import { Tab4Page } from './tab4.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrePagePageRoutingModule,
+    Tab4PageRoutingModule,
     SharedModule
   ],
-  declarations: [PrePagePage]
+  declarations: [Tab4Page]
 })
-export class PrePagePageModule {}
+export class Tab4PageModule {}

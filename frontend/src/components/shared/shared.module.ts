@@ -16,6 +16,7 @@ import { CardListSmallComponent } from './cards/card-list-small/card-list-small.
 import { CardHomeCommunityComponent } from './cards/card-home-community/card-home-community.component';
 import { CardUserCommunityComponent } from './cards/card-user-community/card-user-community.component';
 import { CardListSquareComponent } from './cards/card-list-square/card-list-square.component';
+import { ButtonArrowComponent } from './buttons/button-arrow/button-arrow.component';
 import { CardListRecentComponent } from './cards/card-list-recent/card-list-recent.component';
 import { CardCreateComponent } from './cards/card-create/card-create.component';
 
@@ -36,9 +37,9 @@ import { CardCreateComponent } from './cards/card-create/card-create.component';
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
     CardListSquareComponent,
+    ButtonArrowComponent,
     CardListRecentComponent,
     CardCreateComponent
-
   ],
   imports: [
     IonicModule,
@@ -72,6 +73,7 @@ import { CardCreateComponent } from './cards/card-create/card-create.component';
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
     CardListSquareComponent,
+    ButtonArrowComponent,
     CardListRecentComponent,
     CardCreateComponent
   ]

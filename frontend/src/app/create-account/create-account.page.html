@@ -1,11 +1,11 @@
-<ion-content >
+<ion-content scrollY="false" >
   <div class="body">
 
     <div class="header">
-      <img src="../../assets/svg/arrow.svg" alt="" class="arrow">
+      <img src="../../assets/svg/arrow.svg" alt="" class="arrow" [routerLink]="['/load-screen3']">
       <div>
         <span class="span-top">Já possui uma conta?</span>
-        <app-button-small class="buttonSmall">Entrar</app-button-small>
+        <app-button-small class="buttonSmall"  [routerLink]="['/login-account']">Entrar</app-button-small>
       </div>
     </div>
       

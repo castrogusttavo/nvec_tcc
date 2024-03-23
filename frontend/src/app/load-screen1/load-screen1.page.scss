@@ -1,6 +1,9 @@
 .body{
     background: var(--Color-brand1, #006EFF);
+    height: 100%;
 }
+
+ 
 
 .box{
     width: 430px;
@@ -23,7 +26,6 @@
     border-radius: var(--Space-28, 28px)    var(--Space-28, 28px) 0px 0px;;
     opacity: 0.2;
     background:  var(--Color-inverted-inverted0, #FFF);
-    backdrop-filter: blur(10px);
     position: fixed;
     z-index: 1;
     left: 0;
@@ -39,7 +41,7 @@
     border-radius: 43.2px 43.2px 0px 0px;
     opacity: 0.5;
     background: var(--Color-inverted-inverted100, #F7F8F9);
-    backdrop-filter: blur(10px);
+
     z-index: 2;
     position:fixed;
     justify-content: end;
