@@ -2,39 +2,36 @@
   <div class="body">
 
     <div class="header">
-      <img src="../../assets/svg/arrow.svg" alt="" class="arrow">
-      <span>Já possui uma conta?</span>
-      <app-button-small class="buttonSmall">Entrar</app-button-small>
+      <img src="../../assets/svg/arrow.svg" alt="" class="arrow" [routerLink]="['/load-screen3']">
+      <div>
+        <span class="span-top">Não possui uma conta?</span>
+        <app-button-small class="buttonSmall"  [routerLink]="['/create-account']">Cadastrar</app-button-small>
+      </div>
     </div>
       
     <h1>Na Volta Eu Compro</h1>
-    <div class="boxSombra">
-    </div>
+    <div class="boxSombra"></div>
 
     <div class="box"> 
-      <p>Bem-Vindo Novamente</p>
+      <p>Bem-vindo Novamente</p>
       <span>Insira seus dados abaixo e volte a se organizar</span>
-      <div class="inputs">      
-        <app-input placeholder="Nome" class="inputName">Nome</app-input>
-        <app-input placeholder="E-mail" class="inputEmail">E-mail</app-input>
+      <div class="input">      
+        <app-input placeholder="E-mail" class="inputEmail"></app-input>
+        <app-input placeholder="Senha" class="inputSenha"></app-input>
       </div>
-      <app-button-big class="buttonCreate">Entrar</app-button-big>
-      <div id="linha">
-        <span class="spanTwo">Esqueceu sua senha</span>
-      </div>
+      <app-button-big>Entrar</app-button-big>
 
-      <div>
-        <hr />
+      <div class="line">
+        <div ></div>
         <span>Ou entrar usando</span>
-      </div>
-     
+        <div ></div>
+      </div>      
 
       <div class="buttonSocial">
-        <app-button-social> <img src="../../assets/svg/google.svg"  alt="" class="imgGoogle">Google </app-button-social>
-        <app-button-social> <img src="../../assets/svg/facebook.svg" alt="" class="imgFacebook">Facebook </app-button-social>  
+        <app-button-social [imageSocial]="'../../assets/svg/google.svg'" texto="Midia social"></app-button-social>
+        <app-button-social [imageSocial]="'../../assets/svg/facebook.svg'" texto="Midia social"></app-button-social>
       </div>
    
     </div>
-
   </div>
 </ion-content>
