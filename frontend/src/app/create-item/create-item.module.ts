@@ -2,20 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/components/shared/shared.module';
+
 import { IonicModule } from '@ionic/angular';
 
-import { Tab5PageRoutingModule } from './tab5-routing.module';
+import { CreateItemPageRoutingModule } from './create-item-routing.module';
 
-import { Tab5Page } from './tab5.page';
+import { CreateItemPage } from './create-item.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Tab5PageRoutingModule,
+    CreateItemPageRoutingModule,
     SharedModule
   ],
-  declarations: [Tab5Page]
+  declarations: [CreateItemPage]
 })
-export class Tab5PageModule {}
+export class CreateItemPageModule {}
