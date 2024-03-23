@@ -16,6 +16,8 @@ import { CardListSmallComponent } from './cards/card-list-small/card-list-small.
 import { CardHomeCommunityComponent } from './cards/card-home-community/card-home-community.component';
 import { CardUserCommunityComponent } from './cards/card-user-community/card-user-community.component';
 import { CardListSquareComponent } from './cards/card-list-square/card-list-square.component';
+import { CardListRecentComponent } from './cards/card-list-recent/card-list-recent.component';
+import { CardCreateComponent } from './cards/card-create/card-create.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { CardListSquareComponent } from './cards/card-list-square/card-list-squa
     CardListSmallComponent,
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
-    CardListSquareComponent
+    CardListSquareComponent,
+    CardListRecentComponent,
+    CardCreateComponent
 
   ],
   imports: [
@@ -46,7 +50,10 @@ import { CardListSquareComponent } from './cards/card-list-square/card-list-squa
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-small', component: CardListSmallComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-home-community', component: CardHomeCommunityComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-user-community', component: CardUserCommunityComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}])
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-recent', component: CardListRecentComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-create', component: CardCreateComponent}])
     
   ],
   exports: [
@@ -65,7 +72,9 @@ import { CardListSquareComponent } from './cards/card-list-square/card-list-squa
     CardListSmallComponent,
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
-    CardListSquareComponent
+    CardListSquareComponent,
+    CardListRecentComponent,
+    CardCreateComponent
   ]
 })
 export class SharedModule { }
