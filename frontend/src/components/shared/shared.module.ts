@@ -16,6 +16,7 @@ import { CardListSmallComponent } from './cards/card-list-small/card-list-small.
 import { CardHomeCommunityComponent } from './cards/card-home-community/card-home-community.component';
 import { CardUserCommunityComponent } from './cards/card-user-community/card-user-community.component';
 import { CardListSquareComponent } from './cards/card-list-square/card-list-square.component';
+import { ButtonArrowComponent } from './buttons/button-arrow/button-arrow.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CardListSquareComponent } from './cards/card-list-square/card-list-squa
     CardListSmallComponent,
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
-    CardListSquareComponent
+    CardListSquareComponent,
+    ButtonArrowComponent
 
   ],
   imports: [
@@ -65,7 +67,8 @@ import { CardListSquareComponent } from './cards/card-list-square/card-list-squa
     CardListSmallComponent,
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
-    CardListSquareComponent
+    CardListSquareComponent,
+    ButtonArrowComponent
   ]
 })
 export class SharedModule { }
