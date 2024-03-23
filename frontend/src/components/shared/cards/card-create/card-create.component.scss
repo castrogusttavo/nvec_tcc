@@ -1,0 +1,36 @@
+@import "./../../../../global.scss";
+
+:host{
+    .card{
+        display: flex;
+        width: 100px;
+        height: 100px;
+        padding: 16px 20px 12px 16px;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: 3px dashed #{$brand1};
+        border-radius: 16px;
+        background: transparent;
+        text-align: start;
+    }
+    .create{
+        background: #{$brand2};
+        display: flex;
+        padding: var(--Space-space-025, 2px) 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: #{$textSmallerBold};
+        color: #{$N0};
+        width: 44px;
+        height: 20px;
+        border-radius: 4px;
+        padding: 2px 8px;
+
+    }
+    span{
+        font-size: #{$textSmalling};
+        color: #{$N1000};
+    }
+}
