@@ -15,6 +15,7 @@ import { ButtonSocialComponent } from './buttons/button-social/button-social.com
 import { CardHomeCommunityComponent } from './cards/card-home-community/card-home-community.component';
 import { CardUserCommunityComponent } from './cards/card-user-community/card-user-community.component';
 import { CardListSquareComponent } from './cards/card-list-square/card-list-square.component';
+import { ButtonArrowComponent } from './buttons/button-arrow/button-arrow.component';
 import { CardListRecentComponent } from './cards/card-list-recent/card-list-recent.component';
 import { CardBoxComponent } from './cards/card-box/card-box.component';
 import { CardListSearchComponent } from './cards/card-list-search/card-list-search.component';
@@ -36,9 +37,11 @@ import { CardListSearchComponent } from './cards/card-list-search/card-list-sear
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
     CardListSquareComponent,
+    ButtonArrowComponent,
     CardListRecentComponent,
-    CardBoxComponent
-
+    feature-create-lists-page,
+    CardBoxComponent,
+    CardCreateComponent
   ],
   imports: [
     IonicModule,
@@ -72,6 +75,7 @@ import { CardListSearchComponent } from './cards/card-list-search/card-list-sear
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
     CardListSquareComponent,
+    ButtonArrowComponent,
     CardListRecentComponent,
     CardBoxComponent
   ]

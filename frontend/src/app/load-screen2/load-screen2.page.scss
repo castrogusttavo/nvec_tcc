@@ -1,5 +1,7 @@
 .body{
-    background: var(--Color-brand1, #006EFF);}
+    background: var(--Color-brand1, #006EFF);
+    height: 100%;
+}
 
 .box{
     width: 430px;
@@ -23,7 +25,6 @@
     border-radius: 43.2px 43.2px 0px 0px;
     opacity: 0.5;
     background: var(--Color-inverted-inverted100, #F7F8F9);
-    backdrop-filter: blur(10px);
     z-index: 2;
     position:fixed;
     justify-content: end;
@@ -81,7 +82,10 @@ p{
     font-style: normal;
     font-weight: 600;
     line-height: 26.4px; 
-    margin: 25px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
     padding-top:  5%;
 }
 
@@ -94,19 +98,22 @@ app-button-medium{
     padding-top:  10%;
 
 }
-
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0%;
 }
+app-button-medium{
+    margin: 0%;
+}
+
 
 .containerHeader{
     display: flex;
     justify-content: center;
     align-items: center;
-
-
+    
 }
 
 h1{

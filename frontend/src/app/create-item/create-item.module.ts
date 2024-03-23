@@ -2,20 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/components/shared/shared.module';
+
 import { IonicModule } from '@ionic/angular';
 
-import { PrePagePageRoutingModule } from './pre-page-routing.module';
+import { CreateItemPageRoutingModule } from './create-item-routing.module';
 
-import { PrePagePage } from './pre-page.page';
+import { CreateItemPage } from './create-item.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrePagePageRoutingModule,
+    CreateItemPageRoutingModule,
     SharedModule
   ],
-  declarations: [PrePagePage]
+  declarations: [CreateItemPage]
 })
-export class PrePagePageModule {}
+export class CreateItemPageModule {}

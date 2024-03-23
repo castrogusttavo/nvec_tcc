@@ -1,5 +1,4 @@
-<ion-content>
-
+<ion-content scrollY="false" >
     <div class="containerHeader">    
       <h1>Vamos Começar?</h1>
     </div>
@@ -15,10 +14,9 @@
 
     
       <div class="container">   
-        <app-button-medium class="button">Entrar</app-button-medium>
-        <app-button-medium-outline class="buttonOutline">Cadastrar</app-button-medium-outline>
+        <app-button-medium class="button" [routerLink]="['/login-account']">Entrar</app-button-medium>
+        <app-button-medium-outline class="buttonOutline" [routerLink]="['/create-account']">Cadastrar</app-button-medium-outline>
     </div>
-
   </div>
 
 

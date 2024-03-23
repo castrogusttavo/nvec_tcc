@@ -1,0 +1,21 @@
+.forward{
+    padding-left:  5%;
+    padding-top: 5%;
+}
+
+.imageIlustrator{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
+
+.inputs{
+    display: block;
+}
+
+.input{
+    width: 183px !important;
+    height: 55px !important;
+    flex-shrink: 0;
+}
