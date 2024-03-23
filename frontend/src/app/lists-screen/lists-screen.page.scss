@@ -1,0 +1,36 @@
+:host{
+    
+    .header{
+        box-shadow: none;
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        margin: 16px 24px ;
+        align-items: center;
+        align-items: center;
+    }
+    .content{
+        padding: 16px 24px!important;
+    }
+    .user img {
+        width: 50px;
+        height: 50px;
+    }
+    .lists{
+        display: flex;
+        align-items: center;
+        padding: 27px 0 70px 0;
+    }
+    .list{
+        margin: 0 0 0 32px;
+    }
+    .all-lists{
+        display: content;
+        padding: 27px 0 0 0;
+    }
+    .title-filter{
+        display: flex;
+        justify-content: space-between;
+    }
+
+}

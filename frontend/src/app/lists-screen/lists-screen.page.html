@@ -1,13 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>lists-screen</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="header">
+  <div class="user-greeting">
+    <p>Boa noite! <br>
+    <b>Álvaro Oliveira</b></p>
+  </div>
+  <div class="user">
+    <img src="https://www.figma.com/file/weDcztlgEu14HgPSLwGEnL/NVEC?type=design&node-id=1336-3262&mode=dev" alt="">
+  </div>
+</div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">lists-screen</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="content">
+    <h1>Listas Recentes</h1>
+
+  <div class="lists">
+    <app-card-box action="Criar" description="Adicionar uma nova lista"></app-card-box>
+    <app-card-list-recent title="Festa" content="Festa do 3DS3" description="bebidas e comidas" class="list"></app-card-list-recent>
+  </div>
+
+  <div class="title-filter">
+    <h1>Todas as listas</h1>
+    <img src="./../../assets/svg/filter.svg" alt="">
+  </div>
+
+  <div class="all-lists">
+    <app-card-list-search [imagePath]="'https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg'" title="Festa 3DS3" description="bebidas e comidas"></app-card-list-search>
+    <app-card-list-search></app-card-list-search>
+    <app-card-list-search></app-card-list-search>
+  </div>
+  </div>
 </ion-content>

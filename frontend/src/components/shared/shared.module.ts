@@ -12,13 +12,13 @@ import { CardBannerComponent } from './cards/card-banner/card-banner.component';
 import { CardListComponent } from './cards/card-list/card-list.component';
 import { ButtonSmallComponent } from './buttons/button-small/button-small.component';
 import { ButtonSocialComponent } from './buttons/button-social/button-social.component';
-import { CardListSmallComponent } from './cards/card-list-small/card-list-small.component';
 import { CardHomeCommunityComponent } from './cards/card-home-community/card-home-community.component';
 import { CardUserCommunityComponent } from './cards/card-user-community/card-user-community.component';
 import { CardListSquareComponent } from './cards/card-list-square/card-list-square.component';
 import { ButtonArrowComponent } from './buttons/button-arrow/button-arrow.component';
 import { CardListRecentComponent } from './cards/card-list-recent/card-list-recent.component';
-import { CardCreateComponent } from './cards/card-create/card-create.component';
+import { CardBoxComponent } from './cards/card-box/card-box.component';
+import { CardListSearchComponent } from './cards/card-list-search/card-list-search.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +33,14 @@ import { CardCreateComponent } from './cards/card-create/card-create.component';
     CardListComponent,
     ButtonSmallComponent,
     ButtonSocialComponent,
-    CardListSmallComponent,
+    CardListSearchComponent,
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
     CardListSquareComponent,
     ButtonArrowComponent,
     CardListRecentComponent,
+    feature-create-lists-page,
+    CardBoxComponent,
     CardCreateComponent
   ],
   imports: [
@@ -48,12 +50,12 @@ import { CardCreateComponent } from './cards/card-create/card-create.component';
     RouterModule.forChild([{path: '../../../components/shared/cards/card-icon-home', component: CardIconHomeComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-banner', component: CardBannerComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list', component: CardListComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-small', component: CardListSmallComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-search', component: CardListSearchComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-home-community', component: CardHomeCommunityComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-user-community', component: CardUserCommunityComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-recent', component: CardListRecentComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-create', component: CardCreateComponent}])
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-box', component: CardBoxComponent}])
 
   ],
   exports: [
@@ -69,13 +71,13 @@ import { CardCreateComponent } from './cards/card-create/card-create.component';
     CardListComponent,
     ButtonSmallComponent,
     ButtonSocialComponent,
-    CardListSmallComponent,
+    CardListSearchComponent,
     CardHomeCommunityComponent,
     CardUserCommunityComponent,
     CardListSquareComponent,
     ButtonArrowComponent,
     CardListRecentComponent,
-    CardCreateComponent
+    CardBoxComponent
   ]
 })
 export class SharedModule { }
