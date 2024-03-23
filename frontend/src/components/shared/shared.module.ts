@@ -51,10 +51,9 @@ import { CardCreateComponent } from './cards/card-create/card-create.component';
     RouterModule.forChild([{path: '../../../components/shared/cards/card-home-community', component: CardHomeCommunityComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-user-community', component: CardUserCommunityComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-recent', component: CardListRecentComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-create', component: CardCreateComponent}])
-    
+
   ],
   exports: [
     ButtonBigComponent,
