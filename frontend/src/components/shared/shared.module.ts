@@ -39,9 +39,7 @@ import { CardListSearchComponent } from './cards/card-list-search/card-list-sear
     CardListSquareComponent,
     ButtonArrowComponent,
     CardListRecentComponent,
-    feature-create-lists-page,
     CardBoxComponent,
-    CardCreateComponent
   ],
   imports: [
     IonicModule,
