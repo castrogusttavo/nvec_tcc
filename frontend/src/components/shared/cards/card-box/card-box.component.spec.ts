@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CardListSmallComponent } from './card-list-small.component';
+import { CardBoxComponent } from './card-box.component';
 
-describe('CardListSmallComponent', () => {
-  let component: CardListSmallComponent;
-  let fixture: ComponentFixture<CardListSmallComponent>;
+describe('CardBoxComponent', () => {
+  let component: CardBoxComponent;
+  let fixture: ComponentFixture<CardBoxComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardListSmallComponent ],
+      declarations: [ CardBoxComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CardListSmallComponent);
+    fixture = TestBed.createComponent(CardBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

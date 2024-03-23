@@ -1,3 +1,5 @@
+@import "./../../../../global.scss";
+
 :host{
     ion-card{
         width: 220px;
@@ -43,9 +45,17 @@
 }
 
 :host.card-blue ion-card-header{
-    background: var(--brand1, #006EEF);
+    background: #{$brand1};
 }
 
 :host.card-orange ion-card-header{
-    background: var(--brand2, #FFAC4A);
+    background: #{$brand2};
+}
+
+:host.card-green ion-card-header{
+    background: #{$G400-sucess};
+}
+
+:host.card-red ion-card-header{
+    background: #{$R600-danger};
 }
