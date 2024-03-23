@@ -37,7 +37,11 @@ const routes: Routes = [
   {
     path: 'home-screen',
     loadChildren: () => import('./home-screen/home-screen.module').then( m => m.HomeScreenPageModule)
+  },  {
+    path: 'lists-screen',
+    loadChildren: () => import('./lists-screen/lists-screen.module').then( m => m.ListsScreenPageModule)
   }
+
 
 
 ];
