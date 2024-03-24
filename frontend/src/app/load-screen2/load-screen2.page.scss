@@ -1,145 +1,120 @@
+@import "../../global.scss";
+
 .body{
-    background: var(--Color-brand1, #006EFF);
-    height: 100%;
+    background: $brand1;
+    height: -webkit-fill-available;
 }
 
 .box{
-    width: 430px;
+    width: auto;
     height: 615px;
     flex-shrink: 0;
     border-radius: 48px 48px 0px 0px;
-    background: var(--Color-inverted-inverted0, #FFF);
-    position: fixed;
+    background: $N0;
+    position:fixed;
     justify-content: end;
-    z-index:  3;
+    left: 0;
+    right: 0;
+    z-index: 2;
     bottom: 0;
-    padding-top:  10%;
-
+    text-align: center;
 }
 
 
 .boxSombra1{
-    width: 387px;
+    margin: 0px 24px 0px 24px;
     height: 560.7px;
     flex-shrink: 0;
     border-radius: 43.2px 43.2px 0px 0px;
     opacity: 0.5;
-    background: var(--Color-inverted-inverted100, #F7F8F9);
-    z-index: 2;
-    position:fixed;
-    justify-content: end;
-    bottom: 80px;
+    background: $N100;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    z-index: 1;
     left: 0;
     right: 0;
-    margin: auto;
+    bottom: 80px;
 }
 
 h1{
-    color: var(--Color-Neutral-Light-N100, #F7F8F9);
+    color: $N100;
     text-align: center;
     font-family: 'Poppins';
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
     line-height: 35.2px; 
+    padding-top: 100px;
     margin: 0;
 }
 
 .peopleList{
     display: flex;
-    width: 330px;
-    height: 330px;
-    padding: 16.448px 11.296px 16.406px 0px;
-    align-items: center;
-    flex-shrink: 0;
-    background: #FFF;
+    margin: auto;
+    width: 300px;
+    height: auto;
     left: 0;
     right: 0;
-    margin: auto;
-    justify-content: center;
-
 }
 
 span{
-    color: var(--Color-inverted-inverted400, #B3B9C4);
-    font-family: 'Poppins';
+    color: $N400;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: 16px;
-    margin: 150px;
-    justify-content: center;
-    left: 50;
-    right: 50;
-    padding-top:  40%;
+    text-align: center;
+    left: 100;
+    right: 100;
 }
 
 p{
-    color: var(--Color-Neutral-Dark-N300, #2C333A);
+    color: $N300D;
     text-align: center;
     font-family:  'Poppins';
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
-    line-height: 26.4px; 
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 25px;
-    margin-right: 25px;
-    padding-top:  5%;
+    margin: 0;
+    margin: 35px 40px 0px 40px;
 }
 
 app-button-medium{
-    justify-content: center;
+    margin:  auto;
     left:  0;
     right: 0;
-    margin:  auto;
-    align-items: center;
-    padding-top:  10%;
-
 }
+
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0%;
+    margin-top: 35px;
 }
-app-button-medium{
-    margin: 0%;
-}
-
 
 .containerHeader{
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
-
-h1{
-    padding-top: 30% ;
-}
-
 
 .div1{
     width: 36px;
     height: 13.2px;
     border-radius: 19.2px;
-    border: var(--Space-space-025, 2px) solid var(--Color-inverted-inverted0, #FFF);
+    border: var(--Space-space-025, 2px) solid #{$N0};
 }
 
 .div2{
     width: 13.2px;
     height: 13.2px;
     border-radius: 19.2px;
-    border: var(--Space-space-025, 2px) solid var(--Color-inverted-inverted400, #B3B9C4);
+    border: var(--Space-space-025, 2px) solid #{$N400};
 }
 
 .div3{
     width: 13.2px;
     height: 13.2px;
     border-radius: 19.2px;
-    border: var(--Space-space-025, 2px) solid var(--Color-inverted-inverted400, #B3B9C4);
+    border: var(--Space-space-025, 2px) solid #{$N400};
 }
 
 .bolinhas{
@@ -148,5 +123,5 @@ h1{
     gap: 10px;
     align-items: center;
     justify-content: center;
-    padding-top: 18% ;
+    margin-top: 50px;
 }
