@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/components/shared/shared.module';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,6 +14,7 @@ import { CommunityScreenPage } from './community-screen.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     CommunityScreenPageRoutingModule
   ],
   declarations: [CommunityScreenPage]

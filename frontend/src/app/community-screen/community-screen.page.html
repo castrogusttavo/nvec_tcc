@@ -1,13 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>community-screen</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="content">
+    <app-card-user-community numInvitesCommunity="10" numEnteredCommunity="06" numCreatedCommunity="05" state="Online" greeting="Boa noite!" userName="Álvaro Oliveira" [imagePath]="'./../assets/svg/character.svg'"></app-card-user-community>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">community-screen</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="input-button">
+      <input type="text" placeholder="Pesquisa...">
+      <button type="button">Buscar</button>
+    </div>
+
+    <div class="communities">
+      <app-card-list-search></app-card-list-search>
+    </div>
+  </div>
 </ion-content>
