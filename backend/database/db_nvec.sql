@@ -70,7 +70,7 @@ create table if not exists tb_usuario (
     nm_usuario varchar(100) not null,
     senha_usuario varchar(16) not null,
     email_usuario varchar(200) not null,
-    id_assinatura int not null,
+    id_assinatura int not null default 1,
     primary key (id_usuario),
     index assinatura(id_assinatura asc) visible,
     constraint assinatura

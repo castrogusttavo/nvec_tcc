@@ -53,7 +53,11 @@ const routes: Routes = [
   {
     path: 'lists-screen',
     loadChildren: () => import('./lists-screen/lists-screen.module').then( m => m.ListsScreenPageModule)
+  },  {
+    path: 'community-screen',
+    loadChildren: () => import('./community-screen/community-screen.module').then( m => m.CommunityScreenPageModule)
   }
+
 
 ];
 @NgModule({
