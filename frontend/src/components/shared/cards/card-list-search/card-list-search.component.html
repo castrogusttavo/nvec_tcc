@@ -1,13 +1,15 @@
 <ion-card>
   <div class="information">
     <div class="img-text">
-      <img [src]="imagePath" alt="Imagem compartilhada">
-    </div>
-    <div class="text-btn">
+      <div class="img">
+        <img class="img-list" [src]="imagePath" alt="Imagem compartilhada">
+      </div>
       <div class="title">
-        <h6>{{ title }}</h6>
+        <p>{{ title }}</p>
         <span>{{ description }}</span>
       </div>
+    </div>
+    <div class="btn">
       <div class="btn">
         <button>
             <img src="./../../../../assets/svg/arrow_forward.svg" alt="">    

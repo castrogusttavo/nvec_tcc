@@ -1,8 +1,8 @@
 <ion-card>
   <div class="user">
     <div class="greeting-user">
-      <p>{{greeting}}</p>
-      <p>{{userName}}</p>
+      <p>{{greeting}} <br>
+      <b>{{userName}}</b></p>
     </div>
     <div class="user-profile">
       <img [src]="imagePath">
@@ -13,16 +13,16 @@
   </div>
   <div class="communities">
     <div class="created-communities">
-      <p>{{numCreatedCommunity}}</p>
-      <p>Comunidades criadas</p>
+      <p class="numCommunities">{{numCreatedCommunity}}</p>
+      <p class="community-text">Comunidades criadas</p>
     </div>
     <div class="entered-communities">
-      <p>{{numEnteredCommunity}}</p>
-      <p>Comunidades entradas</p>
+      <p class="numCommunities">{{numEnteredCommunity}}</p>
+      <p class="community-text">Comunidades entradas</p>
     </div>
     <div class="invites-communities">
-      <p>{{numInvitesCommunity}}</p>
-      <p>Convites de comunidades</p>
+      <p class="numCommunities">{{numInvitesCommunity}}</p>
+      <p class="community-text">Convites de comunidades</p>
     </div>
   </div>
 </ion-card>
