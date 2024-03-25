@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-card-box',
@@ -9,7 +10,12 @@ export class CardBoxComponent  implements OnInit {
 
   @Input() action:string|undefined
   @Input() description:string|undefined
-  constructor() { }
+  
+  constructor(private router:Router) { }
+
+  navigateTo(){
+    this.router.navigate(['/home-screen'])
+  }
 
   ngOnInit() {}
 

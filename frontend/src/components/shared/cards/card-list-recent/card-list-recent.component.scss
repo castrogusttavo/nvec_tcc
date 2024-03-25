@@ -3,7 +3,6 @@
 :host{
     .card{
         padding: 16px 0px 16px 16px;
-        --background: #{$brand1};
         width: 175px;
         height: 100px;
         border-radius: 16px;
@@ -21,6 +20,7 @@
         font-size: 14px;
         margin: 0px;
         padding: 0px!important;
+        color:#{$N0};
     }
     .div-text{
         line-height: 0px;
@@ -36,13 +36,20 @@
         width: 75px;
         padding-top: 5%;
         height: 25px;
-        background: #{$B100};
+        background: #{$B0-opacity};
         border-radius: 4px;
-        color:#{$N0};
         text-align: center;
         vertical-align: middle;
     }
     span{
         font-size: #{$textSmalling};
     }
+}
+
+:host.card-blue ion-card{
+    background: #{$brand1};
+}
+
+:host.card-orange ion-card{
+    background: #{$brand2};
 }
