@@ -1,6 +1,10 @@
 @import "./../../../../global.scss";
 
 :host{
+    a{
+        text-decoration: none;
+        cursor: pointer;
+    }
     .card{
         display: flex;
         width: 100px;
