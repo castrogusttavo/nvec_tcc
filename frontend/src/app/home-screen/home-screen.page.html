@@ -1,45 +1,62 @@
-<div class="header">
-  <div class="user-greeting">
-    <p>Boa noite! <br>
-    <b>Álvaro Oliveira</b></p>
+<ion-content>
+  <div class="header">
+    <div class="user-greeting">
+      <p>
+        Boa noite! <br />
+        <b>Álvaro Oliveira</b>
+      </p>
+    </div>
+    <div class="user">
+      <img src="./../../assets/svg/character.svg" alt="" />
+    </div>
   </div>
-  <div class="user">
-    <img src="./../../assets/svg/character.svg" alt="">
-  </div>
-</div>
 
-<div class="content">
-  <div class="lists">
-    <div class="recent-lists">
-      <h6>Listas recentes</h6>
-      <div class="see-more">
-        <span><a href="">Ver todas</a></span>
-        <img src="./../../assets/svg/arrow_forward_home.svg" alt="">
+  <div class="content">
+    <div class="lists">
+      <div class="recent-lists">
+        <h6>Listas recentes</h6>
+        <div class="see-more">
+          <span><a href="">Ver todas</a></span>
+          <img src="./../../assets/svg/arrow_forward_home.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="lists-created" scrollX="true">
+        <app-card-list class="card-blue"></app-card-list>
+        <app-card-list class="card-orange"></app-card-list>
+        <app-card-list class="card-green"></app-card-list>
+        <app-card-list class="card-red"></app-card-list>
       </div>
     </div>
 
-    <div class="lists-created">
-      <app-card-list class="card-blue"></app-card-list>
-      <app-card-list class="card-orange"></app-card-list>
-      <app-card-list class="card-green"></app-card-list>  
-      <app-card-list class="card-red"></app-card-list>  
+    <div class="card-banners">
+      <app-card-banner
+        class="card-banner-yellow"
+        titulo="Conheça os nossos Planos"
+        conteudo="E tenha acesso a todas as nossas funcionalidades, e o melhor sem limite."
+        [imagePath]="'./../../assets/svg/heart.svg'"
+      ></app-card-banner>
+      <app-card-banner
+        class="card-banner-blue"
+        titulo="Oferta Especial do plano anual!"
+        conteudo="Garanta até 20% de desconto em qualquer planos."
+        [imagePath]="'./../../assets/svg/heart.svg'"
+      ></app-card-banner>
+    </div>
+
+    <div class="card-icons">
+      <app-card-icon-home></app-card-icon-home>
+    </div>
+
+    <div class="card-communities">
+      <app-card-home-community
+        title="Mercado"
+        content="Atacadista"
+      ></app-card-home-community>
+      <app-card-home-community
+        title="Escola"
+        content="Volta às aulas"
+      ></app-card-home-community>
     </div>
   </div>
-
-  <div class="card-banners">
-    <app-card-banner class="card-banner-yellow" titulo="Conheça os nossos Planos" conteudo="E tenha acesso a todas as nossas funcionalidades, e o melhor sem limite." [imagePath]="'./../../assets/svg/heart.svg'"></app-card-banner>
-    <app-card-banner class="card-banner-blue"  titulo="Oferta Especial do plano anual!" conteudo="Garanta até 20% de desconto em qualquer planos." [imagePath]="'./../../assets/svg/heart.svg'"></app-card-banner>
-  </div>
-
-  <div class="card-icons">
-    <app-card-icon-home></app-card-icon-home>
-  </div>
-
-  <div class="card-communities">
-    <app-card-home-community title="Mercado" content="Atacadista"></app-card-home-community>
-    <app-card-home-community title="Escola" content="Volta às aulas"></app-card-home-community>
-  </div>
-
-
-</div>
-
+</ion-content>
