@@ -162,17 +162,9 @@ $dropShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40);
 $innerShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40) inset;
 $glassEffect: blur(10px);
 
-<<<<<<< Updated upstream
-// scroll-horizontal
-.scroll-horizontal {
-    width: 100%; /* Defina a largura desejada */
-    overflow-x: auto; /* Ative a rolagem horizontal */
-    white-space: nowrap; /* Impede que os elementos quebrem linha */
-=======
 //SCROLL
 .scroll-horizontal {
     width: 100%;
     overflow-x: auto;
     white-space: nowrap;
->>>>>>> Stashed changes
 }
