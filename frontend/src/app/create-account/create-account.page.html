@@ -1,11 +1,11 @@
-<ion-content >
+<ion-content scrollY="false" >
   <div class="body">
 
     <div class="header">
-      <img src="../../assets/svg/arrow.svg" alt="" class="arrow">
+      <img src="../../assets/svg/arrow.svg" alt="" class="arrow" [routerLink]="['/load-screen3']">
       <div>
         <span class="span-top">Já possui uma conta?</span>
-        <app-button-small class="buttonSmall">Entrar</app-button-small>
+        <app-button-small class="buttonSmall"  [routerLink]="['/login-account']">Entrar</app-button-small>
       </div>
     </div>
       
@@ -15,12 +15,12 @@
     <div class="box"> 
       <p>Comece Gratuitamente</p>
       <span>E controle sua vida financeira</span>
-      <div class="inputs">      
+      <div class="input">      
         <app-input placeholder="Nome" class="inputName">Nome</app-input>
         <app-input placeholder="E-mail" class="inputEmail">E-mail</app-input>
         <app-input placeholder="Title" class="inputTitle">Title </app-input>
       </div>
-      <app-button-big class="buttonCreate">Cadastrar</app-button-big>
+      <app-button-big>Cadastrar</app-button-big>
 
       <div class="line">
         <div ></div>

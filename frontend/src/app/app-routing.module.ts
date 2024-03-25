@@ -37,11 +37,26 @@ const routes: Routes = [
   {
     path: 'home-screen',
     loadChildren: () => import('./home-screen/home-screen.module').then( m => m.HomeScreenPageModule)
-  },  {
+  },
+  {
+    path: 'tab4',
+    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
+  },
+  {
+    path: 'tab5',
+    loadChildren: () => import('./tab5/tab5.module').then( m => m.Tab5PageModule)
+  },
+  {
+    path: 'create-item',
+    loadChildren: () => import('./create-item/create-item.module').then( m => m.CreateItemPageModule)
+  },
+  {
     path: 'lists-screen',
     loadChildren: () => import('./lists-screen/lists-screen.module').then( m => m.ListsScreenPageModule)
+  },  {
+    path: 'community-screen',
+    loadChildren: () => import('./community-screen/community-screen.module').then( m => m.CommunityScreenPageModule)
   }
-
 
 
 ];

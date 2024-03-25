@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { SharedModule } from 'src/components/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 
 import { PrePagePageRoutingModule } from './pre-page-routing.module';
@@ -13,7 +13,8 @@ import { PrePagePage } from './pre-page.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    PrePagePageRoutingModule
+    PrePagePageRoutingModule,
+    SharedModule
   ],
   declarations: [PrePagePage]
 })
