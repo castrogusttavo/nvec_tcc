@@ -5,6 +5,21 @@
     height: -webkit-fill-available;
 }
 
+.boxSombra{
+    margin: 0px 24px 0px 24px;
+    height: 560.7px;
+    flex-shrink: 0;
+    border-radius: 43.2px 43.2px 0px 0px;
+    opacity: 0.5;
+    background: $N100;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 70px;
+}
+
 .box{
     width: auto;
     height: 615px;
@@ -18,22 +33,6 @@
     z-index: 2;
     bottom: 0;
     text-align: center;
-}
-
-
-.boxSombra1{
-    margin: 0px 24px 0px 24px;
-    height: 560.7px;
-    flex-shrink: 0;
-    border-radius: 43.2px 43.2px 0px 0px;
-    opacity: 0.5;
-    background: $N100;
-    backdrop-filter: blur(10px);
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    bottom: 80px;
 }
 
 h1{
@@ -79,15 +78,15 @@ p{
     margin: 35px 40px 0px 40px;
 }
 
+.container {
+    display: flex;
+    margin-top: 35px;
+}
+
 app-button-medium{
     margin:  auto;
     left:  0;
     right: 0;
-}
-
-.container {
-    display: flex;
-    margin-top: 35px;
 }
 
 .containerHeader{
@@ -118,10 +117,9 @@ app-button-medium{
 }
 
 .bolinhas{
-    display: grid;
-    grid-template-columns: auto auto auto;
+	@@ -148,5 +122,5 @@ h1{
     gap: 10px;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 60px;
 }
