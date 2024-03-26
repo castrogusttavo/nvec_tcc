@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-button-arrow',
@@ -7,8 +6,6 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['./button-arrow.component.scss'],
 })
 export class ButtonArrowComponent  implements OnInit {
-
-  @Input() imagePath: string | undefined;  
 
   constructor() { }
 

@@ -1,66 +1,36 @@
-<ion-content>
-  <div class="header">
-    <div class="user-greeting">
-      <p>
-        Boa noite! <br />
-        <b>Álvaro Oliveira</b>
-      </p>
-    </div>
-    <div class="user">
-      <img src="./../../assets/svg/character.svg" alt="" />
-    </div>
-  </div>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      tESTE
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="content">
-    <div class="lists">
-      <div class="recent-lists">
-        <h6>Listas recentes</h6>
-        <div class="see-more">
-          <span><a href="">Ver todas</a></span>
-          <img src="./../../assets/svg/arrow_forward_home.svg" alt="" />
-        </div>
-      </div>
+<ion-content [fullscreen]="true">
+  <app-card-banner class="card-banner-blue" titulo="Tituloooooooooo" conteudo="FUNCIONA POR FAVOR" [imagePath]="'https://www.dinamize.com.br/wp-content/uploads/2020/08/google-imagens-icon11-min.png'"></app-card-banner>
+  <app-card-banner class="card-banner-orage" titulo="Tituloooooooooo" conteudo="FUNCIONA POR FAVOR" [imagePath]="'https://www.dinamize.com.br/wp-content/uploads/2020/08/google-imagens-icon11-min.png'"></app-card-banner>
+  <app-button-medium-outline >Cadastrar</app-button-medium-outline>
+  <app-card-icon-home></app-card-icon-home>
+  <app-button-big>Cadastrar</app-button-big>
+  <app-button-medium>Entrar</app-button-medium>
+  <app-button-medium-outline >Cadastrar</app-button-medium-outline>
+  <app-card-banner [imagePath]="'https://i.pinimg.com/736x/4b/b2/b7/4bb2b7a6a85241683f6cb4fb4a7ae724.jpg'"></app-card-banner>
+  <app-card-banner [imagePath]="'https://www.dinamize.com.br/wp-content/uploads/2020/08/google-imagens-icon11-min.png'"></app-card-banner>
+  <app-card-list class="card-banner-orage"></app-card-list>
+  <app-card-list-search titulo="Festa 2DS3" descricao="Bebidas e comidas" [imagePath]="'./../../assets/icon/favicon.png'"></app-card-list-search>
+  <app-card-home-community title="Mercado" content="Atacadista"></app-card-home-community>
+  <app-card-user-community numCreatedCommunity="05" numEnteredCommunity="06" numInvitesCommunity="10" state="Online" [imagePath]="'./../../assets/icon/favicon.png'" greeting="Boa noite!" userName="Álvaro Oliveira"></app-card-user-community>
+  <app-card-list-square title="Guloseimas" category="Mercado" [imagePath]="'https://cdn.awsli.com.br/600x700/399/399569/produto/176908948/08bceaa35c.jpg'"></app-card-list-square>
+  <app-input placeholder="Nome"></app-input>
+  <app-button-social [imageSocial]="'https://i.pinimg.com/736x/4b/b2/b7/4bb2b7a6a85241683f6cb4fb4a7ae724.jpg'" texto="Midia social"></app-button-social>
+  <app-card-list-recent [imagePath]="'https://i.pinimg.com/736x/4b/b2/b7/4bb2b7a6a85241683f6cb4fb4a7ae724.jpg'" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
+  <app-card-box description="Adicionar uma nova lista"></app-card-box>
+  <app-card-plans [planItems]="['Entrar em 5 comunidades', 'Criar 10 listas','5 comparações mensais']">
+  </app-card-plans>
 
-      <div class="lists-created" scrollX="true">
-        <app-card-list class="card-blue"></app-card-list>
-        <app-card-list class="card-orange"></app-card-list>
-        <app-card-list class="card-green"></app-card-list>
-        <app-card-list class="card-red"></app-card-list>
-      </div>
-    </div>
+  
 
-    <div class="card-banners">
-      <app-card-banner
-        class="card-banner-yellow"
-        titulo="Conheça os nossos Planos"
-        conteudo="E tenha acesso a todas as nossas funcionalidades, e o melhor sem limite."
-        [imagePath]="'./../../assets/svg/heart.svg'"
-      ></app-card-banner>
-      <app-card-banner
-        class="card-banner-blue"
-        titulo="Oferta Especial do plano anual!"
-        conteudo="Garanta até 20% de desconto em qualquer planos."
-        [imagePath]="'./../../assets/svg/heart.svg'"
-      ></app-card-banner>
-    </div>
-
-    <div class="card-icons">
-      <app-card-icon-home></app-card-icon-home>
-    </div>
-
-    <div class="card-communities">
-      <app-card-home-community
-        title="Mercado"
-        content="Atacadista"
-      ></app-card-home-community>
-      <app-card-home-community
-        title="Escola"
-        content="Volta às aulas"
-      ></app-card-home-community>
-    </div>
-  </div>
 </ion-content>
-
 
 
 
