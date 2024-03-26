@@ -117,8 +117,10 @@ app-button-medium{
 }
 
 .bolinhas{
+    display: grid;
+    grid-template-columns: auto auto auto;
     gap: 10px;
     align-items: center;
     justify-content: center;
-    margin-top: 60px;
+    margin-top: 50px;
 }

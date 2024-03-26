@@ -19,7 +19,7 @@
     <h1>Listas Recentes</h1>
 
   <div class="lists scroll-horizontal">
-    <app-card-box action="Criar" description="Adicionar uma nova lista"></app-card-box>
+    <app-card-box action="Criar" description="Adicionar uma nova lista" [routerLink]="['/tabs/tab3']"></app-card-box>
     <app-card-list-recent [imagePath]="'https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg'" class="card-blue list" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
     <app-card-list-recent [imagePath]="'https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg'" class="card-orange list" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
   </div>

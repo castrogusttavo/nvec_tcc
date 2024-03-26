@@ -53,7 +53,20 @@ const routes: Routes = [
   {
     path: 'lists-screen',
     loadChildren: () => import('./lists-screen/lists-screen.module').then( m => m.ListsScreenPageModule)
-  },  {
+  },
+  {
+    path: 'community-screen',
+    loadChildren: () => import('./community-screen/community-screen.module').then( m => m.CommunityScreenPageModule)
+  },
+  {
+    path: 'create-comunnity',
+    loadChildren: () => import('./create-comunnity/create-comunnity.module').then( m => m.CreateComunnityPageModule)
+  },
+  {
+
+    path: 'plans-screen',
+    loadChildren: () => import('./plans-screen/plans-screen.module').then( m => m.PlansScreenPageModule)
+},
     path: 'community-screen',
     loadChildren: () => import('./community-screen/community-screen.module').then( m => m.CommunityScreenPageModule)
   },
@@ -65,6 +78,7 @@ const routes: Routes = [
     path: 'lists-itens-screen',
     loadChildren: () => import('./lists-itens-screen/lists-itens-screen.module').then( m => m.ListsItensScreenPageModule)
   }
+
 
 
 ];

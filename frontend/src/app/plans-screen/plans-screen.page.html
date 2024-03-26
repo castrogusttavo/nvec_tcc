@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab1']">
+
+  <h3>Nossos planos</h3>
+
+  <app-card-plans 
+  [planTitle]="'Seu plano'"
+  [planPreco]="'Grátis'"
+  [planDesc]="'Limitado a algumas funcionalidades para iniciar a gestão financeira.'"
+  [planItems]="['Criar 1 comunidade','Entrar em 5 comunidades', 'Criar 15 listas', '5 comparações mensais']">
+  </app-card-plans>
+
+  <app-card-plans 
+  [planTitle]="'Adquira já!'"
+  [planPreco]="'R$9.90'"
+  [planDesc]="'Ideal para quem busca mais recursos para um controle mais abrangente.'"
+  [planItems]="['Criar comunidades', 'Criar até 35 listas', 'Entrar em 25 comunidades','15 comparações mensais', 'Relatórios mensais']">
+  </app-card-plans>
+
+  <app-card-plans 
+  [planTitle]="'Adquira já!'"
+  [planPreco]="'R$19.90'"
+  [planDesc]="'Oferece acesso total e ilimitado a todas as funções para uma gestão financeira completa.'"
+  [planItems]="['Comunidades ilimitadas', 'Listas Ilimitadas', 'Relatórios mensais e semestrais', 'Comparações ilimitadas']">
+  </app-card-plans>
+
+
+
+</ion-content>
