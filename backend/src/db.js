@@ -4,8 +4,7 @@ const dbConfig = {
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'db_nvec',
-    port: '3307'
+    database: 'db_nvec'
 };
 
 const connection = mysql.createConnection(dbConfig);
