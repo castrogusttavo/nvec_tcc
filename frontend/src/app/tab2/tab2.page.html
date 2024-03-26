@@ -1,19 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="header">
+  <div class="user-greeting">
+    <p>Boa noite! <br>
+    <b>Álvaro Oliveira</b></p>
+  </div>
+  <div class="user">
+    <img src="./../../assets/svg/character.svg" alt="">
+  </div>
+</div>
 
-<ion-content [fullscreen]="true">
-  <ion-content>
-    <app-button-big>Cadastrar</app-button-big>
-    <app-button-medium>Entrar</app-button-medium>
-    <app-button-medium-outline>MUDAR SENHA</app-button-medium-outline>
-  </ion-content>
-    <!-- <app-button-medium>Continuar</app-button-medium>
-    <app-button-medium>Entrar</app-button-medium>
-    <app-button-big-outline>Cadastrar</app-button-big-outline> -->
+<ion-content>
+  <div class="search">
+    <app-input></app-input>
+  </div>
+  <div class="content">
 
+    <div class="input-button">
+      <input type="text" placeholder="Pesquisa...">
+      <button type="button">Buscar</button>
+    </div>
+
+    <h1>Listas Recentes</h1>
+
+  <div class="lists">
+    <app-card-box action="Criar" description="Adicionar uma nova lista"></app-card-box>
+    <app-card-list-recent class="card-blue list" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
+    <app-card-list-recent class="card-orange list" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
+    <app-card-box action="Criar"  description="Adicionar uma nova lista"></app-card-box>
+    <app-card-list-recent [imagePath]="'https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg'" title="Festa" content="Festa do 3DS3" description="bebidas e comidas" class="list"></app-card-list-recent>
+  </div>
+
+  <div class="title-filter">
+    <h1>Todas as listas</h1>
+    <img src="./../../assets/svg/filter.svg" alt="">
+  </div>
+
+  <div class="all-lists">
+    <app-card-list-search [imagePath]="'https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg'" title="Festa 3DS3" description="bebidas e comidas"></app-card-list-search>
+    <app-card-list-search [imagePath]="'https://cursa-json-routes.s3.amazonaws.com/texts/byId/1000279/imgs/68.jpg'" title="Compras do mês" description="mercado"></app-card-list-search>
+    <app-card-list-search [imagePath]="'data:image/jpeg;base64,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'" title="Móveis para mudança" description="móveis para a sala"></app-card-list-search>
+  </div>
+  </div>
 </ion-content>
