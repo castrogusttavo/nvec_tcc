@@ -1,15 +1,18 @@
-<ion-content [fullscreen]="true">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
+<ion-content [fullscreen]="true" scrollY="false">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tab4']">
 
   <div class="imageIlustrator">
     <img  src="../../assets/png/imagem.png" alt="">
   </div>
 
   <div class="inputs">  
-    <app-input placeholder="Nome" class="input"></app-input>
-    <app-input placeholder="Nome" class="input"></app-input>
-    <app-input placeholder="Nome" class="input"></app-input>
-    <app-input placeholder="Nome" class="input"></app-input>
+    <input placeholder="Nome" class="inputText" >
+    <input placeholder="Categoria" class="inputText">
   </div>
+
+  <div class="buttonBig">
+    <app-button-big>Criar Comunidade</app-button-big>
+  </div>
+  
 
 </ion-content>
