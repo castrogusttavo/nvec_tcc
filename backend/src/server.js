@@ -4,7 +4,8 @@ const db = require("./db");
 
 // Importando o arquivo de rotas das APIs
 const userRouter = require("./api/users/users");
-app.use('/api', userRouter); 
+
+app.use('/api', userRouter,); 
 
 const app = express();
 app.use(bodyParser.json());
