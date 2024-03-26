@@ -9,9 +9,6 @@
 </div>
 
 <ion-content>
-  <div class="search">
-    <app-input></app-input>
-  </div>
   <div class="content">
 
     <div class="input-button">
@@ -21,12 +18,10 @@
 
     <h1>Listas Recentes</h1>
 
-  <div class="lists">
+  <div class="lists scroll-horizontal">
     <app-card-box action="Criar" description="Adicionar uma nova lista"></app-card-box>
-    <app-card-list-recent class="card-blue list" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
-    <app-card-list-recent class="card-orange list" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
-    <app-card-box action="Criar"  description="Adicionar uma nova lista"></app-card-box>
-    <app-card-list-recent [imagePath]="'https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg'" title="Festa" content="Festa do 3DS3" description="bebidas e comidas" class="list"></app-card-list-recent>
+    <app-card-list-recent [imagePath]="'https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg'" class="card-blue list" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
+    <app-card-list-recent [imagePath]="'https://t4.ftcdn.net/jpg/01/20/28/25/360_F_120282530_gMCruc8XX2mwf5YtODLV2O1TGHzu4CAb.jpg'" class="card-orange list" title="Festa" content="Festa do 3DS3" description="bebidas e comidas"></app-card-list-recent>
   </div>
 
   <div class="title-filter">

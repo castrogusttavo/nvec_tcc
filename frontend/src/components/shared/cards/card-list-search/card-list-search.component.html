@@ -24,12 +24,17 @@
 <ion-card>
   <div class="information">
     <div class="img-text">
-      <img class="img-list" src="{{ imagePath }}" alt="Imagem compartilhada">
+
+      <div class="img">
+        <img class="img-list" src="{{ imagePath }}" alt="Imagem compartilhada">
+      </div>
+      
+      <div class="title">
+        <p>{{ title }}</p>
+        <span>{{ description }}</span>
+      </div>
     </div>
-    <div class="title">
-      <p>{{ title }}</p>
-      <span>{{ description }}</span>
-    </div>
+
     <div class="btn">
       <button>
         <img src="./../../../../assets/svg/arrow_forward.svg" alt="">

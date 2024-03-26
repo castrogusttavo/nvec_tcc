@@ -161,3 +161,9 @@ $textBigBold: 35px;
 $dropShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40);
 $innerShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40) inset;
 $glassEffect: blur(10px);
+
+//SCROLL
+.scroll-horizontal {
+    width: 100%;
+    overflow-x: auto;
+}

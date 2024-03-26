@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
 @Component({
@@ -7,15 +7,10 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent  implements OnInit {
-  textInput: string | undefined;
+  @Input() placeholder: string | undefined;
 
   constructor(private platform: Platform) {}
 
   ngOnInit() {
-    this.setText();
   }  
-
-  setText() {
-    this.textInput = 'E-mail';
-  }
 }

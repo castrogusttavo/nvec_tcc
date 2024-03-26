@@ -54,4 +54,9 @@
     p{
         font-size: 12px;
     }
+
+    .scroll-horizontal {
+        width: 100%; /* Defina a largura desejada */
+        overflow-x: auto; /* Ative a rolagem horizontal */
+    }
 }
