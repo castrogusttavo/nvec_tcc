@@ -56,6 +56,10 @@ const routes: Routes = [
   },  {
     path: 'community-screen',
     loadChildren: () => import('./community-screen/community-screen.module').then( m => m.CommunityScreenPageModule)
+  },
+  {
+    path: 'create-comunnity',
+    loadChildren: () => import('./create-comunnity/create-comunnity.module').then( m => m.CreateComunnityPageModule)
   }
 
 
