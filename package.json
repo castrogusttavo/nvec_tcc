@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@ionic-native/splash-screen": "^5.36.0"
+  }
+}

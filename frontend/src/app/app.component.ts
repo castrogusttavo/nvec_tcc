@@ -7,8 +7,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private splashScreen: SplashScreenPage) {
-    this.initialization();
+  constructor(private splashScreen: SplashScreen) {
+    this.initializeApp();
   }
 
   initializeApp() {
