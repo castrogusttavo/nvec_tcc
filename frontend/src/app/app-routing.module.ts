@@ -60,6 +60,10 @@ const routes: Routes = [
   {
     path: 'create-comunnity',
     loadChildren: () => import('./create-comunnity/create-comunnity.module').then( m => m.CreateComunnityPageModule)
+  },
+  {
+    path: 'lists-itens-screen',
+    loadChildren: () => import('./lists-itens-screen/lists-itens-screen.module').then( m => m.ListsItensScreenPageModule)
   }
 
 
