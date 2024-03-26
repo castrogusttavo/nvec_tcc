@@ -7,7 +7,7 @@ router.post("/fixedExpenses", async (req, res) => {
     const { vl_despesa_fixa, ds_despesa_fixa, id_usuario } = req.body;
 
     const result = await db_query(
-      "INSERT INTO despesas_fixas (vl_despesa_fixa, ds_despesa_fixa, id_usuario) VALUES (?, ?, ?) RETURNING *",
+      "INSERT INTO tb_despesa_fixa (vl_despesa_fixa, ds_despesa_fixa, id_usuario) VALUES (?, ?, ?) RETURNING *",
       [vl_despesa_fixa, ds_despesa_fixa, id_usuario]
     );
 
@@ -20,7 +20,7 @@ router.post("/fixedExpenses", async (req, res) => {
 
 router.get("/fixedExpenses", async (req, res) => {
   try {
-    const despesasFixas = await db_query("SELECT * FROM despesas_fixas");
+    const despesasFixas = await db_query("SELECT * FROM tb_despesa_fixa");
 
     res.json(despesasFixas);
   } catch (err) {
@@ -34,7 +34,7 @@ router.get("/fixedExpenses/:id", async (req, res) => {
     const despesasFixasId = req.params.id;
 
     const despesasFixas = await db_query(
-      "SELECT * FROM despesas_fixas WHERE id_despesa_fixa = ?",
+      "SELECT * FROM tb_despesa_fixa WHERE id_despesa_fixa = ?",
       [despesasFixasId]
     );
 
@@ -56,7 +56,7 @@ router.put("/fixedExpenses/:id", async (req, res) => {
     const { vl_despesa_fixa, ds_despesa_fixa, id_usuario } = req.body;
 
     await db_query(
-      "UPDATE despesas_fixas SET vl_despesa_fixa = ?, ds_despesa_fixa = ?, id_usuario = ? WHERE id_despesa_fixa = ?",
+      "UPDATE tb_despesa_fixa SET vl_despesa_fixa = ?, ds_despesa_fixa = ?, id_usuario = ? WHERE id_despesa_fixa = ?",
       [vl_despesa_fixa, ds_despesa_fixa, id_usuario, despesaFixaId]
     );
 
@@ -71,7 +71,7 @@ router.delete("/fixedExpenses/:id", async (req, res) => {
   try {
     const despesaFixaId = req.params.id;
 
-    await db_query("DELETE FROM despesas_fixas WHERE id_despesa_fixa = ?", [
+    await db_query("DELETE FROM tb_despesa_fixa WHERE id_despesa_fixa = ?", [
       despesaFixaId,
     ]);
 

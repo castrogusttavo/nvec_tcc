@@ -7,7 +7,7 @@ router.post("/income", async (req, res) => {
     const { vl_renda, id_usuario } = req.body;
 
     const result = await db_query(
-      "INSERT INTO rendas (vl_renda, id_usuario) VALUES (?, ?) RETURNING *",
+      "INSERT INTO tb_renda (vl_renda, id_usuario) VALUES (?, ?) RETURNING *",
       [vl_renda, id_usuario]
     );
 
@@ -20,7 +20,7 @@ router.post("/income", async (req, res) => {
 
 router.get("/income", async (req, res) => {
   try {
-    const rendas = await db_query("SELECT * FROM rendas");
+    const rendas = await db_query("SELECT * FROM tb_renda");
 
     res.json(rendas);
   } catch (err) {
@@ -34,7 +34,7 @@ router.get("/income/:id", async (req, res) => {
     const rendasId = req.params.id;
 
     const rendas = await db_query(
-      "SELECT * FROM rendas WHERE id_renda = ?",
+      "SELECT * FROM tb_renda WHERE id_renda = ?",
       [rendasId]
     );
 
@@ -56,7 +56,7 @@ router.put("/income/:id", async (req, res) => {
     const { vl_renda, id_usuario } = req.body;
 
     await db_query(
-      "UPDATE rendas SET vl_renda = ?, id_usuario = ? WHERE id_renda = ?",
+      "UPDATE tb_renda SET vl_renda = ?, id_usuario = ? WHERE id_renda = ?",
       [vl_renda, id_usuario, rendaId]
     );
 
@@ -71,7 +71,7 @@ router.delete("/income/:id", async (req, res) => {
   try {
     const rendaId = req.params.id;
 
-    await db_query("DELETE FROM rendas WHERE id_renda = ?", [rendaId]);
+    await db_query("DELETE FROM tb_renda WHERE id_renda = ?", [rendaId]);
 
     res.sendStatus(200);
   } catch (err) {

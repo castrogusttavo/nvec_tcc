@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -9,6 +9,10 @@ import { IonicModule } from '@ionic/angular';
 export class CardItemComponent  implements OnInit {
 
   constructor() { }
+
+  @Input() itemName:string|undefined
+  @Input() description:string|undefined
+  @Input() imagePath:string|undefined
 
   ngOnInit() {}
 

@@ -1,0 +1,18 @@
+<ion-content>
+  <div class="content">
+      <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/lists-screen']">
+
+    <div class="title-filter">
+      <h1>Todos os itens</h1>
+      <img src="./../../assets/svg/filter.svg" alt="">
+    </div>
+
+    <div class="itens-div scroll-horizontal">
+      <app-card-box action="Criar" description="Adicionar um novo item"></app-card-box>
+      <app-card-item itemName="Oreo" description="Biscoito" [imagePath]="'https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/lahhlxg8nk6goxrcbcpz'"></app-card-item>
+      <app-card-item itemName="Negresco" description="Biscoito" [imagePath]="'https://images.tcdn.com.br/img/img_prod/645811/biscoito_negresco_e_chocolate_branco_103gr_nestle_5231_2_a6b9cf73dcb34bef1f9746d77306d90c.jpg'"></app-card-item>
+      <app-card-item itemName="Trakinas" description="Biscoito" [imagePath]="'https://drogariacristal.com/media/catalog/product/cache/dc75f304252411b8c602e1e96d99390d/b/i/biscoito_recheado_trakinas_morango_126g.jpg'"></app-card-item>
+      <app-card-item itemName="7 Belo" description="Bala" [imagePath]="'https://jadoces.com.br/wp-content/uploads/2022/08/produto-7belo-bala-framboesa-un.jpg.webp'"></app-card-item>
+    </div>
+  </div>
+</ion-content>
