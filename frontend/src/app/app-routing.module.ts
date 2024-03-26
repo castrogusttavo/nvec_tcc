@@ -66,7 +66,7 @@ const routes: Routes = [
 
     path: 'plans-screen',
     loadChildren: () => import('./plans-screen/plans-screen.module').then( m => m.PlansScreenPageModule)
-},
+},{
     path: 'community-screen',
     loadChildren: () => import('./community-screen/community-screen.module').then( m => m.CommunityScreenPageModule)
   },
