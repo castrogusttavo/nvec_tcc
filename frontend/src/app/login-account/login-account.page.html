@@ -19,7 +19,7 @@
         <app-input placeholder="E-mail" class="inputEmail"></app-input>
         <app-input placeholder="Senha" class="inputSenha"></app-input>
       </div>
-      <app-button-big>Entrar</app-button-big>
+      <app-button-big [routerLink]="['/tabs/tab1']">Entrar</app-button-big>
 
       <div class="line">
         <div ></div>
@@ -28,8 +28,8 @@
       </div>      
 
       <div class="buttonSocial">
-        <app-button-social [imageSocial]="'../../assets/svg/google.svg'" texto="Midia social"></app-button-social>
-        <app-button-social [imageSocial]="'../../assets/svg/facebook.svg'" texto="Midia social"></app-button-social>
+        <app-button-social [imageSocial]="'../../assets/svg/google.svg'" texto="Google" [routerLink]="['/tabs/tab1']"></app-button-social>
+        <app-button-social [imageSocial]="'../../assets/svg/facebook.svg'" texto="Facebook" [routerLink]="['/tabs/tab1']"></app-button-social>
       </div>
    
     </div>

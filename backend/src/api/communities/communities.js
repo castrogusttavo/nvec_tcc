@@ -7,7 +7,7 @@ router.post("/communities", async (req, res) => {
     const { nm_comunidade, id_categoria } = req.body;
 
     const result = await db_query(
-      "INSERT INTO comunidades (nm_comunidade, id_categoria) VALUES (?, ?) RETURNING *",
+      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria) VALUES (?, ?) RETURNING *",
       [nm_comunidade, id_categoria]
     );
 
@@ -20,7 +20,7 @@ router.post("/communities", async (req, res) => {
 
 router.get("/communities", async (req, res) => {
   try {
-    const comunidades = await db_query("SELECT * FROM comunidades");
+    const comunidades = await db_query("SELECT * FROM tb_comunidade");
 
     res.json(comunidades);
   } catch (err) {
@@ -34,7 +34,7 @@ router.get("/communities/:id", async (req, res) => {
     const comunidadesId = req.params.id;
 
     const comunidades = await db_query(
-      "SELECT * FROM comunidades WHERE id_comunidade = ?",
+      "SELECT * FROM tb_comunidade WHERE id_comunidade = ?",
       [comunidadesId]
     );
 
@@ -56,7 +56,7 @@ router.put("/communities/:id", async (req, res) => {
     const { nm_comunidade, id_categoria } = req.body;
 
     await db_query(
-      "UPDATE comunidades SET nm_comunidade = ?, id_categoria = ? WHERE id_comunidade = ?",
+      "UPDATE tb_comunidade SET nm_comunidade = ?, id_categoria = ? WHERE id_comunidade = ?",
       [nm_comunidade, id_categoria, comunidadeId]
     );
 
@@ -71,7 +71,7 @@ router.delete("/communities/:id", async (req, res) => {
   try {
     const comunidadeId = req.params.id;
 
-    await db_query("DELETE FROM comunidades WHERE id_comunidade = ?", [
+    await db_query("DELETE FROM tb_comunidade WHERE id_comunidade = ?", [
       comunidadeId,
     ]);
 
@@ -81,3 +81,5 @@ router.delete("/communities/:id", async (req, res) => {
     res.sendStatus(500).send("Erro ao deletar comunidade");
   }
 });
+
+module.exports = router;

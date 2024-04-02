@@ -6,7 +6,7 @@ router.post("/addresses", async (req, res) => {
     try{
         const {id_bairro} = req.body;
 
-        const result = await db_query("INSERT INTO enderecos (id_bairro) VALUES (?) RETURNING *", [id_bairro]);
+        const result = await db_query("INSERT INTO tb_endereco (id_bairro) VALUES (?) RETURNING *", [id_bairro]);
 
         res.status(201).json({ id_endereco: result.insertId})
     } catch (err) {
@@ -17,7 +17,7 @@ router.post("/addresses", async (req, res) => {
 
 router.get("/addresses", async (req, res) => {
     try{    
-        const enderecos = await db_query("SELECT * FROM enderecos");
+        const enderecos = await db_query("SELECT * FROM tb_endereco");
 
         res.json(enderecos);
     } catch (err) {
@@ -30,7 +30,7 @@ router.get("/addresses/:id", async (req, res) => {
     try{
         const enderecosId = req.params.id;
 
-        const enderecos = await db_query("SELECT * FROM enderecos WHERE id_endereco = ?", [enderecosId]);
+        const enderecos = await db_query("SELECT * FROM tb_endereco WHERE id_endereco = ?", [enderecosId]);
         
         if (enderecos.length === 0) {
             res.status(404).send("Endereço não encontrado");
@@ -49,7 +49,7 @@ router.put("/addresses/:id", async (req, res) => {
         const enderecoId = req.params.id;
         const {id_bairro} = req.body;
 
-        await db_query("UPDATE enderecos SET id_bairro = ? WHERE id_endereco = ?", [id_bairro, enderecoId]);
+        await db_query("UPDATE tb_endereco SET id_bairro = ? WHERE id_endereco = ?", [id_bairro, enderecoId]);
 
         res.sendStatus(200);
     } catch (err) {
@@ -62,7 +62,7 @@ router.delete("/addresses/:id", async (req, res) => {
     try{
         const enderecoId = req.params.id;
 
-        await db_query("DELETE FROM enderecos WHERE id_endereco = ?", [enderecoId]);
+        await db_query("DELETE FROM tb_endereco WHERE id_endereco = ?", [enderecoId]);
 
         res.sendStatus(200);
     } catch (err) {
