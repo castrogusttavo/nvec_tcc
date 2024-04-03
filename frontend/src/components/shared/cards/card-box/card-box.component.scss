@@ -38,3 +38,7 @@
         color: #{$N1000};
     }
 }
+
+:host.card-box-items a{
+    display:  none;
+}
