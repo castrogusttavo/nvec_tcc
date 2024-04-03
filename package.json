@@ -9,11 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@angular/common": "^17.3.2",
     "axios": "^1.6.8",
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.3"
   },
-  "description": ""
+  "description": "![Logo do Projeto](./frontend/src/assets/svg/logo.svg)"
 }
