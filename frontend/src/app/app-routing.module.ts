@@ -80,19 +80,21 @@ const routes: Routes = [
     loadChildren: () => import('./lists-itens-screen/lists-itens-screen.module').then( m => m.ListsItensScreenPageModule)
   },
   {
+    path: 'teste-modal',
+    loadChildren: () => import('./teste-modal/teste-modal.module').then( m => m.TesteModalPageModule)
+  },
+  {
     path: 'explore-container',
     loadChildren: () => import('./explore-container/explore-container.module').then( m => m.ExploreContainerComponentModule)
   },
   {
     path: 'comparation-item-screen',
     loadChildren: () => import('./comparation-item-screen/comparation-item-screen.module').then( m => m.ComparationItemScreenPageModule)
-  },  {
+  },
+  {
     path: 'all-community-screen',
     loadChildren: () => import('./all-community-screen/all-community-screen.module').then( m => m.AllCommunityScreenPageModule)
   }
-
-
-
 
 
 ];

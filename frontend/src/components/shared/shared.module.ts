@@ -20,6 +20,7 @@ import { CardListRecentComponent } from './cards/card-list-recent/card-list-rece
 import { CardBoxComponent } from './cards/card-box/card-box.component';
 import { CardListSearchComponent } from './cards/card-list-search/card-list-search.component';
 import { CardPlansComponent } from './cards/card-plans/card-plans.component';
+import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component';
 import { SourchComponent } from './sourchs/sourch/sourch.component';
 import { CardComparationItemComponent } from './cards/card-comparation-item/card-comparation-item.component';
 
@@ -44,8 +45,10 @@ import { CardComparationItemComponent } from './cards/card-comparation-item/card
     CardListRecentComponent,
     CardBoxComponent,
     CardPlansComponent,
+    ModalCriarComponent,
     CardComparationItemComponent,
     SourchComponent
+
   ],
   imports: [
     IonicModule,
@@ -60,7 +63,8 @@ import { CardComparationItemComponent } from './cards/card-comparation-item/card
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-recent', component: CardListRecentComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-box', component: CardBoxComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-plans', component: CardPlansComponent}])
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-plans', component: CardPlansComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/modals/modal-criar-component', component: CardPlansComponent}])
 
   ],
   exports: [
@@ -84,6 +88,7 @@ import { CardComparationItemComponent } from './cards/card-comparation-item/card
     CardListRecentComponent,
     CardBoxComponent,
     CardPlansComponent,
+    ModalCriarComponent,
     CardComparationItemComponent,
     SourchComponent
   ]
