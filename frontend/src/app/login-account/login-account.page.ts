@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-account',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-account.page.scss'],
 })
 export class LoginAccountPage implements OnInit {
+  email: string = '';
+  senha: string = '';
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  fazerLogin() {
+  
   }
 
 }
