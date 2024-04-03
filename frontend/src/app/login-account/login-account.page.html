@@ -8,30 +8,30 @@
         <app-button-small class="buttonSmall"  [routerLink]="['/create-account']">Cadastrar</app-button-small>
       </div>
     </div>
-      
+
     <h1>Na Volta Eu Compro</h1>
     <div class="boxSombra"></div>
 
-    <div class="box"> 
+    <div class="box">
       <p>Bem-vindo Novamente</p>
       <span>Insira seus dados abaixo e volte a se organizar</span>
-        <div class="input">      
-          <app-input placeholder="E-mail" [(ngModel)]="email" class="inputEmail"></app-input>
-          <app-input placeholder="Senha" [(ngModel)]="senha" class="inputSenha"></app-input>
+        <div class="input">
+          <app-input placeholder="E-mail" class="inputEmail"></app-input>
+          <app-input placeholder="Senha" class="inputSenha"></app-input>
         </div>
-        <app-button-big (click)="fazerLogin()" [routerLink]="['/tabs/tab1']">Entrar</app-button-big>
+        <app-button-big [routerLink]="['/tabs/tab1']">Entrar</app-button-big>
 
       <div class="line">
         <div ></div>
         <span>Ou entrar usando</span>
         <div ></div>
-      </div>      
+      </div>
 
       <div class="buttonSocial">
         <app-button-social [imageSocial]="'../../assets/svg/google.svg'" texto="Google" [routerLink]="['/tabs/tab1']"></app-button-social>
         <app-button-social [imageSocial]="'../../assets/svg/facebook.svg'" texto="Facebook" [routerLink]="['/tabs/tab1']"></app-button-social>
       </div>
-   
+
     </div>
   </div>
 </ion-content>
