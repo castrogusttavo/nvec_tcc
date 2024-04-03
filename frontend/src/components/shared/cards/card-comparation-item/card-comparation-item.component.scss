@@ -1,0 +1,23 @@
+@import "../../../../global.scss";
+
+:host{
+    ion-card{
+        background: #{$brand1};
+        border-radius: #{$spaceLarge};
+        margin-top: 30px;
+    }
+    .card-price{
+        color: #{$brand2};
+        width: 120px;
+        height: 54px;
+        background: #{$N200};
+        border-radius:9.6px; 
+        position: absolute;
+        bottom: 50px;
+        left: 50px;
+    }
+    p{
+        color: #{$N0};
+    }
+}
+
