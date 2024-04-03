@@ -16,8 +16,8 @@
       <p>Bem-vindo Novamente</p>
       <span>Insira seus dados abaixo e volte a se organizar</span>
       <div class="input">      
-        <app-input placeholder="E-mail" class="inputEmail"></app-input>
-        <app-input placeholder="Senha" class="inputSenha"></app-input>
+        <app-input placeholder="E-mail" [(ngModel)]="email" class="inputEmail"></app-input>
+        <app-input placeholder="Senha" [(ngModel)]="senha" class="inputSenha"></app-input>
       </div>
       <app-button-big [routerLink]="['/tabs/tab1']">Entrar</app-button-big>
 
