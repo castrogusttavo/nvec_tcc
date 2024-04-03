@@ -77,7 +77,11 @@ const routes: Routes = [
   {
     path: 'lists-itens-screen',
     loadChildren: () => import('./lists-itens-screen/lists-itens-screen.module').then( m => m.ListsItensScreenPageModule)
+  },  {
+    path: 'teste-modal',
+    loadChildren: () => import('./teste-modal/teste-modal.module').then( m => m.TesteModalPageModule)
   }
+
 
 
 

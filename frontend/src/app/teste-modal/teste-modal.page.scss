@@ -1,0 +1,83 @@
+@import "../../global.scss";
+
+.forward{
+    padding-left:  5%;
+    padding-top: 5%;
+}
+
+.imageIlustrator{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
+
+.inputs{
+    padding-top: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+input{
+    margin: 10px;
+}
+
+input{
+    width: 183px;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    background: transparent;
+}
+  
+textarea{
+    width: 183px;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    background: transparent;
+}
+
+::placeholder {
+    color: $N800D;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
+}
+
+.buttonBig{
+    padding-top: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.description{
+    width: 382px;
+    height: 125px;
+    position: relative;
+    resize: none; 
+    font-family: 'Poppins'; 
+    font-size: 14px; 
+    font-weight: 600;
+    line-height: 16px; 
+}
+
+.description::placeholder{
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+}
+
+.inputText::placeholder{
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+}

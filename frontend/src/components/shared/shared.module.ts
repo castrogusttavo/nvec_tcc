@@ -20,6 +20,7 @@ import { CardListRecentComponent } from './cards/card-list-recent/card-list-rece
 import { CardBoxComponent } from './cards/card-box/card-box.component';
 import { CardListSearchComponent } from './cards/card-list-search/card-list-search.component';
 import { CardPlansComponent } from './cards/card-plans/card-plans.component';
+import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CardPlansComponent } from './cards/card-plans/card-plans.component';
     ButtonArrowComponent,
     CardListRecentComponent,
     CardBoxComponent,
-    CardPlansComponent
+    CardPlansComponent,
+    ModalCriarComponent
   ],
   imports: [
     IonicModule,
@@ -56,7 +58,8 @@ import { CardPlansComponent } from './cards/card-plans/card-plans.component';
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-square', component: CardListSquareComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-recent', component: CardListRecentComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-box', component: CardBoxComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/cards/card-plans', component: CardPlansComponent}])
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-plans', component: CardPlansComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/modals/modal-criar-component', component: CardPlansComponent}])
 
   ],
   exports: [
@@ -79,7 +82,8 @@ import { CardPlansComponent } from './cards/card-plans/card-plans.component';
     ButtonArrowComponent,
     CardListRecentComponent,
     CardBoxComponent,
-    CardPlansComponent
+    CardPlansComponent,
+    ModalCriarComponent
   ]
 })
 export class SharedModule { }
