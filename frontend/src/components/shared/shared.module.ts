@@ -21,6 +21,8 @@ import { CardBoxComponent } from './cards/card-box/card-box.component';
 import { CardListSearchComponent } from './cards/card-list-search/card-list-search.component';
 import { CardPlansComponent } from './cards/card-plans/card-plans.component';
 import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component';
+import { SourchComponent } from './sourchs/sourch/sourch.component';
+import { CardComparationItemComponent } from './cards/card-comparation-item/card-comparation-item.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,10 @@ import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component'
     CardListRecentComponent,
     CardBoxComponent,
     CardPlansComponent,
-    ModalCriarComponent
+    ModalCriarComponent,
+    CardComparationItemComponent,
+    SourchComponent
+
   ],
   imports: [
     IonicModule,
@@ -83,7 +88,9 @@ import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component'
     CardListRecentComponent,
     CardBoxComponent,
     CardPlansComponent,
-    ModalCriarComponent
+    ModalCriarComponent,
+    CardComparationItemComponent,
+    SourchComponent
   ]
 })
 export class SharedModule { }
