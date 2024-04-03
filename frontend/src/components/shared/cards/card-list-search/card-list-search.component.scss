@@ -86,3 +86,7 @@
     width: 20px;
     height: 20px;
 }
+
+:host.card-bg-grey ion-card{
+    background: #{$N200};
+}

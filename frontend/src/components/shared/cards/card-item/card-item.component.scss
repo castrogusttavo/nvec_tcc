@@ -27,3 +27,8 @@
         align-items: center;
     }
 }
+
+:host.card-item-comparation ion-card{
+    border: 3px dashed #{$brand1};
+    border-radius: 16px;
+}
