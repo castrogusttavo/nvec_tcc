@@ -80,6 +80,10 @@ const routes: Routes = [
     loadChildren: () => import('./lists-itens-screen/lists-itens-screen.module').then( m => m.ListsItensScreenPageModule)
   },
   {
+    path: 'acount',
+    loadChildren: () => import('./acount/acount.module').then( m => m.AcountPageModule)
+  },
+  {
     path: 'teste-modal',
     loadChildren: () => import('./teste-modal/teste-modal.module').then( m => m.TesteModalPageModule)
   },
@@ -95,8 +99,6 @@ const routes: Routes = [
     path: 'all-community-screen',
     loadChildren: () => import('./all-community-screen/all-community-screen.module').then( m => m.AllCommunityScreenPageModule)
   }
-
-
 ];
 @NgModule({
   imports: [
