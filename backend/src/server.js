@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("./db");
-const axios = require("axios");
 
 // Importando os arquivos de rota das APIs
 const addressesRouter = require("./api/addresses/addresses");
