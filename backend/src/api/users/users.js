@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const {db_query} = require("../../db");
 
-router.post("/users", async (req, res) => {
+router.post("/:nm_usuario/:email_usuario/:senha_usuario", async (req, res) => {
   try {
-    const { nm_usuario, email_usuario, senha_usuario, id_assinatura } =
+    const { nm_usuario, email_usuario, senha_usuario } =
       req.body;
 
     const result = await db.query(
-      "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario, id_assinatura) VALUES (?, ?, ?, ?) RETURNING *",
-      [nm_usuario, email_usuario, senha_usuario, id_assinatura]
+      "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?, ?) RETURNING *",
+      [nm_usuario, email_usuario, senha_usuario]
     );
 
     res.status(201).json({ id_usuario: result.insertId });
