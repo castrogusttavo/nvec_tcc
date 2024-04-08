@@ -8,12 +8,16 @@
   "dependencies": {
     "@angular/core": "^17.3.2",
     "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
     "firebase-admin": "^12.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.3",
     "node": "^21.7.1",
+    "sequelize": "^6.37.2",
     "sql": "^0.78.0"
   },
   "scripts": {
