@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("./db");
-const axios = require("axios");
 
 // Importando os arquivos de rota das APIs
 const addressesRouter = require("./api/addresses/addresses");
@@ -18,13 +17,13 @@ const app = express();
 app.use(bodyParser.json());
 
 // Configurando as rotas da API para os respectivos caminhos
-app.use('/api/addresses', addressesRouter);
-app.use('/api/communities', communitiesRouter);
-app.use('/api/fixedExpenses', fixedExpensesRouter);
-app.use('/api/income', incomeRouter);
-app.use('/api/items', itemsRouter);
-app.use('/api/lists', listsRouter);
-app.use('/api/users', usersRouter);
+app.use('/api', addressesRouter);
+app.use('/api', communitiesRouter);
+app.use('/api', fixedExpensesRouter);
+app.use('/api', incomeRouter);
+app.use('/api', itemsRouter);
+app.use('/api', listsRouter);
+app.use('/api', usersRouter);
 
 /* Definindo um endpoint
     - req = request -> pedido ao servidor
