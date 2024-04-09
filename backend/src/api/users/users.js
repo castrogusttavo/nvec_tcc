@@ -1,15 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const {db_query} = require("../../db");
+const { db_query } = require("../../db");
 
 router.post("/users", async (req, res) => {
   try {
+<<<<<<< Updated upstream
     const { nm_usuario, email_usuario, senha_usuario, id_assinatura } =
       req.body;
 
     const result = await db.query(
       "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario, id_assinatura) VALUES (?, ?, ?, ?) RETURNING *",
       [nm_usuario, email_usuario, senha_usuario, id_assinatura]
+=======
+    const { nm_usuario, email_usuario, senha_usuario } = req.body;
+
+    const result = await db_query(
+      "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)",
+      [nm_usuario, email_usuario, senha_usuario]
+>>>>>>> Stashed changes
     );
 
     res.status(201).json({ id_usuario: result.insertId });
@@ -34,10 +42,7 @@ router.get("/users/:id", async (req, res) => {
   try {
     const userId = req.params.id;
 
-    const user = await db.query(
-      "SELECT * FROM tb_usuario WHERE id_usuario = ?",
-      [userId]
-    );
+    const user = await db_query("SELECT * FROM tb_usuario WHERE id_usuario = ?", [userId]);
 
     if (user.length === 0) {
       res.status(404).send("Usuário não encontrado");
@@ -54,10 +59,9 @@ router.get("/users/:id", async (req, res) => {
 router.put("/users/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-    const { nm_usuario, email_usuario, senha_usuario, id_assinatura } =
-      req.body;
+    const { nm_usuario, email_usuario, senha_usuario, id_assinatura } = req.body;
 
-    await db.query(
+    await db_query(
       "UPDATE tb_usuario SET nm_usuario = ?, email_usuario = ?, senha_usuario = ?, id_assinatura = ? WHERE id_usuario = ?",
       [nm_usuario, email_usuario, senha_usuario, id_assinatura, userId]
     );
@@ -72,8 +76,8 @@ router.put("/users/:id", async (req, res) => {
 router.delete("/users/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-
-    await db.query("DELETE FROM tb_usuario WHERE id_usuario = ?", [userId]);
+    
+    await db_query("DELETE FROM tb_usuario WHERE id_usuario = ?", [userId]);
 
     res.sendStatus(200);
   } catch (err) {
