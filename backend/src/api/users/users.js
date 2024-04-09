@@ -4,20 +4,12 @@ const { db_query } = require("../../db");
 
 router.post("/users", async (req, res) => {
   try {
-<<<<<<< Updated upstream
     const { nm_usuario, email_usuario, senha_usuario, id_assinatura } =
       req.body;
 
     const result = await db.query(
       "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario, id_assinatura) VALUES (?, ?, ?, ?) RETURNING *",
       [nm_usuario, email_usuario, senha_usuario, id_assinatura]
-=======
-    const { nm_usuario, email_usuario, senha_usuario } = req.body;
-
-    const result = await db_query(
-      "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)",
-      [nm_usuario, email_usuario, senha_usuario]
->>>>>>> Stashed changes
     );
 
     res.status(201).json({ id_usuario: result.insertId });
