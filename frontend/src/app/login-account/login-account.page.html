@@ -15,11 +15,13 @@
     <div class="box">
       <p>Bem-vindo Novamente</p>
       <span>Insira seus dados abaixo e volte a se organizar</span>
+      <form (ngSubmit)="loginUser($event)">
         <div class="input">
-          <app-input placeholder="E-mail" class="inputEmail"></app-input>
-          <app-input placeholder="Senha" class="inputSenha"></app-input>
+          <ion-input type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required></ion-input>
+          <ion-input type="password" placeholder="Senha" name="password" [(ngModel)]="password" required></ion-input>
         </div>
-        <app-button-big [routerLink]="['/tabs/tab1']">Entrar</app-button-big>
+        <app-button-big type="submit">Entrar</app-button-big>
+      </form>
 
       <div class="line">
         <div ></div>
