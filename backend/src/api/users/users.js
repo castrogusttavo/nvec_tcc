@@ -2,13 +2,12 @@ const express = require("express");
 const router = express.Router();
 const { db_query } = require("../../db");
 
-router.post("/:nm_usuario/:email_usuario/:senha_usuario", async (req, res) => {
+router.post("/users", async (req, res) => {
   try {
-    const { nm_usuario, email_usuario, senha_usuario } =
-      req.body;
+    const { nm_usuario, email_usuario, senha_usuario } = req.body;
 
-    const result = await db.query(
-      "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?, ?) RETURNING *",
+    const result = await db_query(
+      "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)",
       [nm_usuario, email_usuario, senha_usuario]
     );
 
@@ -68,7 +67,7 @@ router.put("/users/:id", async (req, res) => {
 router.delete("/users/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-    
+
     await db_query("DELETE FROM tb_usuario WHERE id_usuario = ?", [userId]);
 
     res.sendStatus(200);
@@ -77,5 +76,28 @@ router.delete("/users/:id", async (req, res) => {
     res.status(500).send("Erro ao deletar usuário");
   }
 });
+
+
+//Rota de LogIn
+router.post("/login", async (req, res) => {
+  try {
+    const { email, senha } = re.body;
+
+    const user = await db_query("SELECT * FROM tb_usuario WHERE email_usuario = ? AND senha_usuario = ?", [email, senha]);
+
+    if (user.length === 0) {
+      res.status(401).json({ error: "Credenciais inválidas" })
+      return;
+    }
+
+    res.status(200).json({ user })
+  } catch (err) {
+    console.error("Erro ao fazer login:", err);
+    res.status(500).send("Erro ao fazer login");
+  }
+});
+
+//Rota de SignUp
+
 
 module.exports = router;
