@@ -23,6 +23,7 @@ import { CardPlansComponent } from './cards/card-plans/card-plans.component';
 import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component';
 import { SourchComponent } from './sourchs/sourch/sourch.component';
 import { CardComparationItemComponent } from './cards/card-comparation-item/card-comparation-item.component';
+import { CardListAllComponent } from './cards/card-list-all/card-list-all.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CardComparationItemComponent } from './cards/card-comparation-item/card
     CardPlansComponent,
     ModalCriarComponent,
     CardComparationItemComponent,
-    SourchComponent
+    SourchComponent,
+    CardListAllComponent
 
   ],
   imports: [
@@ -90,7 +92,8 @@ import { CardComparationItemComponent } from './cards/card-comparation-item/card
     CardPlansComponent,
     ModalCriarComponent,
     CardComparationItemComponent,
-    SourchComponent
+    SourchComponent,
+    CardListAllComponent
   ]
 })
 export class SharedModule { }
