@@ -5,11 +5,7 @@ const dbConfig = {
     user: 'root',
     password: 'root',
     database: 'db_nvec',
-<<<<<<< Updated upstream
-    port: '3307'
-=======
-    port: 3306
->>>>>>> Stashed changes
+/*     port: '3307' */
 };
 
 const connection = mysql.createConnection(dbConfig);
