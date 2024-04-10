@@ -10,36 +10,23 @@ import { Router } from '@angular/router';
 export class LoginAccountPage implements OnInit {
   email: string = '';
   password: string = '';
-  usuarios: any[] = [
-    {
-      "id_usuario": 1,
-      "nm_usuario": "Álvaro Oliveira",
-      "senha_usuario": "çenhaForte123",
-      "email_usuario": "alvarooliveira@email.com",
-      "id_assinatura": 2
-    },
-    {
-      "id_usuario": 2,
-      "nm_usuario": "Juliana Barroso",
-      "senha_usuario": "julianaÇenha",
-      "email_usuario": "julianabarroso@email.com",
-      "id_assinatura": 3
-    }
-  ];
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(){
   }
 
-  loginUser(event: Event): void {
+  async loginUser(event : {preventDefault () => void; }) {
     event.preventDefault();
-    const usuario = this.usuarios.find(u => u.email_usuario === this.email && u.senha_usuario === this.password);
-    if (usuario) {
-      console.log('Usuário autenticado: ', usuario);
+
+    try {
+      const response: any = await this.http.post('http://localhost:3001/login', { email_usuario: this.email,senha_usuario :this.password }).toPromise();
+
+      console.log('Login bem-sucedido: ', response);
       this.router.navigate(['/tabs/tab1']);
-    } else {
-      alert('Credenciais inválidas');
+    } catch (err) {
+      console.error('Erro ao fazer login: ', err);
     }
   }
+
 }
