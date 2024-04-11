@@ -78,19 +78,20 @@ router.delete("/users/:id", async (req, res) => {
 });
 
 
-//Rota de LogIn
+// Rota de LogIn
 router.post("/login", async (req, res) => {
   try {
-    const { email, senha } = re.body;
+    const { email, senha } = req.body;
+    console.log(req.body);
 
     const user = await db_query("SELECT * FROM tb_usuario WHERE email_usuario = ? AND senha_usuario = ?", [email, senha]);
 
     if (user.length === 0) {
-      res.status(401).json({ error: "Credenciais inválidas" })
+      res.status(401).json({ error: "Credenciais inválidas" });
       return;
     }
 
-    res.status(200).json({ user })
+    res.status(200).json({ user });
   } catch (err) {
     console.error("Erro ao fazer login:", err);
     res.status(500).send("Erro ao fazer login");

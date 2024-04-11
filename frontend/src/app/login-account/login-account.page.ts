@@ -16,11 +16,14 @@ export class LoginAccountPage implements OnInit {
   ngOnInit(){
   }
 
-  async loginUser(event : {preventDefault () => void; }) {
+  async loginUser(event: { preventDefault: () => void; }) {
     event.preventDefault();
 
+    console.log('Email:', this.email);
+    console.log('Senha:', this.password);
+
     try {
-      const response: any = await this.http.post('http://localhost:3001/login', { email_usuario: this.email,senha_usuario :this.password }).toPromise();
+      const response: any = await this.http.post('http://localhost:3001/api/login', { email: this.email, senha: this.password }).toPromise();
 
       console.log('Login bem-sucedido: ', response);
       this.router.navigate(['/tabs/tab1']);

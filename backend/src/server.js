@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const db = require("./db");
 
 // Importando os arquivos de rota das APIs
@@ -13,7 +14,10 @@ const usersRouter = require("./api/users/users");
 
 const app = express();
 
-// Configurando o middleware body-parser para analisar corpos de solicitação JSON
+app.use(cors({
+  origin: 'http://localhost:8100'
+}));
+
 app.use(bodyParser.json());
 
 // Configurando as rotas da API para os respectivos caminhos
