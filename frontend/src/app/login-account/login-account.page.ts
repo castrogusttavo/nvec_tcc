@@ -32,4 +32,5 @@ export class LoginAccountPage implements OnInit {
     }
   }
 
+
 }

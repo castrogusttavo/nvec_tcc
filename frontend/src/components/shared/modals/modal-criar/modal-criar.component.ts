@@ -5,10 +5,10 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './modal-criar.component.html',
   styleUrls: ['./modal-criar.component.scss'],
 })
-export class ModalCriarComponent  implements OnInit {
+export class ModalCriarComponent implements OnInit {
   isModalOpen = false;
   @Input() button: string = '';
-  @Input() inputs: { placeholder: string, id: string }[][] = [];
+  @Input() inputs: { label?: string, id: string, placeholder: string, class?: string }[][] = [];
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -16,5 +16,5 @@ export class ModalCriarComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {}
-
 }
+

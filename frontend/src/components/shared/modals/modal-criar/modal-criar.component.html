@@ -4,21 +4,17 @@
     <img  src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <!-- <div class="inputs">
-    <input placeholder="Nome" class="inputText">
-    <input placeholder="Categoria" class="inputText">
-    <textarea placeholder="Descrição" class="description"></textarea>
-  </div> -->
-
   <div class="modal-content">
     <form>
       <ng-container *ngFor="let inputRow of inputs">
-        <div *ngFor="let input of inputRow">
-          <input type="text" [placeholder]="input.placeholder" class="inputText"  [id]="input.id">
+        <div  class="inputs">
+          <div *ngFor="let input of inputRow">
+            <input type="text" [placeholder]="input.placeholder" [id]="input.id" [class]="input.class">
+          </div>
         </div>
       </ng-container>
     </form>
-  </div>
+  </div>  
 
   <div class="buttonBig">
     <app-button-big>{{button}}</app-button-big>
