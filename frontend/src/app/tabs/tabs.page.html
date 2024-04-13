@@ -16,15 +16,15 @@
               <ion-content [fullscreen]="true" scrollY="false">
                 <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" (click)="setOpen(false)">
                 <app-modal-criar
-                  button ="Nome botão"
-                  [inputs]="[
-                    [
-                      { placeholder: 'Nome', id: 'nome' },
-                      { placeholder: 'Categoria', id: 'categoria' },
-                      { placeholder: 'Descricao', id: 'descricao' }
-                    ]
-                  ]"
-                ></app-modal-criar>
+                button="Criar Lista"
+                [inputs]="[
+                [
+                  { placeholder: 'Nome', id: 'nome', class: 'inputText' },
+                  { placeholder: 'Categoria', id: 'categoria', class: 'inputText'},
+                  { placeholder: 'Descrição', id: 'descricao', class: 'description'}
+                ]
+              ]"
+              ></app-modal-criar>              
               </ion-content>   
         </ng-template>
       </ion-modal>
