@@ -1,5 +1,7 @@
 <ion-card>
 
+  <span class="see-all">Ver todas</span>
+
   <div class="list-price">
     <div class="list-name">
       <img [src]="imagePath" alt="">
@@ -10,8 +12,8 @@
       <p>{{listCategory}}</p>
 
       <div class="price-date">
-        <div class="total-list">R${{listTotal}}</div>
-        <span>{{listDate}}</span>
+        <div class="total-list">R$<b class="price-list-bold">{{listTotal}}</b></div>
+        <span class="date">{{listDate}}</span>
       </div>
     </div>
   </div>
