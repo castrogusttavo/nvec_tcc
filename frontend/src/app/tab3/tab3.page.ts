@@ -7,6 +7,20 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
+  }
+  
+updateCounter(event: any) {
+  const input = event.target;
+  const maxLength = parseInt(input.getAttribute('maxlength'), 10);
+  const currentLength = input.value.length;
+  const counter = input.parentElement.querySelector('.counter');
+  if (counter) {
+    counter.textContent = currentLength > 0 ? `${currentLength} / ${maxLength}` : '';
+  }
+}
 
+  
+  
 }

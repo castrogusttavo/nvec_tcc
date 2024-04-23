@@ -6,8 +6,28 @@
   </div>
 
   <div class="inputs">
-    <input placeholder="Nome" class="inputText">
-    <input placeholder="Categoria" class="inputText">
+
+    <div class="input-container">
+      <input placeholder="Nome"
+             class="inputText"
+             (input)="updateCounter($event)"
+             maxlength="20">
+      <div class="counter"></div>
+    </div>
+    
+    <div class="input-container">
+      <input placeholder="Categoria"
+             class="inputText"
+             (input)="updateCounter($event)"
+             maxlength="20">
+      <div class="counter"></div>
+    </div>
+
+    <div class="input-container">
+      <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
+      <div class="counter"></div>
+    </div>
+    
     <textarea placeholder="Descrição" class="description"></textarea>
 
   </div>
