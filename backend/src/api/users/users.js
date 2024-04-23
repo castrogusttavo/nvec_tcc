@@ -98,7 +98,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//Rota de SignUp
-
-
 module.exports = router;

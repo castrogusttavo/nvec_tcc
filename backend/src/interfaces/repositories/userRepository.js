@@ -11,7 +11,7 @@ class UserRepository {
     const { username, email, password} = user;
     const [ result ] = await this.db.execute(
       'INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)',
-      [ username, password, email ]
+      [ username, email, password ]
     );
     return new User({
       id: result.insertId,
@@ -21,16 +21,16 @@ class UserRepository {
     });
   }
 
-  async fundUserByEmail(email) {
+  async findUserByEmail(email) {
     const [rows] = await this.db.execute(
       'SELECT * FROM tb_usuario WHERE email_usuario = ?',
       [email]
     );
-    if (row.length === 0) {
+    if (rows.length === 0) {
       return null;
     }
-    const { id, email, password } = rows[0];
-    return new User({ id, username, email, password })
+    const { id, nm_usuario: username, email_usuario: userEmail, senha_usuario: password } = rows[0];
+    return new User({ id, username, email: userEmail, password });
   }
 }
 
