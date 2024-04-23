@@ -1,20 +1,36 @@
 @import "../../../../global.scss";
 
 :host{
-    ion-card{
+    *{
+        
+    }
+    ion-card {
         background: #{$brand1};
         border-radius: #{$spaceLarge};
-        margin-top: 30px;
+        position: relative;
+        padding: 20px;
+        overflow: visible;
     }
-    .card-price{
-        color: #{$brand2};
-        width: 120px;
-        height: 54px;
-        background: #{$N200};
-        border-radius:9.6px; 
+    
+    .card-price {
         position: absolute;
-        bottom: 50px;
-        left: 50px;
+        top: -20px; /* Ajuste para que a div sobreponha um pouco a ion-card */
+        right: -20px; /* Ajuste para que a div sobreponha um pouco a ion-card */
+        left: -20px; /* Ajuste para que a div sobreponha um pouco a ion-card */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #{$brand2};
+        background: #{$N200};
+        border-radius: 9.6px;
+        z-index: 1;
+        /* Defina um tamanho menor para o elemento filho */
+        width: calc(100% + 40px); /* Ajuste conforme necessário */
+        height: 54px; /* Altura desejada para o elemento filho */
+    }
+    
+    .itemCategory{
+        text-align: end;
     }
     p{
         color: #{$N0};

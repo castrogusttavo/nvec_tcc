@@ -1,0 +1,52 @@
+@import '../../../../global.scss';
+
+:host {
+    *{
+        margin: 0px;
+        color: #{$N300};
+    }
+    ion-card{
+        background: #{$B200};
+        border-radius: 25px;
+    }
+    .list-price{
+        background: #{$brand1};
+        border-radius: 25px;
+        padding: 8px 25px 37px 25px;
+    }
+    .see-all{
+        color: #{$N1000};
+        font-size: #{$textSmaller};
+        padding: 21px 25px;
+    }
+    .list-name{
+        display: flex;
+        justify-content: end;
+    }
+    .price-date{
+        padding-top: 10%;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+    }
+    .total-list{
+        background: #{$N200};
+        color: #{$brand2};
+        width: 70%;
+        height: 20%;
+        padding: 8px 40px 7px 40px;
+        border-radius: 7px; 
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        font-size: #{$textNormal};
+    }
+    .price-list-bold{
+        font-size: #{$textLarge};
+        color: #{$brand2};
+    }
+    .date{
+        font-size: #{$textSmalling}
+    }
+    
+}
