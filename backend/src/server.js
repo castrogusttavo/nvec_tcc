@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const db = require("./db");
+const db = require("./frameworks/db/db");
 
 // Importando os arquivos de rota das APIs
 const addressesRouter = require("./api/addresses/addresses");
