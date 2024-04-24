@@ -7,14 +7,12 @@ h1{
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
-    line-height: 35.2px;
     padding-top: 5%;
 }
 
 .content{
     margin: 40px;
 }
-
 
 span{
     color: var(--Color-inverted-inverted500, #8590A2);
@@ -27,7 +25,13 @@ span{
 }
 
 h3{
-    margin: 0;
+    color: var(--Normal0, #161A1D);
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; 
 }
 
 .buttonArrow{
@@ -38,16 +42,13 @@ h3{
     display: flex;
 }
 
-.row{
-    margin-top: 60px;
-    margin-bottom: 60px;
-}
 
 .rowPrimary{
     margin-top: 40px;
 }
-.content{
-    padding: 24px 16px;
+
+.content{ 
+    margin: 24px;
 }
 
 img{
@@ -74,25 +75,6 @@ img{
     line-height: 16px; 
 }
 
-input{
-    margin: 10px;
-    width: 183px;
-    height: 55px;
-    flex-shrink: 0;
-    border-radius: var(--Space-8, 8px);
-    border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
-}
-
-.row {
-    text-align: center; /* Centralizar os elementos na linha */
-}
-
-.input-wrapper,
-.button-wrapper {
-    display: inline-block; /* Garante que os elementos fiquem na mesma linha */
-    vertical-align: top; /* Alinha os elementos verticalmente ao topo */
-}
 
 .inputText {
     width: 183px;
@@ -100,8 +82,4 @@ input{
     border-radius: 8px;
     border: 2px solid #ccc;
     background: transparent;
-}
-
-.input-wrapper {
-    margin-right: 10px; /* Espaçamento entre o input e o botão */
 }
