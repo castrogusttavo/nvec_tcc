@@ -30,25 +30,13 @@
     
     <textarea placeholder="Descrição" class="description"></textarea>
 
-    <ion-list>
-      <ion-item>
-        <ion-select  aria-label="Categoria'" interface="popover" placeholder="Categoria">
-          <ion-select-option value="apples">Apples</ion-select-option>
-          <ion-select-option value="oranges">Oranges</ion-select-option>
-          <ion-select-option value="bananas">Bananas</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-
-    <ion-list>
-      <ion-item>
-        <ion-select aria-label="Categoria'" interface="popover" placeholder="Categoria">
-          <ion-select-option value="apples">Apples</ion-select-option>
-          <ion-select-option value="oranges">Oranges</ion-select-option>
-          <ion-select-option value="bananas">Bananas</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
+    <div>
+      <select id="categoria" name="categoria" class="dropdown">
+        <option value="apples">Apples</option>
+        <option value="oranges">Oranges</option>
+        <option value="bananas">Bananas</option>
+      </select>
+    </div>
 
   </div>
 
