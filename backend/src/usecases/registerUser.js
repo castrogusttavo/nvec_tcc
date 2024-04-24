@@ -10,7 +10,7 @@ const registerUser = async (userRepository, userData) => {
     throw new Error('Usuário já cadastrado');
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 16);
   const newUser =  {
     username,
     password: hashedPassword,
