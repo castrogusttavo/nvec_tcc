@@ -21,15 +21,28 @@
 
 input{
     margin: 10px;
-}
-
-input{
     width: 183px;
     height: 55px;
     flex-shrink: 0;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
     background: transparent;
+}
+
+ion-select{
+    width: 183px;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    background: transparent;
+    margin: 10px;
+
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
 }
 
 ion-input{
