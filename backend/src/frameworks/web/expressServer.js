@@ -1,42 +1,49 @@
 // src/frameworks/web/express-server.js
 
-const express = require('express');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const registerUser = require('../../usecases/registerUser');
-const loginUser = require('../../usecases/loginUser');
-const UserRepository = require('../../interfaces/repositories/userRepository');
-const db = require('../../frameworks/persistance/mysql');
-// const { create } = require('domain');
+const express = require("express");
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const dotenv = require("dotenv");
+require('dotenv').config();
+
+dotenv.config({ path: './src/.env' });
+
+const registerUser = require("../../usecases/registerUser");
+const loginUser = require("../../usecases/loginUser");
+const UserRepository = require("../../interfaces/repositories/userRepository");
 
 const app = express();
 const secretKey = process.env.JWT_SECRET_KEY;
 
-const db = createConnection();
-const userRepository = new UserRepository(db);
+console.log("Secret Key:", secretKey);
+
+if (!secretKey) {
+  throw new Error("Secret Key is not defined. Check your .env configuration.");
+}
 
 app.use(cors());
 app.use(express.json());
 
-app.post('/register', async (req, res) => {
+app.post("/register", async (req, res) => {
   try {
-    const newUser = await registerUser(userRepository, req.body, bcrypt);
-    res.status(201).send(newUser);
+    const newUser = await registerUser(UserRepository, req.body, bcrypt);
+    res.status(201).json(newUser);
   } catch (err) {
-    res.status(400).send({ error: err.message });
+    res.status(400).json({ error: err.message });
   }
 });
 
-app.get('/login', async (req, res) => {
+app.post("/login", async (req, res) => {
   try {
-    const token = await loginUser(userRepository, secretKey, bcrypt, req.body);
+    const token = await loginUser(UserRepository, secretKey, bcrypt, req.body);
     res.json({ token });
   } catch (err) {
-    res.status(401).send({ error: err.message });
+    res.status(401).json({ error: err.message });
   }
 });
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000')
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
