@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" scrollY="false">
+<ion-content>
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
 
   <div class="imageIlustrator">
@@ -29,6 +29,26 @@
     </div>
     
     <textarea placeholder="Descrição" class="description"></textarea>
+
+    <ion-list>
+      <ion-item>
+        <ion-select  aria-label="Categoria'" interface="popover" placeholder="Categoria">
+          <ion-select-option value="apples">Apples</ion-select-option>
+          <ion-select-option value="oranges">Oranges</ion-select-option>
+          <ion-select-option value="bananas">Bananas</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-select aria-label="Categoria'" interface="popover" placeholder="Categoria">
+          <ion-select-option value="apples">Apples</ion-select-option>
+          <ion-select-option value="oranges">Oranges</ion-select-option>
+          <ion-select-option value="bananas">Bananas</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
   </div>
 
