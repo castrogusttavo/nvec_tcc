@@ -10,6 +10,7 @@ export class Tab3Page {
   customCounterFormatter(inputLength: number, maxLength: number) {
     return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
   }
+
   
 updateCounter(event: any) {
   const input = event.target;
