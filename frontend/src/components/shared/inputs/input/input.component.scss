@@ -1,5 +1,5 @@
 @import "../../../../global.scss";
-
+:host{
 .inputNormal {
   width: 382px;
   height: 55px;
@@ -19,4 +19,20 @@
     line-height: 16px; /* 133.333% */
 }
 
+}
+
+:host.input-config-name input{
+    width: 183px;
+    height: 55px;
+    background: var(--Color-bg, #FFF);
+}
+
+:host.input-config-email input{
+    width: 110%;
+    height: 55px;
+    flex-shrink: 0;
+    margin-left: 10px;
+    margin-right: 24px;
+    background: var(--Color-bg, #FFF);
+}
 /*  */

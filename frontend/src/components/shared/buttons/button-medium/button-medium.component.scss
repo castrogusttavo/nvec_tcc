@@ -1,4 +1,7 @@
-.buttonMedium{
+@import "./../../../../global.scss";
+
+:host {
+    .buttonMedium{
     display: flex;
     width: 215px;
     padding: var(--Space-12, 12px) var(--Space-64, 64px);
@@ -18,4 +21,10 @@
     font-weight: 700;
     line-height: 22.4px;
     color: #FFF;
+}
+}
+
+:host.button-medium-config button {
+    width: 147px;
+    height: 36px;
 }
