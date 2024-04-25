@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { SharedModule } from 'src/components/shared/shared.module';
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 
+
 @NgModule({
   imports: [
     IonicModule,
@@ -14,7 +15,7 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab3PageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [Tab3Page]
 })
