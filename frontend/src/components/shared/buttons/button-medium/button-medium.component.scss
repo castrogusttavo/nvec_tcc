@@ -37,6 +37,9 @@
     button {
         width: 182px;
         height: 47px;
-        justify-content: center;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30%;
     }
 }
