@@ -19,11 +19,9 @@
     justify-content: center;
 }
 
-input{
-    margin: 10px;
-}
 
 input{
+    margin: 10px;
     width: 183px;
     height: 55px;
     flex-shrink: 0;
@@ -41,14 +39,6 @@ textarea{
     background: transparent;
 }
 
-::placeholder {
-    color: $N800D;
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; 
-}
 
 .buttonBig{
     padding-top: 8%;
@@ -80,4 +70,13 @@ textarea{
     top: 10px; 
     left: 10px;
     text-align: top;
+}
+
+::placeholder {
+    color: $N800D;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
 }
