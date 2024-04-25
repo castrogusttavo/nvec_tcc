@@ -8,8 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardComparationItemComponent  implements OnInit {
 
   @Input() priceItem:string | undefined
-  @Input() item:string | undefined
+  @Input() itemCategory:string | undefined
   @Input() nameItem:string | undefined
+  @Input() firstItemComparation:string | undefined
+  @Input() secondItemComparation:string | undefined
 
   constructor() { }
 
