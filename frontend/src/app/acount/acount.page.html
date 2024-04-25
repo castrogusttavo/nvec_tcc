@@ -1,49 +1,44 @@
 <ion-content [fullscreen]="true">
   <div class="content">
     <h1>Seu Perfil</h1>
-    <ion-row class="rowPrimary">
-      <ion-col>  
-       <img src="./../../assets/svg/avatar.svg" alt="">
-        <span>selecione um avatar</span>
-      </ion-col>
-    </ion-row>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>  
+          <img src="./../../assets/svg/avatar.svg" alt="">
+        </ion-col>
+        <ion-col>
+           <span>selecione um avatar</span>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
   
     <ion-grid class="grid">
-    <!-- <ion-row class="row" style="display: flex; align-items: center;" >
-      <ion-col>  
-        <input placeholder="Nome" class="inputText" >
-      </ion-col>
-      <ion-col >
-          <app-button-medium >Assinatura</app-button-medium>
-      </ion-col>
-    </ion-row> -->
-  
-    <div class="row">
-        <ion-col >
-          <div class="input-wrapper">
-              <input placeholder="Nome" class="inputText">
-          </div>
+    <ion-row>
+        <ion-col>
+          <app-input placeholder="Nome" class="input-config-name">Nome</app-input>
         </ion-col>
       <ion-col>
-        <div class="button-wrapper">
-            <app-button-medium class="buttonMedium">Assinatura</app-button-medium>
-        </div>
-      </ion-col>
-    </div>
-
-  
-    <ion-row class="row">
-      <ion-col>  
-        <h3>Ajuda</h3>
-      </ion-col>
-      <ion-col>
-        <div class="containerButton">
-          <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
-        </div> 
+            <app-button-medium class="button-medium-config">Assinatura</app-button-medium>
       </ion-col>
     </ion-row>
-  
   </ion-grid>
+
+    <app-input placeholder="Nome" class="input-config-email">Nome</app-input>
+  
+  <ion-row class="row">
+    <ion-col>  
+      <h3>Alterar Senha</h3>
+    </ion-col>
+    <ion-col>
+      <div class="containerButton">
+        <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
+      </div>
+    </ion-col>
+  </ion-row>
+
+
+  
+
   </div>
 
 </ion-content>
