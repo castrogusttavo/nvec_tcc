@@ -7,31 +7,33 @@ h1{
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
-    padding-top: 5%;
+    padding-top: 0;
 }
 
 .content{
-    margin: 40px;
+    margin: 20px;
 }
 
 span{
     color: var(--Color-inverted-inverted500, #8590A2);
-    text-align: center;
     font-family: 'Poppins';
     font-size: 8px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h3{
     color: var(--Normal0, #161A1D);
-    text-align: center;
     font-family: 'Poppins';
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
-    line-height: 22px; 
+    line-height: 22px;  
 }
 
 .buttonArrow{
@@ -40,15 +42,8 @@ h3{
 
 .containerButton{
     display: flex;
-}
-
-
-.rowPrimary{
-    margin-top: 40px;
-}
-
-.content{ 
-    margin: 24px;
+    margin-top: center;
+    margin-bottom: center;
 }
 
 img{
@@ -56,7 +51,10 @@ img{
     width: 112.5px;
     height: 112.5px;
     flex-shrink: 0;
-    justify-content: center;
+    display: flex;
+    justify-content: center; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .inputText::placeholder{
@@ -83,3 +81,33 @@ img{
     border: 2px solid #ccc;
     background: transparent;
 }
+
+p{
+    color: var(--Color-Danger-R500, #DA6262);
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19.6px; 
+    text-decoration-line: underline;
+    padding-top: 10%;
+}
+
+.closeImg{
+    width: 24px;
+    height: 24px;
+    margin: 0;
+}
+
+ion-grid{
+    padding-top: 10%;
+    display: grid;
+    grid-template-rows: auto;
+    grid-row-gap: 20px;
+    justify-content: space-between;
+}
+
+.infoPerfil{
+    padding-top: 10%;
+}
+

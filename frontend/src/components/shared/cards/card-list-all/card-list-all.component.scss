@@ -8,6 +8,10 @@
     ion-card{
         background: #{$B200};
         border-radius: 25px;
+        width: 200px; 
+        height: 100px; 
+        background-color: #f0f0f0; 
+        clip-path: polygon(0% 25%, 25% 25%, 25% 0%, 75% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
     .list-price{
         background: #{$brand1};

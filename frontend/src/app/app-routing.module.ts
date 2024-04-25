@@ -99,6 +99,7 @@ const routes: Routes = [
     path: 'all-community-screen',
     loadChildren: () => import('./all-community-screen/all-community-screen.module').then( m => m.AllCommunityScreenPageModule)
   }
+
 ];
 @NgModule({
   imports: [

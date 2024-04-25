@@ -14,8 +14,11 @@ img{
 
 :host.buttonArrow button{
     border-radius: var(--Space-8, 8px);
-   background: var(--Color-brand1, #006EFF);
-   width: 35px;
-   height: 35px;
+    background: var(--Color-brand1, #006EFF);
+    width: 35px;
+    height: 35px;
+    margin-left: 70%;
+    
+    
 
 }
