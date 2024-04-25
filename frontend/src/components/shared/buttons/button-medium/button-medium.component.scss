@@ -27,4 +27,16 @@
 :host.button-medium-config button {
     width: 147px;
     height: 36px;
+    justify-content: center;
+ }
+
+ :host.button-medium-save{
+    .buttonText{
+        font-size: 12.578px;
+    }
+    button {
+        width: 182px;
+        height: 47px;
+        justify-content: center;
+    }
 }
