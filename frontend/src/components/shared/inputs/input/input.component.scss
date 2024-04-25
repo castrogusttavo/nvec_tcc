@@ -1,4 +1,14 @@
 @import "../../../../global.scss";
+
+::placeholder {
+    color: $N800D;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
+}
+
 :host{
 .inputNormal {
   width: 382px;
@@ -17,6 +27,10 @@
     font-style: normal;
     font-weight: 600;
     line-height: 16px; /* 133.333% */
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
 }
 
 }
@@ -27,12 +41,36 @@
     background: var(--Color-bg, #FFF);
 }
 
-:host.input-config-email input{
-    width: 110%;
+:host.input-config-name input::placeholder{
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+    color: $N800D;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
+    
+}
+
+:host.input-config-email input::placeholder{
+    width: 100%;
     height: 55px;
     flex-shrink: 0;
-    margin-left: 10px;
-    margin-right: 24px;
-    background: var(--Color-bg, #FFF);
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+    color: $N800D;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
 }
 /*  */
+
+
+

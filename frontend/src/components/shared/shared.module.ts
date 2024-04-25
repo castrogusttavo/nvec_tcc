@@ -24,7 +24,7 @@ import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component'
 import { SourchComponent } from './sourchs/sourch/sourch.component';
 import { CardComparationItemComponent } from './cards/card-comparation-item/card-comparation-item.component';
 import { CardListAllComponent } from './cards/card-list-all/card-list-all.component';
-
+import { ModalAlterarComponent } from './modals/modal-alterar/modal-alterar.component';
 @NgModule({
   declarations: [
     ButtonBigComponent,
@@ -49,7 +49,8 @@ import { CardListAllComponent } from './cards/card-list-all/card-list-all.compon
     ModalCriarComponent,
     CardComparationItemComponent,
     SourchComponent,
-    CardListAllComponent
+    CardListAllComponent,
+    ModalAlterarComponent
 
   ],
   imports: [
@@ -67,7 +68,7 @@ import { CardListAllComponent } from './cards/card-list-all/card-list-all.compon
     RouterModule.forChild([{path: '../../../components/shared/cards/card-box', component: CardBoxComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-plans', component: CardPlansComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/modals/modal-criar-component', component: CardPlansComponent}])
-
+    
   ],
   exports: [
     ButtonBigComponent,
@@ -93,7 +94,8 @@ import { CardListAllComponent } from './cards/card-list-all/card-list-all.compon
     ModalCriarComponent,
     CardComparationItemComponent,
     SourchComponent,
-    CardListAllComponent
+    CardListAllComponent,
+    ModalAlterarComponent
   ]
 })
 export class SharedModule { }
