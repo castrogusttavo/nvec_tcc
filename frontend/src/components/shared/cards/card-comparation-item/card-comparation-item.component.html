@@ -14,20 +14,28 @@
   </div>
 </ion-card> -->
 
-    <div class="card-price">
-      <h1>R${{priceItem}}</h1>
-    </div>
+<div class="card-price">
+  <span>R$<b>{{priceItem}}</b></span>
+</div>
 
 <ion-card>
 
 
-    <p class="itemCategory">{{item}}</p>
+  <div class="top">
+    <p class="itemCategory">{{itemCategory}}</p>
+  </div>
 
-  <p>{{nameItem}}</p>
+  <div class="content">
+    <p class="nameItem">{{nameItem}}</p>
+  </div>
 
-  <div class="comparation-scale">
-    <div class="comparation-item">
-
+  <div class="scale">
+    <div class="comparation-scale">
+      <div class="comparation-item">
+        <span>{{firstItemComparation}}</span>
+      </div>
+      <span>{{secondItemComparation}}</span>
     </div>
   </div>
+
 </ion-card>
