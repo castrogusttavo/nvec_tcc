@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { db_query } = require("../../db");
+const { db_query } = require("../../frameworks/db/db");
+const bcrypt = require('bcrypt');
 
 router.post("/users", async (req, res) => {
   try {
@@ -98,7 +99,22 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//Rota de SignUp
+router.post("/register", async (req, res) => {
+  try {
+    const { nm_usuario, email_usuario, senha_usuario } = req.body;
 
+    const hashedPassword = await bcrypt.hash(senha_usuario, 10);
+
+    const result = await db_query(
+      "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)",
+      [nm_usuario, email_usuario, hashedPassword]
+    );
+
+    res.status(201).json({ id_usuario: result.insertId });
+  } catch (err) {
+    console.error("Erro ao inserir usuário:", err);
+    res.status(500).send("Erro ao inserir um novo usuário");
+  }
+});
 
 module.exports = router;
