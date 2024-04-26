@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { db_query } = require("../../db");
+const { db_query } = require("../../frameworks/db/db");
 
 router.post("/items", async (req, res) => {
   try {
