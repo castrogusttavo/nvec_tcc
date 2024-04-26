@@ -1,6 +1,9 @@
 @import "./../../../../global.scss";
 
 :host{
+    img{
+        display: none;
+    }
     a{
         text-decoration: none;
         cursor: pointer;
@@ -41,4 +44,22 @@
 
 :host.card-box-items a{
     display:  none;
+}
+:host.card-box-comparation a,
+:host.card-box-comparation .card
+{
+    width: 160px;
+    height: 160px;
+    padding: 0px;
+    border-radius: 16px;
+}
+:host.card-box-comparation .create,
+:host.card-box-comparation .description{
+    display: none;
+}
+:host.card-box-comparation img{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
 }

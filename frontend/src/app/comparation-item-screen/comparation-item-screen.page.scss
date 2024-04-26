@@ -1,0 +1,17 @@
+@import '../../global.scss';
+
+:host{
+    .card-items{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 64px;
+        margin-top: 32px;
+    }
+    .items{
+        margin-top: 25px;
+
+    }
+    .container{
+        padding: 24px;
+    }
+}
