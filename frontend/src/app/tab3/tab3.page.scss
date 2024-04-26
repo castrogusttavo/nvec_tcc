@@ -23,7 +23,6 @@ input{
     margin: 10px;
     width: 183px;
     height: 55px;
-    flex-shrink: 0;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
     background: transparent;
@@ -32,7 +31,6 @@ input{
 ion-select{
     width: 183px;
     height: 55px;
-    flex-shrink: 0;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
     background: transparent;
@@ -44,21 +42,10 @@ ion-select{
     font-weight: 600;
     line-height: 16px; 
 }
-
-// ion-input{
-//     width: 183px;
-//     height: 55px;
-//     flex-shrink: 0;
-//     border-radius: var(--Space-8, 8px);
-//     border: var(--Space-space-025, 2px) solid $N300;
-//     background: transparent;
-//     margin: 10px;
-// }
   
 textarea{
     width: 183px;
     height: 55px;
-    flex-shrink: 0;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
     background: transparent;
@@ -84,7 +71,6 @@ textarea{
 
 .description{
     width: 382px;
-    // height: 125px;
     min-height: 80px;
     position: relative;
     resize: none; 
@@ -122,7 +108,6 @@ textarea{
 .dropdown {
     width: 183px;
     height: 55px;
-    flex-shrink: 0;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
     background: transparent;
@@ -137,23 +122,3 @@ textarea{
     padding-left:  5%;
     padding-bottom:  5%;
 }
-
-ion-input {
-    width: 183px;
-    height: 55px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    border: 2px solid var(--ion-color-primary);
-    background: transparent;
-    margin: 10px;
-  
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; 
-    color: var(--ion-color-dark);
-    padding-left: 5%;
-    padding-bottom: 5%;
-  }
-  
