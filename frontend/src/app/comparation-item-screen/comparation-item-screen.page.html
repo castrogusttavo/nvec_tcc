@@ -1,13 +1,19 @@
 <ion-content>
-  <button><img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/lists-screen']"></button>
+  <div class="container">
+    <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
 
-  <div class="items">
-    <h5>Escolha os itens</h5>
 
-    <div class="card-items">
-      
+    <div class="items">
+      <h5>Escolha os itens</h5>
+
+      <div class="card-items">
+        <app-card-box [image]="'https://images.tcdn.com.br/img/img_prod/645811/biscoito_oreo_original_270g_mondelez_6485_2_cc657ad241fe9018e4031ce186b890b0.jpg'" class="card-box-comparation"></app-card-box>
+        <app-card-box [image]="'https://images.tcdn.com.br/img/img_prod/645811/biscoito_oreo_original_270g_mondelez_6485_2_cc657ad241fe9018e4031ce186b890b0.jpg'" class="card-box-comparation"></app-card-box>  
+      </div>
+
+      <div class="items-comparation">
+        <app-card-comparation-item firstItemComparation="Negresco" secondItemComparation="Oreo" nameItem="Biscoito Negresco" itemCategory="Biscoito" priceItem="3,50"></app-card-comparation-item>
+      </div>
     </div>
-
-    <app-card-comparation-item firstItemComparation="Negresco" secondItemComparation="Oreo" nameItem="Biscoito Negresco" itemCategory="Biscoito" priceItem="3,50"></app-card-comparation-item>
-  </div>
+  </div>  
 </ion-content>
