@@ -10,6 +10,7 @@ export class CardBoxComponent  implements OnInit {
 
   @Input() action:string|undefined
   @Input() description:string|undefined
+  @Input() image:string|undefined
   
   constructor(private router:Router) { }
 
