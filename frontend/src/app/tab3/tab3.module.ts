@@ -6,6 +6,8 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { SharedModule } from 'src/components/shared/shared.module';
 import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveFormsModule
+
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     ExploreContainerComponentModule,
     Tab3PageRoutingModule,
     SharedModule,
+    ReactiveFormsModule 
   ],
   declarations: [Tab3Page]
 })

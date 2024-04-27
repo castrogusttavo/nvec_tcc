@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Directive, ElementRef, HostListener } from '@angular/core';
+// import { Directive, ElementRef, HostListener } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +9,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  textForm: FormGroup;
 
   customCounterFormatter(inputLength: number, maxLength: number) {
     return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
@@ -22,19 +25,21 @@ export class Tab3Page {
     }
   }
 
-  constructor(private el: ElementRef) { }
+  constructor(private formBuilder: FormBuilder) {
+    this.textForm = this.formBuilder.group({
+      valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      // peso não funciona
+    });
+  }
 
-  @HostListener('input', ['$event']) onInputChange(event: any) {
-    if (event.target.id === 'valor') {
-      let valor = event.target.value;
-      valor = valor.replace(/\D/g, '');
-      if (valor !== '') {
-        valor = 'R$ ' + valor;
-        valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-        valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-      }
-      event.target.value = valor;
-    }
+  formatCurrency(event: any) {
+    let input = event.target;
+    let value = input.value.replace(/\D/g, ''); 
+    value = value.replace(/^0+/, ''); 
+    value = value.replace(/(\d)(\d{2})$/, '$1,$2');
+    value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
+    input.value = value;
   }
 
 }
