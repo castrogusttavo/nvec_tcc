@@ -7,11 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardListAllComponent  implements OnInit {
 
-  @Input() imagePath:string | undefined
-  @Input() listName:string |undefined
-  @Input() listCategory: string | undefined
-  @Input() listTotal : string | undefined
-  @Input() listDate : string | undefined
+  @Input() limite:string | undefined
+  @Input() nomeLista:string |undefined
+  @Input() categoriaLista: string | undefined
+  @Input() dataLista : string | undefined
+  @Input() gasto : string | undefined
 
   constructor() { }
 
