@@ -98,7 +98,12 @@ const routes: Routes = [
   {
     path: 'all-community-screen',
     loadChildren: () => import('./all-community-screen/all-community-screen.module').then( m => m.AllCommunityScreenPageModule)
+  },
+  {
+    path: 'preferences',
+    loadChildren: () => import('./preferences/preferences.module').then( m => m.PreferencesPageModule)
   }
+
 
 ];
 @NgModule({
