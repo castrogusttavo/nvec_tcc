@@ -1,21 +1,34 @@
-.buttonBig{
-    display: inline-flex;
-    padding: 12px 64px;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    border-radius: var(--Space-8, 8px);
-    background: var(--Color-brand1, #006EFF);
-    width:234px;
-    height: 47px;
-    width: auto;
-    height: auto;
+:host{
+    .buttonBig{
+        display: inline-flex;
+        padding: 12px 64px;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        border-radius: var(--Space-8, 8px);
+        background: var(--Color-brand1, #006EFF);
+        width:234px;
+        height: 47px;
+        width: auto;
+        height: auto;
+    }
+
+    .buttonText{
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22.4px;
+        color: #fff;
+    }
 }
 
-.buttonText{
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 22.4px;
-    color: #fff;
+:host.button-big-save {
+    button {
+        width: 234px;
+        height: 47px;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 32px;
+    }
 }
