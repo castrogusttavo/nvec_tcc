@@ -1,21 +1,25 @@
 <ion-card>
+  <div class="limit-list">
+    <div class="limit">
+      <span>Limite</span><br>
+      <p>R${{limite}}</p>
+    </div>
+    <div class="name-list">
+      <h4>{{nomeLista}}</h4>
+      <p>{{categoriaLista}}</p>
+      <span>{{dataLista}}</span>
+    </div>
+  </div>
 
-  <span class="see-all">Ver todas</span>
-
-  <div class="list-price">
-    <div class="list-name">
-      <img [src]="imagePath" alt="">
-      <h6>{{listName}}</h6>
+  <div class="total-list">
+    <div class="total-gasto">
+      <span>Gasto</span><br>
+      <span class="gasto-var">R$<b>{{gasto}}</b></span>
     </div>
 
-    <div class="list-resume">
-      <p>{{listCategory}}</p>
-
-      <div class="price-date">
-        <div class="total-list">R$<b class="price-list-bold">{{listTotal}}</b></div>
-        <span class="date">{{listDate}}</span>
-      </div>
-    </div>
+    <button class="btn-edit">
+      <img src="../../../../assets/svg/edit.svg" alt="">
+    </button>
   </div>
 
 </ion-card>

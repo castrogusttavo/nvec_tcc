@@ -2,9 +2,10 @@
 
 :host{
     .card-items{
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         justify-content: space-between;
-        margin-bottom: 64px;
+        margin-bottom: 54px;
         margin-top: 32px;
     }
     .items{

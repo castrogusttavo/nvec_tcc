@@ -2,80 +2,72 @@
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
 
   <div class="imageIlustrator">
-    <img  src="../../assets/png/imagem.png" alt="">
+    <img  src="../../assets/png/imagem.png">
   </div>
 
   <div class="inputs">
-
     <div class="input-container">
       <input placeholder="Nome"
-             class="inputText"
-             (input)="updateCounter($event)"
-             maxlength="20">
+              class="inputText"
+              (input)="updateCounter($event)"
+              maxlength="20">
       <div class="counter"></div>
     </div>
-    
-    <!-- Vai ficar assim por enquanto, sorry -->
+      
+      <!-- Vai ficar assim por enquanto, sorry -->
     <div>
       <select id="categoria" name="categoria" class="dropdown">
-        <option value="placeholder" selected disabled hidden>Categoria</option>
-        <option value="eletronico">Eletrônicos</option>
-        <option value="roupas">Roupas</option>
-        <option value="livros">Livros</option>
-        <option value="supermercado">Supermercado</option>
-        <option value="casa_decoracao">Casa e Decoração</option>
-        <option value="brinquedos">Brinquedos</option>
-        <option value="ferramentas">Ferramentas</option>
-        <option value="artigos_esportivos">Artigos Esportivos</option>
-        <option value="cosmeticos">Cosméticos</option>
-        <option value="papelaria">Papelaria</option>
-        <option value="jogos_consoles">Jogos e Consoles</option>
-        <option value="animais_estimacao">Animais de estimação</option>
-        <!-- <option value="material_escritorio">Material de Escritório</option> -->
-        <!-- <option value="produtos_limpeza">Produtos de Limpeza</option> -->
-        <!-- <option value="acessorios_veiculos">Acessórios para Veículos</option> -->
-        <!-- <option value="instrumentos_musicais">Instrumentos Musicais</option>
-        <option value="artigos_jardim">Artigos para Jardim</option>
-        <option value="perfumes">Perfumes</option>
-        <option value="calcados">Calçados</option>
-        <option value="artigos">Artigos</option> -->
+          <option value="placeholder" selected disabled hidden>Categoria</option>
+          <option value="eletronico">Eletrônicos</option>
+          <option value="roupas">Roupas</option>
+          <option value="livros">Livros</option>
+          <option value="supermercado">Supermercado</option>
+          <option value="casa_decoracao">Casa e Decoração</option>
+          <option value="brinquedos">Brinquedos</option>
+          <option value="ferramentas">Ferramentas</option>
+          <option value="artigos_esportivos">Artigos Esportivos</option>
+          <option value="cosmeticos">Cosméticos</option>
+          <option value="papelaria">Papelaria</option>
+          <option value="jogos_consoles">Jogos e Consoles</option>
+          <option value="animais_estimacao">Animais de estimação</option>
+          <!-- <option value="material_escritorio">Material de Escritório</option> -->
+          <!-- <option value="produtos_limpeza">Produtos de Limpeza</option> -->
+          <!-- <option value="acessorios_veiculos">Acessórios para Veículos</option> -->
+          <!-- <option value="instrumentos_musicais">Instrumentos Musicais</option>
+          <option value="artigos_jardim">Artigos para Jardim</option>
+          <option value="perfumes">Perfumes</option>
+          <option value="calcados">Calçados</option>
+          <option value="artigos">Artigos</option> -->
       </select>
     </div>
 
+    <app-example class="typeahead"></app-example>
     <div class="input-container">
       <input placeholder="Peso" class="inputText">
+    </div>
+
+      <form [formGroup]="textForm">
+        <div class="input-container">
+          <input formControlName="valorMaximo" placeholder="Valor máximo" type="text" (input)="formatCurrency($event)">
+        </div>
+
+        <!-- peso não funciona -->
+        <div class="input-container">
+          <input formControlName="peso" placeholder="Peso" class="inputText" type="text" (input)="formatCurrency($event)">
+        </div>
+      </form>
+    
+    <div class="input-container">
+      <input placeholder="Valor máximo" type="text" id="valor" appCurrencyFormat>
     </div>
 
     <div class="input-container">
       <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
       <div class="counter"></div>
     </div>
-    
-    <!-- <ion-item>
-      <ion-select class="dropdown " aria-label="Categoria" interface="action-sheet" placeholder="Categoria">
-        <ion-select-option value="apples">Apples</ion-select-option>
-        <ion-select-option value="oranges">Oranges</ion-select-option>
-        <ion-select-option value="bananas">Bananas</ion-select-option>
-      </ion-select>
-    </ion-item> -->
-    
-    <!-- <textarea placeholder="Descrição" class="description"></textarea> -->
-
-    <!-- <div class="input-container">
-      <input placeholder="Valor" type="number">
-    </div> -->
-    <div class="input-container">
-      <input placeholder="Valor máximo" type="text" id="valor" appCurrencyFormat>
-    </div>
-    
-    
-    
-
   </div>
-
+  
   <div class="buttonBig">
     <app-button-big>Criar Lista</app-button-big>
   </div>
-
-
 </ion-content>
