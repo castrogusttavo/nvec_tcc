@@ -7,6 +7,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./frameworks/db/db");
+const session = require("express-session")
 
 // Importando os arquivos de rota das APIs
 const addressesRouter = require("./api/addresses/addresses");
@@ -19,6 +20,18 @@ const usersRouter = require("./api/users/users");
 const variableExpensesRouter = require("./api/variableExpenses/variableExpenses");
 
 const app = express();
+
+app.use(
+  session({
+    secret: 'VjFjd2VGSXhXWGROVldoc1VrVktZVlpzV2xwbFJsWlpZMFZPYTFJd05VcFZNV2hyVmpGS1ZrNVZWVDA9IwSwq2ITFKuKJTEBIyqbp1IeIxgMIycmI2kjoSWfJycMZSMCLGSWq05IpSMAI2ulIzcTF1MeAIMJIQN9',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { 
+      secure: false,
+      maxAge: 7200000,
+    },
+  })
+);
 
 app.use(cors({
   origin: 'http://localhost:8100'
@@ -37,7 +50,12 @@ app.use('/api', usersRouter);
 app.use('/api', variableExpensesRouter);
 
 app.get("/", (req, res) => {
-  res.send("Servidor rodando!");
+  if (req.session.views) {
+    req.session.views++;
+  } else {
+    req.session.views = 1;
+  }
+  res.send(`Você visitou esta página ${req.session.views} vezes`);
 });
 
 // Configuração do servidor
