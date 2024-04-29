@@ -2,11 +2,10 @@
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
 
   <div class="imageIlustrator">
-    <img  src="../../assets/png/imagem.png" alt="">
+    <img  src="../../assets/png/imagem.png">
   </div>
 
   <div class="inputs">
-
     <div class="input-container">
       <input placeholder="Nome"
               class="inputText"
@@ -41,12 +40,10 @@
           <option value="artigos">Artigos</option> -->
       </select>
     </div>
-  
 
-  
+    <app-example class="typeahead"></app-example>
     <div class="input-container">
-      <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
-      <div class="counter"></div>
+      <input placeholder="Peso" class="inputText">
     </div>
 
       <form [formGroup]="textForm">
@@ -59,11 +56,18 @@
           <input formControlName="peso" placeholder="Peso" class="inputText" type="text" (input)="formatCurrency($event)">
         </div>
       </form>
-  </div>
+    
+    <div class="input-container">
+      <input placeholder="Valor máximo" type="text" id="valor" appCurrencyFormat>
+    </div>
 
+    <div class="input-container">
+      <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
+      <div class="counter"></div>
+    </div>
+  </div>
+  
   <div class="buttonBig">
     <app-button-big>Criar Lista</app-button-big>
   </div>
-
-
 </ion-content>

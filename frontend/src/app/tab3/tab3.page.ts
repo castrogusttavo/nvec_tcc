@@ -11,6 +11,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class Tab3Page {
   textForm: FormGroup;
 
+  searchResults: string[] = [];
+
+  search(searchText: string) {
+    this.searchResults = ['Result 1', 'Result 2', 'Result 3'];
+  }
+
   customCounterFormatter(inputLength: number, maxLength: number) {
     return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
   }
