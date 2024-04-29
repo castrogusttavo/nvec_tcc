@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./acount.page.scss'],
 })
 export class AcountPage implements OnInit {
-
+  email: string = '';
+  name: string = '';
   constructor() { }
 
   ngOnInit() {
