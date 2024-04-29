@@ -8,6 +8,12 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class Tab3Page {
 
+  searchResults: string[] = [];
+
+  search(searchText: string) {
+    this.searchResults = ['Result 1', 'Result 2', 'Result 3'];
+  }
+
   customCounterFormatter(inputLength: number, maxLength: number) {
     return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
   }
