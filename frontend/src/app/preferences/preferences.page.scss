@@ -1,0 +1,81 @@
+@import "../../global.scss";
+h1{
+    color: var(--Normal0, #161A1D);
+    text-align: left;
+    font-family: 'Poppins';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 35.2px;
+    padding-top: 5%;
+}
+
+span{
+    color: var(--Color-inverted-inverted500, #8590A2);
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+h3{
+    margin: 0;
+}
+
+.buttonArrow{
+    margin-left: 10%;
+}
+
+.containerButton{
+    padding-left: 81%;
+}
+
+.row{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.rowPrimary{
+    margin-top: 40px;
+}
+
+.toggle{
+    padding-left: 60%;
+}
+
+.grid{
+        margin: 20px;
+}
+
+hr{
+    width: 382px;
+    height: var(--Space-space-025, 2px);
+    flex-shrink: 0;
+    border-radius: var(--Space-4, 4px);
+    background: var(--Color-inverted-inverted900, #2C3E5D);
+}
+
+.range{
+    padding-bottom: 10%;
+}
+
+.dropdown {
+    width: 100%;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    background: transparent;
+    margin: 10px;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
+    color:$N800D;
+    padding-left:  5%;
+    padding-bottom:  5%;
+}
+
