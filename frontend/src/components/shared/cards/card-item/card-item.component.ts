@@ -13,6 +13,7 @@ export class CardItemComponent  implements OnInit {
   @Input() itemName:string|undefined
   @Input() description:string|undefined
   @Input() imagePath:string|undefined
+  @Input() price:string|undefined
 
   ngOnInit() {}
 
