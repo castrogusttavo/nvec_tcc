@@ -16,8 +16,7 @@ const incomeRouter = require("./api/income/income");
 const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists");
 const usersRouter = require("./api/users/users");
-
-const usersRoutes = require('./api/users/usersRoutes');
+const variableExpensesRouter = require("./api/variableExpenses/variableExpenses");
 
 const app = express();
 
@@ -35,7 +34,7 @@ app.use('/api', incomeRouter);
 app.use('/api', itemsRouter);
 app.use('/api', listsRouter);
 app.use('/api', usersRouter);
-app.use('/api/usuarios', usersRoutes)
+app.use('/api', variableExpensesRouter);
 
 app.get("/", (req, res) => {
   res.send("Servidor rodando!");
