@@ -98,7 +98,19 @@ const routes: Routes = [
   {
     path: 'all-community-screen',
     loadChildren: () => import('./all-community-screen/all-community-screen.module').then( m => m.AllCommunityScreenPageModule)
+  },  {
+    path: 'new-password',
+    loadChildren: () => import('./new-password/new-password.module').then( m => m.NewPasswordPageModule)
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
+    path: 'ajuda',
+    loadChildren: () => import('./ajuda/ajuda.module').then( m => m.AjudaPageModule)
   }
+
 
 ];
 @NgModule({

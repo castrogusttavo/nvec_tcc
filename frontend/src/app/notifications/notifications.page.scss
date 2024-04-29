@@ -9,10 +9,6 @@ h1{
     padding-top: 5%;
 }
 
-.content{
-    margin: 40px;
-}
-
 span{
     color: var(--Color-inverted-inverted500, #8590A2);
     text-align: center;
@@ -43,10 +39,11 @@ h3{
 .rowPrimary{
     margin-top: 40px;
 }
-.content{
-    padding: 24px 16px;
-}
 
 .toggle{
     padding-left: 60%;
+}
+
+.grid{
+        margin: 20px;
 }
