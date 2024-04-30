@@ -7,7 +7,7 @@ router.post("/items", async (req, res) => {
     const { nm_item, vl_uni, id_status, id_lista } = req.body;
 
     const result = await db_query(
-        "INSERT INTO tb_item (nm_item, vl_uni, id_status, id_lista) VALUES (?, ?, ?, ?) RETURNING *",
+        "INSERT INTO tb_item (nm_item, vl_uni, id_status, id_lista) VALUES (?, ?, ?, ?)",
         [nm_item, vl_uni, id_status, id_lista]
       );
 
@@ -55,15 +55,80 @@ router.put("/items/:id", async (req, res) => {
     const itemId = req.params.id;
     const { nm_item, vl_uni, id_status, id_lista } = req.body;
 
-    await db_query(
-        "UPDATE tb_item SET nm_item = ?, vl_uni = ?, id_status = ?, id_lista = ? WHERE id_item = ?",
-        [nm_item, vl_uni, id_status, id_lista, itemId]
-      );
+    // Verificar se os campos necessários estão presentes no corpo da solicitação
+    if (!nm_item || !vl_uni || !id_status || !id_lista) {
+      return res.status(400).json({
+        error: "Campos obrigatórios ausentes no corpo da solicitação.",
+      });
+    }
 
-    res.sendStatus(200);
+    const result = await db_query(
+      "UPDATE tb_item SET nm_item = ?, vl_uni = ?, id_status = ?, id_lista = ? WHERE id_item = ?",
+      [nm_item, vl_uni, id_status, id_lista, itemId]
+    );
+
+    // Verificar se a atualização teve êxito
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Item não encontrado." });
+    }
+
+    res.status(200).json({ message: "Item atualizado com sucesso." });
   } catch (err) {
-    console.error("Erro ao atualizar item", err);
-    res.sendStatus(500).send("Erro ao atualizar item");
+    console.error("Erro ao atualizar item:", err);
+    if (!res.headersSent) {
+      res.status(500).send("Erro ao atualizar item.");
+    }
+  }
+});
+
+router.patch("/items/:id", async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    const { nm_item, vl_uni, id_status, id_lista } = req.body;
+
+    // Criar a query dinamicamente, com base nos campos enviados
+    let setClause = [];
+    let setValues = [];
+
+    if (nm_item) {
+      setClause.push("nm_item = ?");
+      setValues.push(nm_item);
+    }
+
+    if (vl_uni) {
+      setClause.push("vl_uni = ?");
+      setValues.push(vl_uni);
+    }
+
+    if (id_status) {
+      setClause.push("id_status = ?");
+      setValues.push(id_status);
+    }
+
+    if (id_lista) {
+      setClause.push("id_lista = ?");
+      setValues.push(id_lista);
+    }
+
+    // Verificar se pelo menos um campo foi enviado para atualização
+    if (setClause.length === 0) {
+      return res.status(400).json({ error: "Nenhum campo para atualizar." });
+    }
+
+    setValues.push(itemId);
+
+    const query = `UPDATE tb_item SET ${setClause.join(", ")} WHERE id_item = ?`;
+
+    const result = await db_query(query, setValues);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Item não encontrado." });
+    }
+
+    res.status(200).json({ message: "Item atualizado com sucesso." });
+  } catch (err) {
+    console.error("Erro ao atualizar item:", err);
+    res.status(500).send("Erro ao atualizar item.");
   }
 });
 

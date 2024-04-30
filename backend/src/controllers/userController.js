@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: './src/.env' }); // Certifique-se de que as variáveis de ambiente são carregadas
 
 const UserRepository = require("../interfaces/repositories/userRepository");
-const userRepository = new UserRepository(db);
+/* const userRepository = new UserRepository(db); */
 
 const secretKey = process.env.JWT_SECRET_KEY; // Pegue a secret key do .env
 
