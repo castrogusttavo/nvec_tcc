@@ -6,18 +6,19 @@
         <img class="imgPerfil" src="./../../assets/svg/avatar.svg" alt="">
         <span>selecione um avatar</span>
       </div>
-      
+
 
     <ion-grid >
       <form>
-        <ion-row>
-            <ion-col>
-              <app-input  type="name" name="name" [(ngModel)]="name" placeholder="Nome" class="input-config-name">Nome</app-input>
-            </ion-col>
-          <ion-col>
-                <app-button-medium class="button-medium-config">Assinatura</app-button-medium>
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="auto">
+            <app-input type="name" name="name" [(ngModel)]="name" placeholder="Nome" class="input-config-name"></app-input>
+          </ion-col>
+          <ion-col class="align-end" size="auto">
+            <app-button-medium class="button-medium-config">Assinatura</app-button-medium>
           </ion-col>
         </ion-row>
+
 
         <ion-row>
           <ion-col>
@@ -27,7 +28,7 @@
       </form>
 
     <ion-row class="row">
-      <ion-col>  
+      <ion-col>
         <h3>Alterar Senha</h3>
       </ion-col>
       <ion-col>
@@ -37,7 +38,7 @@
   </ion-grid>
     <p>Sair da conta</p>
     <app-button-medium type="submit" class="button-medium-save">Salvar</app-button-medium>
- 
+
 
   </div>
 </ion-content>
