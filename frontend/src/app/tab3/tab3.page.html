@@ -1,3 +1,4 @@
+<!-- UMA GUIA DE TESTES!!! nao apaga <3 -->
 <ion-content>
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
 
@@ -18,12 +19,12 @@
     <!-- <div> 
       <select id="peso" name="peso" class="dropdown">
           <option value="placeholder" selected disabled hidden>Peso</option>
-          <option value="eletronico">Kg</option>
-          <option value="roupas">g</option>
-          <option value="livros">L</option>
-          <option value="supermercado">mL</option>
-          <option value="casa_decoracao">M</option>
-          <option value="brinquedos">cm</option>
+          <option value="">Kg</option>
+          <option value="">g</option>
+          <option value="">L</option>
+          <option value="">mL</option>
+          <option value="">M</option>
+          <option value="">cm</option>
       </select>
     </div> -->
 
@@ -31,11 +32,24 @@
 
       <form [formGroup]="textForm">
         <div class="input-container">
-          <input formControlName="valorMaximo" placeholder="Valor máximo" type="text" (input)="formatCurrency($event)">
+          <input formControlName="valorMaximo" placeholder="Valor máximo" (input)="formatCurrency($event)">
         </div>
 
+        <!-- Dropdown peso -->
+        <div class="input-container" >
+          <ion-item style="--inner-border-width: 0px 0px 0px 0px;padding: 0px !important;">
+            <input [(ngModel)]="inputTextValue" class="inputText" (click)="toggleDropdown()" (input)="formatCurrency($event)" formControlName="peso">
+            
+            <ion-select [(ngModel)]="selectedOption" style="position: absolute;
+            margin-left: 140px;">
+              <ion-select-option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <!-- Dropdown peso -->
+
         <div class="input-container">
-          <input formControlName="peso" placeholder="Peso" class="inputText" type="text" (input)="formatCurrency($event)">
+          <input formControlName="peso" placeholder="Peso" class="inputText" (input)="formatCurrency($event)">
         </div>
       </form>
 
