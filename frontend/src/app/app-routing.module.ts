@@ -114,7 +114,11 @@ const routes: Routes = [
   {
     path: 'ajuda',
     loadChildren: () => import('./ajuda/ajuda.module').then( m => m.AjudaPageModule)
+  },  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
   }
+
 
 
 ];
