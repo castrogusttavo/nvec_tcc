@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true">
+  <ion-segment color="secondary" value="secondary">
+    <ion-segment-button value="secondary">
+      <ion-label>Secondary</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="segment">
+      <ion-label>Segment</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  
+  <div *ngIf="secondary === 'secondary'">
+    <p>OLA</p>
+  </div>
+  
+  <div *ngIf="segment === 'segment'">
+    <p>HELLO</p>
+  </div>
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-segment value="all">
+          <ion-segment-button value="all">
+            <ion-label>All</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="favorites">
+            <ion-label>Favorites</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+    </ion-header>
+</ion-content>
