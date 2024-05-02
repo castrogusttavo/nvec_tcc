@@ -1,5 +1,9 @@
 @import "../../global.scss";
 
+*{
+    --padding-start: 0px !important;
+}
+
 .forward{
     padding-left:  5%;
     padding-top: 5%;
@@ -20,6 +24,14 @@
 }
 
 input{
+    margin: 10px;
+    width: 183px;
+    height: 55px;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+}
+
+ion-input{
     margin: 10px;
     width: 183px;
     height: 55px;
@@ -58,6 +70,16 @@ textarea{
     text-align: top;
 }
 
+option{
+    color: $N800D;
+    font-size: 12px;
+    font-weight: 600;
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+}
+
 .counter {
     margin-right: 10px;
     text-align-last: right;
@@ -70,5 +92,3 @@ textarea{
     display: flex;
     justify-content: center;
 }
-
-  
