@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// import { Directive, ElementRef, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -9,6 +8,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+
+  // Dropdown peso
+  inputTextValue: string | undefined;
+  dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL'];
+  selectedOption: string| undefined;
+  dropdownVisible: boolean = false;
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
+  // Dropdown peso
+  
   textForm: FormGroup;
 
   searchResults: string[] = [];
@@ -35,7 +45,6 @@ export class Tab3Page {
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      // peso não funciona
     });
   }
 
