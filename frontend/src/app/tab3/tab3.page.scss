@@ -16,6 +16,12 @@
     padding-top: 10%;
 }
 
+.buttonBig{
+    padding-top: 8%;
+    display: flex;
+    justify-content: center;
+}
+
 .inputs{
     padding-top: 10%;
     display: flex;
@@ -30,18 +36,6 @@ input{
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
 }
-
-ion-input{
-    margin: 10px;
-    width: 183px;
-    height: 55px;
-    border-radius: var(--Space-8, 8px);
-    border: var(--Space-space-025, 2px) solid $N300;
-}
-
-.input-container {
-    position: relative;
-}
   
 textarea{
     width: 183px;
@@ -55,22 +49,11 @@ textarea{
 .description{
     width: 382px;
     min-height: 80px;
-    font-size: 14px; 
-    font-weight: 600;
+    font-size: 16px; 
     margin: 10px;
 }
 
 ::placeholder {
-    color: $N800D;
-    font-size: 12px;
-    font-weight: 600;
-    position: absolute; 
-    top: 10px; 
-    left: 10px;
-    text-align: top;
-}
-
-option{
     color: $N800D;
     font-size: 12px;
     font-weight: 600;
@@ -87,8 +70,7 @@ option{
     color: #888;
 }
 
-.buttonBig{
-    padding-top: 8%;
-    display: flex;
-    justify-content: center;
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
 }
