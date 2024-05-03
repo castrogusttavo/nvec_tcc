@@ -25,6 +25,10 @@ import { SourchComponent } from './sourchs/sourch/sourch.component';
 import { CardComparationItemComponent } from './cards/card-comparation-item/card-comparation-item.component';
 import { CardListAllComponent } from './cards/card-list-all/card-list-all.component';
 import { ModalAlterarComponent } from './modals/modal-alterar/modal-alterar.component';
+
+import { ExampleComponent } from './modals/example/example.component';
+import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
+
 @NgModule({
   declarations: [
     ButtonBigComponent,
@@ -50,7 +54,9 @@ import { ModalAlterarComponent } from './modals/modal-alterar/modal-alterar.comp
     CardComparationItemComponent,
     SourchComponent,
     CardListAllComponent,
-    ModalAlterarComponent
+    ModalAlterarComponent,
+    ExampleComponent,
+    TypeaheadComponent
 
   ],
   imports: [
@@ -67,8 +73,10 @@ import { ModalAlterarComponent } from './modals/modal-alterar/modal-alterar.comp
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-recent', component: CardListRecentComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-box', component: CardBoxComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-plans', component: CardPlansComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/modals/modal-criar-component', component: CardPlansComponent}])
-    
+    RouterModule.forChild([{path: '../../../components/shared/modals/modal-criar-component', component: CardPlansComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/modals/example', component: CardPlansComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/modals/typeahead', component: CardPlansComponent}])
+
   ],
   exports: [
     ButtonBigComponent,
@@ -95,7 +103,9 @@ import { ModalAlterarComponent } from './modals/modal-alterar/modal-alterar.comp
     CardComparationItemComponent,
     SourchComponent,
     CardListAllComponent,
-    ModalAlterarComponent
+    ModalAlterarComponent,
+    ExampleComponent,
+    TypeaheadComponent
   ]
 })
 export class SharedModule { }
