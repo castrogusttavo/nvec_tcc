@@ -11,26 +11,19 @@ export class Tab3Page {
 
   // Dropdown peso
   inputTextValue: string | undefined;
-  dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL'];
-  selectedOption: string| undefined;
+  dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
+  selectedOption: string | undefined = 'Kg';
   dropdownVisible: boolean = false;
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible;
   }
-  // Dropdown peso
-  
-  textForm: FormGroup;
 
-  searchResults: string[] = [];
-
-  search(searchText: string) {
-    this.searchResults = ['Result 1', 'Result 2', 'Result 3'];
-  }
-
+  // Função para formatar o contador de caracteres
   customCounterFormatter(inputLength: number, maxLength: number) {
     return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
   }
 
+  // Atualiza o contador de caracteres
   updateCounter(event: any) {
     const input = event.target;
     const maxLength = parseInt(input.getAttribute('maxlength'), 10);
@@ -41,13 +34,19 @@ export class Tab3Page {
     }
   }
 
+  // FormGroup para validação dos campos de texto
+  textForm: FormGroup;
+
   constructor(private formBuilder: FormBuilder) {
+    // Inicialização do FormGroup para validação dos campos de texto
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      valor: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
     });
   }
 
+  // Formata o valor do campo de texto para o formato de moeda
   formatCurrency(event: any) {
     let input = event.target;
     let value = input.value.replace(/\D/g, ''); 
@@ -56,5 +55,4 @@ export class Tab3Page {
     value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
     input.value = value;
   }
-
 }
