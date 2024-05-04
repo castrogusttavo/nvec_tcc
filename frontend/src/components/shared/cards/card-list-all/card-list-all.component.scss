@@ -1,0 +1,70 @@
+
+@import '../../../../global.scss';
+
+:host {
+    *{
+        margin: 0px;
+    }
+    ion-card{
+        border-radius: 25px;
+        width: 100%; 
+        height: 15rem;  
+        background: #{$brand1};
+        border-radius: 30px;
+        padding: 16px 25px 38px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .name-list span{
+        font-size: #{$textSmalling};
+    }
+    .limit p{
+        font-size: #{$headeH4};
+    }
+    @media (max-width: 370px) {
+        .limit p{
+            font-size: #{$textLarge};;
+        }   
+        .name-list h4{
+            font-size: 1rem;
+        }
+    }
+    .limit-list,
+    .total-list{
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        color: #{$N0};
+    }
+    .name-list{
+        text-align: end;
+    }
+    .total-gasto{
+        width: 142px;
+        border-radius: 7px;
+        background: #{$N0};
+        color: #{$brand2};
+        padding: 2px;
+    }
+    .total-gasto span{
+        font-size: #{$textSmalling};
+    }
+    .total-gasto .gasto-var{
+        font-size: #{$textNormal};
+    }
+    .total-gasto .gasto-var b{
+        font-size: #{$headeH6};
+        font-weight:500;
+    }
+    .btn-edit{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width:53px; 
+        height:53px;
+        padding: 13px;
+        border-radius: 50%; 
+    }
+    
+}
