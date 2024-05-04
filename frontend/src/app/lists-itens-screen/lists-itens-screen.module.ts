@@ -8,6 +8,8 @@ import { SharedModule } from 'src/components/shared/shared.module';
 import { ListsItensScreenPageRoutingModule } from './lists-itens-screen-routing.module';
 
 import { ListsItensScreenPage } from './lists-itens-screen.page';
+import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveFormsModule
+
 
 @NgModule({
   imports: [
@@ -15,7 +17,8 @@ import { ListsItensScreenPage } from './lists-itens-screen.page';
     FormsModule,
     IonicModule,
     ListsItensScreenPageRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   declarations: [ListsItensScreenPage]
 })
