@@ -87,7 +87,7 @@ create table if not exists tb_endereco (
 create table if not exists tb_usuario (
 	id_usuario int not null auto_increment,
     nm_usuario varchar(100) not null,
-    senha_usuario varchar(16) not null,
+    senha_usuario varchar(60) not null,
     email_usuario varchar(200) unique not null,
     id_assinatura int not null default 1,
     primary key (id_usuario),
