@@ -12,7 +12,7 @@ export class TabsPage {
     this.isModalOpen = isOpen;
   }
   
-    // FormGroup para validação dos campos de texto
+  // FormGroup para validação dos campos de texto
   textForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
