@@ -1,0 +1,32 @@
+:host{
+    .content{
+        padding: 16px 24px ;
+
+    }
+    .card-list-all{
+        margin-top: 35px;
+    }
+    .title-filter{
+        display: flex;
+        justify-content: space-between;
+        margin: 7% 0 5% 0
+    } 
+    .itens-div{
+        display: flex;
+        align-items: start;
+    }
+}
+.forward-modal{
+    padding-left:  5%;
+    padding-top: 5%;
+}
+.btn-edit{
+    margin-right: 20px;
+    margin-top: -50px;
+    position: absolute;
+    right: 0;
+    width:53px; 
+    height:53px;
+    padding: 13px;
+    border-radius: 50%; 
+}
