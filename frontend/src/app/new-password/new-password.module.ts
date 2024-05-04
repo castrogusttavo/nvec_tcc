@@ -8,6 +8,7 @@ import { NewPasswordPageRoutingModule } from './new-password-routing.module';
 
 import { NewPasswordPage } from './new-password.page';
 import { SharedModule } from 'src/components/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/components/shared/shared.module';
     FormsModule,
     IonicModule,
     NewPasswordPageRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   declarations: [NewPasswordPage]
 })

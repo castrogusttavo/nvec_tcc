@@ -1,22 +1,41 @@
+drop database if exists db_nvec;
 create database if not exists db_nvec default character set utf8;
 use db_nvec;
 
 create table if not exists tb_status (
 	id_status int auto_increment not null,
-    ds_status varchar(30) not null,
-    estado_status tinyint not null,
+    ds_status enum('Pendente', 'Comprado') not null,
+    ic_status tinyint not null,
     primary key (id_status)
 ) default character set utf8;
 
 create table if not exists tb_categoria (
 	id_categoria int not null auto_increment,
-    ds_categoria varchar(100) not null,
+    ds_categoria enum(
+		'Animais',
+		'Artigos',
+		'Automóveis',
+        'Brinquedos',
+        'Casa e Decoração',
+        'Calçados',
+        'Cosméticos',
+        'Eletrônicos',
+        'Esporte',
+        'Ferramentas',
+        'Jogos',
+        'Literatura',
+        'Papelaria',
+        'Limpeza',
+        'Roupas',
+        'Supermercado' ,
+        'Outros'
+	) not null,
     primary key (id_categoria)
 ) default character set utf8;
 
 create table if not exists tb_assinatura (
 	id_assinatura int auto_increment not null,
-    ds_assinatura varchar(30),
+    ds_assinatura enum('Grátis','Básica','Pro') not null,
     primary key (id_assinatura)
 ) default character set utf8;
 
@@ -90,9 +109,11 @@ create table if not exists tb_comunidade (
         
 create table if not exists tb_lista (
 	id_lista int auto_increment not null,
-    nm_lista varchar(100),
-    dt_criacao datetime,
-    ds_lista varchar(200),
+    nm_lista varchar(50),
+    dt_criacao date,
+    ds_lista varchar(140),
+    rd_lista decimal(10,2),
+    vl_gasto decimal(10,2),
     id_categoria int not null,
     id_usuario int not null,
     primary key (id_lista),
@@ -107,25 +128,23 @@ create table if not exists tb_lista (
 ) default character set utf8;
 
 create table if not exists tb_comunidade_lista (
-	id_comunidade_lista int auto_increment not null,
-    id_comunidade int not null,
+    id_comunidade int auto_increment not null,
     id_lista int not null,
-    primary key (id_comunidade_lista),
+    primary key (id_comunidade, id_lista),
     index comunidade_lista(id_comunidade asc) visible,
     constraint comunidade_lista
 		foreign key (id_comunidade)
         references tb_comunidade(id_comunidade),
 	index lista(id_lista asc) visible,
-	constraint lista
+	constraint lista_id_comu
 		foreign key (id_lista)
         references tb_lista(id_lista)
 ) default character set utf8;
 
 create table if not exists tb_endereco_usuario (
-	id_endereco_usuario int auto_increment not null,
-    id_endereco int,
+    id_endereco int auto_increment not null,
     id_usuario int not null,
-    primary key (id_endereco_usuario),
+    primary key (id_endereco,id_usuario),
     index end_usuario(id_endereco asc) visible,
     constraint end_usuario
 		foreign key (id_endereco)
@@ -137,10 +156,9 @@ create table if not exists tb_endereco_usuario (
 ) default character set utf8;
 
 create table if not exists tb_comunidade_usuario (
-	id_comunidade_usuario int not null auto_increment,
-    id_comunidade int not null,
+    id_comunidade int auto_increment not null,
     id_usuario int not null,
-    primary key (id_comunidade_usuario),
+    primary key (id_comunidade,id_usuario),
     index comunidade_usuario(id_comunidade asc) visible,
     constraint comunidade_usuario
 		foreign key (id_comunidade)
@@ -152,10 +170,9 @@ create table if not exists tb_comunidade_usuario (
 ) default character set utf8;
         
 create table if not exists tb_endereco_comunidade (
-	id_endereco_comunidade int auto_increment not null,
-    id_endereco int not null,
+    id_endereco int auto_increment not null,
     id_comunidade int not null,
-    primary key (id_endereco_comunidade),
+    primary key (id_endereco,id_comunidade),
     index end_comunidade (id_endereco asc) visible,
     constraint end_comunidade
 		foreign key (id_endereco)
@@ -166,11 +183,18 @@ create table if not exists tb_endereco_comunidade (
         references tb_comunidade(id_comunidade)
 ) default character set utf8;
 
+create table if not exists tb_medida_item(
+	id_medida int auto_increment not null,
+	ds_medida enum('kg', 'g', 'L', 'mL', 'm') not null,
+    primary key (id_medida)
+) default character set utf8;
+
 create table if not exists tb_item (
 	id_item int not null auto_increment,
-    nm_item varchar(100) not null,
+    nm_item varchar(50) not null,
 	vl_uni decimal(10,2) not null,
     id_status int not null,
+    id_medida int not null,
     id_lista int not null,
     primary key (id_item),
     index lista_it (id_lista asc) visible,
@@ -180,54 +204,36 @@ create table if not exists tb_item (
 	index status_li(id_status asc) visible,
     constraint status_li
 		foreign key(id_status)
-        references tb_status(id_status)) default character set utf8;
-        
-create table if not exists tb_renda (
-	id_renda int not null auto_increment,
-    ds_renda varchar(200),
-    vl_renda decimal(10,2),
-    dt_renda datetime,
+        references tb_status(id_status),
+	index medida_item(id_medida asc) visible,
+    constraint medida_item
+		foreign key(id_medida)
+        references tb_medida_item(id_medida)
+        ) default character set utf8;
+
+create table if not exists tb_despesas(
+	id_despesa int not null auto_increment,
+    vl_despesa decimal (10,2),
+    dt_despesa date,
+    ds_despesa varchar(140),
     id_usuario int not null,
-    primary key (id_renda),
-    index renda_usuario(id_usuario asc) visible,
-    constraint renda_usuario
-		foreign key (id_usuario)
-        references tb_usuario(id_usuario)
+    primary key (id_despesa),
+    index usuario_despesa(id_usuario asc) visible,
+    constraint usuario_despesa
+		foreign key (id_usuario) references tb_usuario(id_usuario)
 ) default character set utf8;
 
-create table if not exists tb_despesa_variavel (
-	id_despesa_var int not null auto_increment,
-    vl_despesa_var decimal(10,2),
-    ds_despesa_var varchar(100),
-    id_usuario int not null,
-    primary key (id_despesa_var),
-    index usuario_variavel(id_usuario asc) visible,
-    constraint usuario_variavel
-		foreign key (id_usuario)references tb_usuario(id_usuario)
-) default character set utf8;
-
-create table if not exists tb_despesa_fixa (
-	id_despesa_fixa int not null auto_increment,
-    vl_despesa_fixa decimal(10,2),
-    ds_despesa_fixa varchar(100),
-    id_usuario int not null,
-    primary key (id_despesa_fixa),
-    index usuario_fixa(id_usuario asc) visible,
-    constraint usuario_fixa
-		foreign key (id_usuario)
-		references tb_usuario(id_usuario)
-) default character set utf8;
-
-create table if not exists tb_endereco_item (
-	id_endereco_item int not null auto_increment,
-    id_endereco int not null,
-    id_item int not null,
-    primary key (id_endereco_item),
-    index end_item (id_endereco asc) visible,
-    constraint end_item
+create table if not exists tb_endereco_lista (
+    id_endereco int auto_increment not null,
+    id_lista int not null,
+    primary key (id_endereco,id_lista),
+    index end_lista (id_endereco asc) visible,
+    constraint end_lista
 		foreign key (id_endereco)
         references tb_endereco(id_endereco),
-	index item (id_item asc) visible,
-	constraint item
-		foreign key(id_item) references tb_item(id_item)
+	index lista (id_lista asc) visible,
+	constraint lista_id_end
+		foreign key(id_lista) references tb_lista(id_lista)
 ) default character set utf8;
+
+use db_nvec;

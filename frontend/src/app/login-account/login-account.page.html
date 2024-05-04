@@ -17,8 +17,8 @@
       <span>Insira seus dados abaixo e volte a se organizar</span>
       <form (ngSubmit)="loginUser($event)">
         <div class="input">
-          <app-input type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required></app-input>
-          <app-input type="password" placeholder="Senha" name="password" [(ngModel)]="password" required></app-input>
+          <ion-input type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required></ion-input>
+          <ion-input type="password" placeholder="Senha" name="password" [(ngModel)]="password" required></ion-input>
         </div>
         <app-button-big type="submit">Entrar</app-button-big>
       </form>
