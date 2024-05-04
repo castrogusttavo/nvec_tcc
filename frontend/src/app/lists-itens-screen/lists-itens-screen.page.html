@@ -1,6 +1,6 @@
 <ion-content>
   <div class="content">
-      <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/lists-screen']">
+      <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
 
       <div class="card-list-all">
         <app-card-list-all limite="1.000,00" nomeLista="Guloseimas" categoriaLista="Mercado" gasto="240,00" dataLista="18/04/2024"></app-card-list-all>
@@ -11,7 +11,23 @@
     </div>
 
     <div class="itens-div scroll-horizontal">
-      <app-card-box action="Criar" description="Adicionar um novo item"></app-card-box>
+      <app-card-box action="Criar" description="Adicionar um novo item" (click)="setOpen(true)"></app-card-box>
+
+      <!-- Modal começa aqui -->
+      <!-- ITEM AINDA NÃO ESTÁ FEITO, MODAL PARA TESTES -->
+      <ion-modal [isOpen]="isModalOpen">
+        <ng-template>
+              <ion-content [fullscreen]="true" scrollY="false">
+                <img class="forward-modal" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" (click)="setOpen(false)">
+                <form [formGroup]="textForm" >
+                  <app-modal-criar button="Criar Item">
+                  </app-modal-criar>
+                </form>
+              </ion-content>   
+        </ng-template>
+      </ion-modal>
+      <!-- Modal termina aqui-->
+
       <app-card-item price="2,40" itemName="Oreo" description="Biscoito" [imagePath]="'https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/lahhlxg8nk6goxrcbcpz'"></app-card-item>
       <app-card-item price="5,23" itemName="Negresco" description="Biscoito" [imagePath]="'https://images.tcdn.com.br/img/img_prod/645811/biscoito_negresco_e_chocolate_branco_103gr_nestle_5231_2_a6b9cf73dcb34bef1f9746d77306d90c.jpg'"></app-card-item>
       <app-card-item price="1,67" itemName="Trakinas" description="Biscoito" [imagePath]="'https://drogariacristal.com/media/catalog/product/cache/dc75f304252411b8c602e1e96d99390d/b/i/biscoito_recheado_trakinas_morango_126g.jpg'"></app-card-item>
