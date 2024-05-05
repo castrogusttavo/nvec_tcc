@@ -1,31 +1,42 @@
 <ion-content [fullscreen]="true">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
   <ion-segment color="secondary" value="secondary">
     <ion-segment-button value="secondary">
-      <ion-label>Secondary</ion-label>
+      <ion-label>Mensal</ion-label>
     </ion-segment-button>
     <ion-segment-button value="segment">
-      <ion-label>Segment</ion-label>
+      <ion-label>Semestral</ion-label>
     </ion-segment-button>
   </ion-segment>
   
-  <div *ngIf="secondary === 'secondary'">
-    <p>OLA</p>
+<!-- <div [ngSwitch]="segmenteValue">
+  <div *ngSwitchCase="'segment1'">
+    <img class="graficos"  src="../../assets/png/grafico1.png" alt="">
+    <img class="graficos" src="../../assets/png/grafico2.png" alt="">
+    <img class="graficos" src="../../assets/png/grafico3.png" alt="">
+    <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
   </div>
-  
-  <div *ngIf="segment === 'segment'">
-    <p>HELLO</p>
+  <div *ngSwitchCase="'segment1'">
+    <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
+    <img class="graficos"  src="../../assets/png/grafico1.png" alt="">
+    <img class="graficos" src="../../assets/png/grafico2.png" alt="">
+    <img class="graficos" src="../../assets/png/grafico3.png" alt="">
   </div>
+</div> -->
 
-    <ion-header>
-      <ion-toolbar>
-        <ion-segment value="all">
-          <ion-segment-button value="all">
-            <ion-label>All</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="favorites">
-            <ion-label>Favorites</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-toolbar>
-    </ion-header>
+
+  <img class="graficos"  src="../../assets/png/grafico1.png" alt="">
+  <img class="graficos" src="../../assets/png/grafico2.png" alt="">
+  <img class="graficos" src="../../assets/png/grafico3.png" alt="">
+  <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
+
+<div>
+  
+</div>
+<div>
+  
+</div>
+<div>
+  
+</div>
 </ion-content>
