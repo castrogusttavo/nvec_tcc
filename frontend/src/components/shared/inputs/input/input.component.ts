@@ -8,6 +8,7 @@ import { Platform } from '@ionic/angular';
 })
 export class InputComponent  implements OnInit {
   @Input() placeholder: string | undefined;
+  @Input() type: string | undefined;
 
   constructor(private platform: Platform) {}
 
