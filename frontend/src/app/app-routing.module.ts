@@ -117,6 +117,10 @@ const routes: Routes = [
   },  {
     path: 'report',
     loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
+  },
+  {
+    path: 'update-item',
+    loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
   }
 
 
