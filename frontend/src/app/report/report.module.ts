@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ReportPageRoutingModule } from './report-routing.module';
 
 import { ReportPage } from './report.page';
+import { SharedModule } from 'src/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReportPageRoutingModule
+    ReportPageRoutingModule,
+    SharedModule
   ],
   declarations: [ReportPage]
 })
