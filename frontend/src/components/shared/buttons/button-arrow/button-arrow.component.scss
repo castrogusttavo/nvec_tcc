@@ -1,9 +1,10 @@
+@import '../../../../global.scss';
+
 .buttonArrow{
     width: 56.25px;
     height: 56.25px;
     flex-shrink: 0;
-    background: var(--Color-brand1, #006EFF);
-    opacity: 0.75;
+    background: #{$brand1};
     border-radius: 100%;
 }
 
@@ -14,11 +15,8 @@ img{
 
 :host.buttonArrow button{
     border-radius: var(--Space-8, 8px);
-    background: var(--Color-brand1, #006EFF);
+    background: #{$brand1};
     width: 35px;
     height: 35px;
-    margin-left: 70%;
-    
-    
-
+    // margin-left: 70%;
 }
