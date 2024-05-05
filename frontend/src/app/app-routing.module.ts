@@ -122,9 +122,14 @@ const routes: Routes = [
   {
     path: 'regulamentation',
     loadChildren: () => import('./regulamentation/regulamentation.module').then( m => m.RegulamentationPageModule)
-  },  {
-    path: 'privacy-and-cookies-policy',
-    loadChildren: () => import('./privacy-and-cookies-policy/privacy-and-cookies-policy.module').then( m => m.PrivacyAndCookiesPolicyPageModule)
+  },
+  {
+    path: 'cookies-policy',
+    loadChildren: () => import('./cookies-policy/cookies-policy.module').then( m => m.CookiesPolicyPageModule)
+  },
+  {
+    path: 'privacy-policy',
+    loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
   }
 
 
