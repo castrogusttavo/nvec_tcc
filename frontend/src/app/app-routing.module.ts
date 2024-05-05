@@ -114,14 +114,28 @@ const routes: Routes = [
   {
     path: 'ajuda',
     loadChildren: () => import('./ajuda/ajuda.module').then( m => m.AjudaPageModule)
-  },  {
+  },
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
+  },
+  {
+    path: 'regulamentation',
+    loadChildren: () => import('./regulamentation/regulamentation.module').then( m => m.RegulamentationPageModule)
+  },
+  {
     path: 'report',
     loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
   },
   {
     path: 'update-item',
     loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
+  },
+  {
+    path: 'privacy-and-cookies-policy',
+    loadChildren: () => import('./privacy-and-cookies-policy/privacy-and-cookies-policy.module').then( m => m.PrivacyAndCookiesPolicyPageModule)
   }
+
 
 
 
