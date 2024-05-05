@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ReportPage implements OnInit {
-  segment: string = 'segment';
-  secondary: string = 'secondary';
+  public segmentValue: string = 'segment1'; 
   constructor() { }
+
+  segmentChanged(event: any){
+    this.segmentValue = event.detail.value;
+  }
 
   ngOnInit() {
     
