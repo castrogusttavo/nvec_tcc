@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ReportPageRoutingModule } from './report-routing.module';
+import { UpdateItemPageRoutingModule } from './update-item-routing.module';
 
-import { ReportPage } from './report.page';
+import { UpdateItemPage } from './update-item.page';
 import { SharedModule } from 'src/components/shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from 'src/components/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReportPageRoutingModule,
+    UpdateItemPageRoutingModule,
     SharedModule
   ],
-  declarations: [ReportPage]
+  declarations: [UpdateItemPage]
 })
-export class ReportPageModule {}
+export class UpdateItemPageModule {}
