@@ -1,0 +1,54 @@
+<div> <!-- Conteúdo da modal -->
+  <div class="modal-content">
+    <form>
+      <ng-container>
+        <div  class="inputs">
+          <!-- Input Nome -->
+          <div>
+            <input placeholder="Nome"
+                    class="inputText"
+                    (input)="updateCounter($event)"
+                    maxlength="50">
+            <div class="counter"></div>
+          </div>
+          <!-- Input Nome -->
+
+          <!-- Dropdown medida -->
+          <ion-item class="item">
+            <input placeholder="Medida" (click)="toggleDropdown()" [value]="inputTextValue" (input)="formatCurrency($event)" >
+            
+            <ion-select [value]="selectedOption" style="position: absolute; margin-left: 140px;" (ionChange)="onSelectChange($event)">
+              <ion-select-option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</ion-select-option>
+            </ion-select>
+          </ion-item>          
+          <!-- Dropdown medida -->
+
+          <!-- Input Quantidade -->
+          <input placeholder="Quantidade">
+          <!-- Input Quantidade -->
+
+          <!-- Input Valor -->
+          <input placeholder="valor" class="inputText" (input)="formatCurrency($event)">
+          <!-- Input Valor -->
+        </div>
+      </ng-container>
+    </form>
+  </div>  
+
+  <div class="buttonBig">
+    <app-button-big>{{button}}</app-button-big>
+  </div>
+
+  <!-- Botão Bolean cancelar e Excluir -->
+  <div class="bolean">
+    <!-- Botão Cancelar -->
+    <a *ngIf="cancelButtonText" class="cancelar" (click)="onCancelClick()">{{ cancelButtonText }}</a>
+    <!-- Botão Excluir -->
+    <div *ngIf="deleteButtonText" class="excluir">
+      <p>{{ deleteButtonText }}</p>
+    </div>
+  </div>  
+  <!-- Botão Bolean cancelar e Excluir -->
+</div>
+
+

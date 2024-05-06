@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" scrollY="false">
   <div class="content">
     <h1>Minha Conta</h1>
     <ion-row class="rowPrimary">
@@ -7,9 +7,9 @@
         <span>Modifique Seus Dados</span>
       </ion-col>
       <ion-col>
-        <div class="containerButton">
-          <app-button-arrow [routerLink]="['/acount']" [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
-        </div>
+          <div class="containerButton">
+            <app-button-arrow [routerLink]="['/acount']" [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
+          </div>
       </ion-col>
     </ion-row>
   
@@ -21,9 +21,9 @@
       </ion-col>
       <ion-col>
         <div class="containerButton">
-          <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
+          <app-button-arrow [routerLink]="['/notifications']" [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
         </div>
-      </ion-col>
+        </ion-col>
     </ion-row>
   
     <ion-row class="row">
@@ -32,7 +32,7 @@
       </ion-col>
       <ion-col>
         <div class="containerButton">
-          <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
+          <app-button-arrow [routerLink]="['/preferences']" [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
         </div>
       </ion-col>
     </ion-row>
@@ -41,9 +41,9 @@
       <ion-col>  
         <h3>Dark Mode</h3>
       </ion-col>
-      <ion-col>
+      <ion-col >
         <div class="containerButton">
-          <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
+          <ion-toggle [checked]="true" class="toggle"></ion-toggle>
         </div>
       </ion-col>
     </ion-row>
@@ -52,11 +52,11 @@
       <ion-col>  
         <h3>Ajuda</h3>
       </ion-col>
-      <ion-col>
+      <ion-col >
         <div class="containerButton">
-          <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
-        </div> 
-      </ion-col>
+          <app-button-arrow  [routerLink]="['/ajuda']" [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
+        </div>
+        </ion-col>
     </ion-row>
   
   </ion-grid>

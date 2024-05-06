@@ -1,5 +1,9 @@
 @import "../../global.scss";
 
+*{
+    --padding-start: 0px !important;
+}
+
 .forward{
     padding-left:  5%;
     padding-top: 5%;
@@ -10,6 +14,12 @@
     justify-content: center;
     align-items: center;
     padding-top: 10%;
+}
+
+.buttonBig{
+    padding-top: 8%;
+    display: flex;
+    justify-content: center;
 }
 
 .inputs{
@@ -25,22 +35,6 @@ input{
     height: 55px;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
-}
-
-ion-select{
-    width: 183px;
-    height: 55px;
-    border-radius: var(--Space-8, 8px);
-    border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
-    margin: 10px;
-
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; 
 }
   
 textarea{
@@ -48,56 +42,27 @@ textarea{
     height: 55px;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
     padding-top:  5%;
     padding-bottom:  5%;
-}
-
-::placeholder {
-    color: $N800D;
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; 
-}
-
-.buttonBig{
-    padding-top: 8%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .description{
     width: 382px;
     min-height: 80px;
-    position: relative;
-    resize: none; 
-    font-family: 'Poppins'; 
-    font-size: 14px; 
+    font-size: 16px; 
+    margin: 10px;
+}
+
+::placeholder {
+    color: $N800D;
+    font-size: 12px;
     font-weight: 600;
-    line-height: 16px; 
-}
-
-.description::placeholder{
     position: absolute; 
     top: 10px; 
     left: 10px;
     text-align: top;
 }
 
-.inputText::placeholder{
-    position: absolute; 
-    top: 10px; 
-    left: 10px;
-    text-align: top;
-}
-
-.input-container {
-    position: relative;
-}
-  
 .counter {
     margin-right: 10px;
     text-align-last: right;
@@ -105,20 +70,7 @@ textarea{
     color: #888;
 }
 
-.dropdown {
-    width: 183px;
-    height: 55px;
-    border-radius: var(--Space-8, 8px);
-    border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
-    margin: 10px;
-
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; 
-    color:$N800D;
-    padding-left:  5%;
-    padding-bottom:  5%;
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
 }

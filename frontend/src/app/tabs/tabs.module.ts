@@ -7,6 +7,8 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { SharedModule } from 'src/components/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveFormsModule
+
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { SharedModule } from 'src/components/shared/shared.module';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   declarations: [TabsPage]
 })

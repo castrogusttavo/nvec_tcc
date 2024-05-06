@@ -3,7 +3,10 @@
     <img [src]="imagePath" alt="">
   </div>
   <div class="text-item">
-    <p>{{itemName}}</p>
-    <span>{{description}}</span>
+    <ion-checkbox class="chekbox-item" labelPlacement="end">{{itemName}}</ion-checkbox>
+    <p>
+      <span>{{description}}</span>
+      <span><b>{{price}}</b></span>
+    </p>
   </div>
 </ion-card>

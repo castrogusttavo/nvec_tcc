@@ -63,7 +63,6 @@ const routes: Routes = [
     loadChildren: () => import('./create-comunnity/create-comunnity.module').then( m => m.CreateComunnityPageModule)
   },
   {
-
     path: 'plans-screen',
     loadChildren: () => import('./plans-screen/plans-screen.module').then( m => m.PlansScreenPageModule)
   },
@@ -98,8 +97,43 @@ const routes: Routes = [
   {
     path: 'all-community-screen',
     loadChildren: () => import('./all-community-screen/all-community-screen.module').then( m => m.AllCommunityScreenPageModule)
-  }
-
+  },
+  {
+    path: 'preferences',
+    loadChildren: () => import('./preferences/preferences.module').then( m => m.PreferencesPageModule)
+  },
+  {
+    path: 'new-password',
+    loadChildren: () => import('./new-password/new-password.module').then( m => m.NewPasswordPageModule)
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
+    path: 'ajuda',
+    loadChildren: () => import('./ajuda/ajuda.module').then( m => m.AjudaPageModule)
+  },
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
+  },
+  {
+    path: 'regulamentation',
+    loadChildren: () => import('./regulamentation/regulamentation.module').then( m => m.RegulamentationPageModule)
+  },
+  {
+    path: 'cookies-policy',
+    loadChildren: () => import('./cookies-policy/cookies-policy.module').then( m => m.CookiesPolicyPageModule)
+  },
+  {
+    path: 'privacy-policy',
+    loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
+  },
+  {
+    path: 'update-item',
+    loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
+  },
 ];
 @NgModule({
   imports: [

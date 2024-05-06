@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true" scrollY="false">
+  <ion-grid class="grid">
+    <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt=""  [routerLink]="['/tabs/tab5']">
+    <h1>Notificações</h1>
+    <ion-row class="row">
+      <ion-col>  
+        <h3>Listas</h3>
+      </ion-col>
+      <ion-col>
+        <ion-toggle [checked]="true" class="toggle"></ion-toggle>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row class="row">
+      <ion-col>  
+        <h3>Comunidades</h3>
+      </ion-col>
+      <ion-col>
+        <ion-toggle [checked]="true" class="toggle"></ion-toggle>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row class="row">
+      <ion-col>  
+        <h3>Relatórios</h3>
+      </ion-col>
+      <ion-col>
+          <ion-toggle [checked]="true" class="toggle"></ion-toggle>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row class="row">
+      <ion-col>  
+        <h3>Ofertas e Novidades</h3>
+      </ion-col>
+      <ion-col>
+        <ion-toggle [checked]="true" class="toggle"></ion-toggle>
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+</ion-content>

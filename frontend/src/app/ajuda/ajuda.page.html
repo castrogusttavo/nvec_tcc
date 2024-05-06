@@ -1,0 +1,34 @@
+<ion-content  scrollY="false">
+  <ion-grid class="grid">
+    <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt=""  [routerLink]="['/tabs/tab5']">
+    <h1>Ajuda</h1>
+    <ion-row class="row">
+      <ion-col>  
+        <h3>Regulamentos</h3>
+      </ion-col>
+     
+      <ion-col>
+        <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow" [routerLink]="['/regulamentation']"></app-button-arrow>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row class="row">
+      <ion-col>  
+        <h3>Política de Cookies</h3>
+      </ion-col>
+      <ion-col>
+        <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow" [routerLink]="['/cookies-policy']"></app-button-arrow>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row class="row">
+      <ion-col>  
+        <h3>Política de Privacidade</h3>
+      </ion-col>
+      <ion-col>
+        <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow" [routerLink]="['/privacy-policy']"></app-button-arrow>
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+</ion-content>

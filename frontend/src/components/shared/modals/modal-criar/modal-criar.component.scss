@@ -1,15 +1,49 @@
 @import "../../../../global.scss";
 
+*{
+    --padding-start: 0px !important;
+}
+
 .forward{
     padding-left:  5%;
     padding-top: 5%;
 }
 
-.imageIlustrator{
+.buttonBig{
+    padding-top: 8%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding-top: 10%;
+}
+
+.bolean{
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    padding: 0px 24px 40px 24px;
+}
+
+.cancelar{
+    padding: 0px 32px 0px 32px;
+    font-weight: 600;
+    color: $brand1;
+    align-self: center;
+}
+
+.excluir{
+    background-color: #FF554A;
+    padding: 0px 32px 0px 32px;
+    font-size: 16px;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.excluir p{
+    padding: 0px;
 }
 
 .inputs{
@@ -25,79 +59,40 @@ input{
     height: 55px;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
 }
-
-ion-select{
-    width: 183px;
-    height: 55px;
-    border-radius: var(--Space-8, 8px);
-    border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
-    margin: 10px;
-
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; 
-}
-
+  
 textarea{
     width: 183px;
     height: 55px;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
     padding-top:  5%;
     padding-bottom:  5%;
 }
 
-::placeholder {
-    color: $N800D;
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; 
-}
-
-.buttonBig{
-    padding-top: 8%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .description{
     width: 382px;
-    min-height: 80px;
-    position: relative;
-    resize: none; 
-    font-family: 'Poppins'; 
-    font-size: 14px; 
+    min-height: 125px;
+    font-size: 16px; 
+    margin: 10px;
+}
+
+::placeholder {
+    color: $N800D;
+    font-size: 12px;
     font-weight: 600;
-    line-height: 16px; 
-}
-
-.description::placeholder{
     position: absolute; 
     top: 10px; 
     left: 10px;
     text-align: top;
 }
 
-.inputText::placeholder{
-    position: absolute; 
-    top: 10px; 
-    left: 10px;
-    text-align: top;
+.inputText{
+    width: 382px;
+    font-size: 16px; 
+    margin: 10px;
 }
 
-.input-container {
-    position: relative;
-}
-  
 .counter {
     margin-right: 10px;
     text-align-last: right;
@@ -105,20 +100,12 @@ textarea{
     color: #888;
 }
 
-.dropdown {
-    width: 183px;
-    height: 55px;
-    border-radius: var(--Space-8, 8px);
-    border: var(--Space-space-025, 2px) solid $N300;
-    background: transparent;
-    margin: 10px;
-
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; 
-    color:$N800D;
-    padding-left:  5%;
-    padding-bottom:  5%;
+.desc-counter .counter{
+    height: 18px;
 }
+
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
+}
+

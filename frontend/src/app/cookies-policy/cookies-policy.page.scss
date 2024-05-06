@@ -1,0 +1,17 @@
+@import "../../global.scss";
+
+:host{
+    *{
+        color: #{$mutued};
+    }
+    .content{
+        padding: 24px;
+    }
+    h1{
+        color: #000000;
+    }
+    .paragraph{
+        margin: 24px 0 24px 0;
+    }
+
+}

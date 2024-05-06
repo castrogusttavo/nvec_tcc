@@ -13,7 +13,6 @@ h1{
     margin: 40px;
 }
 
-
 span{
     color: var(--Color-inverted-inverted500, #8590A2);
     text-align: center;
@@ -33,7 +32,7 @@ h3{
 }
 
 .containerButton{
-    display: flex;
+    padding-left: 81%;
 }
 
 .row{
@@ -46,4 +45,8 @@ h3{
 }
 .content{
     padding: 24px 16px;
+}
+
+.toggle{
+    padding-left: 60%;
 }

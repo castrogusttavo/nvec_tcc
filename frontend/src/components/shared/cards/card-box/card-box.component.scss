@@ -4,9 +4,8 @@
     img{
         display: none;
     }
-    a{
-        text-decoration: none;
-        cursor: pointer;
+    button{
+        background: transparent;
     }
     .card{
         display: flex;
@@ -42,14 +41,14 @@
     }
 }
 
-:host.card-box-items a{
+:host.card-box-items button{
     display:  none;
 }
-:host.card-box-comparation a,
+:host.card-box-comparation button,
 :host.card-box-comparation .card
 {
-    width: 160px;
-    height: 160px;
+    width: 98%;
+    height: 100%;
     padding: 0px;
     border-radius: 16px;
 }

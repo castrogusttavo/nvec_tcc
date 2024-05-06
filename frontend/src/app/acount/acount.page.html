@@ -1,41 +1,44 @@
 <ion-content scrollY="false">
   <div class="content">
-    <img class="closeImg" src="./../../assets/svg/close.svg" alt="fechar aba do perfil">
+    <img class="closeImg" src="./../../assets/svg/close.svg" alt="fechar aba do perfil" [routerLink]="['/tabs/tab5']">
     <h1>Seu Perfil</h1>
       <div class="infoPerfil">
         <img class="imgPerfil" src="./../../assets/svg/avatar.svg" alt="">
         <span>selecione um avatar</span>
       </div>
-      
+
 
     <ion-grid >
-    <ion-row>
-        <ion-col>
-          <app-input placeholder="Nome" class="input-config-name">Nome</app-input>
-        </ion-col>
-      <ion-col>
+      <form>
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="auto">
+            <app-input type="name" name="name" [(ngModel)]="name" placeholder="Nome" class="input-config-name"></app-input>
+          </ion-col>
+          <ion-col class="align-center" size="auto">
             <app-button-medium class="button-medium-config">Assinatura</app-button-medium>
-      </ion-col>
-    </ion-row>
+          </ion-col>
+        </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <app-input placeholder="Email" class="input-config-email">Nome</app-input>
-      </ion-col>
-    </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <app-input  type="email" name="email" [(ngModel)]="email" placeholder="Email" class="input-config-email"></app-input>
+          </ion-col>
+        </ion-row>
+      </form>
 
     <ion-row class="row">
-      <ion-col>  
+      <ion-col>
         <h3>Alterar Senha</h3>
       </ion-col>
-      <ion-col>
-          <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow"></app-button-arrow>
+      <ion-col class="alter-pass">
+          <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow" [routerLink]="['/new-password']"></app-button-arrow>
       </ion-col>
     </ion-row>
   </ion-grid>
-    <p>Sair da conta</p>
-    <app-button-medium onClick="" class="button-medium-save">Salvar</app-button-medium>
- 
+    <p onclick="">Sair da conta</p>
+    <app-button-medium type="submit" class="button-medium-save">Salvar</app-button-medium>
+
 
   </div>
 </ion-content>
