@@ -1,0 +1,51 @@
+<div> <!-- Conteúdo da modal -->
+  <div class="modal-content">
+    <form>
+      <ng-container>
+        <div  class="inputs">
+          <!-- Input Nome -->
+          <div>
+            <input placeholder="Nome"
+                    class="inputText"
+                    (input)="updateCounter($event)"
+                    maxlength="50">
+            <div class="counter"></div>
+          </div>
+          <!-- Input Nome -->
+      
+          <!-- DropDown Categoria -->
+          <app-example class="typeahead"></app-example>
+          <!-- DropDown Categoria -->
+
+          <!-- Input Valor Máximo -->
+          <input formControlName="valorMaximo" placeholder="Valor máximo" (input)="formatCurrency($event)">
+          <!-- Input Valor Máximo -->
+
+          <!-- Descrição-->
+          <div class="desc-counter ">
+            <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="140"></textarea>
+            <div class="counter"></div>
+          </div>
+          <!-- Descrição -->
+        </div>
+      </ng-container>
+    </form>
+  </div>  
+
+  <div class="buttonBig">
+    <app-button-big>{{button}}</app-button-big>
+  </div>
+
+  <!-- Botão Bolean cancelar e Excluir -->
+  <div class="bolean">
+    <!-- Botão Cancelar -->
+    <a *ngIf="cancelButtonText" class="cancelar" (click)="onCancelClick()">{{ cancelButtonText }}</a>
+    <!-- Botão Excluir -->
+    <div *ngIf="deleteButtonText" class="excluir">
+      <p>{{ deleteButtonText }}</p>
+    </div>
+  </div>  
+  <!-- Botão Bolean cancelar e Excluir -->
+</div>
+
+

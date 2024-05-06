@@ -20,12 +20,12 @@ import { CardListRecentComponent } from './cards/card-list-recent/card-list-rece
 import { CardBoxComponent } from './cards/card-box/card-box.component';
 import { CardListSearchComponent } from './cards/card-list-search/card-list-search.component';
 import { CardPlansComponent } from './cards/card-plans/card-plans.component';
-import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component';
 import { SourchComponent } from './sourchs/sourch/sourch.component';
 import { CardComparationItemComponent } from './cards/card-comparation-item/card-comparation-item.component';
 import { CardListAllComponent } from './cards/card-list-all/card-list-all.component';
-import { ModalAlterarComponent } from './modals/modal-alterar/modal-alterar.component';
-
+import { ModalItemComponent } from './modals/modal-item/modal-item.component';
+//Mudar nome dos components abaixo quando tiver tempo
+import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component';
 import { ExampleComponent } from './modals/example/example.component';
 import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
 
@@ -54,10 +54,9 @@ import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
     CardComparationItemComponent,
     SourchComponent,
     CardListAllComponent,
-    ModalAlterarComponent,
     ExampleComponent,
-    TypeaheadComponent
-
+    TypeaheadComponent,
+    ModalItemComponent
   ],
   imports: [
     IonicModule,
@@ -73,10 +72,10 @@ import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
     RouterModule.forChild([{path: '../../../components/shared/cards/card-list-recent', component: CardListRecentComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-box', component: CardBoxComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-plans', component: CardPlansComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/modals/modal-criar-component', component: CardPlansComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/modals/example', component: CardPlansComponent}]),
-    RouterModule.forChild([{path: '../../../components/shared/modals/typeahead', component: CardPlansComponent}])
-
+    RouterModule.forChild([{path: '../../../components/shared/modals/modal-criar-component', component: ModalCriarComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/modals/example', component: ExampleComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/modals/typeahead', component: TypeaheadComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/modals/modal-item', component: ModalItemComponent}]),
   ],
   exports: [
     ButtonBigComponent,
@@ -103,9 +102,9 @@ import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
     CardComparationItemComponent,
     SourchComponent,
     CardListAllComponent,
-    ModalAlterarComponent,
     ExampleComponent,
-    TypeaheadComponent
+    TypeaheadComponent,
+    ModalItemComponent
   ]
 })
 export class SharedModule { }
