@@ -12,21 +12,24 @@
             <div class="counter"></div>
           </div>
           <!-- Input Nome -->
-      
-          <!-- DropDown Categoria -->
-          <app-example class="typeahead"></app-example>
-          <!-- DropDown Categoria -->
 
-          <!-- Input Valor Máximo -->
-          <input formControlName="valorMaximo" placeholder="Valor máximo" (input)="formatCurrency($event)">
-          <!-- Input Valor Máximo -->
+          <!-- Dropdown medida -->
+          <ion-item class="item">
+            <input placeholder="Medida" (click)="toggleDropdown()" [value]="inputTextValue" (input)="formatCurrency($event)" >
+            
+            <ion-select [value]="selectedOption" style="position: absolute; margin-left: 140px;" (ionChange)="onSelectChange($event)">
+              <ion-select-option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</ion-select-option>
+            </ion-select>
+          </ion-item>          
+          <!-- Dropdown medida -->
 
-          <!-- Descrição-->
-          <div class="desc-counter ">
-            <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="140"></textarea>
-            <div class="counter"></div>
-          </div>
-          <!-- Descrição -->
+          <!-- Input Quantidade -->
+          <input placeholder="Quantidade">
+          <!-- Input Quantidade -->
+
+          <!-- Input Valor -->
+          <input placeholder="valor" class="inputText" (input)="formatCurrency($event)">
+          <!-- Input Valor -->
         </div>
       </ng-container>
     </form>
