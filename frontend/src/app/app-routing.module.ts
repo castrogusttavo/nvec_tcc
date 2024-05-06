@@ -63,7 +63,6 @@ const routes: Routes = [
     loadChildren: () => import('./create-comunnity/create-comunnity.module').then( m => m.CreateComunnityPageModule)
   },
   {
-
     path: 'plans-screen',
     loadChildren: () => import('./plans-screen/plans-screen.module').then( m => m.PlansScreenPageModule)
   },
@@ -130,7 +129,11 @@ const routes: Routes = [
   {
     path: 'privacy-policy',
     loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
-  }
+  },
+  {
+    path: 'update-item',
+    loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
+  },
 ];
 @NgModule({
   imports: [
