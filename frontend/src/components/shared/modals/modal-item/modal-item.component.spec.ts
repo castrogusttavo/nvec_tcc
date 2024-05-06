@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalAlterarComponent } from './modal-alterar.component';
+import { ModalItemComponent } from './modal-item.component';
 
-describe('ModalAlterarComponent', () => {
-  let component: ModalAlterarComponent;
-  let fixture: ComponentFixture<ModalAlterarComponent>;
+describe('ModalItemComponent', () => {
+  let component: ModalItemComponent;
+  let fixture: ComponentFixture<ModalItemComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalAlterarComponent ],
+      declarations: [ ModalItemComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalAlterarComponent);
+    fixture = TestBed.createComponent(ModalItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
