@@ -1,62 +1,70 @@
 <!-- UMA GUIA DE TESTES!!! nao apaga <3 -->
 <ion-content>
-  <div class="content">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
 
-    <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
+  <div class="imageIlustrator">
+    <img  src="../../assets/png/imagem.png">
+  </div>
 
-    <div class="imageIlustrator">
-      <img  src="../../assets/png/imagem.png">
-    </div>
+  <!--LISTA: placeholder, class, (input), maxlength-->
 
-    <!--LISTA: placeholder, class, (input), maxlength-->
+  <div class="inputs">
+    <form name="" id="" [formGroup]="textForm" style="display: contents;">
+      <!-- Input Nome -->
+      <div>
+        <input placeholder="Nome"
+                class="inputText"
+                (input)="updateCounter($event)"
+                maxlength="20">
+        <div class="counter"></div>
+      </div>
+      <!-- Input Nome -->
+  
+      <!-- DropDown Categoria -->
+      <app-example class="typeahead"></app-example>
+      <!-- DropDown Categoria -->
 
-    <div class="inputs">
-      <form name="" id="" [formGroup]="textForm" style="display: contents;">
-        <!-- Input Nome -->
-        <div class="inputName">
-          <input placeholder="Nome"
-                  (input)="updateCounter($event)"
-                  maxlength="20">
-          <div class="counter"></div>
-        </div>
-        <!-- Input Nome -->
-    
-        <!-- DropDown Categoria -->
-        <!-- <app-example class="typeahead"></app-example> -->
-        <!-- DropDown Categoria -->
+      <!-- Input Valor Máximo -->
+      <input formControlName="valorMaximo" placeholder="Valor máximo" (input)="formatCurrency($event)">
+      <!-- Input Valor Máximo -->
 
-        <!-- Input Valor Máximo -->
-        <!-- <input formControlName="valorMaximo" placeholder="Valor máximo" (input)="formatCurrency($event)"> -->
-        <!-- Input Valor Máximo -->
+      
 
-        <div class="flexInputs">
-                  <!-- Dropdown peso                      COMPONENT-->
-          <ion-item class="item">
-            <input placeholder="Medida" [(ngModel)]="inputTextValue" (click)="toggleDropdown()" (input)="formatCurrency($event)" formControlName="peso">
-            
-            <ion-select [(ngModel)]="selectedOption" style="position: absolute; margin-left: 140px;">
-              <ion-select-option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <!-- Dropdown peso -->
 
-          <!-- Input Valor -->
-          <input formControlName="valor" placeholder="Valor unitário" (input)="formatCurrency($event)">
-          <!-- Input Valor -->
-        </div>
 
-        <!-- Descrição                      COMPONENT-->
-        <div>
-          <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
-          <div class="counter"></div>
-        </div>
-        <!-- Descrição -->
-      </form>
-    </div>
-    
-    <div class="buttonBig">
-      <app-button-big>Criar Item</app-button-big>
-    </div>
+      <!-- Dropdown medida                      COMPONENT-->
+      <ion-item class="item">
+        <input placeholder="Medida" [(ngModel)]="inputTextValue" class="inputText" (click)="toggleDropdown()" (input)="formatCurrency($event)" formControlName="medida">
+        
+        <ion-select [(ngModel)]="selectedOption" style="position: absolute; margin-left: 140px;">
+          <ion-select-option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- Dropdown medida -->
 
+
+
+
+
+
+      <!-- Input Valor -->
+      <input formControlName="valor" placeholder="valor" class="inputText" (input)="formatCurrency($event)">
+      <!-- Input Valor -->
+
+      <!-- Input Quantidade -->
+      <input formControlName="quantidade" placeholder="Quantidade" class="inputText">
+      <!-- Input Quantidade -->
+
+      <!-- Descrição                      COMPONENT-->
+      <div>
+        <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
+        <div class="counter"></div>
+      </div>
+      <!-- Descrição -->
+    </form>
+  </div>
+  
+  <div class="buttonBig">
+    <app-button-big>Criar Lista</app-button-big>
   </div>
 </ion-content>
