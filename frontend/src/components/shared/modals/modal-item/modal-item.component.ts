@@ -22,9 +22,20 @@ export class ModalItemComponent  implements OnInit {
     this.deleteButtonText = '';
   }
 
-  // @Input() inputs: { label?: string, id: string, placeholder: string, class?: string }[][] = [];
-
   ngOnInit() {}
+
+  // Dropdown medida
+  inputTextValue: string = '';
+  dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
+  selectedOption: string | undefined = 'Kg';
+  dropdownVisible: boolean = false;
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
+  onSelectChange(event: any) {
+    this.selectedOption = event.detail.value;
+    console.log('Opção selecionada:', this.selectedOption);
+  }  
 
   // Função para formatar o contador de caracteres
   customCounterFormatter(inputLength: number, maxLength: number) {
@@ -50,6 +61,9 @@ export class ModalItemComponent  implements OnInit {
     value = value.replace(/(\d)(\d{2})$/, '$1,$2');
     value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
     input.value = value;
+    // console.log('formatCurrency:', value); O CONSOLE VAI PARA TODOS EIN
   }
+
+
 }
 

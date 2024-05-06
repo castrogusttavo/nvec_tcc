@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class Tab3Page {
 
-  // Dropdown peso
+  // Dropdown medida
   inputTextValue: string | undefined;
   dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
   selectedOption: string | undefined = 'Kg';
@@ -42,7 +42,8 @@ export class Tab3Page {
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       valor: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      medida: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      quantidade: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
     });
   }
 

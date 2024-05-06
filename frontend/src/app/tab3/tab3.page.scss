@@ -3,9 +3,6 @@
 *{
     --padding-start: 0px !important;
 }
-.content{
-    padding: 24px;
-}
 
 .forward{
     padding-left:  5%;
@@ -25,15 +22,15 @@
     justify-content: center;
 }
 
-// .inputs{
-//     padding-top: 10%;
-//     display: flex;
-//     flex-wrap: wrap;
-//     justify-content: center;
-// }
+.inputs{
+    padding-top: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 input{
-    margin: 10px 0;
+    margin: 10px;
     width: 183px;
     height: 55px;
     border-radius: var(--Space-8, 8px);
@@ -41,7 +38,7 @@ input{
 }
   
 textarea{
-    width: 100%;
+    width: 183px;
     height: 55px;
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
@@ -50,9 +47,10 @@ textarea{
 }
 
 .description{
+    width: 382px;
     min-height: 80px;
     font-size: 16px; 
-    margin: 10px 0;
+    margin: 10px;
 }
 
 ::placeholder {
@@ -75,11 +73,4 @@ textarea{
 .item{
     --inner-padding-end: 0 !important;
     --inner-border-width: 0px 0px 0px 0px;
-}
-.inputName input{
-    width: 100%;
-}
-.flexInputs{
-    display: flex;
-    justify-content: space-between;
 }
