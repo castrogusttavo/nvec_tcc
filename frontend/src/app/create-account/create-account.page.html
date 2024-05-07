@@ -8,31 +8,33 @@
         <app-button-small class="buttonSmall"  [routerLink]="['/login-account']">Entrar</app-button-small>
       </div>
     </div>
-      
+
     <h1>Na Volta Eu Compro</h1>
     <div class="boxSombra"></div>
 
-    <div class="box"> 
+    <div class="box">
       <p>Comece Gratuitamente</p>
       <span>E controle sua vida financeira</span>
-      <div class="input">      
-        <app-input type="text" placeholder="Nome" class="inputName">Nome</app-input>
-        <app-input type="email" placeholder="E-mail" class="inputEmail">E-mail</app-input>
-        <app-input type="password" placeholder="Senha" class="inputSenha">Senha </app-input>
-      </div>
-      <app-button-big [routerLink]="['/pre-page']">Cadastrar</app-button-big>
+
+      <form (ngSubmit)="createUser($event)"  class="input">
+        <app-input type="text" placeholder="Nome" class="input-login" name="name" [(ngModel)]="name" required/>
+        <app-input type="email" placeholder="E-mail" class="input-login" name="email" [(ngModel)]="email" required/>
+        <app-input type="password" placeholder="Senha" class="input-login" name="password" [(ngModel)]="password" required/>
+
+        <app-button-big type="submit">Cadastrar</app-button-big>
+      </form>
 
       <div class="line">
         <div ></div>
         <span>Ou cadastrar por</span>
         <div ></div>
-      </div>      
+      </div>
 
       <div class="buttonSocial">
         <app-button-social [imageSocial]="'../../assets/svg/google.svg'" texto="Google" [routerLink]="['/pre-page']"></app-button-social>
         <app-button-social [imageSocial]="'../../assets/svg/facebook.svg'" texto="Facebook" [routerLink]="['/pre-page']"></app-button-social>
       </div>
-   
+
     </div>
   </div>
 </ion-content>

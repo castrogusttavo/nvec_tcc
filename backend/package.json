@@ -23,7 +23,9 @@
     "sql": "^0.78.0"
   },
   "scripts": {
-    "test": "echo \"Succes\" && exit 1"
+    "test": "echo \"Succes\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "description": ""
 }

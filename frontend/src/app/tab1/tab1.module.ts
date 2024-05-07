@@ -6,8 +6,7 @@ import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { SharedModule } from 'src/components/shared/shared.module';
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -16,8 +15,9 @@ import { SharedModule } from 'src/components/shared/shared.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page],
 })
 export class Tab1PageModule {}
