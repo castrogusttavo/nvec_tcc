@@ -7,12 +7,13 @@
       <h5>Escolha os itens</h5>
 
       <div class="card-items">
-          <app-card-box [image]="'https://images.tcdn.com.br/img/img_prod/645811/biscoito_negresco_e_chocolate_branco_103gr_nestle_5231_2_a6b9cf73dcb34bef1f9746d77306d90c.jpg'" class="card-box-comparation"></app-card-box>
-          <app-card-box [image]="'https://images.tcdn.com.br/img/img_prod/645811/biscoito_oreo_original_270g_mondelez_6485_2_cc657ad241fe9018e4031ce186b890b0.jpg'" class="card-box-comparation"></app-card-box>
+          <app-card-box action="Item1" description="Adicione um item" class="card-box-comparation-button" ></app-card-box>
+          <app-card-box action="Item2" description="Adicione outro item" class="card-box-comparation-button" ></app-card-box>
+          
       </div>
 
       <div class="items-comparation">
-        <app-card-comparation-item firstItemComparation="Negresco" secondItemComparation="Oreo" nameItem="Biscoito Negresco" itemCategory="Biscoito" priceItem="3,50"></app-card-comparation-item>
+        <app-card-comparation-item firstItemComparation="I8tem1" secondItemComparation="Item2" nameItem="Item recomendado" itemCategory="Categoria" priceItem="0,00"></app-card-comparation-item>
       </div>
     </div>
   </div>  

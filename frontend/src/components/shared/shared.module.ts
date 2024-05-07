@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonBigComponent } from './buttons/button-big/button-big.component';
 import { ButtonMediumComponent } from './buttons/button-medium/button-medium.component';
 import { ButtonMediumOutlineComponent } from './buttons/button-medium-outline/button-medium-outline.component';
@@ -61,6 +63,8 @@ import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
   imports: [
     IonicModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([{path: '../../../components/shared/cards/card-item', component: CardItemComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-icon-home', component: CardIconHomeComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/cards/card-banner', component: CardBannerComponent}]),
