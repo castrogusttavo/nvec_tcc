@@ -62,3 +62,68 @@
     height: 100%;
     border-radius: 16px;
 }
+// :host.card-box-comparation-button button,
+// :host.card-box-comparation-button .card
+// {
+//     width: 159px;
+//     height: 159px;
+//     padding: 0px;
+//     border-radius: 16px;
+// }
+// :host.card-box-comparation-button .create{
+//         background: #{$brand2};
+//         display: flex;
+//         padding: var(--Space-space-025, 2px) 8px;
+//         justify-content: center;
+//         align-items: center;
+//         gap: 8px;
+//         font-size: #{$textSmallerBold};
+//         color: #{$N0};
+//         width: 44px;
+//         height: 20px;
+//         border-radius: 4px;
+//         padding: 2px 8px;
+// }
+// :host.card-box-comparation-button .description{
+
+// }
+:host.card-box-comparation-button{
+    img{
+        display: none;
+    }
+    button{
+        background: transparent;
+    }
+    .card{
+        display: flex;
+        width: 159px;
+        height: 159px;
+        padding: 25px 34px 19px 25px;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: 3px dashed #{$brand1};
+        border-radius: 16px;
+        background: transparent;
+        text-align: start;
+    }
+    .create{
+        background: #{$brand2};
+        display: flex;
+        padding: var(--Space-space-025, 2px) 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: #{$textMediumBold};
+        color: #{$N0};
+        width: 80px;
+        height: 30px;
+        border-radius: 4px;
+        padding: 2px 8px;
+
+    }
+    span{
+        font-size: #{$textSmallBold};
+        color: #{$N1000};
+    }
+}

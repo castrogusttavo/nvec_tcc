@@ -24,4 +24,35 @@ export class Tab2Page {
     });
   }
 
+  clearSearchText() {
+    this.searchText = '';
+  }
+  searchText: string = '';
+  originalItems: any[] = [
+    { title: 'Guloseimas', description: 'Doces pros irmãos'},
+    { title: 'Compras do mês', description: 'Não esquecer o leite'},
+    { title: 'Móveis para mudança', description: 'Principalmente cadeiras'}
+  ];
+  itemsToShow: any[] = this.originalItems;
+  
+  onSearchInput(event: any) {
+    this.searchText = event.target.value;
+    this.filterItems();
+  }
+
+  filterItems() {
+    if (this.searchText === '') {
+      this.itemsToShow = this.originalItems;
+      return;
+    }
+  
+    const searchTextLower = this.searchText.toLowerCase();
+    this.itemsToShow = this.originalItems.filter(item => 
+      item.title.toLowerCase().includes(searchTextLower)
+    );
+  }
+  
+  
+  
+
 }
