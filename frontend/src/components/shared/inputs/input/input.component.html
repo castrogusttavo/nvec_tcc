@@ -1,1 +1,8 @@
-<input [type]="type" [placeholder]="placeholder" class="inputNormal"/>
+<input
+class="inputNormal"
+  [type]="type"
+  [placeholder]="placeholder"
+  [name]="name"
+  [(ngModel)]="value"
+  (ngModelChange)="onChange($event)"
+/>
