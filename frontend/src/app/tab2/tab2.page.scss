@@ -89,3 +89,12 @@
     padding-left:  5%;
     padding-top: 5%;
 }
+
+.slide-up-animation {
+    transition: transform 0.3s ease-out;
+    // transform: translateY(100%);
+    transform: translateY(10px);
+}
+  
+
+  
