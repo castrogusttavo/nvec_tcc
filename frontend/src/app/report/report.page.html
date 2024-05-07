@@ -1,42 +1,35 @@
 <ion-content [fullscreen]="true">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
-  <ion-segment color="secondary" value="secondary">
-    <ion-segment-button value="secondary">
+  <div class="content">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab1']">
+  <ion-segment class="header" color="secondary" value="secondary" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="segment">
       <ion-label>Mensal</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="segment">
+    <ion-segment-button value="secondary">
       <ion-label>Semestral</ion-label>
     </ion-segment-button>
   </ion-segment>
-  
-<!-- <div [ngSwitch]="segmenteValue">
-  <div *ngSwitchCase="'segment1'">
-    <img class="graficos"  src="../../assets/png/grafico1.png" alt="">
-    <img class="graficos" src="../../assets/png/grafico2.png" alt="">
-    <img class="graficos" src="../../assets/png/grafico3.png" alt="">
-    <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
+
+  <!-- <div>
+    <button ion-button (click)="toggleDateTime()">Selecionar data</button>
+    <ion-datetime *ngIf="showDateTime" minuteValues="0,15,30,45" dayValues="5,10,15,20,25,30"></ion-datetime>
   </div>
-  <div *ngSwitchCase="'segment1'">
-    <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
-    <img class="graficos"  src="../../assets/png/grafico1.png" alt="">
-    <img class="graficos" src="../../assets/png/grafico2.png" alt="">
-    <img class="graficos" src="../../assets/png/grafico3.png" alt="">
+   -->
+  
+  <div [ngSwitch]="segmentValue" class="todosGrafico">
+    <div *ngSwitchCase="'segment'">
+      <img class="graficos" src="../../assets/png/grafico1.png" alt="">
+      <img class="graficos" src="../../assets/png/grafico2.png" alt="">
+      <img class="graficos" src="../../assets/png/grafico3.png" alt="">
+      <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
+    </div>
+    <div *ngSwitchCase="'secondary'">
+      <img class="graficos" src="../../assets/png/grafico-1.png" alt="">
+      <img class="graficos" src="../../assets/png/grafico-2.png" alt="">
+      <img class="graficos" src="../../assets/png/grafico-3.png" alt="">
+      <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
+    </div>
   </div>
-</div> -->
-
-
-  <img class="graficos"  src="../../assets/png/grafico1.png" alt="">
-  <img class="graficos" src="../../assets/png/grafico2.png" alt="">
-  <img class="graficos" src="../../assets/png/grafico3.png" alt="">
-  <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
-
-<div>
-  
 </div>
-<div>
-  
-</div>
-<div>
-  
-</div>
+
 </ion-content>

@@ -115,8 +115,9 @@ span{
     margin-left: auto;
     margin-right: auto;
     display: flex;
-justify-content: center;
-align-items: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
 }
 
 .valor{
@@ -136,6 +137,119 @@ align-items: center;
     margin-left: auto;
     margin-right: auto;
     display: flex;
-justify-content: center;
-align-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 317px;
+    height: 34px;
 }
+
+ion-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  ion-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.backOne{
+    position: relative;
+    display: flex;
+    padding: 4px var(--Space-32, 32px);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--Space-12, 12px);
+    background: #D6DFFF;
+    color: var(--Color-Neutral-Dark-N400, #454F59);
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25.2px; /* 140% */
+    z-index: 1;
+}
+
+.backTwo{
+    position: absolute; 
+    bottom: -4px; 
+    left: 5px; 
+    width: 73px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--Space-12, 12px);
+    background: #D6DFFF;
+    z-index: 0;
+}
+
+p{
+    display: flex;
+    position: absolute; 
+    left: 15px; 
+    bottom: -15px; 
+    color: var(--Color-Neutral-Dark-N400, #454F59);
+    font-family: Poppins;
+    font-size: 10.8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15.12px; 
+    z-index: 2;
+}
+
+.quant{
+    display: flex;
+    position: absolute; 
+    left: 55px; 
+    top: -15px; 
+    color: var(--Color-Neutral-Dark-N400, #454F59);
+    font-family: Poppins;
+    font-size: 10.8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15.12px; 
+    z-index: 2;
+}
+
+.backTwoTwo{
+    position: absolute; 
+    top: -4px; 
+    right: 5px; 
+    width: 73px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--Space-12, 12px);
+    background: var(--Color-Warning-Y100, #FFF7D6);
+    z-index: 0;
+}
+
+.backOneOne{
+    position: relative;
+    display: flex;
+    padding: 4px var(--Space-32, 32px);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--Space-12, 12px);
+    background: var(--Color-Warning-Y100, #FFF7D6);
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25.2px; /* 140% */
+    z-index: 1;
+}
+
+.cards{
+    padding-bottom: 20px;
+}
+

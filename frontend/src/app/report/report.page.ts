@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.page.html',
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ReportPage implements OnInit {
-  public segmentValue: string = 'segment1'; 
-  constructor() { }
-
+  public segmentValue: string = 'segment'; 
+  
   segmentChanged(event: any){
+    console.log("Segment changed:", event.detail.value);
     this.segmentValue = event.detail.value;
   }
+
 
   ngOnInit() {
     

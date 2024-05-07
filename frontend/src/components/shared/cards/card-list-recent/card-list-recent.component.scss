@@ -1,15 +1,13 @@
 @import "./../../../../global.scss";
 
-:host{
+:host.card-blue{
     .card{
         padding: 16px 0px 16px 16px;
         width: 175px;
         height: 100px;
         border-radius: 16px;
         color: #{$N0};
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        background: #{$brand1};
     }
     img{
         width: 50px;
@@ -19,37 +17,124 @@
     h6{
         font-size: 14px;
         margin: 0px;
-        padding: 0px!important;
         color:#{$N0};
     }
     .div-text{
         line-height: 0px;
     }
-    .div-image{
-        padding-left: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-    }
     .title{
-        width: 75px;
-        padding-top: 5%;
+        min-width: 75px;
         height: 25px;
         background: #{$B0-opacity};
         border-radius: 4px;
         text-align: center;
-        vertical-align: middle;
+        align-content: space-evenly;
+        padding-left: 10px;
+        padding-right:  10px;
     }
-    span{
+    .span{
         font-size: #{$textSmalling};
     }
+    .handleCardPass {
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    }
+    
+    .handleCardPass::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 20px;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #006EFF); 
+    }
+    .handleCardPass-title {
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    }
+    .handleCardPass-title::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 20px; 
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #75B0FF); 
+    }
 }
 
-:host.card-blue ion-card{
-    background: #{$brand1};
-}
-
-:host.card-orange ion-card{
-    background: #{$brand2};
+:host.card-orange{
+    .card{
+        padding: 16px 0px 16px 16px;
+        width: 175px;
+        height: 100px;
+        border-radius: 16px;
+        color: #{$N0};
+        background: #{$brand2};
+    }
+    img{
+        width: 50px;
+        height: 50px;
+        border-radius: 4px;
+    }
+    h6{
+        font-size: 14px;
+        margin: 0px;
+        color:#{$N0};
+    }
+    .div-text{
+        line-height: 0px;
+    }
+    .title{
+        min-width: 75px;
+        height: 25px;
+        background: #{$B0-opacity};
+        border-radius: 4px;
+        text-align: center;
+        align-content: space-evenly;
+        padding-left: 10px;
+        padding-right:  10px;
+    }
+    .span{
+        font-size: #{$textSmalling};
+    }
+    .handleCardPass {
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    }
+    .handleCardPass::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 20px;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #{$brand2}); 
+    }
+    .handleCardPass-title {
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    }
+    .handleCardPass-title::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 20px; 
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #F4CFA5); 
+    }
 }
