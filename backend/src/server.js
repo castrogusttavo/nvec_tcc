@@ -58,14 +58,6 @@ app.get("/", (req, res) => {
   res.send(`Você visitou esta página ${req.session.views} vezes`);
 });
 
-app.get('/api/user-info', (req, res) => {
-  if (req.session.userId) {
-    res.json({ name: 'Nome do usuário' });
-  } else {
-    res.status(401).json({ error: 'Não autenticado' });
-  }
-});
-
 // Configuração do servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
