@@ -15,10 +15,10 @@
     <div class="box">
       <p>Bem-vindo Novamente</p>
       <span>Insira seus dados abaixo e volte a se organizar</span>
-      <form (ngSubmit)="loginUser($event)">
+      <form (ngSubmit)="loginUser($event)" class="forms">
         <div class="input">
-          <ion-input type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required></ion-input>
-          <ion-input type="password" placeholder="Senha" name="password" [(ngModel)]="password" required></ion-input>
+          <app-input class="input-login" type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required></app-input>
+          <app-input class="input-login" type="password" placeholder="Senha" name="password" [(ngModel)]="password" required></app-input>
         </div>
         <app-button-big type="submit">Entrar</app-button-big>
       </form>
