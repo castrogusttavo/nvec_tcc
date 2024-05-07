@@ -18,6 +18,7 @@ create table if not exists tb_categoria (
         'Brinquedos',
         'Casa e Decoração',
         'Calçados',
+        'Comida',
         'Cosméticos',
         'Eletrônicos',
         'Esporte',
@@ -99,6 +100,7 @@ create table if not exists tb_usuario (
 create table if not exists tb_comunidade (
 	id_comunidade int auto_increment not null,
     nm_comunidade varchar(30),
+    sb_comunidade varchar(100),
     id_categoria int not null,
     primary key (id_comunidade),
     index categoria_comunidade (id_categoria asc) visible,

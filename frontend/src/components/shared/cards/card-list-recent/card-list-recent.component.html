@@ -1,14 +1,11 @@
 <ion-card class="card">
   <div class="div-text">
-    <div class="title">
-      <h6>{{title}}</h6>
+    <div class="title handleCardPass-title" style="margin-bottom: 10px;">
+      <h6>{{category}}</h6>
     </div>
-    <p>{{content}}</p>
-    <span>{{description}}</span>
-  </div>
-  <div class="image">
-    <div class="div-image">
-      <img [src]="imagePath" alt="">
+    <div class="handleCardPass">
+      <p style="font-weight: 600;">{{name}}</p>
+      <p class="span">{{description}}</p>
     </div>
   </div>
 </ion-card>

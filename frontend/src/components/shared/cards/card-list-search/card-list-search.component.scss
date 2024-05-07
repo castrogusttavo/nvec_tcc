@@ -17,6 +17,7 @@
     }
     p{
         margin: 0;
+        font-size: 16px;
     }
     .img-text{
         width: 80%;
@@ -51,7 +52,7 @@
         line-height: 22px;
         margin: 0;
     }
-    span{
+    .span{
         color: var(--Color-inverted-inverted400, #B3B9C4);
         font-family: Poppins;
         font-size: 8px;
@@ -76,17 +77,32 @@
         display: flex;
         align-items: center;
     }
+    .handleCardPass {
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 400px;
+    }
+    .handleCardPass::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 20px;
+    }
 }
-:host.card-list-search-create .img {
-    border: 2px dashed #{$brand1};
-    padding: 10px;
-    display: flex;
-}
-:host.card-list-search-create .img-list {
-    width: 20px;
-    height: 20px;
-}
+// :host.card-list-search-create .img {
+//     border: 2px dashed #{$brand1};
+//     padding: 10px;
+//     display: flex;
+// }
+// :host.card-list-search-create .img-list {
+//     width: 20px;
+//     height: 20px;
+// }
 
-:host.card-bg-grey ion-card{
-    background: #{$N200};
-}
+// :host.card-bg-grey ion-card{
+//     background: #{$N200};
+// }

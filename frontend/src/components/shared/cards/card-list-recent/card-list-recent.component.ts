@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardListRecentComponent  implements OnInit {
 
-  @Input() title:string|undefined
-  @Input() content:string|undefined
+  @Input() category:string|undefined
+  @Input() name:string|undefined
   @Input() description:string|undefined
   @Input() imagePath:string|undefined
 
