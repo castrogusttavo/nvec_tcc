@@ -15,12 +15,13 @@
     <div class="box">
       <p>Comece Gratuitamente</p>
       <span>E controle sua vida financeira</span>
-      <form class="input">
-        <app-input type="text" placeholder="Nome" class="inputName">Nome</app-input>
-        <app-input type="email" placeholder="E-mail" class="inputEmail">E-mail</app-input>
-        <app-input type="password" placeholder="Senha" class="inputSenha">Senha </app-input>
+      
+      <form (ngSubmit)="createUser($event)"  class="input">
+        <app-input type="text" placeholder="Nome" class="input-login" name="name" [(ngModel)]="name" required/>
+        <app-input type="email" placeholder="E-mail" class="input-login" name="email" [(ngModel)]="email" required/>
+        <app-input type="password" placeholder="Senha" class="input-login" name="password" [(ngModel)]="password" required/>
 
-        <app-button-big [routerLink]="['/pre-page']">Cadastrar</app-button-big>
+        <app-button-big type="submit">Cadastrar</app-button-big>
       </form>
 
       <div class="line">

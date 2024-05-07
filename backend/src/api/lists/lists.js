@@ -18,6 +18,19 @@ router.post("/lists", async (req, res) => {
   }
 });
 
+router.get('/recentLists', async (req, res) => {
+  try {
+    const recentLists = await db_query(
+      "SELECT * FROM tb_lista ORDER BY dt_criacao DESC LIMIT 2"
+    );
+
+    res.status(200).json(recentLists);
+  } catch(err) {
+    console.error("Erro ao buscar listas recentes", err);
+    res.status(500).send("Erro ao buscar listas recentes");
+  }
+});
+
 router.get("/lists", async (req, res) => {
   try {
     const lists = await db_query("SELECT * FROM tb_lista");
@@ -25,24 +38,6 @@ router.get("/lists", async (req, res) => {
   } catch (err) {
     console.error("Erro ao buscar listas", err);
     res.sendStatus(500).send("Erro ao buscar listas");
-  }
-});
-
-router.get("/lists/:id", async (req, res) => {
-  try {
-    const listId = req.params.id;
-
-    const lists = await db_query("SELECT * FROM tb_lista WHERE id_lista = ?", [listId]);
-
-    if (lists.length === 0) {
-      res.status(404).send("Lista não encontrada");
-      return;
-    }
-
-    res.json(lists[0]);
-  } catch (err) {
-    console.error("Erro ao buscar lista", err);
-    res.sendStatus(500).send("Erro ao buscar lista");
   }
 });
 

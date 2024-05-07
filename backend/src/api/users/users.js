@@ -148,6 +148,9 @@ router.post("/login", async (req, res) => {
     // Criar uma sessão ao fazer login com sucesso
     req.session.userId = user[0].id_usuario;
     req.session.userEmail = user[0].email_usuario;
+    req.session.userName = user[0].nm_usuario;
+
+    console.log("Sessão criada:", req.session); 
 
     res.status(200).json({ message: "Login bem-sucedido" });
   } catch (err) {
@@ -161,32 +164,36 @@ const rounds = 10;
 
 router.post("/register", async (req, res) => {
   try {
-    const { nm_usuario, email_usuario, senha_usuario } = req.body;
+    const { name, email, password } = req.body;
 
-    const emailCheck = await db_query("SELECT * FROM tb_usuario WHERE email_usuario = ?", [email_usuario]);
+    const emailCheck = await db_query("SELECT * FROM tb_usuario WHERE email_usuario = ?", [email]);
 
     if (emailCheck.length > 0) {
       res.status(409).json({ error: "Email já cadastrado" });
       return;
     }
 
-    const hashedPassword = await bcrypt.hash(senha_usuario, rounds);
+    const hashedPassword = await bcrypt.hash(password, rounds);
 
     const result = await db_query(
       "INSERT INTO tb_usuario (nm_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)",
-      [nm_usuario, email_usuario, hashedPassword]
+      [name, email, hashedPassword]
     );
 
     // Criar uma sessão ao registrar um usuário com sucesso
     req.session.userId = result.insertId;
-    req.session.userEmail = email_usuario;
+    req.session.userEmail = email;
+    req.session.userName = name;
+
+    console.log("Sessão criada:", req.session); // Adicione esta linha para verificar se a sessão é configurada
 
     res.status(201).json({ id_usuario: result.insertId, message: "Registro bem-sucedido" });
   } catch (err) {
     console.error("Erro ao registrar usuário:", err);
     res.status(500).send("Erro ao registrar um novo usuário");
   }
-})
+});
+
 
 // LogOut
 router.post("/logout", (req, res) => {
@@ -200,57 +207,62 @@ router.post("/logout", (req, res) => {
 });
 
 // Alter Password
-router.patch("/users/change-password", async (req, res) => {
+router.patch("/change-password", async (req, res) => {
   try {
-    const { userId, currentPassword, newPassword } = req.body;
+    const { email, currentPassword, newPassword } = req.body;
 
-    // Verifique se o usuário está autenticado
-    if (!userId) {
-      return res.status(401).json({ error: "Usuário não autenticado" });
-    } 
+    if (!email || !currentPassword || !newPassword) {
+      return res.status(400).json({ error: "Dados insuficientes para alteração de senha." });
+    }
 
-    // Recupere o usuário do banco de dados
-    const user = await db_query(
-      "SELECT * FROM tb_usuario WHERE id_usuario = ?",
-      [userId]
-    );
+    if (newPassword.length < 8) {
+      return res.status(400).json({ error: "A nova senha deve ter pelo menos 8 caracteres." });
+    }
+
+    // Recuperar o usuário pelo email
+    const user = await db_query("SELECT * FROM tb_usuario WHERE email_usuario = ?", [email]);
 
     if (user.length === 0) {
-      return res.status(404).json({ error: "Usuário não encontrado" });
+      return res.status(404).json({ error: "Usuário não encontrado." });
     }
 
-    // Verifique se a senha atual está correta
-    const passwordMatch = await bcrypt.compare(
-      currentPassword,
-      user[0].senha_usuario
-    );
+    // Comparar a senha atual com o hash armazenado
+    const passwordMatch = await bcrypt.compare(currentPassword, user[0].senha_usuario);
 
     if (!passwordMatch) {
-      return res.status(401).json({ error: "Senha atual incorreta" });
+      return res.status(401).json({ error: "Senha atual incorreta." });
     }
 
-    // Verifique se a nova senha é válida
-    if (newPassword.length < 8) {
-      return res.status(400).json({ error: "A nova senha deve ter pelo menos 8 caracteres" });
-    }
-
-    if (await bcrypt.compare(newPassword, user[0].senha_usuario)) {
-      return res.status(400).json({ error: "A nova senha não pode ser a mesma que a antiga" });
-    }
-
-    // Criptografe a nova senha
+    // Criptografar a nova senha
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
-    // Atualize a senha no banco de dados
+    // Atualizar a senha no banco de dados
     await db_query(
-      "UPDATE tb_usuario SET senha_usuario = ? WHERE id_usuario = ?",
-      [hashedNewPassword, userId]
+      "UPDATE tb_usuario SET senha_usuario = ? WHERE email_usuario = ?",
+      [hashedNewPassword, email]
     );
 
-    res.status(204).send("Sucesso ao atualizar a nova senha");
+    res.status(200).json({ message: "Senha alterada com sucesso." });
   } catch (err) {
     console.error("Erro ao alterar a senha:", err);
-    res.status(500).json({ error: "Erro ao alterar a senha" });
+    res.status(500).json({ error: "Erro ao alterar a senha." });
+  }
+});
+
+router.get("/latest-user", async (req, res) => {
+  try {
+    // Consulta para obter o usuário mais recente pelo campo 'id_usuario'
+    const result = await db_query("SELECT nm_usuario FROM tb_usuario ORDER BY id_usuario DESC LIMIT 1");
+
+    if (result.length > 0) {
+      const userName = result[0].nm_usuario; // Nome do usuário mais recente
+      res.status(200).json({ userName }); // Retornar o nome
+    } else {
+      res.status(404).json({ error: "Nenhum usuário encontrado" });
+    }
+  } catch (err) {
+    console.error("Erro ao buscar o usuário mais recente:", err);
+    res.status(500).json({ error: "Erro ao buscar o usuário mais recente" });
   }
 });
 

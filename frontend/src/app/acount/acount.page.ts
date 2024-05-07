@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-acount',
@@ -8,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 export class AcountPage implements OnInit {
   email: string = '';
   name: string = '';
-  constructor() { }
 
-  ngOnInit() {
+  constructor(private http: HttpClient, private router: Router) {}
+
+  ngOnInit(): void {
   }
 
+  async logout(): Promise<void> {
+    try {
+      await this.http.post('http://localhost:3001/api/logout', {}).toPromise();
+
+      console.log('Logout bem-sucedido');
+
+      this.router.navigate(['/login-account']);
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+
+      this.router.navigate(['/login-account']);
+    }
+  }
 }
