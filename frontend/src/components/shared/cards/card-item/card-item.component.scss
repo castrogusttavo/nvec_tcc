@@ -45,6 +45,13 @@
         display: flex;
         justify-content: space-between;
     }
+    ion-checkbox p{
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 60px;
+    }
 }
 
 :host.card-item-comparation ion-card{

@@ -15,7 +15,7 @@
     <div class="box">
       <p>Bem-vindo Novamente</p>
       <span>Insira seus dados abaixo e volte a se organizar</span>
-      <form (ngSubmit)="loginUser($event)">
+      <form (ngSubmit)="loginUser($event)" class="forms">
         <div class="input">
           <app-input type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required />
           <app-input type="password" placeholder="Senha" name="password" [(ngModel)]="password" required />

@@ -10,33 +10,33 @@
       <img src="./../../assets/svg/character.svg" alt="" />
     </div>
   </div>
+
   <div class="content">
     <div class="lists">
       <div class="recent-lists">
         <h6>Listas recentes</h6>
-        <div class="see-more">
-          <span><a href="">Ver todas</a></span>
+        <div class="see-more" > 
+          <span [routerLink]="['/tabs/tab2']">Ver todas</span>
           <img src="./../../assets/svg/arrow_forward_home.svg" alt="" />
         </div>
       </div>
 
-      <div class="lists-created" scrollX="true">
-        <app-card-list class="card-blue"></app-card-list>
-        <app-card-list class="card-orange"></app-card-list>
-        <app-card-list class="card-green"></app-card-list>
-        <app-card-list class="card-red"></app-card-list>
-        
+      <div class="lists-created scroll-horizontal">
+        <app-card-list title="Lanche da Escola" category="Mercado" price="R$200/R$235"  date="03/12/2023"  class="card-blue"></app-card-list>
+        <app-card-list title="Feirinha" category="Mercado" price="R$70/R$93" date="30/11/2023" class="card-orange"></app-card-list>
+        <app-card-list title="Material Escola" category="Papelaria" price="R$50/R$103" date="30/03/2024" class="card-green"></app-card-list>
+        <app-card-list title="Jogos de Vídeo Game" category="Jogos" price="R$153/R$190" date="04/04/2024" class="card-red"></app-card-list>
       </div>
     </div>
 
-    <div class="card-banners">
-      <app-card-banner [routerLink]="['/plans-screen']"
+    <div class="card-banners scroll-horizontal">
+      <app-card-banner
         class="card-banner-yellow"
         titulo="Conheça os nossos Planos"
         conteudo="E tenha acesso a todas as nossas funcionalidades, e o melhor sem limite."
         [imagePath]="'./../../assets/svg/heart.svg'"
       ></app-card-banner>
-      <app-card-banner [routerLink]="['/plans-screen']"
+      <app-card-banner
         class="card-banner-blue"
         titulo="Oferta Especial do plano anual!"
         conteudo="Garanta até 20% de desconto em qualquer planos."
@@ -48,7 +48,7 @@
       <app-card-icon-home></app-card-icon-home>
     </div>
 
-    <div class="card-communities" [routerLink]="['/tabs/tab4']">
+    <div class="card-communities scroll-horizontal">
       <app-card-home-community
         title="Mercado"
         content="Atacadista"
@@ -57,12 +57,10 @@
         title="Escola"
         content="Volta às aulas"
       ></app-card-home-community>
+      <app-card-home-community
+        title="Trabalho"
+        content="Ferramentas"
+      ></app-card-home-community>
     </div>
   </div>
 </ion-content>
-
-
-
-
-
-

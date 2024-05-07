@@ -2,7 +2,7 @@
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
   <div class="content">
     <div class="card-list-all">
-      <app-card-list-all limite="1.000,00" nomeLista="Guloseimas" categoriaLista="Mercado" gasto="240,00" dataLista="18/04/2024">
+      <app-card-list-all limite="1.000,00" nomeLista="Guloseimas" categoriaLista="Comida" gasto="240,00" dataLista="18/04/2024">
       </app-card-list-all>
       <button class="btn-edit" (click)="setOpen(1, true)">
         <img src="../../../../assets/svg/edit.svg" alt="">
@@ -30,7 +30,7 @@
       <img src="./../../assets/svg/filter.svg" alt="">
     </div>
 
-    <div class="itens-div scroll-horizontal">
+    <div class="itens-div">
       <app-card-box action="Criar" description="Adicionar um novo item" (click)="setOpen(2, true)"></app-card-box>
 
       <!-- Segundo modal -->
@@ -47,12 +47,24 @@
       </ion-modal>
       <!-- Fim do segundo modal -->
 
-      <app-card-item [routerLink]="['/update-item']" price="2,40" itemName="Oreo" description="Biscoito"
+      <app-card-item price="2,40" itemName="Oreo" description="Biscoito"
         [imagePath]="'https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/lahhlxg8nk6goxrcbcpz'"></app-card-item>
       <app-card-item price="5,23" itemName="Negresco" description="Biscoito"
         [imagePath]="'https://images.tcdn.com.br/img/img_prod/645811/biscoito_negresco_e_chocolate_branco_103gr_nestle_5231_2_a6b9cf73dcb34bef1f9746d77306d90c.jpg'"></app-card-item>
       <app-card-item price="1,67" itemName="Trakinas" description="Biscoito"
         [imagePath]="'https://drogariacristal.com/media/catalog/product/cache/dc75f304252411b8c602e1e96d99390d/b/i/biscoito_recheado_trakinas_morango_126g.jpg'"></app-card-item>
+      <app-card-item price="0,23" itemName="7 Belo" description="Bala"
+        [imagePath]="'https://jadoces.com.br/wp-content/uploads/2022/08/produto-7belo-bala-framboesa-un.jpg.webp'"></app-card-item>
+      <app-card-item price="0,23" itemName="Fini Dentadura" description="Bala"
+        [imagePath]="'https://armazemsaovito.fbitsstatic.net/img/p/balas-de-gelatina-dentaduras-fini-500g-161936/359903.jpg?w=256&h=256&v=no-change&qs=ignore'"></app-card-item>
+      <app-card-item price="0,23" itemName="Deliket" description="Bala"
+        [imagePath]="'https://images.rappi.com.br/products/2096837847-1581347939359.jpg?d=136x136&e=webp'"></app-card-item>
+      <app-card-item price="0,23" itemName="7 Belo" description="Bala"
+        [imagePath]="'https://jadoces.com.br/wp-content/uploads/2022/08/produto-7belo-bala-framboesa-un.jpg.webp'"></app-card-item>
+      <app-card-item price="0,23" itemName="7 Belo" description="Bala"
+        [imagePath]="'https://jadoces.com.br/wp-content/uploads/2022/08/produto-7belo-bala-framboesa-un.jpg.webp'"></app-card-item>
+      <app-card-item price="0,23" itemName="7 Belo" description="Bala"
+        [imagePath]="'https://jadoces.com.br/wp-content/uploads/2022/08/produto-7belo-bala-framboesa-un.jpg.webp'"></app-card-item>
       <app-card-item price="0,23" itemName="7 Belo" description="Bala"
         [imagePath]="'https://jadoces.com.br/wp-content/uploads/2022/08/produto-7belo-bala-framboesa-un.jpg.webp'"></app-card-item>
     </div>

@@ -39,10 +39,6 @@ const routes: Routes = [
     loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
   },
   {
-    path: 'home-screen',
-    loadChildren: () => import('./home-screen/home-screen.module').then( m => m.HomeScreenPageModule)
-  },
-  {
     path: 'tab4',
     loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
   },
