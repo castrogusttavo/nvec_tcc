@@ -13,6 +13,7 @@
  
     }
     .chekbox-item{
+        margin-inline-end: 0;
         color: #{$title};
         font-weight: 700;
         --size: 15px;
@@ -45,16 +46,23 @@
         display: flex;
         justify-content: space-between;
     }
-    ion-checkbox p{
+    .checkbox p{
         position: relative;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 60px;
     }
+    .chekbox-item {
+        display: flex;
+        align-items: center;
+      }
+
 }
 
-:host.card-item-comparation ion-card{
-    border: 3px dashed #{$brand1};
-    border-radius: 16px;
+:host(.checkbox-label-placement-end) ion-checkbox .label-text-wrapper {
+    -webkit-margin-start: 0px;
+    margin-inline-start: 0;
+    -webkit-margin-end: 0;
+    margin-inline-end: 0;
 }
