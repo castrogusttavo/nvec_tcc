@@ -16,11 +16,11 @@
           <!-- Dropdown medida -->
           <ion-item class="item">
             <input placeholder="Medida" (click)="toggleDropdown()" [value]="inputTextValue" (input)="formatCurrency($event)" >
-            
+
             <ion-select [value]="selectedOption" style="position: absolute; margin-left: 140px;" (ionChange)="onSelectChange($event)">
               <ion-select-option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</ion-select-option>
             </ion-select>
-          </ion-item>          
+          </ion-item>
           <!-- Dropdown medida -->
 
           <!-- Input Quantidade -->
@@ -33,7 +33,7 @@
         </div>
       </ng-container>
     </form>
-  </div>  
+  </div>
 
   <div class="buttonBig">
     <app-button-big>{{button}}</app-button-big>
@@ -47,7 +47,7 @@
     <div *ngIf="deleteButtonText" class="excluir">
       <p>{{ deleteButtonText }}</p>
     </div>
-  </div>  
+  </div>
   <!-- Botão Bolean cancelar e Excluir -->
 </div>
 

@@ -8,6 +8,7 @@ import { AcountPageRoutingModule } from './acount-routing.module';
 
 import { AcountPage } from './acount.page';
 import { SharedModule } from 'src/components/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/components/shared/shared.module';
     FormsModule,
     IonicModule,
     AcountPageRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   declarations: [AcountPage]
 })

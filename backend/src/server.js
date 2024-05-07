@@ -25,7 +25,7 @@ app.use(
   session({
     secret: 'VjFjd2VGSXhXWGROVldoc1VrVktZVlpzV2xwbFJsWlpZMFZPYTFJd05VcFZNV2hyVmpGS1ZrNVZWVDA9IwSwq2ITFKuKJTEBIyqbp1IeIxgMIycmI2kjoSWfJycMZSMCLGSWq05IpSMAI2ulIzcTF1MeAIMJIQN9',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { 
       secure: false,
       maxAge: 7200000,
@@ -56,6 +56,14 @@ app.get("/", (req, res) => {
     req.session.views = 1;
   }
   res.send(`Você visitou esta página ${req.session.views} vezes`);
+});
+
+app.get('/api/user-info', (req, res) => {
+  if (req.session.userId) {
+    res.json({ name: 'Nome do usuário' });
+  } else {
+    res.status(401).json({ error: 'Não autenticado' });
+  }
 });
 
 // Configuração do servidor

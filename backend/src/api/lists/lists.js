@@ -28,6 +28,19 @@ router.get("/lists", async (req, res) => {
   }
 });
 
+router.get('/recentLists', async (req, res) => {
+  try {
+    const recentLists = await db_query(
+      "SELECT * FROM tb_lista ORDER BY dt_criacao DESC LIMIT 2"
+    );
+
+    res.status(200).json(recentLists);
+  } catch(err) {
+    console.error("Erro ao buscar listas recentes", err);
+    res.status(500).send("Erro ao buscar listas recentes");
+  }
+});
+
 router.get("/lists/:id", async (req, res) => {
   try {
     const listId = req.params.id;
