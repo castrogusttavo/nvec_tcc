@@ -1,7 +1,7 @@
 @import "./../../global.scss";
 
 :host{
-    
+
     .header{
         box-shadow: none;
         display: flex;
@@ -12,7 +12,7 @@
         align-items: center;
     }
     p{
-        font-size: 12px; 
+        font-size: 12px;
     }
     .content{
         padding: 16px 24px!important;
@@ -36,7 +36,7 @@
     .title-filter{
         display: flex;
         justify-content: space-between;
-    } 
+    }
     p {
         font-size: 12px!important;
         line-height: 16px;
@@ -54,7 +54,7 @@
         font-size: 12px;
         font-style: normal;
         font-weight: 600;
-        line-height: 16px; 
+        line-height: 16px;
     }
 
     .input-button {
