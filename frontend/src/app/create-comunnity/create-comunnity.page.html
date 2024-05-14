@@ -5,17 +5,22 @@
     <img  src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <div class="inputs">  
-    <input placeholder="Nome" class="inputText" >
-    <app-example class="typeahead"></app-example>
-    <div>
-      <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
-      <div class="counter"></div>
+  <form (ngSubmit)="createCommunity($event)" >
+    <div class="inputs">  
+      <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
+      <input name="category" [(ngModel)]="category" placeholder="Categoria" class="inputText" >
+      <!-- <app-example [(ngModel)]="category" class="typeahead"></app-example> -->
+      <div>
+        <textarea name="about" [(ngModel)]="about"  placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
+        <div class="counter"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="buttonBig">
-    <app-button-big>Criar Comunidade</app-button-big>
-  </div>
+    <div class="buttonBig">
+      <app-button-big>Criar Comunidade</app-button-big>
+    </div>
+  </form>
+
+
   
 </ion-content>
