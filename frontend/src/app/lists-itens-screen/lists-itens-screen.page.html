@@ -39,8 +39,28 @@
           <ion-content [fullscreen]="true" scrollY="false">
             <img class="forward-modal" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" (click)="setOpen(2, false)">
             <form>
-              <app-modal-item button="Criar Item">
-              </app-modal-item>
+              <!-- <app-modal-item
+                button="Criar Item"
+                [onSubmitFunction]="criarItem"
+                nameNome="name"
+                valueNome="name">
+              </app-modal-item> -->
+
+              <!-- <app-modal-item
+              button="Criar Item"
+              [onSubmitFunction]="criarItem"
+              nameNome="name"
+              nameNg="name"
+              valueNome="value"
+              valueNg="value">
+            </app-modal-item> -->
+
+              <!-- <app-modal-item
+              button="Criar Item"
+              [onSubmitFunction]="criarItem"
+              [nameNg]="name"
+              [valueNg]="value">
+            </app-modal-item> -->
             </form>
           </ion-content>
         </ng-template>

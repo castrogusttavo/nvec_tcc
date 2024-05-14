@@ -312,12 +312,7 @@ create table if not exists tb_usuario (
     nm_usuario varchar(100) not null,
     senha_usuario varchar(60) not null,
     email_usuario varchar(200) unique not null,
-    id_assinatura int not null default 1,
-    primary key (id_usuario),
-    index assinatura(id_assinatura asc) visible,
-    constraint assinatura
-		foreign key (id_assinatura)
-		references tb_assinatura(id_assinatura)) default character set utf8;
+    primary key (id_usuario)) default character set utf8;
         
 create table if not exists tb_comunidade (
 	id_comunidade int auto_increment not null,
