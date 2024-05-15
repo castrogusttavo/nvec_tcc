@@ -1,12 +1,12 @@
 use db_nvec;
 insert into tb_categoria(ds_categoria) values
+        ('Alimentos'),
         ('Animais'),
 		('Artigos'),
 		('Automóveis'),
         ('Brinquedos'),
         ('Casa e Decoração'),
         ('Calçados'),
-        ('Comida'),
         ('Cosméticos'),
         ('Eletrônicos'),
         ('Esporte'),
