@@ -5,15 +5,15 @@ const { db_query } = require("../../frameworks/db/db");
 // Rota POST para criar uma nova comunidade
 router.post("/communities", async (req, res) => {
   try {
-    const { nm_comunidade, id_categoria } = req.body;
+    const { nm_comunidade, id_categoria, sb_comunidade } = req.body;
 
-    if (!nm_comunidade || !id_categoria) {
+    if (!nm_comunidade || !id_categoria  || !sb_comunidade) {
       return res.status(400).json({ error: "Campos obrigatórios ausentes." });
     }
 
     const result = await db_query(
-      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria) VALUES (?, ?)",
-      [nm_comunidade, id_categoria]
+      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria, sb_comunidade) VALUES (?, ?, ?)",
+      [nm_comunidade, id_categoria, sb_comunidade]
     );
 
     res.status(201).json({ id_comunidade: result.insertId });
@@ -80,8 +80,8 @@ router.put("/communities/:id", async (req, res) => {
     }
 
     const result = await db_query(
-      "UPDATE tb_comunidade SET nm_comunidade = ?, id_categoria = ? WHERE id_comunidade = ?",
-      [nm_comunidade, id_categoria, comunidadeId]
+      "UPDATE tb_comunidade SET nm_comunidade = ?, id_categoria = ?, sb_comunidade=? WHERE id_comunidade = ?",
+      [nm_comunidade, id_categoria, sb_comunidade, comunidadeId]
     );
 
     if (result.affectedRows === 0) {

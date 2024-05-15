@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-comunnity',
@@ -8,14 +9,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateComunnityPage implements OnInit {
 
-  // Dropdown medida
+  name:string = "";
+  category:string = "";
+  about:string = "";
+
   inputTextValue: string | undefined;
-  dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
-  selectedOption: string | undefined = 'Kg';
-  dropdownVisible: boolean = false;
-  toggleDropdown() {
-    this.dropdownVisible = !this.dropdownVisible;
-  }
+
+  // dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
+  // selectedOption: string | undefined = 'Kg';
+  // dropdownVisible: boolean = false;
+  // toggleDropdown() {
+  //   this.dropdownVisible = !this.dropdownVisible;
+  // }
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     
@@ -37,27 +44,25 @@ export class CreateComunnityPage implements OnInit {
     }
   }
 
-  // FormGroup para validação dos campos de texto
-  textForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-    // Inicialização do FormGroup para validação dos campos de texto
-    this.textForm = this.formBuilder.group({
-      valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      valor: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      medida: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      quantidade: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-    });
-  }
+  async createCommunity(event: { preventDefault: () => void; }) {
+    event.preventDefault();
 
-  // Formata o valor do campo de texto para o formato de moeda
-  formatCurrency(event: any) {
-    let input = event.target;
-    let value = input.value.replace(/\D/g, ''); 
-    value = value.replace(/^0+/, ''); 
-    value = value.replace(/(\d)(\d{2})$/, '$1,$2');
-    value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
-    input.value = value;
+    console.log('Name:', this.name);
+    console.log('Categoria:', this.category);
+    console.log('Sobre:', this.about);
+
+    try {
+      const response: any = await this.http.post(
+        'http://localhost:3001/api/communities',
+        { nm_comunidade: this.name, id_categoria: this.category, sb_comunidade:this.about }
+      ).toPromise();
+
+      console.log('Comunidade criada com sucesso:', response);
+      this.router.navigate(['/tabs/tab4']);
+    } catch (err) {
+      console.error('Erro ao criar comunidade:', err);
+    }
   }
 
 }
