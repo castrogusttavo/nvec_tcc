@@ -237,5 +237,3 @@ create table if not exists tb_endereco_lista (
 	constraint lista_id_end
 		foreign key(id_lista) references tb_lista(id_lista)
 ) default character set utf8;
-
-use db_nvec;

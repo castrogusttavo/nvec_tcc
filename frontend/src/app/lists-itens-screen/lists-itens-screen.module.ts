@@ -9,6 +9,8 @@ import { ListsItensScreenPageRoutingModule } from './lists-itens-screen-routing.
 
 import { ListsItensScreenPage } from './lists-itens-screen.page';
 import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveFormsModule
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveForms
     IonicModule,
     ListsItensScreenPageRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [ListsItensScreenPage]
 })

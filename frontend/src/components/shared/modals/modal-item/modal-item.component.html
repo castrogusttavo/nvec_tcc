@@ -1,15 +1,16 @@
 <div> <!-- Conteúdo da modal -->
   <div class="modal-content">
-    <form>
+    <form (ngSubmit)="onSubmitFunction && onSubmitFunction()">
       <ng-container>
         <div  class="inputs">
           <!-- Input Nome -->
           <div>
-            <input placeholder="Nome"
+            <!-- <input placeholder="Nome"
                     class="inputText"
                     (input)="updateCounter($event)"
-                    maxlength="50">
-            <div class="counter"></div>
+                    maxlength="50"
+                    [name]="nameNome" [(ngModel)]="name">
+            <div class="counter"></div> -->
           </div>
           <!-- Input Nome -->
 
@@ -23,21 +24,24 @@
           </ion-item>
           <!-- Dropdown medida -->
 
-          <!-- Input Quantidade -->
+          <!-- Input Quantidade                                             POR ENQUANTO NEM EXISTE NÉ-->
           <input placeholder="Quantidade">
           <!-- Input Quantidade -->
 
           <!-- Input Valor -->
-          <input placeholder="valor" class="inputText" (input)="formatCurrency($event)">
+          <!-- <input placeholder="valor" class="inputText" (input)="formatCurrency($event)" [name]="valueNome" [(ngModel)]="value"> -->
           <!-- Input Valor -->
         </div>
       </ng-container>
+
+      <div class="buttonBig">
+        <app-button-big>{{button}}</app-button-big>
+      </div>
+
     </form>
   </div>
 
-  <div class="buttonBig">
-    <app-button-big>{{button}}</app-button-big>
-  </div>
+
 
   <!-- Botão Bolean cancelar e Excluir -->
   <div class="bolean">
