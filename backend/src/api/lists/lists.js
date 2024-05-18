@@ -4,11 +4,11 @@ const { db_query } = require("../../frameworks/db/db");
 
 router.post("/lists", async (req, res) => {
   try {
-    const { nm_lista, dt_criacao, ds_lista, id_categoria, id_usuario } = req.body;
+    const { nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria, id_usuario } = req.body;
 
     const result = await db_query(
-      "INSERT INTO tb_lista (nm_lista, dt_criacao, ds_lista, id_categoria, id_usuario) VALUES (?, ?, ?, ?, ?)",
-      [nm_lista, dt_criacao, ds_lista, id_categoria, id_usuario]
+      "INSERT INTO tb_lista (nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria, id_usuario) VALUES (?, ?, ?, ?, ?)",
+      [nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria, id_usuario]
     );
 
     res.status(201).json({ id_lista: result.insertId });
@@ -62,12 +62,13 @@ router.get("/lists/:id", async (req, res) => {
 router.put("/lists/:id", async (req, res) => {
   try {
     const listId = req.params.id;
-    const { nm_lista, ds_lista, id_categoria, id_usuario } = req.body;
+    const { nm_lista, rd_lista, ds_lista, id_categoria, id_usuario } = req.body;
 
     if (
       nm_lista === undefined ||
       ds_lista === undefined ||
       id_categoria === undefined ||
+      rd_lista === undefined ||
       id_usuario === undefined
     ) {
       res.status(400).send("Um ou mais valores estão ausentes");
@@ -75,8 +76,8 @@ router.put("/lists/:id", async (req, res) => {
     }
 
     await db_query(
-      "UPDATE tb_lista SET nm_lista = ?, ds_lista = ?, id_categoria = ?, id_usuario = ? WHERE id_lista = ?",
-      [nm_lista, ds_lista, id_categoria, id_usuario, listId]
+      "UPDATE tb_lista SET nm_lista = ?, ds_lista = ?, id_categoria = ?, rd_lista=?, id_usuario = ? WHERE id_lista = ?",
+      [nm_lista, ds_lista, id_categoria,rd_lista, id_usuario, listId]
     );
 
     res.status(200).json({ message: "Lista atualizada com sucesso." });
