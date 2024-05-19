@@ -5,7 +5,7 @@ const dbConfig = {
     user: 'root',
     password: 'root',
     database: 'db_nvec',
-    port: '3306' 
+    // port: '3306' 
     // port: '3307' 
 };
 

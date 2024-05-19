@@ -10,6 +10,16 @@ export class ModalItemComponent  implements OnInit {
   @Input() button: string = '';
   @Input() cancelButtonText: string;
   @Input() deleteButtonText: string;
+  @Input() onSubmitFunction: Function | undefined;
+  //Coloquei como indefinido
+
+  @Input() nameNome: string = '';
+  @Input() nameNg: string = '';
+
+  @Input() valueNome: string = '';
+  @Input() valueNg: string = '';
+
+
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
 
   onCancelClick() {
