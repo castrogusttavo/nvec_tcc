@@ -27,10 +27,9 @@ export class Tab4Page implements OnInit {
 
   getCommunities():Observable<any[]>{
     return this.http.get<any[]>(this.apiCommunity);
-  }  
+  }
 
   ngOnInit(): void {
-    this.getUserName();
     this.getCommunities().subscribe(communities=>{
       this.communities=communities;
     })
@@ -51,34 +50,4 @@ export class Tab4Page implements OnInit {
       item.title.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
-  getUserName(): void {
-    this.http.get<{ userName: string }>('http://localhost:3001/api/latest-user')
-      .pipe(
-        catchError(error => {
-          console.error('Erro ao buscar o nome do usuário:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.userName = data.userName;
-        }
-      );
-  }
-
-  loginUser(): void {
-    this.http.post<{ userName: string }>('http://localhost:3001/api/login', { email: this.email })
-      .pipe(
-        catchError(error => {
-          console.error('Erro ao fazer login:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.userName = data.userName;
-        }
-      );
-  }
-
 }
