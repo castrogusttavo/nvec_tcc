@@ -19,7 +19,6 @@ const incomeRouter = require("./api/income/income");
 const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists");
 const usersRouter = require("./api/users/users")(secretKey);
-const variableExpensesRouter = require("./api/variableExpenses/variableExpenses");
 const categoriesRouter = require("./api/categories/categories");
 const app = express();
 

@@ -221,7 +221,7 @@ module.exports = function (secretKey) {
 
       // Gerar um token JWT para o usuário recém-cadastrado
       const token = jwt.sign(
-        { userId: result.insertId, userEmail: email },
+        { userId: result.insertId, userEmail: email, userName: name },
         secretKey,
         { expiresIn: "3h" }
       );
