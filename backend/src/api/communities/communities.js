@@ -13,7 +13,7 @@ router.post("/communities", async (req, res) => {
     }
 
     const result = await db_query(
-      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria, sb_comunidade, end_comunidade) VALUES (?, ?, ?)",
+      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria, sb_comunidade, end_comunidade) VALUES (?, ?, ?, ?)",
       [nm_comunidade, id_categoria, sb_comunidade, end_comunidade]
     );
 
@@ -81,7 +81,7 @@ router.put("/communities/:id", async (req, res) => {
     }
 
     const result = await db_query(
-      "UPDATE tb_comunidade SET nm_comunidade = ?, id_categoria = ?, sb_comunidade=?, end_comunidade WHERE id_comunidade = ?",
+      "UPDATE tb_comunidade SET nm_comunidade = ?, id_categoria = ?, sb_comunidade=?, end_comunidade=? WHERE id_comunidade = ?",
       [nm_comunidade, id_categoria, sb_comunidade, end_comunidade, comunidadeId]
     );
 

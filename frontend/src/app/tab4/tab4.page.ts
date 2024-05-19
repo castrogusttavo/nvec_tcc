@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-tab4',
@@ -20,6 +20,22 @@ export class Tab4Page implements OnInit {
   email: string = '';
   userName: string | undefined;
 
+  constructor(private http: HttpClient) {}
+
+  communities!:any[];
+  private apiCommunity = "http://localhost:3001/api/communities";
+
+  getCommunities():Observable<any[]>{
+    return this.http.get<any[]>(this.apiCommunity);
+  }  
+
+  ngOnInit(): void {
+    this.getUserName();
+    this.getCommunities().subscribe(communities=>{
+      this.communities=communities;
+    })
+  }
+
   onSearchInput(event: any) {
     this.searchText = event.target.value;
     this.filterItems();
@@ -35,12 +51,6 @@ export class Tab4Page implements OnInit {
       item.title.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.getUserName();
-  }
-
   getUserName(): void {
     this.http.get<{ userName: string }>('http://localhost:3001/api/latest-user')
       .pipe(
