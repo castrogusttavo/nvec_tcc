@@ -30,6 +30,7 @@ import { ModalItemComponent } from './modals/modal-item/modal-item.component';
 import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component';
 import { ExampleComponent } from './modals/example/example.component';
 import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
+import { ToogleThemeComponent } from './toogle-theme/toogle-theme.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
     CardListAllComponent,
     ExampleComponent,
     TypeaheadComponent,
-    ModalItemComponent
+    ModalItemComponent,
+    ToogleThemeComponent
   ],
   imports: [
     IonicModule,
@@ -108,7 +110,8 @@ import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
     CardListAllComponent,
     ExampleComponent,
     TypeaheadComponent,
-    ModalItemComponent
+    ModalItemComponent,
+    ToogleThemeComponent
   ]
 })
 export class SharedModule { }

@@ -23,9 +23,14 @@ export class LoginAccountPage implements OnInit {
     console.log('Senha:', this.password);
 
     try {
-      const response: any = await this.http.post('http://localhost:3001/api/login', { email: this.email, senha: this.password }).toPromise();
+      const response: any = await this.http.post(
+        'http://localhost:3001/api/login',
+        { email: this.email, senha: this.password }
+      ).toPromise();
 
       console.log('Login bem-sucedido: ', response);
+
+      localStorage.setItem('token', response.token);
       this.router.navigate(['/tabs/tab1']);
     } catch (err) {
       console.error('Erro ao fazer login: ', err);

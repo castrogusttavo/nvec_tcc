@@ -30,6 +30,8 @@ export class CreateAccountPage implements OnInit {
       ).toPromise();
 
       console.log('Conta criada com sucesso:', response);
+
+      localStorage.setItem('token', response.token);
       this.router.navigate(['/pre-page']);
     } catch (err) {
       console.error('Erro ao criar conta:', err);

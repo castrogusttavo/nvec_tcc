@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { Observable, of, throwError } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-tab4',
@@ -20,22 +18,6 @@ export class Tab4Page implements OnInit {
   email: string = '';
   userName: string | undefined;
 
-  constructor(private http: HttpClient) {}
-
-  communities!:any[];
-  private apiCommunity = "http://localhost:3001/api/communities";
-
-  getCommunities():Observable<any[]>{
-    return this.http.get<any[]>(this.apiCommunity);
-  }  
-
-  ngOnInit(): void {
-    this.getUserName();
-    this.getCommunities().subscribe(communities=>{
-      this.communities=communities;
-    })
-  }
-
   onSearchInput(event: any) {
     this.searchText = event.target.value;
     this.filterItems();
@@ -51,34 +33,19 @@ export class Tab4Page implements OnInit {
       item.title.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
+  constructor(private jwtHelper: JwtHelperService) {}
+
+  ngOnInit(): void {
+    this.getUserName();
+  }
+
   getUserName(): void {
-    this.http.get<{ userName: string }>('http://localhost:3001/api/latest-user')
-      .pipe(
-        catchError(error => {
-          console.error('Erro ao buscar o nome do usuário:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.userName = data.userName;
-        }
-      );
+    const token = localStorage.getItem('token');
+    console.log('Token:', token); // Adicione esta linha para verificar o token no console
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      console.log('Decoded Token:', decodedToken); // Adicione esta linha para verificar o token decodificado no console
+      this.userName = decodedToken.userName; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
+    }
   }
-
-  loginUser(): void {
-    this.http.post<{ userName: string }>('http://localhost:3001/api/login', { email: this.email })
-      .pipe(
-        catchError(error => {
-          console.error('Erro ao fazer login:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.userName = data.userName;
-        }
-      );
-  }
-
 }

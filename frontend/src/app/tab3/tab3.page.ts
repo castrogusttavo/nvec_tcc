@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -50,8 +49,8 @@ export class Tab3Page {
   // Formata o valor do campo de texto para o formato de moeda
   formatCurrency(event: any) {
     let input = event.target;
-    let value = input.value.replace(/\D/g, ''); 
-    value = value.replace(/^0+/, ''); 
+    let value = input.value.replace(/\D/g, '');
+    value = value.replace(/^0+/, '');
     value = value.replace(/(\d)(\d{2})$/, '$1,$2');
     value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
     input.value = value;

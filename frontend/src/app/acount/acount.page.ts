@@ -18,16 +18,18 @@ export class AcountPage implements OnInit {
 
   async logout(): Promise<void> {
     try {
+      // Chama a rota de logout no servidor, se necessário
       await this.http.post('http://localhost:3001/api/logout', {}).toPromise();
 
       console.log('Logout bem-sucedido');
-
-      this.router.navigate(['/login-account']);
     } catch (error) {
       console.error('Erro ao fazer logout:', error);
+    } finally {
+      // Remover o token do localStorage
+      localStorage.removeItem('token');
 
+      // Redirecionar para a página de login
       this.router.navigate(['/login-account']);
     }
   }
-
 }
