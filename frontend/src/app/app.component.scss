@@ -1,0 +1,84 @@
+.dark {
+  /* === DARK MODE === */
+  // Colors Scheme for Dark Mode (Based on Light Mode)
+
+  // Brand
+  $brand1-dark: #1e90ff; // Adjusted blue shade for dark mode
+  $brand2-dark: #ffa500; // Adjusted orange shade for dark mode
+
+  // Neutral Light
+  $N0-dark: #161a1d;
+  $N100-dark: #1d2125;
+  $N200-dark: #22272b;
+  $N300-dark: #2c333a;
+  $N400-dark: #454f59;
+  $N500-dark: #596773;
+  $N600-dark: #738496;
+  $N700-dark: #8c9bab;
+  $N800-dark: #9fadbc;
+  $N900-dark: #b6c2cf;
+  $N1000-dark: #c7d1db;
+
+  // Info
+  $B0-dark: #081e45; // Adjusted blue shade for dark mode
+  $B100-dark: #082b4c; // Adjusted blue shade for dark mode
+  $B200-dark: #09326c; // Adjusted blue shade for dark mode
+  $B300-dark: #0c66e4; // Adjusted blue shade for dark mode
+  $B400-dark: #0e74ff; // Adjusted blue shade for dark mode
+  $B500-info-dark: #006eef; // Adjusted blue shade for dark mode
+  $B600-dark: #0c66e4; // Adjusted blue shade for dark mode
+  $B700-dark: #0055cc; // Adjusted blue shade for dark mode
+  $B800-dark: #09326c; // Adjusted blue shade for dark mode
+  $B900-dark: #092957; // Adjusted blue shade for dark mode
+
+  // Success
+  $G0-dark: #162e16; // Adjusted green shade for dark mode
+  $G100-dark: #1a3c1a; // Adjusted green shade for dark mode
+  $G200-dark: #0e5a0e; // Adjusted green shade for dark mode
+  $G300-dark: #0c6c0c; // Adjusted green shade for dark mode
+  $G400-success-dark: #27ae60; // Adjusted green shade for dark mode
+  $G500-dark: #22a06b; // Adjusted green shade for dark mode
+  $G600-dark: #1f845a; // Adjusted green shade for dark mode
+  $G700-dark: #216e4e; // Adjusted green shade for dark mode
+  $G800-dark: #164b35; // Adjusted green shade for dark mode
+  $G900-dark: #143c2b; // Adjusted green shade for dark mode
+
+  // Warning
+  $Y0-dark: #1e1c0d; // Adjusted yellow shade for dark mode
+  $Y100-dark: #352c04; // Adjusted yellow shade for dark mode
+  $Y200-dark: #4d3b00; // Adjusted yellow shade for dark mode
+  $Y300-warning-dark: #cf9f02; // Adjusted yellow shade for dark mode
+  $Y400-dark: #e2b203; // Adjusted yellow shade for dark mode
+  $Y500-dark: #b38600; // Adjusted yellow shade for dark mode
+  $Y600-dark: #949f00; // Adjusted yellow shade for dark mode
+  $Y700-dark: #7f5f01; // Adjusted yellow shade for dark mode
+  $Y800-dark: #533f04; // Adjusted yellow shade for dark mode
+  $Y900-dark: #3f3102; // Adjusted yellow shade for dark mode
+
+  // Danger
+  $R0-dark: #2d1111; // Adjusted red shade for dark mode
+  $R100-dark: #430404; // Adjusted red shade for dark mode
+  $R200-dark: #5a1212; // Adjusted red shade for dark mode
+  $R300-dark: #8e3636; // Adjusted red shade for dark mode
+  $R400-dark: #b13b3b; // Adjusted red shade for dark mode
+  $R500-danger-dark: #cd5151; // Adjusted red shade for dark mode
+  $R600-dark: #ae4747; // Adjusted red shade for dark mode
+  $R700-dark: #943d3d; // Adjusted red shade for dark mode
+  $R800-dark: #502525; // Adjusted red shade for dark mode
+  $R900-dark: #421f1f; // Adjusted red shade for dark mode
+
+  // Muted
+  $mutued-dark: #8c9bab;
+  $title-dark: #c7d1db;
+  $bg-dark: #161a1d;
+
+  // Effects
+  $dropShadow-dark: 0px 4px 15px 0px rgba(9, 44, 76, 0.4);
+  $innerShadow-dark: 0px 4px 15px 0px rgba(9, 44, 76, 0.4) inset;
+  $glassEffect-dark: blur(10px);
+
+  body.dark {
+    --ion-background-color: $bg-dark;
+    --ion-text-color: $title-dark;
+  }
+}
