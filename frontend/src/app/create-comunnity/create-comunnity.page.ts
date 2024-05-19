@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-comunnity',
@@ -9,11 +10,17 @@ import { Router } from '@angular/router';
 })
 export class CreateComunnityPage implements OnInit {
 
-  name:string = "";
-  category:string = "";
-  about:string = "";
-
+  name!:string;
+  category!:any[];
+  about!:string;
+  address!:string;
   inputTextValue: string | undefined;
+  categoriaSelecionada!:string;
+  private apiCategories = 'http://localhost:3001/api/categories'
+
+  getCategories():Observable<any[]>{
+    return this.http.get<any[]>(this.apiCategories);
+  }
 
   // dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
   // selectedOption: string | undefined = 'Kg';
@@ -25,7 +32,9 @@ export class CreateComunnityPage implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    
+    this.getCategories().subscribe(categories => {
+      this.category = categories;
+    });
   }
 
   // Função para formatar o contador de caracteres
@@ -51,11 +60,12 @@ export class CreateComunnityPage implements OnInit {
     console.log('Name:', this.name);
     console.log('Categoria:', this.category);
     console.log('Sobre:', this.about);
+    console.log('address:', this.address);
 
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/communities',
-        { nm_comunidade: this.name, id_categoria: this.category, sb_comunidade:this.about }
+        { nm_comunidade: this.name, id_categoria: this.categoriaSelecionada, sb_comunidade:this.about, end_comunidade:this.address }
       ).toPromise();
 
       console.log('Comunidade criada com sucesso:', response);

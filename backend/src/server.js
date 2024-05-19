@@ -20,6 +20,7 @@ const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists");
 const usersRouter = require("./api/users/users")(secretKey);
 const variableExpensesRouter = require("./api/variableExpenses/variableExpenses");
+const categoriesRouter = require("./api/categories/categories");
 const app = express();
 
 app.use(cors({
@@ -36,7 +37,7 @@ app.use('/api', incomeRouter);
 app.use('/api', itemsRouter);
 app.use('/api', listsRouter);
 app.use('/api', usersRouter);
-app.use('/api', variableExpensesRouter);
+app.use('/api', categoriesRouter);
 
 app.get("/", (req, res) => {
   if (req.session.views) {
