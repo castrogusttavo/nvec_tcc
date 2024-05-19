@@ -8,8 +8,17 @@
   <form (ngSubmit)="createCommunity($event)" >
     <div class="inputs">  
       <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
-      <input name="category" [(ngModel)]="category" placeholder="Categoria" class="inputText" >
-      <!-- <app-example [(ngModel)]="category" class="typeahead"></app-example> -->
+      <!-- <input name="category" [(ngModel)]="category" placeholder="Categoria" class="inputText" > -->
+      
+      <ion-item>
+        <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
+          <ion-select-option *ngFor="let category of category" [value]="category.id_categoria">
+            {{ category.ds_categoria }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <input name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText" >
       <div>
         <textarea name="about" [(ngModel)]="about"  placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
         <div class="counter"></div>

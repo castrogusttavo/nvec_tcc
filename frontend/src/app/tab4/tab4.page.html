@@ -14,6 +14,14 @@
       class="card-list-search-create"
       [imagePath]="item.imagePath"
       [title]="item.title"></app-card-list-search>
+
+    </div>
+
+    <div >
+      <app-card-list-search
+      *ngFor="let community of communities" name="community"
+      [title]="community.nm_comunidade"></app-card-list-search>
+
     </div>
   </div>
 </ion-content>
