@@ -31,7 +31,6 @@ export class Tab4Page implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserName();
     this.getCommunities().subscribe(communities=>{
       this.communities=communities;
     })
