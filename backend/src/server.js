@@ -7,7 +7,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./frameworks/db/db");
-const session = require("express-session")
+const jwt = require('jsonwebtoken');
+
+const secretKey = "VjFjd2VGSXhXWGROVldoc1VrVktZVlpzV2xwbFJsWlpZMFZPYTFJd05VcFZNV2hyVmpGS1ZrNVZWVDA9IwSwq2ITFKuKJTEBIyqbp1IeIxgMIycmI2kjoSWfJycMZSMCLGSWq05IpSMAI2ulIzcTF1MeAIMJIQN9";
 
 // Importando os arquivos de rota das APIs
 const addressesRouter = require("./api/addresses/addresses");
@@ -16,22 +18,9 @@ const fixedExpensesRouter = require("./api/fixedExpenses/fixedExpenses");
 const incomeRouter = require("./api/income/income");
 const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists");
-const usersRouter = require("./api/users/users");
+const usersRouter = require("./api/users/users")(secretKey);
 const variableExpensesRouter = require("./api/variableExpenses/variableExpenses");
-
 const app = express();
-
-app.use(
-  session({
-    secret: 'VjFjd2VGSXhXWGROVldoc1VrVktZVlpzV2xwbFJsWlpZMFZPYTFJd05VcFZNV2hyVmpGS1ZrNVZWVDA9IwSwq2ITFKuKJTEBIyqbp1IeIxgMIycmI2kjoSWfJycMZSMCLGSWq05IpSMAI2ulIzcTF1MeAIMJIQN9',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { 
-      secure: false,
-      maxAge: 7200000,
-    },
-  })
-);
 
 app.use(cors({
   origin: 'http://localhost:8100'
