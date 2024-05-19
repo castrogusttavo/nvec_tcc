@@ -9,17 +9,14 @@ import { throwError } from 'rxjs';
   templateUrl: './new-password.page.html',
   styleUrls: ['./new-password.page.scss'],
 })
-
 export class NewPasswordPage implements OnInit {
-  userEmail: string = '';
   currentPassword: string = '';
   newPassword: string = '';
   confirmNewPassword: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async changePassword(event: { preventDefault: () => void; }) {
     event.preventDefault();
@@ -33,21 +30,23 @@ export class NewPasswordPage implements OnInit {
       console.error('Password must be at least 8 characters long');
       return;
     }
+
     try {
+      const token = localStorage.getItem('token');
       const response = await this.http.patch('http://localhost:3001/api/change-password', {
-        email: this.userEmail,
         currentPassword: this.currentPassword,
         newPassword: this.newPassword
-      }
-    ).pipe(
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      }).pipe(
         catchError(err => {
           console.error(err);
           return throwError(err);
         })
       ).toPromise();
 
-    console.log("Senha alterada com sucesso: ", response);
-    this.router.navigate(['/acount']);
+      console.log("Senha alterada com sucesso: ", response);
+      this.router.navigate(['/acount']);
     } catch (error) {
       console.error("Erro ao alterar senha: ", error);
     }

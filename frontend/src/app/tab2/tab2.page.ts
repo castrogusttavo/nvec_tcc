@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { of, throwError } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-tab2',
@@ -21,7 +19,7 @@ export class Tab2Page {
   // FormGroup para validação dos campos de texto
   textForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private jwtHelper: JwtHelperService) {
     // Inicialização do FormGroup para validação dos campos de texto
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
@@ -63,33 +61,12 @@ export class Tab2Page {
   }
 
   getUserName(): void {
-    this.http.get<{ userName: string }>('http://localhost:3001/api/latest-user')
-      .pipe(
-        catchError(error => {
-          console.error('Erro ao buscar o nome do usuário:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.userName = data.userName;
-        }
-      );
+    const token = localStorage.getItem('token');
+    console.log('Token:', token); // Adicione esta linha para verificar o token no console
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      console.log('Decoded Token:', decodedToken); // Adicione esta linha para verificar o token decodificado no console
+      this.userName = decodedToken.userName; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
+    }
   }
-
-  loginUser(): void {
-    this.http.post<{ userName: string }>('http://localhost:3001/api/login', { email: this.email })
-      .pipe(
-        catchError(error => {
-          console.error('Erro ao fazer login:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.userName = data.userName;
-        }
-      );
-  }
-
 }

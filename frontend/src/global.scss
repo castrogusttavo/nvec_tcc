@@ -31,6 +31,7 @@
     font-family: 'Poppins', sans-serif;
     box-shadow: none;
     --ripple-color: transparent !important; //Depois colocar em todos
+    scroll-behavior: smooth;
 }
 
 //Spacing
@@ -142,7 +143,7 @@ $headeH6:20px;
 
 $textSmalling: 8px;
 $textSmaller: 12px;
-$textSmallerBold: 12px; 
+$textSmallerBold: 12px;
 $textSmall: 14px;
 $textSmallBold: 14px;
 $textNormal: 16px;
@@ -156,8 +157,6 @@ $textExtraLargeBold: 24px;
 $textBig: 35px;
 $textBigBold: 35px;
 
-//
-
 //EFECTS
 $dropShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40);
 $innerShadow: 0px 4px 15px 0px rgba(9, 44, 76, 0.40) inset;
@@ -168,3 +167,77 @@ $glassEffect: blur(10px);
     width: 100%;
     overflow-x: auto;
 }
+
+
+/* === DARK MODE === */
+// Colors Scheme for Dark Mode (Based on Light Mode)
+
+// Brand
+$brand1-dark: #1E90FF; // Adjusted blue shade for dark mode
+$brand2-dark: #FFA500; // Adjusted orange shade for dark mode
+
+// Neutral Light
+$N0-dark: #161A1D;
+$N100-dark: #1D2125;
+$N200-dark: #22272B;
+$N300-dark: #2C333A;
+$N400-dark: #454F59;
+$N500-dark: #596773;
+$N600-dark: #738496;
+$N700-dark: #8C9BAB;
+$N800-dark: #9FADBC;
+$N900-dark: #B6C2CF;
+$N1000-dark: #C7D1DB;
+
+// Info
+$B0-dark: #081E45; // Adjusted blue shade for dark mode
+$B100-dark: #082B4C; // Adjusted blue shade for dark mode
+$B200-dark: #09326C; // Adjusted blue shade for dark mode
+$B300-dark: #0C66E4; // Adjusted blue shade for dark mode
+$B400-dark: #0E74FF; // Adjusted blue shade for dark mode
+$B500-info-dark: #006EEF; // Adjusted blue shade for dark mode
+$B600-dark: #0C66E4; // Adjusted blue shade for dark mode
+$B700-dark: #0055CC; // Adjusted blue shade for dark mode
+$B800-dark: #09326C; // Adjusted blue shade for dark mode
+$B900-dark: #092957; // Adjusted blue shade for dark mode
+
+// Success
+$G0-dark: #162E16; // Adjusted green shade for dark mode
+$G100-dark: #1A3C1A; // Adjusted green shade for dark mode
+$G200-dark: #0E5A0E; // Adjusted green shade for dark mode
+$G300-dark: #0C6C0C; // Adjusted green shade for dark mode
+$G400-success-dark: #27AE60; // Adjusted green shade for dark mode
+$G500-dark: #22A06B; // Adjusted green shade for dark mode
+$G600-dark: #1F845A; // Adjusted green shade for dark mode
+$G700-dark: #216E4E; // Adjusted green shade for dark mode
+$G800-dark: #164B35; // Adjusted green shade for dark mode
+$G900-dark: #143C2B; // Adjusted green shade for dark mode
+
+// Warning
+$Y0-dark: #1E1C0D; // Adjusted yellow shade for dark mode
+$Y100-dark: #352C04; // Adjusted yellow shade for dark mode
+$Y200-dark: #4D3B00; // Adjusted yellow shade for dark mode
+$Y300-warning-dark: #CF9F02; // Adjusted yellow shade for dark mode
+$Y400-dark: #E2B203; // Adjusted yellow shade for dark mode
+$Y500-dark: #B38600; // Adjusted yellow shade for dark mode
+$Y600-dark: #949F00; // Adjusted yellow shade for dark mode
+$Y700-dark: #7F5F01; // Adjusted yellow shade for dark mode
+$Y800-dark: #533F04; // Adjusted yellow shade for dark mode
+$Y900-dark: #3F3102; // Adjusted yellow shade for dark mode
+
+// Danger
+$R0-dark: #2D1111; // Adjusted red shade for dark mode
+$R100-dark: #430404; // Adjusted red shade for dark mode
+$R200-dark: #5A1212; // Adjusted red shade for dark mode
+$R300-dark: #8E3636; // Adjusted red shade for dark mode
+$R400-dark: #B13B3B; // Adjusted red shade for dark mode
+$R500-danger-dark: #CD5151; // Adjusted red shade for dark mode
+$R600-dark: #AE4747; // Adjusted red shade for dark mode
+$R700-dark: #943D3D; // Adjusted red shade for dark mode
+$R800-dark: #502525; // Adjusted red shade for dark mode
+$R900-dark: #421F1F; // Adjusted red shade for dark mode
+
+// Muted
+$mutued-dark: #8C9BAB;
+$title-dark: #C7D1DB;
+$bg-dark: #161A1D;
