@@ -1,0 +1,42 @@
+:host{
+    .content{
+        padding: 16px 24px ;
+  
+    }
+    .card-list-all{
+        margin-top: 35px;
+    }
+    .title-filter{
+        display: flex;
+        justify-content: space-between;
+        margin: 7% 0 5% 0
+    }
+    .itens-div{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 100px);
+        justify-content: space-between;
+        overflow: auto;
+        height: 400px;
+        width: 100%;
+        overflow-x: clip;
+    }
+    .forward{
+        padding-left:  5%;
+        padding-top: 5%;
+    }
+  }
+  .forward-modal{
+    padding-left:  5%;
+    padding-top: 5%;
+  }
+  .btn-edit{
+    margin-right: 24px;
+    margin-top: -53px;
+    position: absolute;
+    right: 0;
+    width:53px;
+    height:53px;
+    padding: 13px;
+    border-radius: 50%;
+  }
+  
