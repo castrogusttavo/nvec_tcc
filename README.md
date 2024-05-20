@@ -44,7 +44,15 @@ https://github.com/castrogusttavo/nvec_tcc
         ```
 
 ## Uso
-    ionic serve
+   2. Na pasta frontend:
+        ```bash
+        ionic serve
+        ```
+   3. Na pasta backend:
+        ```bash
+        npm run dev
+        ```
+    
 
 ## Contribuição
 
