@@ -58,11 +58,6 @@ __Sofia Rocha__ (Front-end) <br/>
 
 Este projeto é licenciado sob a Licença [MIT](./LICENSE).
 
-## Colaboradores
-
-- [Nome do Colaborador 1](link-para-perfil-no-github)
-- [Nome do Colaborador 2](link-para-perfil-no-github)
-
 ## Linguagens Utilizadas
  - Front-end
    - Ionic

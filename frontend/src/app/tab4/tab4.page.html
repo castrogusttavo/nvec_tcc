@@ -4,7 +4,7 @@
 
     <div class="input-button">
       <input type="text" placeholder="Pesquisa..." (input)="onSearchInput($event)">
-      <button type="button">Buscar</button>
+      <button type="button" (click)="clearSearchText()">Buscar</button>
     </div>
 
     <div class="communities" [ngClass]="{'slide-up-animation': searchText}">

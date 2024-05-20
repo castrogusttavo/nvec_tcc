@@ -4,6 +4,23 @@
     .content{
         padding: 16px 24px ;
     }
+
+    .search{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  ::placeholder {
+      color: var(--Color-Neutral-Dark-N800, #9FADBC);
+      font-family: Poppins;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 16px;
+  }
+
     .input-button {
         display: flex;
         align-items: center;

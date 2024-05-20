@@ -36,6 +36,10 @@ export class Tab4Page implements OnInit {
     })
   }
 
+  clearSearchText() {
+    this.searchText = '';
+  }
+
   onSearchInput(event: any) {
     const searchText = event.target.value.replace(/\s/g, ''); // Remover espaços
     this.searchText = searchText;
