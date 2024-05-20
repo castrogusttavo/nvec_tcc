@@ -40,7 +40,8 @@ export class Tab2Page {
   itemsToShow: any[] = this.originalItems;
 
   onSearchInput(event: any) {
-    this.searchText = event.target.value;
+    const searchText = event.target.value.replace(/\s/g, ''); // Remover espaços
+    this.searchText = searchText;
     this.filterItems();
   }
 

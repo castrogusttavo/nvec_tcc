@@ -31,6 +31,8 @@
     font-family: 'Poppins', sans-serif;
     box-shadow: none;
     --ripple-color: transparent !important; //Depois colocar em todos
+    --ion-tab-bar-color: #B3B9C4 !important;
+    --ion-color-step-600: #B3B9C4 !important;
     scroll-behavior: smooth;
 }
 
@@ -168,6 +170,30 @@ $glassEffect: blur(10px);
     overflow-x: auto;
 }
 
+// SCROL BAR
+::-webkit-scrollbar {
+  display: none;
+  background: #F1F2FA;
+  border: 0;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+  background: #F1F2FA;
+  border: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  display: none;
+  background: #F1F2FA;
+  border: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  display: none;
+  background: #F1F2FA;
+  border: 0;
+}
 
 /* === DARK MODE === */
 // Colors Scheme for Dark Mode (Based on Light Mode)

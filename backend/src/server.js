@@ -3,13 +3,15 @@
     - res = response -> resposta do servidor
 */
 
+require('dotenv').config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./frameworks/db/db");
 const jwt = require('jsonwebtoken');
 
-const secretKey = "VjFjd2VGSXhXWGROVldoc1VrVktZVlpzV2xwbFJsWlpZMFZPYTFJd05VcFZNV2hyVmpGS1ZrNVZWVDA9IwSwq2ITFKuKJTEBIyqbp1IeIxgMIycmI2kjoSWfJycMZSMCLGSWq05IpSMAI2ulIzcTF1MeAIMJIQN9";
+const secretKey = process.env.SECRET_KEY;
 
 // Importando os arquivos de rota das APIs
 const addressesRouter = require("./api/addresses/addresses");
