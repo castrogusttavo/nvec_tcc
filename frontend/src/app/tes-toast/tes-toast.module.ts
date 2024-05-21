@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { TesToastPageRoutingModule } from './tes-toast-routing.module';
 
 import { TesToastPage } from './tes-toast.page';
+import { SharedModule } from 'src/components/shared/shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TesToastPageRoutingModule
+    TesToastPageRoutingModule,
+    SharedModule
   ],
   declarations: [TesToastPage]
 })
