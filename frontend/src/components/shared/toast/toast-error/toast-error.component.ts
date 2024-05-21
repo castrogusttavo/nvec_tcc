@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-toast-error',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toast-error.component.scss'],
 })
 export class ToastErrorComponent  implements OnInit {
+  @Input() titulo: string | undefined; // titulo modificavel
+  @Input() conteudo: string | undefined;  // conteudo modificavel
 
   constructor() { }
 
