@@ -142,6 +142,9 @@ const routes: Routes = [
     path: 'comunnity-lists-item',
     loadChildren: () => import('./comunnity-lists-item/comunnity-lists-item.module').then( m => m.ComunnityListsItemPageModule)
   },
+  { path: 'community-lists-sobre',
+    loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
+  },
 
 
 ];

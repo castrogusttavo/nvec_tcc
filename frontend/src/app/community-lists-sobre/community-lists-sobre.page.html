@@ -1,0 +1,116 @@
+<ion-content [fullscreen]="true">
+  <div class="content">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab1']">
+  <ion-segment class="header" color="secondary" value="secondary" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="segment">
+      <ion-label>Listas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="secondary">
+      <ion-label>Sobre</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- <div>
+    <button ion-button (click)="toggleDateTime()">Selecionar data</button>
+    <ion-datetime *ngIf="showDateTime" minuteValues="0,15,30,45" dayValues="5,10,15,20,25,30"></ion-datetime>
+  </div>
+   -->
+  
+  <div [ngSwitch]="segmentValue" class="todosGrafico">
+    <div *ngSwitchCase="'segment'">
+
+      <div class="list-user">
+        <div class="list">
+          <h3 class="yellow-text">Esta é a sua lista</h3>
+          <div class="user-price">
+            <div class="name-address">
+              <h5 class="black-text">Nome do usuário</h5>
+              <span class="grey-text">Local: local da lista</span>
+              <!-- <h4 class="yellow-text">{{userName}}</h4><br>
+              <span class="yellow-text">{{listAddress}}</span> -->
+            </div>
+  
+            <div class="total-list">
+              <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
+              <!-- <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
+  
+              <button class="btn-lists btn-list">
+                <img src="../../assets/svg/arrow_forward.svg" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+     </div>
+  
+     <div class="compare-lists">
+      <button class="btn-lists" style="color: #ffffff">Comparar Listas</button>
+
+        <div class="lists-component">
+
+          <div class="lists-users">
+            <div class="name-address">
+              <h4 class="black-text">Nome</h4>
+              <span class="grey-text span">Local: local</span>
+              <!-- <h4>{{userName}}</h4><br>
+              <span>{{listAddress}}</span> -->
+            </div>
+  
+            <div class="total-list">
+              <h3  class="yellow-text">R$ <b class="yellow-text">300,34</b></h3>
+              <!-- <h3  class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
+  
+              <button class="btn-lists btn-list">
+                <img src="../../assets/svg/arrow_forward.svg" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+ 
+    <div *ngSwitchCase="'secondary'">
+
+      <h2>Atacadista{{communityName}}</h2>
+
+      <div class="category">
+        <h6><b  class="title">Categoria:</b></h6>
+        <h6 style="text-transform: uppercase; margin: 0px;">Mercado{{category}}</h6>
+      </div>
+
+      <div class="divider">
+
+      </div>
+
+      <div class="description">
+        <h6><b  class="title">Descrição:</b></h6>
+        <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora quia sint eveniet doloremque accusamus debitis, nam quidem quos placeat quod ullam fugit, vero dolorem voluptate vel nihil molestias velit? Dignissimos?{{description}}</h6>
+      </div>
+      
+      <div class=" participantes">
+        <h5 class="title">Participantes</h5>
+
+        <div class="guests">
+
+          <div class="creator">
+            <h5>Gabrielly {{creatorName}}</h5>
+            <div style="width: 100px; height: 40px; display: flex; align-items: center; justify-content: center; color: #ffffff;" class="btn-lists">Criador</div>
+          </div>
+
+          <div class="other-guest" style="margin-top: 20px;">
+            <h5>outroMembro{{usersName}}</h5>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+</ion-content>
