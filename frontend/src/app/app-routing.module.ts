@@ -133,9 +133,14 @@ const routes: Routes = [
   {
     path: 'update-item',
     loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
-  },  {
+  },
+  {
     path: 'tes-toast',
     loadChildren: () => import('./tes-toast/tes-toast.module').then( m => m.TesToastPageModule)
+  },
+  {
+    path: 'comunnity-lists-item',
+    loadChildren: () => import('./comunnity-lists-item/comunnity-lists-item.module').then( m => m.ComunnityListsItemPageModule)
   },
 
 
