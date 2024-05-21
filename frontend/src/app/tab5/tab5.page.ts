@@ -9,20 +9,33 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class Tab5Page implements OnInit {
   email: string = '';
   userName: string | undefined;
+  private previousToken: string | null = null;
 
   constructor(private jwtHelper: JwtHelperService) {}
 
   ngOnInit(): void {
     this.getUserName();
+    this.checkTokenChanges();
   }
 
   getUserName(): void {
     const token = localStorage.getItem('token');
-    console.log('Token:', token); // Adicione esta linha para verificar o token no console
+    console.log('Token:', token);
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken); // Adicione esta linha para verificar o token decodificado no console
-      this.userName = decodedToken.userName; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
+      console.log('Decoded Token:', decodedToken);
+      this.userName = decodedToken.userName;
     }
+  }
+
+  checkTokenChanges(): void {
+    setInterval(() => {
+      const currentToken = localStorage.getItem('token');
+
+      if (currentToken !== this.previousToken) {
+        this.previousToken = currentToken;
+        this.getUserName();
+      }
+    }, 1000);
   }
 }

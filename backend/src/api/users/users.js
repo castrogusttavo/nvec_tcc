@@ -149,9 +149,9 @@ module.exports = function (secretKey) {
   });
 
   // LogOut
-  router.post("/logout", (req, res) => {
+  router.post('/logout', (req, res) => {
     // Limpar o cookie do token JWT
-    res.clearCookie("token").send("Sessão encerrada com sucesso");
+    res.clearCookie('token').json({ message: 'Sessão encerrada com sucesso' });
   });
 
   // Alter Password
