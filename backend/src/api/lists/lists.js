@@ -1,155 +1,125 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
+const router = express.Router();
 const { db_query } = require("../../frameworks/db/db");
 
-const router = express.Router();
+router.post("/lists", async (req, res) => {
+  try {
+    const { nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria, id_usuario } = req.body;
 
-module.exports = function (secretKey) {
-  function verifyToken(req, res, next) {
-    const { authorization } = req.headers;
+    const result = await db_query(
+      "INSERT INTO tb_lista (nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria, id_usuario) VALUES (?, ?, ?, ?, ?)",
+      [nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria, id_usuario]
+    );
 
-    if (!authorization || !authorization.startsWith("Bearer ")) {
-      return res
-        .status(401)
-        .json({ error: "Token de autorização não fornecido." });
-    }
-
-    const token = authorization.split(" ")[1];
-
-    jwt.verify(token, secretKey, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ error: "Token inválido ou expirado." });
-      }
-      req.userId = decoded.userId;
-      req.userEmail = decoded.userEmail;
-      req.userName = decoded.userName;
-      next();
-    });
+    res.status(201).json({ id_lista: result.insertId });
+  } catch (err) {
+    console.error("Erro ao inserir lista", err);
+    res.sendStatus(500).send("Erro ao inserir lista");
   }
+});
 
-  // Criar nova lista
-  router.post("/lists", verifyToken, async (req, res) => {
-    try {
-      const {
-        nome_lista,
-        descricao_lista,
-        rd_lista,
-        valor_gasto,
-        id_categoria,
-      } = req.body;
-      const userId = req.userId;
-      const dataAtual = new Date();
+router.get("/lists", async (req, res) => {
+  try {
+    const lists = await db_query("SELECT * FROM tb_lista");
+    res.json(lists);
+  } catch (err) {
+    console.error("Erro ao buscar listas", err);
+    res.sendStatus(500).send("Erro ao buscar listas");
+  }
+});
 
-      const result = await db_query(
-        "INSERT INTO tb_lista (nm_lista, dt_criacao, ds_lista, rd_lista, vl_gasto, id_categoria, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        [
-          nome_lista,
-          dataAtual,
-          descricao_lista,
-          rd_lista,
-          valor_gasto,
-          id_categoria,
-          userId,
-        ]
-      );
+router.get('/recentLists', async (req, res) => {
+  try {
+    const recentLists = await db_query(
+      "SELECT * FROM tb_lista ORDER BY dt_criacao DESC LIMIT 2"
+    );
 
-      res.status(201).json({ id_lista: result.insertId });
-    } catch (err) {
-      console.error("Erro ao criar lista:", err);
-      res.status(500).send("Erro ao criar uma nova lista");
+    res.status(200).json(recentLists);
+  } catch(err) {
+    console.error("Erro ao buscar listas recentes", err);
+    res.status(500).send("Erro ao buscar listas recentes");
+  }
+});
+
+router.get("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
+
+    const lists = await db_query("SELECT * FROM tb_lista WHERE id_lista = ?", [listId]);
+
+    if (lists.length === 0) {
+      res.status(404).send("Lista não encontrada");
+      return;
     }
-  });
 
-  // Buscar todas as listas do usuário
-  router.get("/lists", verifyToken, async (req, res) => {
-    try {
-      const userId = req.userId;
+    res.json(lists[0]);
+  } catch (err) {
+    console.error("Erro ao buscar lista", err);
+    res.sendStatus(500).send("Erro ao buscar lista");
+  }
+});
 
-      const lists = await db_query(
-        "SELECT * FROM tb_lista WHERE id_usuario = ?",
-        [userId]
-      );
+router.put("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
+    const { nm_lista, rd_lista, ds_lista, id_categoria, id_usuario } = req.body;
 
-      res.json(lists);
-    } catch (err) {
-      console.error("Erro ao buscar listas:", err);
-      res.status(500).send("Erro ao buscar listas");
+    if (
+      nm_lista === undefined ||
+      ds_lista === undefined ||
+      id_categoria === undefined ||
+      rd_lista === undefined ||
+      id_usuario === undefined
+    ) {
+      res.status(400).send("Um ou mais valores estão ausentes");
+      return;
     }
-  });
 
-  // Buscar lista específica pelo ID
-  router.get("/lists/:id", verifyToken, async (req, res) => {
-    try {
-      const listId = req.params.id;
-      const userId = req.userId;
+    await db_query(
+      "UPDATE tb_lista SET nm_lista = ?, ds_lista = ?, id_categoria = ?, rd_lista=?, id_usuario = ? WHERE id_lista = ?",
+      [nm_lista, ds_lista, id_categoria,rd_lista, id_usuario, listId]
+    );
 
-      const list = await db_query(
-        "SELECT * FROM tb_lista WHERE id_lista = ? AND id_usuario = ?",
-        [listId, userId]
-      );
+    res.status(200).json({ message: "Lista atualizada com sucesso." });
+  } catch (err) {
+    console.error("Erro ao atualizar lista:", err);
+    res.status(500).send("Erro ao atualizar lista");
+  }
+});
 
-      if (list.length === 0) {
-        res.status(404).send("Lista não encontrada");
-        return;
-      }
+router.patch("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
+    const updateFields = req.body;
 
-      res.json(list[0]);
-    } catch (err) {
-      console.error("Erro ao buscar lista:", err);
-      res.status(500).send("Erro ao buscar lista");
-    }
-  });
+    const keys = Object.keys(updateFields);
+    const values = Object.values(updateFields);
 
-  // Atualizar lista
-  router.put("/lists/:id", verifyToken, async (req, res) => {
-    try {
-      const listId = req.params.id;
-      const userId = req.userId;
-      const {
-        nome_lista,
-        descricao_lista,
-        rd_lista,
-        valor_gasto,
-        id_categoria,
-      } = req.body;
+    const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
+    
+    await db_query(
+      `UPDATE tb_lista SET ${setQuery} WHERE id_lista = ?`,
+      [...values, listId]
+    );
 
-      await db_query(
-        "UPDATE tb_lista SET nm_lista = ?, ds_lista = ?, rd_lista = ?, vl_gasto = ?, id_categoria = ? WHERE id_lista = ? AND id_usuario = ?",
-        [
-          nome_lista,
-          descricao_lista,
-          rd_lista,
-          valor_gasto,
-          id_categoria,
-          listId,
-          userId,
-        ]
-      );
+    res.status(200).json({ message: "Item atualizado com sucesso." });
+  } catch (err) {
+    console.error("Erro ao atualizar parcialmente a lista", err);
+    res.sendStatus(500).send("Erro ao atualizar parcialmente a lista");
+  }
+});
 
-      res.sendStatus(200);
-    } catch (err) {
-      console.error("Erro ao atualizar lista:", err);
-      res.status(500).send("Erro ao atualizar lista");
-    }
-  });
+router.delete("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
 
-  // Deletar lista
-  router.delete("/lists/:id", verifyToken, async (req, res) => {
-    try {
-      const listId = req.params.id;
-      const userId = req.userId;
+    await db_query("DELETE FROM tb_lista WHERE id_lista = ?", [listId]);
 
-      await db_query(
-        "DELETE FROM tb_lista WHERE id_lista = ? AND id_usuario = ?",
-        [listId, userId]
-      );
+    res.sendStatus(204);
+  } catch (err) {
+    console.error("Erro ao deletar lista", err);
+    res.sendStatus(500).send("Erro ao deletar lista");
+  }
+});
 
-      res.sendStatus(200);
-    } catch (err) {
-      console.error("Erro ao deletar lista:", err);
-      res.status(500).send("Erro ao deletar lista");
-    }
-  });
-
-  return router;
-};
+module.exports = router;
