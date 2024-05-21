@@ -31,6 +31,10 @@ import { ModalCriarComponent } from './modals/modal-criar/modal-criar.component'
 import { ExampleComponent } from './modals/example/example.component';
 import { TypeaheadComponent } from './modals/typeahead/typeahead.component';
 import { ToogleThemeComponent } from './toogle-theme/toogle-theme.component';
+// Toasts
+import { ToastErrorComponent } from './toast/toast-error/toast-error.component';
+import { ToastInfoComponent } from './toast/toast-info/toast-info.component';
+import { ToastSuccessComponent } from './toast/toast-success/toast-success.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,10 @@ import { ToogleThemeComponent } from './toogle-theme/toogle-theme.component';
     ExampleComponent,
     TypeaheadComponent,
     ModalItemComponent,
-    ToogleThemeComponent
+    ToogleThemeComponent,
+    ToastErrorComponent,
+    ToastInfoComponent,
+    ToastSuccessComponent
   ],
   imports: [
     IonicModule,
@@ -82,6 +89,10 @@ import { ToogleThemeComponent } from './toogle-theme/toogle-theme.component';
     RouterModule.forChild([{path: '../../../components/shared/modals/example', component: ExampleComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/modals/typeahead', component: TypeaheadComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/modals/modal-item', component: ModalItemComponent}]),
+    // Toasts
+    RouterModule.forChild([{path: '../../../components/shared/toast/toast-error', component: ToastErrorComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/toast/toast-info', component: ToastInfoComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/toast/toast-success', component: ToastSuccessComponent}])
   ],
   exports: [
     ButtonBigComponent,
@@ -111,7 +122,10 @@ import { ToogleThemeComponent } from './toogle-theme/toogle-theme.component';
     ExampleComponent,
     TypeaheadComponent,
     ModalItemComponent,
-    ToogleThemeComponent
+    ToogleThemeComponent,
+    ToastErrorComponent,
+    ToastInfoComponent,
+    ToastSuccessComponent
   ]
 })
 export class SharedModule { }
