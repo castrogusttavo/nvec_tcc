@@ -35,15 +35,6 @@ INSERT INTO tb_bairro (nm_bairro, id_cidade) VALUES
 INSERT INTO tb_endereco (id_bairro) VALUES
        (1), (2), (3), (4), (5), (6);
 
--- Preencher a tabela de usuários
-INSERT INTO tb_usuario (nm_usuario, senha_usuario, email_usuario, id_assinatura) VALUES
-       ('Álvaro Oliveira', 'senha123', 'alvaro.oliveira@example.com', 1),
-       ('Maria Silva', '1234', 'maria.silva@example.com', 2),
-       ('John Doe', 'abcd', 'john.doe@example.com', 3),
-       ('Jane Doe', 'pass5678', 'jane.doe@example.com', 4),
-       ('Carlos Santana', 'qwerty', 'carlos.santana@example.com', 5),
-       ('Sophia Smith', 'password', 'sophia.smith@example.com', 6);
-
 -- Preencher a tabela de comunidades
 INSERT INTO tb_comunidade (nm_comunidade, sb_comunidade, id_categoria) VALUES
        ('Comunidade de Automóveis', 'Discutir carros', 3),
