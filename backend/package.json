@@ -4,7 +4,7 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@angular/core": "^17.3.2",
     "axios": "^1.6.8",
