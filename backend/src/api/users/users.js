@@ -7,13 +7,15 @@ const bcrypt = require("bcrypt");
 module.exports = function (secretKey) {
   function verifyToken(req, res, next) {
     const { authorization } = req.headers;
-  
+
     if (!authorization || !authorization.startsWith("Bearer ")) {
-      return res.status(401).json({ error: "Token de autorização não fornecido." });
+      return res
+        .status(401)
+        .json({ error: "Token de autorização não fornecido." });
     }
-  
+
     const token = authorization.split(" ")[1];
-  
+
     jwt.verify(token, secretKey, (err, decoded) => {
       if (err) {
         return res.status(401).json({ error: "Token inválido ou expirado." });
@@ -149,9 +151,9 @@ module.exports = function (secretKey) {
   });
 
   // LogOut
-  router.post('/logout', (req, res) => {
+  router.post("/logout", (req, res) => {
     // Limpar o cookie do token JWT
-    res.clearCookie('token').json({ message: 'Sessão encerrada com sucesso' });
+    res.clearCookie("token").json({ message: "Sessão encerrada com sucesso" });
   });
 
   // Alter Password
@@ -159,35 +161,48 @@ module.exports = function (secretKey) {
     try {
       const { currentPassword, newPassword } = req.body;
       const userId = req.userId;
-  
+
       if (!currentPassword || !newPassword) {
-        return res.status(400).json({ error: "Dados insuficientes para alteração de senha." });
+        return res
+          .status(400)
+          .json({ error: "Dados insuficientes para alteração de senha." });
       }
-  
+
       if (newPassword.length < 8) {
-        return res.status(400).json({ error: "A nova senha deve ter pelo menos 8 caracteres." });
+        return res
+          .status(400)
+          .json({ error: "A nova senha deve ter pelo menos 8 caracteres." });
       }
-  
+
       // Recuperar o usuário pelo ID
-      const user = await db_query("SELECT * FROM tb_usuario WHERE id_usuario = ?", [userId]);
-  
+      const user = await db_query(
+        "SELECT * FROM tb_usuario WHERE id_usuario = ?",
+        [userId]
+      );
+
       if (user.length === 0) {
         return res.status(404).json({ error: "Usuário não encontrado." });
       }
-  
+
       // Comparar a senha atual com o hash armazenado
-      const passwordMatch = await bcrypt.compare(currentPassword, user[0].senha_usuario);
-  
+      const passwordMatch = await bcrypt.compare(
+        currentPassword,
+        user[0].senha_usuario
+      );
+
       if (!passwordMatch) {
         return res.status(401).json({ error: "Senha atual incorreta." });
       }
-  
+
       // Criptografar a nova senha
       const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-  
+
       // Atualizar a senha no banco de dados
-      await db_query("UPDATE tb_usuario SET senha_usuario = ? WHERE id_usuario = ?", [hashedNewPassword, userId]);
-  
+      await db_query(
+        "UPDATE tb_usuario SET senha_usuario = ? WHERE id_usuario = ?",
+        [hashedNewPassword, userId]
+      );
+
       res.status(200).json({ message: "Senha alterada com sucesso." });
     } catch (err) {
       console.error("Erro ao alterar a senha:", err);
@@ -243,13 +258,11 @@ module.exports = function (secretKey) {
         expires: new Date(Date.now() + 3 * 60 * 60 * 1000),
       });
 
-      res
-        .status(201)
-        .json({
-          id_usuario: result.insertId,
-          token,
-          message: "Registro bem-sucedido",
-        });
+      res.status(201).json({
+        id_usuario: result.insertId,
+        token,
+        message: "Registro bem-sucedido",
+      });
     } catch (err) {
       console.error("Erro ao registrar usuário:", err);
       res.status(500).send("Erro ao registrar um novo usuário");
