@@ -22,6 +22,8 @@ const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists");
 const usersRouter = require("./api/users/users")(secretKey);
 const categoriesRouter = require("./api/categories/categories");
+const networkErrorRouter = require("./api/system/ping")
+
 const app = express();
 
 app.use(cors({
@@ -39,6 +41,7 @@ app.use('/api', itemsRouter);
 app.use('/api', listsRouter);
 app.use('/api', usersRouter);
 app.use('/api', categoriesRouter);
+app.use('/api', networkErrorRouter);
 
 app.get("/", (req, res) => {
   if (req.session.views) {
