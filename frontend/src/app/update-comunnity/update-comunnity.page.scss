@@ -1,5 +1,26 @@
 @import "../../global.scss";
 
+.excluir{
+    background-color: #FF554A;
+    padding: 0px 32px 0px 32px;
+    font-size: 16px;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    padding: 0px 24px 40px 24px;
+}
+
+
 *{
     --padding-start: 0px !important;
 }

@@ -144,7 +144,20 @@ const routes: Routes = [
   },
   { path: 'community-lists-sobre',
     loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
+  },  {
+    path: 'update-comunnity',
+    loadChildren: () => import('./update-comunnity/update-comunnity.module').then( m => m.UpdateComunnityPageModule)
   },
+  {
+    path: 'create-item-comunnity',
+    loadChildren: () => import('./create-item-comunnity/create-item-comunnity.module').then( m => m.CreateItemComunnityPageModule)
+  },
+  {
+    path: 'update-item-comunnity',
+    loadChildren: () => import('./update-item-comunnity/update-item-comunnity.module').then( m => m.UpdateItemComunnityPageModule)
+  }
+
+
 
 
 ];
