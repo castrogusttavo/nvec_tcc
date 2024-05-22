@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button-big',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./button-big.component.scss'],
 })
 export class ButtonBigComponent  implements OnInit {
+  @Input() disabled: boolean = false; 
 
   constructor() { }
 

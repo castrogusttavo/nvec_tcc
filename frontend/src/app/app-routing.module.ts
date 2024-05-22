@@ -144,7 +144,11 @@ const routes: Routes = [
   },
   { path: 'community-lists-sobre',
     loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
+  },  {
+    path: 'teste-senha',
+    loadChildren: () => import('./teste-senha/teste-senha.module').then( m => m.TesteSenhaPageModule)
   },
+
 
 
 ];
