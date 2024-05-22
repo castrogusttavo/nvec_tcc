@@ -144,7 +144,12 @@ const routes: Routes = [
   },
   { path: 'community-lists-sobre',
     loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
-  },  {
+  },
+  {
+    path: 'teste-senha',
+    loadChildren: () => import('./teste-senha/teste-senha.module').then( m => m.TesteSenhaPageModule)
+  },
+  {
     path: 'update-comunnity',
     loadChildren: () => import('./update-comunnity/update-comunnity.module').then( m => m.UpdateComunnityPageModule)
   },
@@ -156,10 +161,6 @@ const routes: Routes = [
     path: 'update-item-comunnity',
     loadChildren: () => import('./update-item-comunnity/update-item-comunnity.module').then( m => m.UpdateItemComunnityPageModule)
   }
-
-
-
-
 ];
 @NgModule({
   imports: [

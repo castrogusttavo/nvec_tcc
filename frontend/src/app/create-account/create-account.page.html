@@ -17,12 +17,12 @@
       <p>Comece Gratuitamente</p>
       <span>E controle sua vida financeira</span>
 
-      <form (ngSubmit)="createUser($event)"  class="input">
+      <form (ngSubmit)="createUser($event)"  class="input" #form="ngForm">
         <app-input type="text" placeholder="Nome" class="input-login" name="name" [(ngModel)]="name" required/>
         <app-input type="email" placeholder="E-mail" class="input-login" name="email" [(ngModel)]="email" required/>
         <app-input type="password" placeholder="Senha" class="input-login" name="password" [(ngModel)]="password" required/>
 
-        <app-button-big type="submit">Cadastrar</app-button-big>
+        <app-button-big type="submit" [disabled]="!form.valid">Cadastrar</app-button-big>
       </form>
 
       <div class="line">
