@@ -35,16 +35,6 @@
             required
           >
           </app-input>
-          <div
-            *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
-          >
-            <small *ngIf="loginForm.get('email').errors.required"
-              >E-mail é obrigatório.</small
-            >
-            <small *ngIf="loginForm.get('email').errors.email"
-              >E-mail inválido.</small
-            >
-          </div>
 
           <app-input
             class="input-login"
@@ -54,16 +44,6 @@
             required
           >
           </app-input>
-          <div
-            *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
-          >
-            <small *ngIf="loginForm.get('password').errors.required"
-              >Senha é obrigatória.</small
-            >
-            <small *ngIf="loginForm.get('password').errors.minlength"
-              >Senha precisa ter ao menos 6 caracteres.</small
-            >
-          </div>
         </div>
         <app-button-big type="submit" [disabled]="loginForm.invalid"
           >Entrar</app-button-big
