@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-account',
@@ -8,11 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-account.page.scss'],
 })
 export class CreateAccountPage implements OnInit {
+  registerForm: FormGroup;
+
   name: string = '';
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private fb: FormBuilder) {
+    this.registerForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+   }
 
   ngOnInit() {
   }
@@ -20,13 +29,20 @@ export class CreateAccountPage implements OnInit {
   async createUser(event: { preventDefault: () => void; }) {
     event.preventDefault();
 
-    console.log('Email:', this.email);
-    console.log('Senha:', this.password);
+    if (this.registerForm.invalid) {
+      console.error('Form is not valid');
+      return;
+    }
+
+    const { name, email, password } = this.registerForm.value;
+
+    console.log('Email:', email);
+    console.log('Senha:', password);
 
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/register',
-        { name: this.name, email: this.email, password: this.password }
+        { name, email, password }
       ).toPromise();
 
       console.log('Conta criada com sucesso:', response);

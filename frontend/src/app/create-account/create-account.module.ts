@@ -9,6 +9,7 @@ import { CreateAccountPageRoutingModule } from './create-account-routing.module'
 
 import { CreateAccountPage } from './create-account.page';
 import { share } from 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { share } from 'rxjs';
     IonicModule,
     CreateAccountPageRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   declarations: [CreateAccountPage]
 })
