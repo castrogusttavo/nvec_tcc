@@ -1,11 +1,17 @@
-<ion-content scrollY="false" >
+<ion-content scrollY="false">
   <div class="body">
-
     <div class="header">
-      <img src="../../assets/svg/arrow.svg" alt="" class="arrow" [routerLink]="['/load-screen3']">
+      <img
+        src="../../assets/svg/arrow.svg"
+        alt=""
+        class="arrow"
+        [routerLink]="['/load-screen3']"
+      />
       <div>
         <span class="span-top">Não possui uma conta?</span>
-        <app-button-small class="buttonSmall"  [routerLink]="['/create-account']">Cadastrar</app-button-small>
+        <app-button-small class="buttonSmall" [routerLink]="['/create-account']"
+          >Cadastrar</app-button-small
+        >
       </div>
     </div>
 
@@ -15,24 +21,73 @@
     <div class="box">
       <p>Bem-vindo Novamente</p>
       <span>Insira seus dados abaixo e volte a se organizar</span>
-      <form (ngSubmit)="loginUser($event)" class="forms">
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="loginUser($event)"
+        class="forms"
+      >
         <div class="input">
-          <app-input class="input-login" type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required/>
-          <app-input class="input-login" type="password" placeholder="Senha" name="password" [(ngModel)]="password" required/>        </div>
-        <app-button-big type="submit">Entrar</app-button-big>
+          <app-input
+            class="input-login"
+            type="email"
+            placeholder="E-mail"
+            formControlName="email"
+            required
+          >
+          </app-input>
+          <div
+            *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+          >
+            <small *ngIf="loginForm.get('email').errors.required"
+              >E-mail é obrigatório.</small
+            >
+            <small *ngIf="loginForm.get('email').errors.email"
+              >E-mail inválido.</small
+            >
+          </div>
+
+          <app-input
+            class="input-login"
+            type="password"
+            placeholder="Senha"
+            formControlName="password"
+            required
+          >
+          </app-input>
+          <div
+            *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
+          >
+            <small *ngIf="loginForm.get('password').errors.required"
+              >Senha é obrigatória.</small
+            >
+            <small *ngIf="loginForm.get('password').errors.minlength"
+              >Senha precisa ter ao menos 6 caracteres.</small
+            >
+          </div>
+        </div>
+        <app-button-big type="submit" [disabled]="loginForm.invalid"
+          >Entrar</app-button-big
+        >
       </form>
 
       <div class="line">
-        <div ></div>
+        <div></div>
         <span>Ou entrar usando</span>
-        <div ></div>
+        <div></div>
       </div>
 
       <div class="buttonSocial">
-        <app-button-social [imageSocial]="'../../assets/svg/google.svg'" texto="Google" [routerLink]="['/tabs/tab1']"></app-button-social>
-        <app-button-social [imageSocial]="'../../assets/svg/facebook.svg'" texto="Facebook" [routerLink]="['/tabs/tab1']"></app-button-social>
+        <app-button-social
+          [imageSocial]="'../../assets/svg/google.svg'"
+          texto="Google"
+          [routerLink]="['/tabs/tab1']"
+        ></app-button-social>
+        <app-button-social
+          [imageSocial]="'../../assets/svg/facebook.svg'"
+          texto="Facebook"
+          [routerLink]="['/tabs/tab1']"
+        ></app-button-social>
       </div>
-
     </div>
   </div>
 </ion-content>
