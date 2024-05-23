@@ -1,0 +1,64 @@
+@import '../../global.scss';
+
+.cardBlue{
+    background-color:var(--Color-brand1, #006EFF);;
+    border-radius: 25px;
+    width: 100%; 
+    height: 15rem;  
+    background: #{$brand1};
+    border-radius: 30px;
+    padding: 16px 25px 38px 25px;
+    z-index: 0;
+}
+
+.nameComunnity{
+    color: var(--Color-bg-neutral, #F1F2F4);
+    font-family: 'Poppins';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26.4px; 
+    margin-bottom: 3px;
+}
+
+.category{
+    color: var(--Color-inverted-inverted300, #DCDFE4);
+    text-align: left;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22.4px;
+    margin-top: 0px;
+    margin-bottom: 3px;
+}
+
+.date{
+    color: var(--Color-inverted-inverted300, #DCDFE4);
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 0px;
+}
+
+.boxSobre{
+    width: 100%;
+    max-width: 354px;
+    border: 2px solid var(--Color-inverted-inverted300, #DCDFE4);
+    border-radius: 8px;
+    z-index: 1;
+    flex-shrink: 1;
+    color: var(--Color-inverted-inverted300, #DCDFE4);
+    padding: 10px; /* Adiciona padding para espaçamento interno */
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+    background-color: #fff; /* Cor de fundo opcional para melhor visibilidade */
+    overflow-wrap: break-word; /* Quebra palavras longas */
+}
+
+.textComunnity{
+    margin: 0; /* Remove margem padrão */
+    line-height: 1.5; /* Ajusta a altura da linha para melhor legibilidade */
+    word-wrap: break-word; /* Quebra palavras longas */
+}

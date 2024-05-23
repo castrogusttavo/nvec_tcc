@@ -3,9 +3,9 @@ const mysql = require('mysql2','mysql');
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '12345',
     database: 'db_nvec',
-    // port: '3306' 
+    port: '3306' 
     // port: '3307' 
 };
 
