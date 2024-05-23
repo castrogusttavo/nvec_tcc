@@ -22,7 +22,8 @@ const networkErrorRouter = require("./api/system/ping")(secretKey);
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:8100'
+  origin: 'http://localhost:8100',
+  credentials: true
 }));
 app.use(express.json());
 app.use(bodyParser.json());
