@@ -15,6 +15,7 @@ export class Tab1Page implements OnInit {
   ngOnInit(): void {
     this.getUserName();
     this.checkTokenChanges();
+
   }
 
   getUserName(): void {

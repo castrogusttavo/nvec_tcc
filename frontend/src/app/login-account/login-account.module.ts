@@ -9,7 +9,6 @@ import { InputComponent } from '../../components/shared/inputs/input/input.compo
 import { LoginAccountPageRoutingModule } from './login-account-routing.module';
 
 import { LoginAccountPage } from './login-account.page';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -18,8 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     LoginAccountPageRoutingModule,
     SharedModule,
-    HttpClientModule,
-    ReactiveFormsModule
+    HttpClientModule
   ],
   declarations: [LoginAccountPage],
   exports: [InputComponent]

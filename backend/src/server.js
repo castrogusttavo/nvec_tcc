@@ -17,7 +17,7 @@ const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists")(secretKey);
 const usersRouter = require("./api/users/users")(secretKey);
 
-const networkErrorRouter = require("./api/system/ping")
+const networkErrorRouter = require("./api/system/ping")(secretKey);
 
 const app = express();
 
