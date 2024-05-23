@@ -1,4 +1,45 @@
-<!-- UMA GUIA DE TESTES!!! nao apaga <3 -->
+<ion-content [fullscreen]="true" scrollY="false">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab4']">
+
+  <div class="imageIlustrator">
+    <img  src="../../assets/png/imagem.png" alt="">
+  </div>
+
+  <form (ngSubmit)="createList($event)" >
+    <div class="inputs">  
+      <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
+      <!-- <input name="category" [(ngModel)]="category" placeholder="Categoria" class="inputText" > -->
+      
+      <ion-item>
+        <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
+          <ion-select-option *ngFor="let category of category" [value]="category.id_categoria">
+            {{ category.ds_categoria }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <input name="expense" [(ngModel)]="expense" placeholder="Valor máximo" class="inputText" >
+
+      <input name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText" >
+      <div>
+        <textarea name="description" [(ngModel)]="description"  placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
+        <div class="counter"></div>
+      </div>
+    </div>
+
+    <div class="buttonBig">
+      <app-button-big>Criar Lista</app-button-big>
+    </div>
+  </form>
+
+
+  
+</ion-content>
+
+
+
+
+<!-- UMA GUIA DE TESTES!!! nao apaga <3
 <ion-content>
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
 
@@ -6,11 +47,11 @@
     <img  src="../../assets/png/imagem.png">
   </div>
 
-  <!--LISTA: placeholder, class, (input), maxlength-->
+  LISTA: placeholder, class, (input), maxlength
 
   <div class="inputs">
     <form name="" id="" [formGroup]="textForm" style="display: contents;">
-      <!-- Input Nome -->
+      Input Nome 
       <div>
         <input placeholder="Nome"
                 class="inputText"
@@ -18,21 +59,21 @@
                 maxlength="20">
         <div class="counter"></div>
       </div>
-      <!-- Input Nome -->
+      Input Nome 
   
-      <!-- DropDown Categoria -->
+      DropDown Categoria 
       <app-example class="typeahead"></app-example>
-      <!-- DropDown Categoria -->
+      DropDown Categoria 
 
-      <!-- Input Valor Máximo -->
+      Input Valor Máximo 
       <input formControlName="valorMaximo" placeholder="Valor máximo" (input)="formatCurrency($event)">
-      <!-- Input Valor Máximo -->
+      Input Valor Máximo 
 
       
 
 
 
-      <!-- Dropdown medida                      COMPONENT-->
+      Dropdown medida                      COMPONENT
       <ion-item class="item">
         <input placeholder="Medida" [(ngModel)]="inputTextValue" class="inputText" (click)="toggleDropdown()" (input)="formatCurrency($event)" formControlName="medida">
         
@@ -40,31 +81,31 @@
           <ion-select-option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- Dropdown medida -->
+      Dropdown medida 
 
 
 
 
 
 
-      <!-- Input Valor -->
+      Input Valor 
       <input formControlName="valor" placeholder="valor" class="inputText" (input)="formatCurrency($event)">
-      <!-- Input Valor -->
+      Input Valor 
 
-      <!-- Input Quantidade -->
-      <input formControlName="quantidade" placeholder="Quantidade" class="inputText">
-      <!-- Input Quantidade -->
+      Input Quantidade 
+      <input formControlName="quantidade" placeholder="Quantidddddddade" class="inputText">
+      Input Quantidade 
 
-      <!-- Descrição                      COMPONENT-->
+      Descrição                      COMPONENT
       <div>
         <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
         <div class="counter"></div>
       </div>
-      <!-- Descrição -->
+       Descrição 
     </form>
   </div>
   
   <div class="buttonBig">
     <app-button-big>Criar Lista</app-button-big>
   </div>
-</ion-content>
+</ion-content> -->

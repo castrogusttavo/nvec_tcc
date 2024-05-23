@@ -9,13 +9,17 @@
       <img src="../../assets/png/list.png" alt="" class="lists">
     </ion-tab-button>
 
-    <ion-tab-button (click)="setOpen(true)">
-      <!-- Modal começa aqui -->
+    <ion-tab-button tab="tab3" href="/tabs/tab3">
+      <img src="../../assets/svg/add.svg" alt=""  class="buttonAdd">
+    </ion-tab-button>
+
+     <!-- <ion-tab-button (click)="setOpen(true)">
+       Modal começa aqui 
       <ion-modal [isOpen]="isModalOpen">
         <ng-template>
               <ion-content [fullscreen]="true" scrollY="false">
                 <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" (click)="setOpen(false)">
-                <!-- ATENÇÃOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+                 ATENÇÃOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 
                 Se for Modal de criar coloque:
                 <app-modal-criar button="Criar lista"</app-modal-criar>
@@ -26,7 +30,7 @@
                   [deleteButtonText]="'Excluir'"
                   (cancelClicked)="setOpen(false)">
                 </app-modal-criar>
-                -->
+                
                 <form [formGroup]="textForm" >
                   <app-modal-criar button="Criar lista">
                   </app-modal-criar>
@@ -35,12 +39,12 @@
               </ion-content>   
         </ng-template>
       </ion-modal>
-      <!-- Modal termina aqui -->
+       Modal termina aqui 
       <div class="buttonMeio">
         <img src="../../assets/png/add.png" alt="" class="buttonAdd">
       </div>
       
-    </ion-tab-button>
+    </ion-tab-button>  -->
 
     <ion-tab-button tab="tab4" href="/tabs/tab4">
       <img src="../../assets/png/community.png" alt="" class="community">
