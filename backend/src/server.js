@@ -29,9 +29,9 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Configurando as rotas da API para os respectivos caminhos
-// app.use('/api', communitiesRouter); 
+app.use('/api', communitiesRouter); 
 app.use('/api', itemsRouter); 
-// app.use('/api', listsRouter); 
+app.use('/api', listsRouter); 
 app.use('/api', usersRouter);
 app.use('/api', networkErrorRouter);
 app.use('/api', reportRouter);

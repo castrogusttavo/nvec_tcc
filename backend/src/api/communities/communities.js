@@ -3,30 +3,8 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { db_query } = require("../../frameworks/db/db");
 
-module.exports = function (secretKey) {
-  function verifyToken(req, res, next) {
-    const { authorization } = req.headers;
-
-    if (!authorization || !authorization.startsWith("Bearer ")) {
-      return res
-        .status(401)
-        .json({ error: "Token de autorização não fornecido." });
-    }
-
-    const token = authorization.split(" ")[1];
-
-    jwt.verify(token, secretKey, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ error: "Token inválido ou expirado." });
-      }
-      req.userId = decoded.userId;
-      req.userEmail = decoded.userEmail;
-      next();
-    });
-  }
-
   // New Community
-  router.post("/communities/:id", verifyToken, async (req, res) => {
+  router.post("/communities/:id", async (req, res) => {
     try {
       const { nome_comunidade, sobre_comunidade, id_categoria } = req.body;
 
@@ -52,7 +30,7 @@ module.exports = function (secretKey) {
   });
 
   // Get All Communities
-  router.get("/communities", verifyToken, async (req, res) => {
+  router.get("/communities", async (req, res) => {
     try {
       const comunidades = await db_query("SELECT * FROM tb_comunidade");
 
@@ -64,7 +42,7 @@ module.exports = function (secretKey) {
   });
 
   // Get Community by ID
-  router.get("/communities/:id", verifyToken, async (req, res) => {
+  router.get("/communities/:id", async (req, res) => {
     try {
       const comunidadeId = req.params.id;
 
@@ -85,7 +63,7 @@ module.exports = function (secretKey) {
   });
 
   // Alter All Data of Community
-  router.put("/communities/:id", verifyToken, async (req, res) => {
+  router.put("/communities/:id", async (req, res) => {
     try {
       const comunidadeId = req.params.id;
       const { nome_comunidade, sobre_comunidade, id_categoria } = req.body;
@@ -111,7 +89,7 @@ module.exports = function (secretKey) {
   });
 
   // Alter Specific Data of Community
-  router.patch("/communities/:id", verifyToken, async (req, res) => {
+  router.patch("/communities/:id", async (req, res) => {
     try {
       const comunidadeId = req.params.id;
       const updateFields = req.body;
@@ -138,7 +116,7 @@ module.exports = function (secretKey) {
   });
 
   // Delete Community by ID
-  router.delete("/communities/:id", verifyToken, async (req, res) => {
+  router.delete("/communities/:id", async (req, res) => {
     try {
       const comunidadeId = req.params.id;
 
@@ -158,5 +136,4 @@ module.exports = function (secretKey) {
     }
   });
 
-  return router;
-};
+  module.exports = router;
