@@ -14,10 +14,10 @@ const secretKey = 'PdZdx2PAMRbRQALIPfxiw1PlPenTPfjtP2rqvZDmQfjTGZTJSNZDx05PwZTHP
 // Importando os arquivos de rota das APIs
 const communitiesRouter = require("./api/communities/communities");
 const itemsRouter = require("./api/items/items");
-const listsRouter = require("./api/lists/lists")(secretKey);
+const listsRouter = require("./api/lists/lists"); 
 const usersRouter = require("./api/users/users")(secretKey);
-
-const networkErrorRouter = require("./api/system/ping")(secretKey);
+const networkErrorRouter = require("./api/system/ping");
+const reportRouter = require("./api/report/report");
 
 const app = express();
 
@@ -29,11 +29,12 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Configurando as rotas da API para os respectivos caminhos
-app.use('/api', communitiesRouter);
-app.use('/api', itemsRouter);
-app.use('/api', listsRouter);
+// app.use('/api', communitiesRouter); 
+app.use('/api', itemsRouter); 
+// app.use('/api', listsRouter); 
 app.use('/api', usersRouter);
 app.use('/api', networkErrorRouter);
+app.use('/api', reportRouter);
 
 app.get("/", (req, res) => {
   if (req.session.views) {

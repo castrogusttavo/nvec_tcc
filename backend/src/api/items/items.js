@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { db_query } = require("../../frameworks/db/db");
 
-module.exports = function () {
   // New Item
   router.post("/items/:id", async (req, res) => {
     const id_lista = req.params.id;
@@ -181,5 +180,4 @@ module.exports = function () {
     }
   });
 
-  return router;
-};
+  module.exports = router;
