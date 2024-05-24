@@ -149,9 +149,9 @@ module.exports = function (secretKey) {
   });
 
   // LogOut
-  router.post("/logout", (req, res) => {
+  router.post('/logout', (req, res) => {
     // Limpar o cookie do token JWT
-    res.clearCookie("token").send("Sessão encerrada com sucesso");
+    res.clearCookie('token').json({ message: 'Sessão encerrada com sucesso' });
   });
 
   // Alter Password
@@ -221,7 +221,7 @@ module.exports = function (secretKey) {
 
       // Gerar um token JWT para o usuário recém-cadastrado
       const token = jwt.sign(
-        { userId: result.insertId, userEmail: email },
+        { userId: result.insertId, userEmail: email, userName: name },
         secretKey,
         { expiresIn: "3h" }
       );

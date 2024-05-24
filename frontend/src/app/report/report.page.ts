@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ReportPage implements OnInit {
-  public segmentValue: string = 'segment'; 
-  
+  public segmentValue: string = 'segment';
+
   segmentChanged(event: any){
     console.log("Segment changed:", event.detail.value);
     this.segmentValue = event.detail.value;
@@ -17,7 +17,7 @@ export class ReportPage implements OnInit {
 
 
   ngOnInit() {
-    
+
   }
 
 }

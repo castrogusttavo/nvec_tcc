@@ -44,7 +44,15 @@ https://github.com/castrogusttavo/nvec_tcc
         ```
 
 ## Uso
-    ionic serve
+   1. Na pasta frontend:
+        ```bash
+        ionic serve
+        ```
+   2. Na pasta backend:
+        ```bash
+        npm run dev
+        ```
+    
 
 ## Contribuição
 
@@ -57,11 +65,6 @@ __Sofia Rocha__ (Front-end) <br/>
 ## Licença
 
 Este projeto é licenciado sob a Licença [MIT](./LICENSE).
-
-## Colaboradores
-
-- [Nome do Colaborador 1](link-para-perfil-no-github)
-- [Nome do Colaborador 2](link-para-perfil-no-github)
 
 ## Linguagens Utilizadas
  - Front-end

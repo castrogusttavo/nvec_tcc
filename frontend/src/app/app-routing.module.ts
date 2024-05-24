@@ -43,10 +43,6 @@ const routes: Routes = [
     loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
   },
   {
-    path: 'tab3',
-    loadChildren: () => import('./tab3/tab3.module').then( m => m.Tab3PageModule)
-  },
-  {
     path: 'tab5',
     loadChildren: () => import('./tab5/tab5.module').then( m => m.Tab5PageModule)
   },
@@ -139,10 +135,32 @@ const routes: Routes = [
     loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
   },
   {
-    path: 'create-list',
-    loadChildren: () => import('./create-list/create-list.module').then( m => m.CreateListPageModule)
+    path: 'tes-toast',
+    loadChildren: () => import('./tes-toast/tes-toast.module').then( m => m.TesToastPageModule)
   },
-
+  {
+    path: 'comunnity-lists-item',
+    loadChildren: () => import('./comunnity-lists-item/comunnity-lists-item.module').then( m => m.ComunnityListsItemPageModule)
+  },
+  { path: 'community-lists-sobre',
+    loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
+  },
+  {
+    path: 'teste-senha',
+    loadChildren: () => import('./teste-senha/teste-senha.module').then( m => m.TesteSenhaPageModule)
+  },
+  {
+    path: 'update-comunnity',
+    loadChildren: () => import('./update-comunnity/update-comunnity.module').then( m => m.UpdateComunnityPageModule)
+  },
+  {
+    path: 'create-item-comunnity',
+    loadChildren: () => import('./create-item-comunnity/create-item-comunnity.module').then( m => m.CreateItemComunnityPageModule)
+  },
+  {
+    path: 'update-item-comunnity',
+    loadChildren: () => import('./update-item-comunnity/update-item-comunnity.module').then( m => m.UpdateItemComunnityPageModule)
+  }
 ];
 @NgModule({
   imports: [

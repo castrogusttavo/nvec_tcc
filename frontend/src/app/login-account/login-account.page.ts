@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-account',
@@ -8,10 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-account.page.scss'],
 })
 export class LoginAccountPage implements OnInit {
+  loginForm: FormGroup;
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
   ngOnInit(){
   }
@@ -19,13 +26,20 @@ export class LoginAccountPage implements OnInit {
   async loginUser(event: { preventDefault: () => void; }) {
     event.preventDefault();
 
-    console.log('Email:', this.email);
-    console.log('Senha:', this.password);
+    if (this.loginForm.invalid) {
+      console.error('Form is not valid');
+      return;
+    }
+
+    const { email, password } = this.loginForm.value;
+
+    console.log('Email:', email);
+    console.log('Senha:', password);
 
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/login',
-        { email: this.email, senha: this.password }
+        { email, senha: password }
       ).toPromise();
 
       console.log('Login bem-sucedido: ', response);
@@ -36,5 +50,4 @@ export class LoginAccountPage implements OnInit {
       console.error('Erro ao fazer login: ', err);
     }
   }
-
 }

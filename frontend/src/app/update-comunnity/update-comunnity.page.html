@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true" scrollY="false">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab4']">
+
+  <div class="imageIlustrator">
+    <img  src="../../assets/png/imagem.png" alt="">
+  </div>
+
+  <form >
+    <div class="inputs">  
+      <input name="name"  placeholder="Nome" class="inputText" >
+      <!-- <input name="category" [(ngModel)]="category" placeholder="Categoria" class="inputText" > -->
+      
+      <ion-item>
+        <ion-select placeholder="Categoria"  name="category">
+          <ion-select-option >
+
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div>
+        <textarea name="about"   placeholder="Descrição" class="description"  maxlength="100"></textarea>
+        <div class="counter"></div>
+      </div>
+    </div>
+    <div class="buttonBig">
+      <app-button-big>Salvar Alterações</app-button-big>
+    </div>
+  </form>
+
+  <div class="options">
+    <app-button-small class="textButton">Cancelar</app-button-small>
+    <div  class="excluir">
+      <p>Excluir</p>
+    </div>
+  </div>
+  
+</ion-content>

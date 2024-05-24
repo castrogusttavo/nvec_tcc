@@ -43,18 +43,19 @@ create table if not exists tb_pais (
 	id_pais int not null auto_increment,
 	nm_pais varchar(40),
     primary key (id_pais)
-    ) default character set utf8;
-    
+) default character set utf8;
+
 create table if not exists tb_uf (
 	id_uf int auto_increment not null,
     nm_uf varchar(40) not null,
     id_pais int not null,
     primary key (id_uf),
-	index pais (id_Pais asc) visible,
+	index pais (id_pais asc) visible,
     constraint pais 
 		foreign key (id_pais)
-        references tb_pais (id_pais)) default character set utf8;
-        
+        references tb_pais (id_pais)
+) default character set utf8;
+
 create table if not exists tb_cidade (
 	id_cidade int not null auto_increment,
     nm_cidade varchar(40),
@@ -63,8 +64,9 @@ create table if not exists tb_cidade (
     index uf (id_uf asc) visible,
     constraint uf
 		foreign key (id_uf)
-        references tb_uf (id_uf)) default character set utf8;
-        
+        references tb_uf (id_uf)
+) default character set utf8;
+
 create table if not exists tb_bairro (
 	id_bairro int auto_increment not null,
     nm_bairro varchar(40),
@@ -73,8 +75,9 @@ create table if not exists tb_bairro (
     index cidade (id_cidade asc) visible,
     constraint cidade
 		foreign key (id_cidade)
-		references tb_cidade (id_cidade)) default character set utf8;
-        
+		references tb_cidade (id_cidade)
+) default character set utf8;
+
 create table if not exists tb_endereco (
 	id_endereco int auto_increment not null,
     id_bairro int not null,
@@ -82,8 +85,9 @@ create table if not exists tb_endereco (
     index bairro (id_bairro asc) visible,
     constraint bairro
 		foreign key (id_bairro)
-        references tb_bairro (id_bairro)) default character set utf8;
-        
+        references tb_bairro (id_bairro)
+) default character set utf8;
+
 create table if not exists tb_usuario (
 	id_usuario int not null auto_increment,
     nm_usuario varchar(100) not null,
@@ -94,8 +98,9 @@ create table if not exists tb_usuario (
     index assinatura(id_assinatura asc) visible,
     constraint assinatura
 		foreign key (id_assinatura)
-		references tb_assinatura(id_assinatura)) default character set utf8;
-        
+		references tb_assinatura(id_assinatura)
+) default character set utf8;
+
 create table if not exists tb_comunidade (
 	id_comunidade int auto_increment not null,
     nm_comunidade varchar(30),
@@ -107,7 +112,7 @@ create table if not exists tb_comunidade (
 		foreign key (id_categoria) 
         references tb_categoria(id_categoria)
 ) default character set utf8;
-        
+
 create table if not exists tb_lista (
 	id_lista int auto_increment not null,
     nm_lista varchar(50),
@@ -129,7 +134,7 @@ create table if not exists tb_lista (
 ) default character set utf8;
 
 create table if not exists tb_comunidade_lista (
-    id_comunidade int auto_increment not null,
+    id_comunidade int not null,
     id_lista int not null,
     primary key (id_comunidade, id_lista),
     index comunidade_lista(id_comunidade asc) visible,
@@ -143,9 +148,9 @@ create table if not exists tb_comunidade_lista (
 ) default character set utf8;
 
 create table if not exists tb_endereco_usuario (
-    id_endereco int auto_increment not null,
+    id_endereco int not null,
     id_usuario int not null,
-    primary key (id_endereco,id_usuario),
+    primary key (id_endereco, id_usuario),
     index end_usuario(id_endereco asc) visible,
     constraint end_usuario
 		foreign key (id_endereco)
@@ -157,9 +162,9 @@ create table if not exists tb_endereco_usuario (
 ) default character set utf8;
 
 create table if not exists tb_comunidade_usuario (
-    id_comunidade int auto_increment not null,
+    id_comunidade int not null,
     id_usuario int not null,
-    primary key (id_comunidade,id_usuario),
+    primary key (id_comunidade, id_usuario),
     index comunidade_usuario(id_comunidade asc) visible,
     constraint comunidade_usuario
 		foreign key (id_comunidade)
@@ -169,11 +174,11 @@ create table if not exists tb_comunidade_usuario (
 		foreign key (id_usuario)
         references tb_usuario(id_usuario)
 ) default character set utf8;
-        
+
 create table if not exists tb_endereco_comunidade (
-    id_endereco int auto_increment not null,
+    id_endereco int not null,
     id_comunidade int not null,
-    primary key (id_endereco,id_comunidade),
+    primary key (id_endereco, id_comunidade),
     index end_comunidade (id_endereco asc) visible,
     constraint end_comunidade
 		foreign key (id_endereco)
@@ -184,7 +189,7 @@ create table if not exists tb_endereco_comunidade (
         references tb_comunidade(id_comunidade)
 ) default character set utf8;
 
-create table if not exists tb_medida_item(
+create table if not exists tb_medida_item (
 	id_medida int auto_increment not null,
 	ds_medida enum('kg', 'g', 'L', 'mL', 'm') not null,
     primary key (id_medida)
@@ -211,9 +216,9 @@ create table if not exists tb_item (
     constraint medida_item
 		foreign key(id_medida)
         references tb_medida_item(id_medida)
-        ) default character set utf8;
+) default character set utf8;
 
-create table if not exists tb_despesas(
+create table if not exists tb_despesas (
 	id_despesa int not null auto_increment,
     vl_despesa decimal (10,2),
     dt_despesa date,
@@ -222,18 +227,20 @@ create table if not exists tb_despesas(
     primary key (id_despesa),
     index usuario_despesa(id_usuario asc) visible,
     constraint usuario_despesa
-		foreign key (id_usuario) references tb_usuario(id_usuario)
+		foreign key (id_usuario)
+        references tb_usuario(id_usuario)
 ) default character set utf8;
 
 create table if not exists tb_endereco_lista (
-    id_endereco int auto_increment not null,
+    id_endereco int not null,
     id_lista int not null,
-    primary key (id_endereco,id_lista),
+    primary key (id_endereco, id_lista),
     index end_lista (id_endereco asc) visible,
     constraint end_lista
 		foreign key (id_endereco)
         references tb_endereco(id_endereco),
 	index lista (id_lista asc) visible,
-	constraint lista_id_end
-		foreign key(id_lista) references tb_lista(id_lista)
+	constraint lista_end
+		foreign key (id_lista)
+        references tb_lista(id_lista)
 ) default character set utf8;
