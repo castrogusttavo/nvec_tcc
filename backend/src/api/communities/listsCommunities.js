@@ -6,4 +6,61 @@ const { db_query } = require("../../frameworks/db/db");
   // Tabela comunidade_listas -> listas usuários
   // Nova Tabela lista_base_comunidade -> lista base com os itens
 
+  router.get('/listCommunities/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+
+      const listsCommunity = await db_query(`
+        SELECT *
+        FROM 
+          tb_comunidade_lista as cl
+        JOIN 
+          tb_lista AS l ON cl.id_lista = l.id_lista
+        WHERE 
+          cl.id_comunidade = ?
+      `, [idCommunity])
+
+      // Limpar a data
+      const cleanedListsCommunity = listsCommunity.map(list => {
+        const date = new Date(list.dt_criacao);
+        const formattedDate = date.toISOString().split('T')[0];
+        return { ...list, dt_criacao: formattedDate };
+      });
+
+      res.send(cleanedListsCommunity);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
+  router.get('/lowestList/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+
+      const lowestList = await db_query(`
+        SELECT *
+        FROM
+          tb_lista l
+        JOIN
+          tb_comunidade_lista cl ON l.id_lista = cl.id_lista
+        WHERE
+          cl.id_comunidade = ?
+        ORDER BY
+          vl_gasto
+        LIMIT 1
+      `, [idCommunity])
+
+      // Limpar a data
+      const cleanedListsCommunity = lowestList.map(list => {
+        const date = new Date(list.dt_criacao);
+        const formattedDate = date.toISOString().split('T')[0];
+        return { ...list, dt_criacao: formattedDate };
+      });
+
+      res.send(cleanedListsCommunity);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
   module.exports = router;
