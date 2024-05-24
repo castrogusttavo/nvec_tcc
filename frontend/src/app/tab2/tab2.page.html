@@ -23,7 +23,7 @@
         <app-card-box action="Criar" description="Adicionar uma nova lista" (click)="setOpen(true)"></app-card-box>
 
         <!-- Componentes adicionais -->
-        <app-card-list-recent
+        <app-card-list-recent 
           class="card-blue list"
           category="Comida"
           name="Guloseimas"
@@ -32,10 +32,12 @@
         </app-card-list-recent>
 
         <app-card-list-recent
+         *ngFor="let list of lists"
+          name="list"
           class="card-orange list"
-          category="Casa e Decoração"
-          name="Móveis para mudança"
-          description="Principalmente cadeiras"
+          [category]="list.id_categoria"
+          [name]="list.nm_lista"
+          [description]="list.ds_lista"
           [routerLink]="['/lists-itens-screen']">
         </app-card-list-recent>
       </div>
@@ -52,6 +54,14 @@
         [title]="item.title"
         [description]="item.description"
         [routerLink]="['/lists-itens-screen']">
+      </app-card-list-search>
+
+      <app-card-list-search
+      *ngFor="let list of lists"
+          name="list"
+          [title]="list.nm_lista"
+          [description]="list.ds_lista"
+          [routerLink]="['/lists-itens-screen']">
       </app-card-list-search>
     </div>
 

@@ -5,7 +5,10 @@ const dbConfig = {
     user: 'root',
     password: '12345',
     database: 'db_nvec',
-    port: '3306' 
+    waitForConnections: true,
+    connectionLimit: 300,
+    queueLimit: 0
+    // port: '3306' 
     // port: '3307' 
 };
 

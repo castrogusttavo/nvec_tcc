@@ -3,31 +3,8 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { db_query } = require("../../frameworks/db/db");
 
-module.exports = function (secretKey) {
-  function verifyToken(req, res, next) {
-    const { authorization } = req.headers;
-
-    if (!authorization || !authorization.startsWith("Bearer ")) {
-      return res
-        .status(401)
-        .json({ error: "Token de autorização não fornecido." });
-    }
-
-    const token = authorization.split(" ")[1];
-
-    jwt.verify(token, secretKey, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ error: "Token inválido ou expirado." });
-      }
-      req.userId = decoded.userId;
-      req.userEmail = decoded.userEmail;
-      req.userName = decoded.userName;
-      next();
-    });
-  }
-
   // New List
-  router.post("/lists", verifyToken, async (req, res) => {
+  router.post("/lists", async (req, res) => {
     try {
       const {
         nome_lista,
@@ -63,7 +40,7 @@ module.exports = function (secretKey) {
   });
 
   // Get All Lists
-  router.get("/lists", verifyToken, async (req, res) => {
+  router.get("/lists", async (req, res) => {
     try {
       const userId = req.userId;
 
@@ -195,5 +172,4 @@ module.exports = function (secretKey) {
     }
   });
 
-  return router;
-};
+  module.exports = router;

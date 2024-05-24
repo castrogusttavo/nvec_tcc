@@ -91,4 +91,3 @@ function similarToPersonalData(password: string, personalData: string): boolean 
   const similarToUsername = password.toLowerCase().includes(personalData.toLowerCase());
   return similarToUsername;
 }
-

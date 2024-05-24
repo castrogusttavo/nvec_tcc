@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab2',
@@ -16,10 +18,14 @@ export class Tab2Page {
   email: string = '';
   userName: string | undefined;
 
+  lists!:any[];
+  category!:string;
+  private apiLists = "http://localhost:3001/api/lists";
+
   // FormGroup para validação dos campos de texto
   textForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private jwtHelper: JwtHelperService) {
+  constructor(private formBuilder: FormBuilder, private http:HttpClient, private jwtHelper: JwtHelperService) {
     // Inicialização do FormGroup para validação dos campos de texto
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
@@ -28,6 +34,9 @@ export class Tab2Page {
     });
   }
 
+  getLists():Observable<any[]>{
+    return this.http.get<any[]>(this.apiLists);
+  }
   clearSearchText() {
     this.searchText = '';
   }
@@ -59,6 +68,9 @@ export class Tab2Page {
 
   ngOnInit(): void {
     this.getUserName();
+    this.getLists().subscribe(lists=>{
+      this.lists = lists;
+    })
   }
 
   getUserName(): void {
