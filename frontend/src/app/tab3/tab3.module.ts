@@ -6,6 +6,8 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { SharedModule } from 'src/components/shared/shared.module';
 import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveFormsModule
 // import { ExampleComponent } from 'src/components/shared/modals/example/example.component';
@@ -19,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveForms
     ExploreContainerComponentModule,
     Tab3PageRoutingModule,
     SharedModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule ,
+    HttpClientModule
   ],
   // declarations: [Tab3Page, ExampleComponent, TypeaheadComponent]
   declarations: [Tab3Page]

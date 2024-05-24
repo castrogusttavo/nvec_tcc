@@ -1,20 +1,93 @@
-<ion-content [fullscreen]="true" scrollY="false"> <!-- ele ta no tabs/tab3 -->
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/lists-screen']">
+<ion-content [fullscreen]="true" scrollY="false">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab4']">
 
   <div class="imageIlustrator">
     <img  src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <div class="inputs">  
-    <input placeholder="Nome" class="inputText">
-    <input placeholder="Categoria" class="inputText">
-    <textarea placeholder="Descrição" class="description"></textarea>
+  <form >
+    <div class="inputs">  
+      <input name="name" placeholder="Nome" class="inputText" >
+      
+      <ion-item>
+        <ion-select placeholder="Categoria" name="category">
+          <ion-select-option>
+            
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  </div>
+      <input name="address"placeholder="Endereço" class="inputText" >
+      <div>
+        <textarea name="about"  placeholder="Descrição" class="description"  maxlength="100"></textarea>
+        <div class="counter"></div>
+      </div>
+    </div>
 
-  <div class="buttonBig">
-    <app-button-big>Criar Lista</app-button-big>
-  </div>
+    <div class="buttonBig">
+      <app-button-big>Criar Comunidade</app-button-big>
+    </div>
+  </form>
+
+
   
-
 </ion-content>
+
+
+
+
+
+<!-- <ion-content>
+    <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
+  
+    <div class="imageIlustrator">
+      <img  src="../../assets/png/imagem.png">
+    </div>
+  
+  
+    <div class="inputs">
+      <form name="" id="" [formGroup]="textForm" style="display: contents;">
+        <div>
+          <input placeholder="Nome"
+                  class="inputText"
+                  (input)="updateCounter($event)"
+                  maxlength="20">
+          <div class="counter"></div>
+        </div>
+    
+        <app-example class="typeahead"></app-example>
+  
+        <input formControlName="valorMaximo" placeholder="Valor máximo" (input)="formatCurrency($event)">
+  
+        
+  
+  
+  
+        <ion-item class="item">
+          <input placeholder="Medida" [(ngModel)]="inputTextValue" class="inputText" (click)="toggleDropdown()" (input)="formatCurrency($event)" formControlName="medida">
+          
+          <ion-select [(ngModel)]="selectedOption" style="position: absolute; margin-left: 140px;">
+            <ion-select-option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+  
+  
+  
+  
+  
+        <input formControlName="valor" placeholder="valor" class="inputText" (input)="formatCurrency($event)">
+  
+        <input formControlName="quantidade" placeholder="Quantidade" class="inputText">
+  
+        <div>
+          <textarea placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
+          <div class="counter"></div>
+        </div>
+      </form>
+    </div>
+    
+    <div class="buttonBig">
+      <app-button-big>Criar Lista</app-button-big>
+    </div>
+  </ion-content> -->
