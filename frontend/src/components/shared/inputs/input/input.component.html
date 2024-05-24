@@ -5,4 +5,7 @@
   [name]="name"
   [(ngModel)]="value"
   (ngModelChange)="onChange($event)"
+  (input)="updateCounter($event)"
+  [maxlength]="maxlength"
 />
+<div [class.counter]="type === 'password'"></div>

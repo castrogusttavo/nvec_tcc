@@ -72,20 +72,9 @@
 }
 
 :host.input-password input{
-    width: 100%;
+    width: 382px;
     height: 55px;
-    flex-shrink: 0;
-    top: 10px;
-    left: 10px;
-    text-align: top;
-    color: $N800D;
-    font-family: 'Poppins';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px;
-    margin-bottom: 24px;
-
+    color: $N0D;
 }
 
 :host.input-login input{
@@ -94,3 +83,10 @@
     margin-bottom: 24px;
     color: $N0D;
 }
+
+.counter {
+    height: 18px !important;
+    margin-bottom: 12px;
+}
+
+

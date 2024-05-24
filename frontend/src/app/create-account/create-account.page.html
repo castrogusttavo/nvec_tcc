@@ -34,6 +34,7 @@
             placeholder="Nome"
             class="input-login"
             name="name"
+            [maxlength]="50"
             required
           >
           </app-input>
@@ -50,6 +51,7 @@
             placeholder="E-mail"
             class="input-login"
             name="email"
+            [maxlength]="200"
             required
           >
           </app-input>
@@ -60,8 +62,9 @@
             formControlName="password"
             type="password"
             placeholder="Senha"
-            class="input-login"
+            class="input-password"
             name="password"
+            [maxlength]="16"
             required
           >
           </app-input>
