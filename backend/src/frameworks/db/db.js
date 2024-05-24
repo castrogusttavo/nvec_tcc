@@ -3,7 +3,7 @@ const mysql = require('mysql2','mysql');
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: '12345',
+    password: 'root',
     database: 'db_nvec',
     waitForConnections: true,
     connectionLimit: 300,

@@ -37,7 +37,7 @@ const { db_query } = require("../../frameworks/db/db");
   // vl_total - vl_gasto + id_ctg
   // 4 categorias que mais economizou
 
-  router.get('/report/totalSaved/:id', async (req, res) => {
+  router.get('/report/totalSaved/:userId', async (req, res) => {
     try {
       const userId = req.params.userId;
 
@@ -69,7 +69,7 @@ const { db_query } = require("../../frameworks/db/db");
   // Comparações feitas
   // Listas Finalizadas
 
-  router.get('/report/balance/:id', async (req, res) => {
+  router.get('/report/balance/:userId', async (req, res) => {
     try {
       const userId = req.params.userId;
 
