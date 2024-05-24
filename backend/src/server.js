@@ -13,12 +13,16 @@ const secretKey = 'PdZdx2PAMRbRQALIPfxiw1PlPenTPfjtP2rqvZDmQfjTGZTJSNZDx05PwZTHP
 
 // Importando os arquivos de rota das APIs
 const communitiesRouter = require("./api/communities/communities");
+const listsCommunitiesRouter = require("./api/communities/listsCommunities");
+
 const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists"); 
-const usersRouter = require("./api/users/users")(secretKey);
-const networkErrorRouter = require("./api/system/ping");
-const reportRouter = require("./api/report/report");
 
+const reportRouter = require("./api/report/report");
+const categoryRouter = require("./api/categories/categories");
+const usersRouter = require("./api/users/users")(secretKey);
+
+const networkErrorRouter = require("./api/system/ping");
 const app = express();
 
 app.use(cors({
@@ -35,6 +39,8 @@ app.use('/api', listsRouter);
 app.use('/api', usersRouter);
 app.use('/api', networkErrorRouter);
 app.use('/api', reportRouter);
+app.use('/api', listsCommunitiesRouter)
+app.use('/api', categoryRouter)
 
 app.get("/", (req, res) => {
   if (req.session.views) {
