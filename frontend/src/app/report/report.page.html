@@ -1,35 +1,64 @@
 <ion-content [fullscreen]="true">
   <div class="content">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab1']">
-  <ion-segment class="header" color="secondary" value="segment" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="segment">
-      <ion-label>Mensal</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="secondary">
-      <ion-label>Semestral</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+    <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab1']">
+    <ion-segment class="header" color="secondary" value="segment" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="segment">
+        <ion-label>Mensal</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="secondary">
+        <ion-label>Semestral</ion-label>
+      </ion-segment-button>
+    </ion-segment>
 
-  <!-- <div>
-    <button ion-button (click)="toggleDateTime()">Selecionar data</button>
-    <ion-datetime *ngIf="showDateTime" minuteValues="0,15,30,45" dayValues="5,10,15,20,25,30"></ion-datetime>
-  </div>
-   -->
-
-  <div [ngSwitch]="segmentValue" class="todosGrafico">
-    <div *ngSwitchCase="'segment'">
-      <img class="graficos" src="../../assets/png/grafico1.png" alt="">
-      <img class="graficos" src="../../assets/png/grafico2.png" alt="">
-      <img class="graficos" src="../../assets/png/grafico3.png" alt="">
-      <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
+    <!-- Section to display total spend -->
+    <div class="report-section">
+      <h2>Total Gasto</h2>
+      <ion-list>
+        <ion-item *ngFor="let spend of totalSpend">
+          <ion-label>
+            <h3>{{ spend.ds_categoria }}</h3>
+            <p>Total Gasto: {{ spend.total_gasto | currency }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </div>
-    <div *ngSwitchCase="'secondary'">
-      <img class="graficos" src="../../assets/png/grafico-1.png" alt="">
-      <img class="graficos" src="../../assets/png/grafico-2.png" alt="">
-      <img class="graficos" src="../../assets/png/grafico-3.png" alt="">
-      <img class="graficos" src="../../assets/png/grafico 4.png" alt="">
+
+    <!-- Section to display total saved -->
+    <div class="report-section">
+      <h2>Total Economizado</h2>
+      <ion-list>
+        <ion-item *ngFor="let save of totalSaved">
+          <ion-label>
+            <h3>{{ save.ds_categoria }}</h3>
+            <p>Total Economizado: {{ save.total_economizado | currency }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Section to display balance -->
+    <div class="report-section">
+      <h2>Balanço Geral</h2>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h3>Listas Criadas</h3>
+            <p>{{ balance.createdList.lists_created }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Listas Finalizadas</h3>
+            <p>{{ balance.completedLists.lists_completed }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Comunidades</h3>
+            <p>{{ balance.communities.communities }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </div>
   </div>
-</div>
-
 </ion-content>

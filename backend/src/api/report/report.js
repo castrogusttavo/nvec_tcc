@@ -8,8 +8,8 @@ const { db_query } = require("../../frameworks/db/db");
 
   router.get('/report/totalSpend/', async (req, res) => {
     try {
-      const { userId } = req.body;
-
+      const { userId } = req.query; // Alteração aqui
+  
       const spend = await db_query(`
         SELECT 
           c.ds_categoria,
@@ -26,7 +26,7 @@ const { db_query } = require("../../frameworks/db/db");
           total_gasto DESC
         LIMIT 4
     `, [userId]);
-
+  
       res.json(spend);
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -39,8 +39,8 @@ const { db_query } = require("../../frameworks/db/db");
 
   router.get('/report/totalSaved/', async (req, res) => {
     try {
-      const { userId } = req.body;
-
+      const { userId } = req.query; // Alteração aqui
+  
       const saved = await db_query(`
         SELECT
           c.ds_categoria,
@@ -57,10 +57,6 @@ const { db_query } = require("../../frameworks/db/db");
           total_economizado DESC
         LIMIT 4
       `, [userId]);
-
-      if (saved.length === 0 || saved.every(row => row.total_economizado === 0)) {
-        return res.json([{ ds_categoria: "Nenhuma categoria", total_economizado: 0 }]);
-      }
       
       res.json(saved);
     } catch (err) {
@@ -75,7 +71,8 @@ const { db_query } = require("../../frameworks/db/db");
 
   router.get('/report/balance/', async (req, res) => {
     try {
-      const { userId } = req.body;
+      const { userId } = req.query;
+      console.log('UserID:', userId);
 
       const createdLists = await db_query(`
         SELECT 
@@ -107,13 +104,13 @@ const { db_query } = require("../../frameworks/db/db");
       `, [userId]);
 
       res.status(200).json({
-        createdList: createdLists,
-        completedLists: completedLists,
-        communities: communities
-      })
+        createdList: { lists_created: createdLists[0].lists_created },
+        completedLists: { lists_completed: completedLists[0].lists_completed },
+        communities: { communities: communities[0].communities }
+      });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
-  });
+  });  
 
   module.exports = router;

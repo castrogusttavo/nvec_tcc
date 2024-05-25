@@ -32,6 +32,7 @@ app.use(cors({
   origin: 'http://localhost:8100'
 }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Configurando as rotas da API para os respectivos caminhos
