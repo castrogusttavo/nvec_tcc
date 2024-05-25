@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+
+
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -17,7 +19,7 @@ export class Tab3Page {
   description!:string;
   expense!:string;
   address!:string;
-  userId!:number;
+  user!:string;
   inputTextValue: string | undefined;
   categoriaSelecionada!:string;
   private apiCategories = 'http://localhost:3001/api/categories'
@@ -26,14 +28,20 @@ export class Tab3Page {
     return this.http.get<any[]>(this.apiCategories);
   }
 
+  // dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
+  // selectedOption: string | undefined = 'Kg';
+  // dropdownVisible: boolean = false;
+  // toggleDropdown() {
+  //   this.dropdownVisible = !this.dropdownVisible;
+  // }
+
   constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
     this.getCategories().subscribe(categories => {
       this.category = categories;
     });
-    this.getUserId();
-    console.log('Id do usuário: ', this.userId)
+    this.getUserName();
   }
 
   // Função para formatar o contador de caracteres
@@ -54,27 +62,20 @@ export class Tab3Page {
 
   async createList(event: { preventDefault: () => void; }) {
     event.preventDefault();
-  
-    console.log('Id do Usuário:', this.userId);
+
     console.log('Name:', this.name);
     console.log('Categoria:', this.category);
     console.log('Descrição:', this.description);
     console.log('Endereço:', this.address);
     console.log('Valor máximo:', this.expense);
-  
+    console.log('data:', this.expense);
+
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/lists',
-        { 
-          nome_lista: this.name, 
-          descricao_lista: this.description,
-          renda_lista: this.expense, 
-          endereco_lista: this.address,
-          id_categoria: this.categoriaSelecionada, 
-          userId: this.userId, 
-        }
+        { nm_lista: this.name, rd_lista:this.expense, ds_lista:this.description,id_categoria:this.categoriaSelecionada, id_usuario:this.user, dt_criacao:'2002-02-01', end_lista:this.address }
       ).toPromise();
-  
+
       console.log('Lista criada com sucesso:', response);
       this.router.navigate(['/tabs/tab1']);
     } catch (err) {
@@ -82,23 +83,15 @@ export class Tab3Page {
     }
   }
 
-getUserId(): void {
-  const token = localStorage.getItem('token');
-  console.log('Token:', token);
-  if (token) {
-    try {
-      const decodedToken: any = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken); 
-      if (decodedToken && decodedToken.userId) {
-        this.userId = decodedToken.userId;
-      }
-    } catch (error) {
-      console.error('Error decoding token:', error);
+  getUserName(): void {
+    const token = localStorage.getItem('token');
+    console.log('Token:', token); // Adicione esta linha para verificar o token no console
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      console.log('Decoded Token:', decodedToken.userId); // Adicione esta linha para verificar o token decodificado no console
+      this.user = decodedToken.userId; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
     }
-  } else {
-    console.warn('Token not found in local storage');
   }
-}
   // // Dropdown medida
   // inputTextValue: string | undefined;
   // dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];

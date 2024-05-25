@@ -9,20 +9,17 @@ const cors = require("cors");
 const db = require("./frameworks/db/db");
 const jwt = require('jsonwebtoken');
 
-const secretKey = 'PdZdx2PAMRbRQALIPfxiw1PlPenTPfjtP2rqvZDmQfjTGZTJSNZDx05PwZTHP2bsPgjAM1TlHPTQPXU9CqMqk2CNZEoEDNYVCskvj1CyCraGCswgC2ediMQzDswGTMGWFAMQk05CjMGUC2ofCtwNZ1GyUCGDCKH9';
+const secretKey = "VjFjd2VGSXhXWGROVldoc1VrVktZVlpzV2xwbFJsWlpZMFZPYTFJd05VcFZNV2hyVmpGS1ZrNVZWVDA9IwSwq2ITFKuKJTEBIyqbp1IeIxgMIycmI2kjoSWfJycMZSMCLGSWq05IpSMAI2ulIzcTF1MeAIMJIQN9";
 
 // Importando os arquivos de rota das APIs
+const addressesRouter = require("./api/addresses/addresses");
 const communitiesRouter = require("./api/communities/communities");
-const listsCommunitiesRouter = require("./api/communities/listsCommunities");
-
+const fixedExpensesRouter = require("./api/fixedExpenses/fixedExpenses");
+const incomeRouter = require("./api/income/income");
 const itemsRouter = require("./api/items/items");
-const listsRouter = require("./api/lists/lists"); 
-
-//const reportRouter = require("./api/report/report");
-const categoryRouter = require("./api/categories/categories");
+const listsRouter = require("./api/lists/lists");
 const usersRouter = require("./api/users/users")(secretKey);
-
-const networkErrorRouter = require("./api/system/ping");
+const categoriesRouter = require("./api/categories/categories");
 const app = express();
 
 app.use(cors({
@@ -32,14 +29,14 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Configurando as rotas da API para os respectivos caminhos
-app.use('/api', communitiesRouter); 
-app.use('/api', itemsRouter); 
-app.use('/api', listsRouter); 
+app.use('/api', addressesRouter);
+app.use('/api', communitiesRouter);
+app.use('/api', fixedExpensesRouter);
+app.use('/api', incomeRouter);
+app.use('/api', itemsRouter);
+app.use('/api', listsRouter);
 app.use('/api', usersRouter);
-app.use('/api', networkErrorRouter);
-//app.use('/api', reportRouter);
-app.use('/api', listsCommunitiesRouter)
-app.use('/api', categoryRouter)
+app.use('/api', categoriesRouter);
 
 app.get("/", (req, res) => {
   if (req.session.views) {

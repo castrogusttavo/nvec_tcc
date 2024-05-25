@@ -4,7 +4,7 @@
 
     <div class="input-button">
       <input type="text" placeholder="Pesquisa..." (input)="onSearchInput($event)">
-      <button type="button" (click)="clearSearchText()">Buscar</button>
+      <button type="button">Buscar</button>
     </div>
 
     <div class="communities" [ngClass]="{'slide-up-animation': searchText}">
@@ -17,11 +17,11 @@
 
     </div>
 
-<!--     <div >
+    <div >
       <app-card-list-search
       *ngFor="let community of communities" name="community"
       [title]="community.nm_comunidade"></app-card-list-search>
 
-    </div> -->
+    </div>
   </div>
 </ion-content>

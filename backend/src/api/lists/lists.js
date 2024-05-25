@@ -1,177 +1,125 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 const { db_query } = require("../../frameworks/db/db");
 
+router.post("/lists", async (req, res) => {
+  try {
+    const { nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria, id_usuario, end_lista } = req.body;
 
-  // New List
-  router.post("/lists", async (req, res) => {
-    try {
-      const {
-        nome_lista,
-        descricao_lista,
-        renda_lista,
-        endereco_lista,
-        id_categoria,
-      } = req.body;
-      const userId = req.userId;
-      const dataAtual = new Date().toISOString().slice(0, 10);
+    const result = await db_query(
+      "INSERT INTO tb_lista (nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria,end_lista, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria,end_lista, id_usuario]
+    );
 
-      const result = await db_query(
-        "INSERT INTO tb_lista (nm_lista, dt_criacao, ds_lista, rd_lista, end_lista, id_categoria, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        [
-          nome_lista,
-          dataAtual,
-          descricao_lista,
-          renda_lista,
-          endereco_lista,
-          id_categoria,
-          userId,
-        ]
-      );
+    res.status(201).json({ id_lista: result.insertId });
+  } catch (err) {
+    console.error("Erro ao inserir lista", err);
+    res.sendStatus(500).send("Erro ao inserir lista");
+  }
+});
 
-      res.status(201).json({
-        message: "Lista criada com sucesso.",
-        id_lista: result.insertId,
-      });
-    } catch (err) {
-      console.error( "Erro ao criar lista", err,
-      );
-      res.status(500).send("Erro ao criar uma nova lista");
+router.get("/lists", async (req, res) => {
+  try {
+    const lists = await db_query("SELECT * FROM tb_lista");
+    res.json(lists);
+  } catch (err) {
+    console.error("Erro ao buscar listas", err);
+    res.sendStatus(500).send("Erro ao buscar listas");
+  }
+});
+
+router.get('/recentLists', async (req, res) => {
+  try {
+    const recentLists = await db_query(
+      "SELECT * FROM tb_lista ORDER BY dt_criacao DESC LIMIT 2"
+    );
+
+    res.status(200).json(recentLists);
+  } catch(err) {
+    console.error("Erro ao buscar listas recentes", err);
+    res.status(500).send("Erro ao buscar listas recentes");
+  }
+});
+
+router.get("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
+
+    const lists = await db_query("SELECT * FROM tb_lista WHERE id_lista = ?", [listId]);
+
+    if (lists.length === 0) {
+      res.status(404).send("Lista não encontrada");
+      return;
     }
-  });
 
-  // Get All Lists
-  router.get("/lists", async (req, res) => {
-    try {
-      const userId = req.userId;
+    res.json(lists[0]);
+  } catch (err) {
+    console.error("Erro ao buscar lista", err);
+    res.sendStatus(500).send("Erro ao buscar lista");
+  }
+});
 
-      const lists = await db_query(
-        "SELECT * FROM tb_lista WHERE id_usuario = ?",
-        [userId]
-      );
+router.put("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
+    const { nm_lista, rd_lista, ds_lista, id_categoria, id_usuario } = req.body;
 
-      res.json(lists);
-    } catch (err) {
-      console.error("Erro ao buscar listas:", err);
-      res.status(500).send("Erro ao buscar listas");
+    if (
+      nm_lista === undefined ||
+      ds_lista === undefined ||
+      id_categoria === undefined ||
+      rd_lista === undefined ||
+      id_usuario === undefined
+    ) {
+      res.status(400).send("Um ou mais valores estão ausentes");
+      return;
     }
-  });
 
-  // Get List by ID
-  router.get("/lists/:id", async (req, res) => {
-    try {
-      const listId = req.params.id;
-      const userId = req.userId;
+    await db_query(
+      "UPDATE tb_lista SET nm_lista = ?, ds_lista = ?, id_categoria = ?, rd_lista=?, id_usuario = ? WHERE id_lista = ?",
+      [nm_lista, ds_lista, id_categoria,rd_lista, id_usuario, listId]
+    );
 
-      const list = await db_query(
-        "SELECT * FROM tb_lista WHERE id_lista = ? AND id_usuario = ?",
-        [listId, userId]
-      );
+    res.status(200).json({ message: "Lista atualizada com sucesso." });
+  } catch (err) {
+    console.error("Erro ao atualizar lista:", err);
+    res.status(500).send("Erro ao atualizar lista");
+  }
+});
 
-      if (list.length === 0) {
-        res.status(404).send("Lista não encontrada");
-        return;
-      }
+router.patch("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
+    const updateFields = req.body;
 
-      res.json(list[0]);
-    } catch (err) {
-      console.error("Erro ao buscar lista:", err);
-      res.status(500).send("Erro ao buscar lista");
-    }
-  });
+    const keys = Object.keys(updateFields);
+    const values = Object.values(updateFields);
 
-  // Get Recent Lists
-  router.get("/recentLists", async (req, res) => {
-    try {
-      const listId = req.params.id;
-      const userId = req.userId;
+    const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
+    
+    await db_query(
+      `UPDATE tb_lista SET ${setQuery} WHERE id_lista = ?`,
+      [...values, listId]
+    );
 
-      const recentLists = await db_query(
-        "SELECT * FROM tb_lista WHERE id_usuario = ? ORDER BY dt_criacao DESC LIMIT 4",
-        [userId]
-      );
+    res.status(200).json({ message: "Item atualizado com sucesso." });
+  } catch (err) {
+    console.error("Erro ao atualizar parcialmente a lista", err);
+    res.sendStatus(500).send("Erro ao atualizar parcialmente a lista");
+  }
+});
 
-      res.status(200).json(recentLists);
-    } catch (err) {
-      console.error("Erro ao buscar listas recentes:", err);
-      res.status(500).send("Erro ao buscar listas recentes");
-    }
-  });
+router.delete("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
 
-  // Alter All Data of List
-  router.put("lists/:id", async (req, res) => {
-    try {
-      const listId = req.params.id;
-      const userId = req.userId;
-      const {
-        nome_lista,
-        descricao_lista,
-        renda_lista,
-        valor_gasto,
-        id_categoria,
-      } = req.body;
+    await db_query("DELETE FROM tb_lista WHERE id_lista = ?", [listId]);
 
-      await db_query(
-        "UPDATE tb_lista SET nm_lista = ?, ds_lista = ?, rd_lista = ?, vl_gasto = ?, id_categoria = ? WHERE id_lista = ? AND id_usuario = ?",
-        [
-          nome_lista,
-          descricao_lista,
-          renda_lista,
-          valor_gasto,
-          id_categoria,
-          listId,
-          userId,
-        ]
-      );
+    res.sendStatus(204);
+  } catch (err) {
+    console.error("Erro ao deletar lista", err);
+    res.sendStatus(500).send("Erro ao deletar lista");
+  }
+});
 
-      res.sendStatus(200).json({ message: "Lista atualizada com sucesso." });
-    } catch (err) {
-      console.error("Erro ao atualizar lista:", err);
-      res.status(500).send("Erro ao atualizar lista");
-    }
-  });
-
-  // Alter Specific Data of List
-  router.patch("lists/:id", async (req, res) => {
-    try {
-      const listId = req.params.id;
-      const userId = req.userId;
-      const updateFields = req.body;
-
-      const keys = Object.keys(updateFields);
-      const values = Object.values(updateFields);
-
-      const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
-
-      await db_query(
-        `UPDATE tb_lista SET ${setQuery} WHERE id_lista = ? AND id_usuario = ?`,
-        [...values, listId, userId]
-      );
-
-      res.sendStatus(200).json({ message: "Lista atualizada com sucesso." });
-    } catch (err) {
-      console.error("Erro ao atualizar parcialmente a lista", err);
-      res.sendStatus(500).send("Erro ao atualizar parcialmente a lista");
-    }
-  });
-
-  // Delete List
-  router.patch("lists/:id", async (req, res) => {
-    try {
-      const listId = req.params.id;
-      const userId = req.userId;
-
-      await db_query(
-        "DELETE FROM tb_lista WHERE id_lista = ? AND id_usuario = ?",
-        [listId, userId]
-      );
-
-      res.sendStatus(200).json({ message: "Lista deletada com sucesso." });
-    } catch (err) {
-      console.error("Erro ao deletar lista", err);
-      res.sendStatus(500).send("Erro ao deletar lista");
-    }
-  });
-
-  module.exports = router;
+module.exports = router;
