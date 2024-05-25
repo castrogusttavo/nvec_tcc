@@ -18,7 +18,32 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
   @Input() name: string = '';
+  @Input() maxlength!: number;
   value: string = '';
+
+  // Atualiza o contador de caracteres
+  updateCounter(event: any) {
+    const input = event.target;
+    const maxLength = parseInt(input.getAttribute('maxlength'), 10);
+    const currentLength = input.value.length;
+    const counter = input.parentElement.querySelector('.counter');
+    if (counter) {
+      if (currentLength === 16) {
+        counter.textContent = 'Limite atingido';
+        counter.style.color = '#FF554A';
+        counter.style.fontSize = '12px';
+        counter.style.marginLeft = '280px';
+      } else if (currentLength > 0){
+        counter.textContent = `${currentLength} / ${maxLength}`;
+        counter.style.color = '#888'; 
+        counter.style.fontSize = '12px';
+        counter.style.marginLeft = '340px';
+      }else {
+        counter.textContent = '';
+      }
+    }    
+  }
+
 
   onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};

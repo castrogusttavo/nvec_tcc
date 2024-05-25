@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <div class="content">
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab1']">
-  <ion-segment class="header" color="secondary" value="secondary" (ionChange)="segmentChanged($event)">
+  <ion-segment class="header" color="secondary" value="segment" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="segment">
       <ion-label>Listas</ion-label>
     </ion-segment-button>
@@ -30,7 +30,7 @@
               <span class="yellow-text">{{listAddress}}</span> -->
             </div>
   
-            <div class="total-list">
+            <div class="totalList">
               <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
               <!-- <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
   
@@ -43,21 +43,21 @@
      </div>
   
      <div class="compare-lists">
-      <button class="btn-lists" style="color: #ffffff">Comparar Listas</button>
 
-        <div class="lists-component">
-
-          <div class="lists-users">
+      <!-- <div class="listEconomic">
+        <div class="list">
+          <h3 class="titleText">Esta é a lista mais barata</h3>
+          <div class="value">
             <div class="name-address">
-              <h4 class="black-text">Nome</h4>
-              <span class="grey-text span">Local: local</span>
-              <!-- <h4>{{userName}}</h4><br>
-              <span>{{listAddress}}</span> -->
+              <h5 class="black-text">Nome do usuário</h5>
+              <span class="grey-text">Local: local da lista</span>
+              <h4 class="yellow-text">{{userName}}</h4><br>
+              <span class="yellow-text">{{listAddress}}</span>
             </div>
   
-            <div class="total-list">
-              <h3  class="yellow-text">R$ <b class="yellow-text">300,34</b></h3>
-              <!-- <h3  class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
+            <div class="totalList">
+              <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
+              <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3>
   
               <button class="btn-lists btn-list">
                 <img src="../../assets/svg/arrow_forward.svg" alt="">
@@ -65,9 +65,35 @@
             </div>
           </div>
         </div>
+      </div> -->
+
+
+      <div class="usersLists">
+        <button class="btn-lists" style="color: #ffffff">Comparar Listas</button>
+
+          <div class="lists-component">
+
+            <div class="lists-users">
+              <div class="name-address">
+                <h4 class="black-text">Nome</h4>
+                <span class="grey-text span">Local: local</span>
+                <!-- <h4>{{userName}}</h4><br>
+                <span>{{listAddress}}</span> -->
+              </div>
+    
+              <div class="total-list">
+                <h3  class="yellow-text">R$ <b class="yellow-text">300,34</b></h3>
+                <!-- <h3  class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
+    
+                <button class="btn-lists btn-list">
+                  <img src="../../assets/svg/arrow_forward.svg" alt="">
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
- 
  
     <div *ngSwitchCase="'secondary'">
 
@@ -112,5 +138,8 @@
 
   </div>
 </div>
+
+
+
 
 </ion-content>

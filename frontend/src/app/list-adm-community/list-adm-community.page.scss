@@ -1,0 +1,116 @@
+@import '../../global.scss';
+
+.content{
+    padding: 16px 24px ;
+}
+.cardBlue{
+    background-color: var(--Color-brand1, #006EFF);
+    border-radius: 25px;
+    width: 100%; 
+    padding: 16px 25px 38px 25px;
+    z-index: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.nameComunnity{
+    color: var(--Color-bg-neutral, #F1F2F4);
+    font-family: 'Poppins';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26.4px; 
+    margin-bottom: 3px;
+}
+
+.category{
+    color: var(--Color-inverted-inverted300, #DCDFE4);
+    text-align: left;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22.4px;
+    margin-top: 0px;
+    margin-bottom: 3px;
+}
+
+.date{
+    color: var(--Color-inverted-inverted300, #DCDFE4);
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 0px;
+}
+
+.boxSobre{
+    width: 100%;
+    max-width: 354px;
+    border: 2px solid var(--Color-inverted-inverted300, #DCDFE4);
+    border-radius: 8px;
+    z-index: 1;
+    flex-shrink: 1;
+    color: var(--Color-inverted-inverted300, #DCDFE4);
+    padding: 10px; 
+    box-sizing: border-box; 
+    overflow-wrap: break-word; 
+}
+
+.textComunnity{
+    margin: 0; 
+    line-height: 1.5; 
+    word-wrap: break-word; 
+}
+
+.btn-edit{
+    margin-right: -27px;
+    margin-top: 15px;
+    position: absolute;
+    right: 0;
+    width:53px;
+    height:53px;
+    padding: 13px;
+    border-radius: 50%;
+}
+
+h3{
+    color: var(--Color-bg, #FFF);
+    font-family: 'Poppins';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 11.2px; 
+    text-align: justify;
+    padding-top: 8%;
+    text-decoration-line: underline;
+}
+
+.col{
+    height: 60px;
+    padding-top: 10%;
+}
+
+.title-filter{
+    display: flex;
+    justify-content: space-between;
+    margin: 7% 0 5% 0;
+}
+
+.itens-div{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    justify-content: space-between;
+    overflow: auto;
+    height: 400px;
+    width: 100%;
+    overflow-x: clip;
+}
+
+.forward{
+    padding-left:  5%;
+    padding-top: 5%;
+}
