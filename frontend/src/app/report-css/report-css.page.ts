@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.page.html',
-  styleUrls: ['./report.page.scss'],
+  selector: 'app-report-css',
+  templateUrl: './report-css.page.html',
+  styleUrls: ['./report-css.page.scss'],
 })
-
-export class ReportPage implements OnInit {
+export class ReportCssPage implements OnInit {
   public segmentValue: string = 'segment';
   private previousToken: string | null = null;
 
@@ -23,7 +22,7 @@ export class ReportPage implements OnInit {
 
   user!:string;
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) { }
 
   segmentChanged(event: any){
     console.log("Segment changed:", event.detail.value);
@@ -37,6 +36,7 @@ export class ReportPage implements OnInit {
     this.getTotalSpend();
     this.getTotalSaved();
     this.getBalance();
+    this.getTotalValueByCategory();
   }
 
   getUserId(): void {
@@ -94,6 +94,21 @@ export class ReportPage implements OnInit {
       this.balance = data;
     }, err => {
       console.error('Erro ao buscar balanço', err);
+    });
+  }
+
+  getTotalValueByCategory(): void {
+    this.http.get<any[]>('http://localhost:3001/api/report/totalValueByCategory', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      params: {
+        userId: this.user
+      }
+    }).subscribe(data => {
+      console.log('Total Value By Category:', data);
+    }, err => {
+      console.error('Erro ao buscar valor total por categoria', err);
     });
   }
 

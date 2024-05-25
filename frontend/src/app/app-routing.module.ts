@@ -163,6 +163,10 @@ const routes: Routes = [
   },  {
     path: 'update-item-user',
     loadChildren: () => import('./update-item-user/update-item-user.module').then( m => m.UpdateItemUserPageModule)
+  },
+  {
+    path: 'report-css',
+    loadChildren: () => import('./report-css/report-css.module').then( m => m.ReportCssPageModule)
   }
 
 ];

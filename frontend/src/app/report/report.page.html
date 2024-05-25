@@ -16,8 +16,10 @@
       <ion-list>
         <ion-item *ngFor="let spend of totalSpend">
           <ion-label>
-            <h3>{{ spend.ds_categoria }}</h3>
-            <p>Total Gasto: {{ spend.total_gasto | currency }}</p>
+            <div class="spend-item">
+              <h3>{{ spend.ds_categoria }}</h3>
+              <p>Total Gasto: {{ spend.total_gasto | currency }}</p>
+            </div>
           </ion-label>
         </ion-item>
       </ion-list>
@@ -27,14 +29,19 @@
     <div class="report-section">
       <h2>Total Economizado</h2>
       <ion-list>
-        <ion-item *ngFor="let save of totalSaved">
+        <ion-item>
           <ion-label>
-            <h3>{{ save.ds_categoria }}</h3>
-            <p>Total Economizado: {{ save.total_economizado | currency }}</p>
+            <div class="save-items">
+              <div class="save-item" *ngFor="let save of totalSaved">
+                <h3>{{ save.ds_categoria }}</h3>
+                <p>Total Economizado: {{ save.total_economizado | currency }}</p>
+              </div>
+            </div>
           </ion-label>
         </ion-item>
       </ion-list>
     </div>
+
 
     <!-- Section to display balance -->
     <div class="report-section">
