@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { db_query } = require("../../frameworks/db/db");
 
+//insert categories
   router.post("/categories/:id", async (req, res) => {
     try {
       const {ds_categoria } = req.body;
@@ -28,6 +29,7 @@ const { db_query } = require("../../frameworks/db/db");
     }
   });
 
+  //read categories
   router.get("/categories", async (req, res) => {
     try {
       const categorias = await db_query("SELECT * FROM tb_categoria");
@@ -58,6 +60,9 @@ const { db_query } = require("../../frameworks/db/db");
       res.status(500).send("Erro ao buscar categoria.");
     }
   });
+
+  //update categories
+
   router.put("/categories/:id", async (req, res) => {
     try {
       const categoriaId = req.params.id;
@@ -108,6 +113,8 @@ const { db_query } = require("../../frameworks/db/db");
       res.status(500).send("Erro ao alterar parcialmente a comunidade.");
     }
   });
+
+  //delete categories
 
   router.delete("/categories/:id", async (req, res) => {
     try {

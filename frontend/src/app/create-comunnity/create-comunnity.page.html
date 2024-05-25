@@ -8,7 +8,8 @@
   <form (ngSubmit)="createCommunity($event)" >
     <div class="inputs">  
       <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
-      <!-- <input name="category" [(ngModel)]="category" placeholder="Categoria" class="inputText" > -->
+      <input name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText" >
+      <!-- <input address="category" [(ngModel)]="category" placeholder="Categoria" class="inputText" > -->
       
       <ion-item>
         <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
