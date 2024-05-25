@@ -1,7 +1,8 @@
+@import "../../global.scss";
+
 :host{
     .content{
-        padding: 16px 24px ;
-  
+        padding: 16px;
     }
     .card-list-all{
         margin-top: 35px;
@@ -19,6 +20,7 @@
         height: 400px;
         width: 100%;
         overflow-x: clip;
+        padding-right: 40px;
     }
     .forward{
         padding-left:  5%;
@@ -40,3 +42,58 @@
     border-radius: 50%;
   }
   
+
+.itens-div{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    justify-content: space-between;
+    overflow: auto;
+    height: 400px;
+    width: 100%;
+    overflow-x: clip;
+    left: 0%;
+}
+
+.list{
+    width: 100%;
+    padding: 0px 28px 17px 28px;
+}
+
+.user-price{
+    margin-top: 10px; 
+    display: flex;
+    justify-content: space-between;
+}
+.name-address{
+    height: fit-content;
+}
+.black-text{
+    color: #000000;
+    font-size: 16px;
+}
+.grey-text{
+    color: #626F86;
+    font-size: 18px;
+}
+.totalList{
+    display: flex;
+    justify-content: right;
+    padding-bottom: 20px;
+}
+
+.yellow-text{
+    color: #{$brand2};
+    font-weight: 600;
+}
+
+hr{
+    width: 342px;
+    height: 1.971px;
+    flex-shrink: 0;
+    border-radius: 7.2px;
+    background: var(--Color-inverted-inverted300, #DCDFE4);
+    display: flex;
+    right: auto;
+    left: auto;
+    justify-content: center;
+}
