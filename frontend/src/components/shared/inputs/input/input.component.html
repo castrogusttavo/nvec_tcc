@@ -3,9 +3,11 @@
   [type]="type"
   [placeholder]="placeholder"
   [name]="name"
-  [(ngModel)]="value"
+  [(ngModel)]="inputValue"
   (ngModelChange)="onChange($event)"
   (input)="updateCounter($event)"
   [maxlength]="maxlength"
+  [readonly]="readOnly"
 />
 <div [class.counter]="type === 'password'"></div>
+<ng-content></ng-content>

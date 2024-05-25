@@ -19,7 +19,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder: string = '';
   @Input() name: string = '';
   @Input() maxlength!: number;
-  value: string = '';
+  inputValue: string = '';
+  @Input() readOnly: boolean = false;
 
   // Atualiza o contador de caracteres
   updateCounter(event: any) {
@@ -35,21 +36,20 @@ export class InputComponent implements OnInit, ControlValueAccessor {
         counter.style.marginLeft = '280px';
       } else if (currentLength > 0){
         counter.textContent = `${currentLength} / ${maxLength}`;
-        counter.style.color = '#888'; 
+        counter.style.color = '#888';
         counter.style.fontSize = '12px';
         counter.style.marginLeft = '340px';
       }else {
         counter.textContent = '';
       }
-    }    
+    }
   }
-
 
   onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};
 
   writeValue(value: any): void {
-    this.value = value;
+    this.inputValue = value;
   }
 
   registerOnChange(fn: (value: any) => void): void {

@@ -24,20 +24,6 @@ router.post("/communities", async (req, res) => {
   }
 });
 
-// Rota GET para buscar comunidades recentes
-router.get("/recentCommunities", async (req, res) => {
-  try {
-    const recentCommunities = await db_query(
-      "SELECT * FROM tb_comunidade ORDER BY id_comunidade DESC LIMIT 3"
-    );
-
-    res.status(200).json(recentCommunities);
-  } catch (err) {
-    console.error("Erro ao buscar comunidades recentes:", err);
-    res.status(500).send("Erro ao buscar comunidades recentes.");
-  }
-});
-
 // Rota GET para buscar todas as comunidades
 router.get("/communities", async (req, res) => {
   try {

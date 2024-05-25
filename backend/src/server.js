@@ -20,6 +20,8 @@ const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists");
 const usersRouter = require("./api/users/users")(secretKey);
 const categoriesRouter = require("./api/categories/categories");
+const dataUserRouter = require("./api/users/dataUser");
+const reportRouter = require("./api/report/report");
 
 const checkInternetRouter = require("./api/system/ping");
 const cacheRouter = require("./api/system/cache")(secretKey);
@@ -43,6 +45,8 @@ app.use('/api', itemsRouter);
 app.use('/api', listsRouter);
 app.use('/api', usersRouter);
 app.use('/api', categoriesRouter);
+app.use('/api', dataUserRouter);
+app.use('/api', reportRouter);
 
   // Rotas e Dados do sistema
 app.use('/api', checkInternetRouter);

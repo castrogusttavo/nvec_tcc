@@ -31,7 +31,7 @@ router.get("/lists", async (req, res) => {
 router.get('/recentLists', async (req, res) => {
   try {
     const recentLists = await db_query(
-      "SELECT * FROM tb_lista ORDER BY dt_criacao DESC LIMIT 2"
+      "SELECT * FROM tb_lista ORDER BY dt_criacao DESC LIMIT 4"
     );
 
     res.status(200).json(recentLists);

@@ -6,9 +6,9 @@ const { db_query } = require("../../frameworks/db/db");
   // vl_gasto por lista + id_ctg 
   // 4 categorias que mais gastou
 
-  router.get('/report/totalSpend/:userId', async (req, res) => {
+  router.get('/report/totalSpend/', async (req, res) => {
     try {
-      const userId = req.params.userId;
+      const { userId } = req.body;
 
       const spend = await db_query(`
         SELECT 
@@ -37,14 +37,14 @@ const { db_query } = require("../../frameworks/db/db");
   // vl_total - vl_gasto + id_ctg
   // 4 categorias que mais economizou
 
-  router.get('/report/totalSaved/:userId', async (req, res) => {
+  router.get('/report/totalSaved/', async (req, res) => {
     try {
-      const userId = req.params.userId;
+      const { userId } = req.body;
 
       const saved = await db_query(`
         SELECT
           c.ds_categoria,
-          SUM(l.rd_lista - l.vl_gasto) as total_economizado
+          COALESCE(SUM(l.rd_lista - l.vl_gasto), 0) as total_economizado
         FROM
           tb_lista l
         JOIN
@@ -57,6 +57,10 @@ const { db_query } = require("../../frameworks/db/db");
           total_economizado DESC
         LIMIT 4
       `, [userId]);
+
+      if (saved.length === 0 || saved.every(row => row.total_economizado === 0)) {
+        return res.json([{ ds_categoria: "Nenhuma categoria", total_economizado: 0 }]);
+      }
       
       res.json(saved);
     } catch (err) {
@@ -69,9 +73,9 @@ const { db_query } = require("../../frameworks/db/db");
   // Comparações feitas
   // Listas Finalizadas
 
-  router.get('/report/balance/:userId', async (req, res) => {
+  router.get('/report/balance/', async (req, res) => {
     try {
-      const userId = req.params.userId;
+      const { userId } = req.body;
 
       const createdLists = await db_query(`
         SELECT 
