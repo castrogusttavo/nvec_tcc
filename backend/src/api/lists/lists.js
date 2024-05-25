@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { db_query } = require("../../frameworks/db/db");
 
+
   // New List
   router.post("/lists", async (req, res) => {
     try {
@@ -10,20 +11,20 @@ const { db_query } = require("../../frameworks/db/db");
         nome_lista,
         descricao_lista,
         renda_lista,
-        valor_gasto,
+        endereco_lista,
         id_categoria,
       } = req.body;
       const userId = req.userId;
       const dataAtual = new Date().toISOString().slice(0, 10);
 
       const result = await db_query(
-        "INSERT INTO tb_lista (nm_lista, dt_criacao, ds_lista, rd_lista, vl_gasto, id_categoria, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO tb_lista (nm_lista, dt_criacao, ds_lista, rd_lista, end_lista, id_categoria, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)",
         [
           nome_lista,
           dataAtual,
           descricao_lista,
           renda_lista,
-          valor_gasto,
+          endereco_lista,
           id_categoria,
           userId,
         ]
@@ -34,7 +35,8 @@ const { db_query } = require("../../frameworks/db/db");
         id_lista: result.insertId,
       });
     } catch (err) {
-      console.error("Erro ao criar lista", err);
+      console.error( "Erro ao criar lista", err,
+      );
       res.status(500).send("Erro ao criar uma nova lista");
     }
   });

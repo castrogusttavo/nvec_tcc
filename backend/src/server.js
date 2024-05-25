@@ -18,16 +18,15 @@ const listsCommunitiesRouter = require("./api/communities/listsCommunities");
 const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists"); 
 
-const reportRouter = require("./api/report/report");
-
+//const reportRouter = require("./api/report/report");
+const categoryRouter = require("./api/categories/categories");
 const usersRouter = require("./api/users/users")(secretKey);
 
 const networkErrorRouter = require("./api/system/ping");
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:8100',
-  credentials: true
+  origin: 'http://localhost:8100'
 }));
 app.use(express.json());
 app.use(bodyParser.json());
@@ -38,8 +37,9 @@ app.use('/api', itemsRouter);
 app.use('/api', listsRouter); 
 app.use('/api', usersRouter);
 app.use('/api', networkErrorRouter);
-app.use('/api', reportRouter);
+//app.use('/api', reportRouter);
 app.use('/api', listsCommunitiesRouter)
+app.use('/api', categoryRouter)
 
 app.get("/", (req, res) => {
   if (req.session.views) {

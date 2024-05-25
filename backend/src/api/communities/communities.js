@@ -2,137 +2,138 @@ const express = require("express");
 const router = express.Router();
 const { db_query } = require("../../frameworks/db/db");
 
-  // New Community
-  router.post("/communities/:id", async (req, res) => {
-    try {
-      const { nome_comunidade, sobre_comunidade, id_categoria } = req.body;
+// New Community
+router.post('/communities', async (req, res) => {
+  try {
+    const { nome_comunidade, sobre_comunidade, id_categoria, endereco_comunidade } = req.body;
 
-      if (!nome_comunidade || !sobre_comunidade || !id_categoria) {
-        return res.status(400).json({ error: "Campos obrigatórios ausentes." });
-      }
-
-      const comunidades = await db_query(
-        "INSERT INTO tb_comunidade (nm_comunidade, ds_comunidade, id_categoria) VALUES (?, ?, ?)",
-        [nome_comunidade, sobre_comunidade, id_categoria]
-      );
-
-      res
-        .status(200)
-        .json({
-          message: "Comunidade criada com sucesso.",
-          id_comunidade: comunidades.insertId,
-        });
-    } catch (err) {
-      console.error("Erro ao criar comunidade:", err);
-      res.status(500).send("Erro ao criar comunidade.");
+    if (!nome_comunidade || !sobre_comunidade || !id_categoria || !endereco_comunidade) {
+      return res.status(400).json({ error: 'Missing required fields.' });
     }
-  });
 
-  // Get All Communities
-  router.get("/communities", async (req, res) => {
-    try {
-      const comunidades = await db_query("SELECT * FROM tb_comunidade");
+    const result = await db_query(
+      'INSERT INTO tb_comunidade (nm_comunidade, sb_comunidade, id_categoria, end_comunidade) VALUES (?, ?, ?, ?)',
+      [nome_comunidade, sobre_comunidade, id_categoria, endereco_comunidade]
+    );
 
-      res.status(200).json(comunidades);
-    } catch (err) {
-      console.error("Erro ao buscar comunidades:", err);
-      res.status(500).send("Erro ao buscar comunidades.");
+    res.status(200).json({
+      message: 'Community created successfully.',
+      id_comunidade: result.insertId,
+    });
+  } catch (err) {
+    console.error('Error creating community:', err);
+    res.status(500).send('Error creating community.');
+  }
+});
+
+// Get Community by ID
+router.get("/communities", async (req, res) => {
+  try {
+    const communities = await db_query("SELECT * FROM db_nvec.tb_comunidade;");
+    
+    if (communities.length === 0) {
+      return res.status(404).json({ error: "No communities found." });
     }
-  });
 
-  // Get Community by ID
-  router.get("/communities/:id", async (req, res) => {
-    try {
-      const comunidadeId = req.params.id;
+    res.status(200).json(communities);
+  } catch (err) {
+    console.error("Error fetching communities:", err);
+    res.status(500).send("Error fetching communities.");
+  }
+});
 
-      const comunidade = await db_query(
-        "SELECT * FROM tb_comunidade WHERE id_comunidade = ?",
-        [comunidadeId]
-      );
+// Get Community by ID
+router.get("/communities/:id", async (req, res) => {
+  try {
+    const communityId = req.params.id;
+    const community = await db_query(
+      "SELECT * FROM db_nvec.tb_comunidade WHERE id_comunidade = ?;",
+      [communityId]
+    );
 
-      if (comunidade.length === 0) {
-        return res.status(404).json({ error: "Comunidade não encontrada." });
-      }
-
-      res.status(200).json(comunidade[0]);
-    } catch (err) {
-      console.error("Erro ao buscar comunidade:", err);
-      res.status(500).send("Erro ao buscar comunidade.");
+    if (community.length === 0) {
+      return res.status(404).json({ error: "Community not found." });
     }
-  });
 
-  // Alter All Data of Community
-  router.put("/communities/:id", async (req, res) => {
-    try {
-      const comunidadeId = req.params.id;
-      const { nome_comunidade, sobre_comunidade, id_categoria } = req.body;
+    res.status(200).json(community[0]);
+  } catch (err) {
+    console.error("Error fetching community:", err);
+    res.status(500).send("Error fetching community.");
+  }
+});
 
-      if (!nome_comunidade || !sobre_comunidade || !id_categoria) {
-        return res.status(400).json({ error: "Campos obrigatórios ausentes." });
-      }
+// Update All Data of Community
+router.put("/communities/:id", async (req, res) => {
+  try {
+    const communityId = req.params.id;
+    const { nome_comunidade, sobre_comunidade, id_categoria, endereco_comunidade } = req.body;
 
-      const result = await db_query(
-        "UPDATE tb_comunidade SET nm_comunidade = ?, ds_comunidade = ?, id_categoria = ? WHERE id_comunidade = ?",
-        [nome_comunidade, sobre_comunidade, id_categoria, comunidadeId]
-      );
-
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ error: "Comunidade não encontrada." });
-      }
-
-      res.status(200).json({ message: "Comunidade alterada com sucesso." });
-    } catch (err) {
-      console.error("Erro ao alterar comunidade:", err);
-      res.status(500).send("Erro ao alterar comunidade.");
+    if (!nome_comunidade || !sobre_comunidade || !id_categoria || !endereco_comunidade) {
+      return res.status(400).json({ error: "Missing required fields." });
     }
-  });
 
-  // Alter Specific Data of Community
-  router.patch("/communities/:id", async (req, res) => {
-    try {
-      const comunidadeId = req.params.id;
-      const updateFields = req.body;
+    const result = await db_query(
+      "UPDATE tb_comunidade SET nm_comunidade = ?, sb_comunidade = ?, id_categoria = ?, end_comunidade = ? WHERE id_comunidade = ?",
+      [nome_comunidade, sobre_comunidade, id_categoria, endereco_comunidade, communityId]
+    );
 
-      const keys = Object.keys(updateFields);
-      const values = Object.values(updateFields);
-
-      const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
-
-      const result = await db_query(
-        `UPDATE tb_comunidade SET ${setQuery} WHERE id_comunidade = ?`,
-        [...values, comunidadeId]
-      );
-
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ error: "Comunidade não encontrada." });
-      }
-
-      res.status(200).json({ message: "Comunidade alterada com sucesso." });
-    } catch (err) {
-      console.error("Erro ao alterar parcialmente a comunidade", err);
-      res.status(500).send("Erro ao alterar parcialmente a comunidade.");
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Community not found." });
     }
-  });
 
-  // Delete Community by ID
-  router.delete("/communities/:id", async (req, res) => {
-    try {
-      const comunidadeId = req.params.id;
+    res.status(200).json({ message: "Community updated successfully." });
+  } catch (err) {
+    console.error("Error updating community:", err);
+    res.status(500).send("Error updating community.");
+  }
+});
 
-      const result = await db_query(
-        "DELETE FROM tb_comunidade WHERE id_comunidade = ?",
-        [comunidadeId]
-      );
+// Update Specific Data of Community
+router.patch("/communities/:id", async (req, res) => {
+  try {
+    const communityId = req.params.id;
+    const updateFields = req.body;
 
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ error: "Comunidade não encontrada." });
-      }
+    const keys = Object.keys(updateFields);
+    const values = Object.values(updateFields);
 
-      res.status(200).json({ message: "Comunidade deletada com sucesso." });
-    } catch (err) {
-      console.error("Erro ao deletar comunidade:", err);
-      res.status(500).send("Erro ao deletar comunidade.");
+    const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
+
+    const result = await db_query(
+      `UPDATE tb_comunidade SET ${setQuery} WHERE id_comunidade = ?`,
+      [...values, communityId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Community not found." });
     }
-  });
 
-  module.exports = router;
+    res.status(200).json({ message: "Community updated successfully." });
+  } catch (err) {
+    console.error("Error partially updating community:", err);
+    res.status(500).send("Error partially updating community.");
+  }
+});
+
+// Delete Community by ID
+router.delete("/communities/:id", async (req, res) => {
+  try {
+    const communityId = req.params.id;
+
+    const result = await db_query(
+      "DELETE FROM tb_comunidade WHERE id_comunidade = ?",
+      [communityId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Community not found." });
+    }
+
+    res.status(200).json({ message: "Community deleted successfully." });
+  } catch (err) {
+    console.error("Error deleting community:", err);
+    res.status(500).send("Error deleting community.");
+  }
+});
+
+module.exports = router;

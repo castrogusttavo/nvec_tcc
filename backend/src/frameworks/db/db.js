@@ -7,7 +7,7 @@ const dbConfig = {
     database: 'db_nvec',
     waitForConnections: true,
     connectionLimit: 300,
-    queueLimit: 0
+    queueLimit: 0,
     // port: '3306' 
     // port: '3307' 
 };

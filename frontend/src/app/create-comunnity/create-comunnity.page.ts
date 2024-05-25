@@ -58,20 +58,25 @@ export class CreateComunnityPage implements OnInit {
     event.preventDefault();
 
     console.log('Name:', this.name);
-    console.log('Categoria:', this.category);
-    console.log('Sobre:', this.about);
-    console.log('address:', this.address);
+    console.log('Category:', this.categoriaSelecionada);
+    console.log('About:', this.about);
+    console.log('Address:', this.address);
 
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/communities',
-        { nm_comunidade: this.name, id_categoria: this.categoriaSelecionada, sb_comunidade:this.about, end_comunidade:this.address }
+        {
+          nome_comunidade: this.name,
+          sobre_comunidade: this.about,
+          id_categoria: this.categoriaSelecionada,
+          endereco_comunidade: this.address
+        }
       ).toPromise();
 
-      console.log('Comunidade criada com sucesso:', response);
+      console.log('Community created successfully:', response);
       this.router.navigate(['/tabs/tab4']);
     } catch (err) {
-      console.error('Erro ao criar comunidade:', err);
+      console.error('Error creating community:', err);
     }
   }
 
