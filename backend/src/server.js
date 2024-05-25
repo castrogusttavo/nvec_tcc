@@ -20,6 +20,10 @@ const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists");
 const usersRouter = require("./api/users/users")(secretKey);
 const categoriesRouter = require("./api/categories/categories");
+
+const checkInternetRouter = require("./api/system/ping");
+const cacheRouter = require("./api/system/cache")(secretKey);
+
 const app = express();
 
 app.use(cors({
@@ -29,6 +33,8 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Configurando as rotas da API para os respectivos caminhos
+
+  // Rotas e Dados do usuário
 app.use('/api', addressesRouter);
 app.use('/api', communitiesRouter);
 app.use('/api', fixedExpensesRouter);
@@ -37,6 +43,10 @@ app.use('/api', itemsRouter);
 app.use('/api', listsRouter);
 app.use('/api', usersRouter);
 app.use('/api', categoriesRouter);
+
+  // Rotas e Dados do sistema
+app.use('/api', checkInternetRouter);
+app.use('/api', cacheRouter);
 
 app.get("/", (req, res) => {
   if (req.session.views) {
