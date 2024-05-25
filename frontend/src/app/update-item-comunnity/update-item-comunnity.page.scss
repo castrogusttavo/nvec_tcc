@@ -1,4 +1,3 @@
-
 @import "../../global.scss";
 
 .forward{
@@ -21,7 +20,6 @@
 }
 
 
-
 input{
     margin: 10px;
     width: 183px;
@@ -31,14 +29,14 @@ input{
     border: var(--Space-space-025, 2px) solid $N300;
     background: transparent;
 }
-  
+
 ::placeholder {
     color: $N800D;
     font-family: 'Poppins';
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
-    line-height: 16px; 
+    line-height: 16px;
 }
 
 .buttonBig{
@@ -49,8 +47,8 @@ input{
 }
 
 .inputText::placeholder{
-    position: absolute; 
-    top: 10px; 
+    position: absolute;
+    top: 10px;
     left: 10px;
     text-align: top;
 }
@@ -61,8 +59,8 @@ input{
 }
 
 .inputName::placeholder{
-    position: absolute; 
-    top: 10px; 
+    position: absolute;
+    top: 10px;
     left: 10px;
     text-align: top;
 }
