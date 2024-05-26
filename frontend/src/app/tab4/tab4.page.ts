@@ -18,6 +18,7 @@ export class Tab4Page implements OnInit {
   itemsToShow: any[] = this.originalItems;
 
   email: string = '';
+  userId!:number;
   userName: string | undefined;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService
@@ -27,7 +28,7 @@ export class Tab4Page implements OnInit {
   private apiCommunity = "http://localhost:3001/api/communities";
 
   getCommunities():Observable<any[]>{
-    return this.http.get<any[]>(this.apiCommunity);
+    return this.http.get<any[]>(this.apiCommunity,{ params: { id_usuario:this.userId } });
   }
 
   ngOnInit(): void {
@@ -59,6 +60,7 @@ export class Tab4Page implements OnInit {
       const decodedToken = this.jwtHelper.decodeToken(token);
       console.log('Decoded Token:', decodedToken); // Adicione esta linha para verificar o token decodificado no console
       this.userName = decodedToken.userName; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
+      this.userId = decodedToken.userId; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
     }
   }
 }

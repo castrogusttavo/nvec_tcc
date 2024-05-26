@@ -6,6 +6,7 @@ const { db_query } = require("../../frameworks/db/db");
 router.post("/communities", async (req, res) => {
   try {
     const { nm_comunidade, id_categoria, sb_comunidade, end_comunidade} = req.body;
+    const {id_comunidade, id_usuario} = req.body;
 
     if (!nm_comunidade || !id_categoria  || !sb_comunidade || !end_comunidade) {
       return res.status(400).json({ error: "Campos obrigatórios ausentes." });
@@ -17,7 +18,20 @@ router.post("/communities", async (req, res) => {
       [nm_comunidade, id_categoria, sb_comunidade, end_comunidade]
     );
 
-    res.status(201).json({ id_comunidade: result.insertId });
+    this.id_comunidade=result.insertId;
+
+    res.status(201).json({ id_comunidade:this.id_comunidade});
+
+    const UserCommunity = await db_query(
+      "INSERT INTO tb_comunidade_usuario(id_comunidade, id_usuario) VALUES (?,?) ",
+      [id_comunidade, id_usuario]
+    );
+
+    if (!UserCommunity.insertId) {
+      return res.status(500).json({ error: "Erro ao inserir na tabela tb_comunidade_usuario." });
+    }
+
+    res.status(201).json({ id_comunidade });
   } catch (err) {
     console.error("Erro ao inserir comunidade:", err);
     res.status(500).send("Erro ao inserir comunidade.");
