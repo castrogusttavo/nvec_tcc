@@ -1,7 +1,17 @@
 <ion-content [fullscreen]="true">
   <div class="content">
-    <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab1']">
-    <ion-segment class="header" color="secondary" value="segment" (ionChange)="segmentChanged($event)">
+    <img
+      class="forward"
+      src="../../assets/svg/arrow_forward_ios.svg"
+      alt=""
+      [routerLink]="['/tabs/tab1']"
+    />
+    <ion-segment
+      class="header"
+      color="secondary"
+      value="segment"
+      (ionChange)="segmentChanged($event)"
+    >
       <ion-segment-button value="segment">
         <ion-label>Mensal</ion-label>
       </ion-segment-button>
@@ -10,62 +20,105 @@
       </ion-segment-button>
     </ion-segment>
 
-    <!-- Section to display total spend -->
-    <div class="report-section">
-      <h2>Total Gasto</h2>
-      <ion-list>
-        <ion-item *ngFor="let spend of totalSpend">
-          <ion-label>
-            <div class="spend-item">
-              <h3>{{ spend.ds_categoria }}</h3>
-              <p>Total Gasto: {{ spend.total_gasto | currency }}</p>
-            </div>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
+    <div [ngSwitch]="segmentValue" class="todosGrafico">
+      <div *ngSwitchCase="'segment'">
+        <!-- === Total Gasto === -->
+        <div class="totalSpend">
+          <h1>Total Gasto</h1>
 
-    <!-- Section to display total saved -->
-    <div class="report-section">
-      <h2>Total Economizado</h2>
-      <ion-list>
-        <ion-item>
-          <ion-label>
-            <div class="save-items">
-              <div class="save-item" *ngFor="let save of totalSaved">
-                <h3>{{ save.ds_categoria }}</h3>
-                <p>Total Economizado: {{ save.total_economizado | currency }}</p>
+          <div class="graph">
+            <div class="columnData" *ngFor="let spend of totalSpend">
+              <p class="categoryName">{{ spend.ds_categoria }}</p>
+
+              <div class="lineData">
+                <!-- Barra de progresso (cinza) -->
+                <div
+                  class="percentData"
+                  [style.height]="heights[spend.ds_categoria]"
+                ></div>
+                <!-- Barra de avanço (vermelha) -->
+              </div>
+
+              <p class="numberValue">
+                {{ spend.total_gasto | currency: 'BRL' }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- === Total Economizado === -->
+        <div class="totalSaved">
+          <h1>Total Economizado</h1>
+
+          <div class="graph">
+            <div class="columnData" *ngFor="let save of totalSaved">
+              <p class="categoryName">{{ save.ds_categoria }}</p>
+
+              <div class="lineData">
+                <!-- Barra de progresso (cinza) -->
+                <div
+                  class="percentData"
+                  [style.height]="heightsSaved[save.ds_categoria]"
+                ></div>
+                <!-- Barra de avanço (vermelha) -->
+              </div>
+
+              <p class="numberValue">
+                {{ save.total_economizado | currency: 'BRL' }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- === Balanço Geral === -->
+        <div class="balance">
+          <h1>Balanço Geral</h1>
+
+          <div class="graph">
+            <div class="createdLists">
+              <div class="bgIcon"></div>
+
+              <p class="balanceName">
+                Listas <br />
+                criadas
+              </p>
+
+              <div class="numberTotal">
+                <span>{{ balance.createdList.lists_created }}</span>
               </div>
             </div>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
 
+            <div class="communities">
+              <div class="bgIcon"></div>
 
-    <!-- Section to display balance -->
-    <div class="report-section">
-      <h2>Balanço Geral</h2>
-      <ion-list>
-        <ion-item>
-          <ion-label>
-            <h3>Listas Criadas</h3>
-            <p>{{ balance.createdList.lists_created }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h3>Listas Finalizadas</h3>
-            <p>{{ balance.completedLists.lists_completed }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h3>Comunidades</h3>
-            <p>{{ balance.communities.communities }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
+              <p class="balanceName">
+                Comunidades <br />
+                criadas
+              </p>
+
+              <div class="numberTotal">
+                <span>{{ balance.communities.communities }}</span>
+              </div>
+            </div>
+
+            <div class="completedLists">
+              <div class="bgIcon"></div>
+
+              <p class="balanceName">
+                Listas <br />
+                completas
+              </p>
+
+              <div class="numberTotal">
+                <span>{{ balance.completedLists.lists_completed }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'secondary'">
+        <!-- Sem dados por enquanto -->
+      </div>
     </div>
   </div>
 </ion-content>

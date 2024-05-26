@@ -2,31 +2,38 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-report',
   templateUrl: './report.page.html',
   styleUrls: ['./report.page.scss'],
 })
-
 export class ReportPage implements OnInit {
   public segmentValue: string = 'segment';
   private previousToken: string | null = null;
 
   totalSpend: any[] = [];
   totalSaved: any[] = [];
+  totalValueByCategory: any[] = [];
   balance: any = {
     createdList: [],
     completedLists: [],
-    communities: []
+    communities: [],
   };
 
-  user!:string;
+  heights: { [key: string]: string } = {};
+  heightsSaved: { [key: string]: string } = {}; // Adicionada propriedade
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) {}
+  user!: string;
 
-  segmentChanged(event: any){
-    console.log("Segment changed:", event.detail.value);
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    private router: Router
+  ) {}
+
+  segmentChanged(event: any) {
     this.segmentValue = event.detail.value;
   }
 
@@ -34,74 +41,120 @@ export class ReportPage implements OnInit {
     this.getUserId();
     this.checkTokenChanges();
 
-    this.getTotalSpend();
+    this.loadData();
     this.getTotalSaved();
     this.getBalance();
   }
 
   getUserId(): void {
     const token = localStorage.getItem('token');
-    console.log('Token:', token); // Adicione esta linha para verificar o token no console
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken.userId); // Adicione esta linha para verificar o token decodificado no console
-      this.user = decodedToken.userId; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
+      this.user = decodedToken.userId;
     }
   }
 
-  getTotalSpend(): void {
-    this.http.get<any[]>('http://localhost:3001/api/report/totalSpend', {
+  getTotalSpend() {
+    return this.http.get<any[]>('http://localhost:3001/api/report/totalSpend', {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       params: {
-        userId: this.user
-      }
-    }).subscribe(data => {
-      console.log('Total Spend:', data); // Adicione esta linha para verificar os dados no console
-      this.totalSpend = data;
-    }, err => {
-      console.error('Erro ao buscar total gasto', err);
+        userId: this.user,
+      },
     });
+  }
+
+  getTotalValueByCategory() {
+    return this.http.get<any[]>(
+      'http://localhost:3001/api/report/totalValueByCategory',
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        params: {
+          userId: this.user,
+        },
+      }
+    );
+  }
+
+  loadData(): void {
+    forkJoin({
+      totalSpend: this.getTotalSpend(),
+      totalValueByCategory: this.getTotalValueByCategory(),
+    }).subscribe(
+      ({ totalSpend, totalValueByCategory }) => {
+        this.totalSpend = totalSpend;
+        this.totalValueByCategory = totalValueByCategory;
+
+        // Calcular alturas para cada categoria em totalSpend
+        this.totalSpend.forEach((spend) => {
+          const totalRendas = this.getTotalRendas(spend.ds_categoria);
+          this.heights[spend.ds_categoria] = this.calculateHeight(
+            spend.total_gasto,
+            totalRendas
+          );
+        });
+      },
+      (err) => {
+        console.error('Erro ao carregar dados', err);
+      }
+    );
   }
 
   getTotalSaved(): void {
-    this.http.get<any[]>('http://localhost:3001/api/report/totalSaved', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      params: {
-        userId: this.user
-      }
-    }).subscribe(data => {
-      console.log('Total Saved:', data); // Adicione esta linha para verificar os dados no console
-      this.totalSaved = data;
-    }, err => {
-      console.error('Erro ao buscar total economizado', err);
-    });
+    this.http
+      .get<any[]>('http://localhost:3001/api/report/totalSaved', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        params: {
+          userId: this.user,
+        },
+      })
+      .subscribe(
+        (data) => {
+          this.totalSaved = data;
+
+          // Calcular alturas para cada categoria em totalSaved
+          this.totalSaved.forEach((save) => {
+            const totalRendas = this.getTotalRendas(save.ds_categoria);
+            this.heightsSaved[save.ds_categoria] = this.calculateHeight(
+              save.total_economizado,
+              totalRendas
+            );
+          });
+        },
+        (err) => {
+          console.error('Erro ao buscar total economizado', err);
+        }
+      );
   }
 
   getBalance(): void {
-    this.http.get<any>('http://localhost:3001/api/report/balance', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      params: {
-        userId: this.user
-      }
-    }).subscribe(data => {
-      console.log('Balance:', data);
-      this.balance = data;
-    }, err => {
-      console.error('Erro ao buscar balanço', err);
-    });
+    this.http
+      .get<any>('http://localhost:3001/api/report/balance', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        params: {
+          userId: this.user,
+        },
+      })
+      .subscribe(
+        (data) => {
+          this.balance = data;
+        },
+        (err) => {
+          console.error('Erro ao buscar balanço', err);
+        }
+      );
   }
 
   checkTokenChanges(): void {
     setInterval(() => {
       const currentToken = localStorage.getItem('token');
-      const token = localStorage.getItem('token');
-
       if (currentToken !== this.previousToken) {
         this.previousToken = currentToken;
         this.getUserId();
@@ -109,4 +162,24 @@ export class ReportPage implements OnInit {
     }, 1000);
   }
 
+  calculateHeight(totalGasto: string, totalRendas: number): string {
+    const totalGastoNum = parseFloat(totalGasto);
+
+    if (isNaN(totalGastoNum) || totalRendas === 0) {
+      return '0%';
+    }
+
+    const percentageSpent = (totalGastoNum / totalRendas) * 100;
+    const maxHeight = 100;
+    const height = Math.min(percentageSpent, maxHeight);
+    return `${height}%`;
+  }
+
+  getTotalRendas(categoria: string): number {
+    const category = this.totalValueByCategory.find(
+      (cat) => cat.ds_categoria === categoria
+    );
+    const totalRendas = category ? parseFloat(category.total_rendas) : 0;
+    return isNaN(totalRendas) ? 0 : totalRendas;
+  }
 }

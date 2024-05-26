@@ -12,20 +12,20 @@ router.get("/report/totalSpend/", async (req, res) => {
 
     const spend = await db_query(
       `
-        SELECT 
-          c.ds_categoria,
-          SUM(l.vl_gasto) as total_gasto
-        FROM
-          tb_lista l
-        JOIN
-          tb_categoria c ON l.id_categoria = c.id_categoria
-        WHERE
-          l.id_usuario = ?
-        GROUP BY
-          c.ds_categoria
-        ORDER BY
-          total_gasto DESC
-        LIMIT 4
+      SELECT 
+        c.ds_categoria,
+        COALESCE(SUM(COALESCE(l.vl_gasto, 0)), 0) AS total_gasto
+      FROM
+        tb_lista l
+      JOIN
+        tb_categoria c ON l.id_categoria = c.id_categoria
+      WHERE
+        l.id_usuario = ?
+      GROUP BY
+        c.ds_categoria
+      ORDER BY
+        total_gasto DESC
+      LIMIT 4
     `,
       [userId]
     );
@@ -95,12 +95,14 @@ router.get("/report/balance/", async (req, res) => {
     const communities = await db_query(
       `
       SELECT 
-      COUNT(*) as communities
+        COUNT(*) as communities
       FROM 
         tb_comunidade_usuario AS cu
       JOIN 
         tb_comunidade AS c 
-        ON cu.id_comunidade = c.id_comunidade;
+        ON cu.id_comunidade = c.id_comunidade
+      WHERE
+        cu.id_usuario = ?;
       `,
       [userId]
     );

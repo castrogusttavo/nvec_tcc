@@ -1,28 +1,162 @@
-.graficos{
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 32px;
-}
-
-.content{
+.content {
   margin: 20px;
 }
 
-.header{
+.header {
   padding-top: 10px;
 }
 
-.todosGrafico{
-  padding-top: 32px;
+.totalSpend,
+.totalSaved,
+.balance {
+  width: 380px;
+  border-radius: 16px;
+  margin-top: 64px;
+  background-color: #f1f2f4;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.spend-item {
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+.totalSaved,
+.balance {
+  margin-top: 2rem;
+}
+
+.balance {
+  margin-bottom: 32px;
+}
+
+.totalSpend h1,
+.totalSaved h1,
+.balance h1 {
+  color: #006eff;
+
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px;
+  margin-top: 12px;
+}
+
+.graph {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+}
+
+.columnData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.categoryName {
+  color: #758195;
+
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.numberValue {
+  color: #161a1d;
+
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  margin-bottom: 12px;
+}
+
+.lineData {
+  background-color: #fff;
+  height: 125px;
+  width: 32px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.percentData {
+  background-color: #cd5151;
+  width: 32px;
+  border-radius: 12px;
+}
+
+.totalSaved .percentData {
+  background-color: #27ae60;
+}
+
+.balance .graph {
+  margin-bottom: 48px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+}
+
+.createdLists,
+.communities,
+.completedLists {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.bgIcon {
+  width: 75px;
+  height: 50px;
+
+  border-radius: 4px;
+  background-color: #ffac4a;
+}
+
+.balanceName {
+  color: #121212;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.numberTotal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  width: 25px;
+  height: 25px;
+
+  border-radius: 4px;
+  background: rgba(133, 184, 255, 0.5);
+}
+
+.numberTotal p {
+  position: absolute;
+
+  color: #172b4d;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 13px;
 }
