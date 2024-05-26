@@ -1,13 +1,20 @@
-<ion-card>
+<ion-card [ngClass]="customClass">
   <div class="content">
-    <span class="spanPlan">{{ planTitle }}</span>
-    <h1>{{ planPreco }}</h1>
+    <span
+    [ngStyle]="{
+      'color': planTitle === 'Plano Ativo' ? '#B38600' : '#161A1D',
+      'background-color': planTitle === 'Plano Ativo' ? 'rgba(255, 172, 74, 0.3)' : 'transparent'
+    }"
+    class="spanPlan">
+    {{ planTitle }}
+  </span>
+      <h1>{{ planPreco }}</h1>
     <p>{{ planDesc }}</p>
     <h2>Inclui:</h2>
     <ul>
       <li *ngFor="let item of planItems">
-          <img src="../../../../assets/svg/checkbox.svg" alt="">
-          <span>{{ item }}</span>
+        <img src="../../../../assets/svg/checkbox.svg" alt="">
+        <span>{{ item }}</span>
       </li>
     </ul>
   </div>

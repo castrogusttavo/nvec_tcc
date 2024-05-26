@@ -7,27 +7,23 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./plans-screen.page.scss'],
 })
 export class PlansScreenPage implements OnInit {
-  activeSubscriptionId: number | null = null;
+  userSubscriptionId: number | undefined;
 
-  constructor(private jwtHelper: JwtHelperService) { }
+  constructor(private jwtHelper: JwtHelperService) {}
 
   ngOnInit() {
-    this.extractSubscriptionId();
+    this.getUserSubscriptionId();
   }
 
-  extractSubscriptionId(): void {
+  getUserSubscriptionId(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken: any = this.jwtHelper.decodeToken(token);
-      this.activeSubscriptionId = decodedToken.subscriptionId;
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userSubscriptionId = decodedToken.subscriptionId;
     }
   }
 
   isPlanActive(planId: number): boolean {
-    return this.activeSubscriptionId === planId;
-  }
-
-  getPlanClass(planId: number): string {
-    return this.isPlanActive(planId) ? 'active-plan' : '';
+    return this.userSubscriptionId === planId;
   }
 }
