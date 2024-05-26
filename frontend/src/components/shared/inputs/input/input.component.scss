@@ -108,3 +108,21 @@
     text-align: start;
 }
 
+.password-strength-image{
+    // position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+img{
+    position: fixed;
+    margin-bottom: 95px;
+    margin-left: 250px;
+}
+
+.requirement{
+    color: $N800D;
+    font-weight: 600;
+    font-size: 12px;
+}
