@@ -9,10 +9,14 @@ export class ButtonSocialComponent  implements OnInit {
 
   @Input() imageSocial: string | undefined;
   @Input() texto: string | undefined;
-
+  @Input() disabled: boolean = false;
 
   constructor() { }
 
   ngOnInit() {}
+
+  getButtonClasses() {
+    return this.disabled ? 'disabled-button' : '';
+  }
 
 }
