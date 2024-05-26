@@ -221,7 +221,7 @@ module.exports = function (secretKey) {
 
       // Gerar um token JWT para o usuário recém-cadastrado
       const token = jwt.sign(
-        { userId: result.insertId, userEmail: email, userName: name,  userAsn: id_assinatura},
+        { userId: result.insertId, userEmail: email, userName: name,  subscriptionId: id_assinatura},
         secretKey,
         { expiresIn: "3h" }
       );
@@ -232,7 +232,7 @@ module.exports = function (secretKey) {
         name: name,
         email: email,
         password: password,
-        userAsn: id_assinatura
+        subscriptionId: id_assinatura
       };
 
       // Exibir os dados do usuário no console
@@ -287,7 +287,7 @@ module.exports = function (secretKey) {
           userId: user[0].id_usuario,
           userEmail: user[0].email_usuario,
           userName: user[0].nm_usuario,
-          userAsn: user[0].id_assinatura
+          subscriptionId: user[0].id_assinatura
         },
         secretKey,
         { expiresIn: "3h" }
@@ -299,7 +299,7 @@ module.exports = function (secretKey) {
         name: user[0].nm_usuario,
         email: user[0].email_usuario,
         password: senha,
-        userAsn: user[0].id_assinatura
+        subscriptionId: user[0].id_assinatura
       };
 
       // Exibir os dados do usuário no console
