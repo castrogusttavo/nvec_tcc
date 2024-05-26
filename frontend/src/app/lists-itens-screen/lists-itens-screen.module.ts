@@ -10,8 +10,14 @@ import { ListsItensScreenPageRoutingModule } from './lists-itens-screen-routing.
 import { ListsItensScreenPage } from './lists-itens-screen.page';
 import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveFormsModule
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  {
+    path: '',
+    component: ListsItensScreenPage
+  }
+];
 
 @NgModule({
   imports: [
@@ -21,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListsItensScreenPageRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [ListsItensScreenPage]
 })

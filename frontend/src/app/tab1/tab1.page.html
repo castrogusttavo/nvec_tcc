@@ -22,10 +22,17 @@
       </div>
 
       <div class="lists-created scroll-horizontal">
-        <app-card-list title="Lanche da Escola" category="Mercado" price="R$200/R$235"  date="03/12/2023"  class="card-blue"></app-card-list>
-        <app-card-list title="Feirinha" category="Mercado" price="R$70/R$93" date="30/11/2023" class="card-orange"></app-card-list>
+        <app-card-list
+        *ngFor="let list of recentLists"
+         [title]="list.nm_lista" 
+         [category]="list.ds_categoria" 
+         [price]="list.rd_lista"  
+         [date]="list.dt_criacao"  
+         class="card-blue"
+         ></app-card-list>
+        <!-- <app-card-list title="Feirinha" category="Mercado" price="R$70/R$93" date="30/11/2023" class="card-orange"></app-card-list>
         <app-card-list title="Material Escola" category="Papelaria" price="R$50/R$103" date="30/03/2024" class="card-green"></app-card-list>
-        <app-card-list title="Jogos de Vídeo Game" category="Jogos" price="R$153/R$190" date="04/04/2024" class="card-red"></app-card-list>
+        <app-card-list title="Jogos de Vídeo Game" category="Jogos" price="R$153/R$190" date="04/04/2024" class="card-red"></app-card-list> -->
       </div>
     </div>
 

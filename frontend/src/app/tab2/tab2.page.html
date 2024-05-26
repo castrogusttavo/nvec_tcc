@@ -23,19 +23,19 @@
         <app-card-box action="Criar" description="Adicionar uma nova lista" (click)="setOpen(true)"></app-card-box>
 
         <!-- Componentes adicionais -->
-        <app-card-list-recent 
+        <!-- <app-card-list-recent 
           class="card-blue list"
           category="Comida"
           name="Guloseimas"
           description="Doces pros irmãos"
           [routerLink]="['/lists-itens-screen']">
-        </app-card-list-recent>
+        </app-card-list-recent> -->
 
         <app-card-list-recent
-         *ngFor="let list of lists"
+         *ngFor="let list of recentLists"
           name="list"
-          class="card-orange list"
-          [category]="list.id_categoria"
+          class="card-blue list"
+          [category]="list.ds_categoria"
           [name]="list.nm_lista"
           [description]="list.ds_lista"
           [routerLink]="['/lists-itens-screen']">
@@ -61,7 +61,7 @@
           name="list"
           [title]="list.nm_lista"
           [description]="list.ds_lista"
-          [routerLink]="['/lists-itens-screen']">
+          [routerLink]="['/lists-itens-screen/list.id_lista']">
       </app-card-list-search>
     </div>
 

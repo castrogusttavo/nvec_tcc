@@ -75,7 +75,7 @@ const routes: Routes = [
     loadChildren: () => import('./create-comunnity/create-comunnity.module').then( m => m.CreateComunnityPageModule)
   },
   {
-    path: 'lists-itens-screen',
+    path: 'lists-items/:id',
     loadChildren: () => import('./lists-itens-screen/lists-itens-screen.module').then( m => m.ListsItensScreenPageModule)
   },
   {
@@ -160,7 +160,8 @@ const routes: Routes = [
   {
     path: 'update-item-comunnity',
     loadChildren: () => import('./update-item-comunnity/update-item-comunnity.module').then( m => m.UpdateItemComunnityPageModule)
-  },  {
+  },
+  {
     path: 'update-item-user',
     loadChildren: () => import('./update-item-user/update-item-user.module').then( m => m.UpdateItemUserPageModule)
   }

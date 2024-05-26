@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lists-itens-screen',
@@ -8,41 +9,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./lists-itens-screen.page.scss'],
 })
 export class ListsItensScreenPage implements OnInit {
-  isModalOpen1 = false;
-  isModalOpen2 = false;
+  listId: string | null = null;
+  items: any[] = [];
 
-  setOpen(modalNumber: number, isOpen: boolean) {
-    if (modalNumber === 1) {
-      this.isModalOpen1 = isOpen;
-    } else if (modalNumber === 2) {
-      this.isModalOpen2 = isOpen;
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.listId = this.route.snapshot.paramMap.get('id');
+    console.log('List ID:', this.listId);
+
+    if (this.listId) {
+      this.getItems(this.listId).subscribe(items => {
+        this.items = items;
+      });
     }
   }
 
-  // constructor(private http: HttpClient, private router: Router) { }
-
-  ngOnInit() {
+  getItems(listId: string): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:3001/api/lists/${listId}`);
   }
-
-  // name: string = 'arroz';
-  // value: string = '12';
-
-  // async criarItem() {
-  //   try {
-  //     console.log('Nome : ', this.name);
-  //     console.log('Valor : ', this.value);
-  
-  //     const response: any = await this.http.post(
-  //       'http://localhost:3001/items',
-  //       { nm_item: this.name, vl_uni: this.value }
-  //     ).toPromise();
-  
-  //     console.log('Item criado com sucesso:', response);
-  //     this.router.navigate(['/tabs/tab2']);
-  //   } catch (err) {
-  //     console.error('Erro ao criar item:', err);
-  //   }
-  // }
-  
 
 }
