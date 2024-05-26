@@ -38,10 +38,6 @@
             required
           >
           </app-input>
-<!--           <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
-            <small *ngIf="registerForm.get('email').errors.required">E-mail é obrigatório.</small>
-            <small *ngIf="registerForm.get('email').errors.email">E-mail inválido.</small>
-          </div> -->
         </div>
 
         <div>
@@ -69,13 +65,10 @@
           >
           </app-input>
         </div>
-
-        <app-button-big type="submit" [disabled]="registerForm.invalid"
-          >Cadastrar
-        </app-button-big>
+        <app-button-big type="submit" [disabled]="registerForm.invalid || passwordStrengthMessage === 'Senha fraca'">Cadastrar</app-button-big>
       </form>
 
-      <div class="line">
+      <!-- <div class="line">
         <div></div>
         <span>Ou cadastrar por</span>
         <div></div>
@@ -92,7 +85,7 @@
           texto="Facebook"
           [routerLink]="['/pre-page']"
         ></app-button-social>
-      </div>
+      </div> -->
     </div>
   </div>
 </ion-content>

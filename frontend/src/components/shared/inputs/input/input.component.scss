@@ -86,7 +86,25 @@
 
 .counter {
     height: 18px !important;
-    margin-bottom: 12px;
+    margin-bottom: 2px;
 }
 
+.passwordStrength {
+    color: #FF554A;
+    font-size: 12px;
+}
+  
+.password-requirements-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100%;
+    margin-right: 75px;
+    margin-bottom: 10px;
+}
+  
+.password-requirements {
+    font-size: 12px;
+    text-align: start;
+}
 
