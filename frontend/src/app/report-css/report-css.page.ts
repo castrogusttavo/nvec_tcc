@@ -23,6 +23,7 @@ export class ReportCssPage implements OnInit {
   };
 
   heights: { [key: string]: string } = {};
+  heightsSaved: { [key: string]: string } = {}; // Adicionada propriedade
 
   user!: string;
 
@@ -93,7 +94,7 @@ export class ReportCssPage implements OnInit {
         this.totalSpend = totalSpend;
         this.totalValueByCategory = totalValueByCategory;
 
-        // Calcular alturas para cada categoria
+        // Calcular alturas para cada categoria em totalSpend
         this.totalSpend.forEach((spend) => {
           const totalRendas = this.getTotalRendas(spend.ds_categoria);
           this.heights[spend.ds_categoria] = this.calculateHeight(
@@ -124,6 +125,17 @@ export class ReportCssPage implements OnInit {
         (data) => {
           console.log('Total Saved:', data);
           this.totalSaved = data;
+
+          // Calcular alturas para cada categoria em totalSaved
+          this.totalSaved.forEach((save) => {
+            const totalRendas = this.getTotalRendas(save.ds_categoria);
+            this.heightsSaved[save.ds_categoria] = this.calculateHeight(
+              save.total_economizado,
+              totalRendas
+            );
+          });
+
+          console.log('HeightsSaved:', this.heightsSaved);
         },
         (err) => {
           console.error('Erro ao buscar total economizado', err);
