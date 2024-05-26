@@ -54,4 +54,25 @@
     p{
         font-size: 12px;
     }
+
+    .custom-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .custom-toast.show {
+      display: block;
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .custom-toast.hide {
+      transform: translateX(-50%) translateY(100px);
+      opacity: 0;
+    }
+
 }

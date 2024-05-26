@@ -16,6 +16,19 @@ export class Tab1Page implements OnInit {
     this.getUserName();
     this.checkTokenChanges();
 
+    const toast = document.getElementById('myToast');
+    if (toast) {
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 500); // Tempo de duração da animação de saída
+      }, 5000); // 5 segundos antes de ocultar o toast
+    }
   }
 
   getUserName(): void {
@@ -39,4 +52,5 @@ export class Tab1Page implements OnInit {
       }
     }, 1000);
   }
+
 }
