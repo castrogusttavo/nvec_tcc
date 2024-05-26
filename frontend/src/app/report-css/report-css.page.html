@@ -32,11 +32,16 @@
 
               <div class="lineData">
                 <!-- Barra de progresso (cinza) -->
-                <div class="percentData"></div>
+                <div
+                  class="percentData"
+                  [style.height]="heights[spend.ds_categoria]"
+                ></div>
                 <!-- Barra de avanço (vermelha) -->
               </div>
 
-              <p class="numberValue">{{ spend.total_gasto | currency: 'BRL' }}</p>
+              <p class="numberValue">
+                {{ spend.total_gasto | currency: 'BRL' }}
+              </p>
             </div>
           </div>
         </div>
@@ -55,7 +60,9 @@
                 <!-- Barra de avanço (vermelha) -->
               </div>
 
-              <p class="numberValue">{{ save.total_economizado | currency: 'BRL' }}</p>
+              <p class="numberValue">
+                {{ save.total_economizado | currency: 'BRL' }}
+              </p>
             </div>
           </div>
         </div>

@@ -83,6 +83,7 @@
   height: 125px;
   width: 32px;
   border-radius: 12px;
+  overflow: hidden;
 
   display: flex;
   align-items: flex-end;
@@ -90,7 +91,6 @@
 
 .percentData {
   background-color: #cd5151;
-  height: 100px;
   width: 32px;
   border-radius: 12px;
 }
