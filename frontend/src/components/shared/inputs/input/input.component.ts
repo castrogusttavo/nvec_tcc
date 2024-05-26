@@ -88,7 +88,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
       requirements.push('- 2 tipos de caracteres (letras, números, símbolos)');
     }
 
-    if (password.length >= 8 && typesCount == 2) {
+    if (password.length >= 8 && typesCount == 2 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase())) {
       if (password.length < 12) {
         requirements.push('Senha forte (opcional):');
         requirements.push('- Pelo menos 12 caracteres.');
