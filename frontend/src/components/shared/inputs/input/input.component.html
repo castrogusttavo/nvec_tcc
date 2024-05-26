@@ -1,18 +1,30 @@
-<input
-  class="inputNormal"
-  [type]="type"
-  [placeholder]="placeholder"
-  [name]="name"
-  [(ngModel)]="inputValue"
-  (ngModelChange)="onInputChange($event)"
-  (input)="updateCounter($event)"
-  [maxlength]="maxlength"
-  [readonly]="readOnly"
-/>
-<div [class.counter]="type === 'password'"></div>
-<span *ngIf="type === 'password' && passwordStrengthMessage" class="passwordStrength">{{ passwordStrengthMessage }}</span>
-<div *ngIf="type === 'password' && passwordRequirements.length > 0" class="password-requirements-container">
-  <div class="password-requirements">
-    <p *ngFor="let requirement of passwordRequirements" style="margin: 0 !important;">{{ requirement }}</p>
+<div class="input-wrapper">
+  <input
+    class="inputNormal"
+    [type]="type"
+    [placeholder]="placeholder"
+    [name]="name"
+    [(ngModel)]="inputValue"
+    (ngModelChange)="onInputChange($event)"
+    (input)="updateCounter($event)"
+    [maxlength]="maxlength"
+    [readonly]="readOnly"
+  />
+  <div [class.counter]="type === 'password' && validateStrength"></div>
+
+  <div class="password-strength-image" *ngIf="type === 'password' && validateStrength">
+    <img *ngIf="!inputValue" src="../../../../assets/png/psw_null.png" alt="Senha Vazia">
+    <img *ngIf="inputValue && passwordStrengthMessage === 'Senha fraca'" src="../../../../assets/png/psw_weak.png" alt="Senha Fraca">
+    <img *ngIf="inputValue && passwordStrengthMessage === 'Senha média'" src="../../../../assets/png/psw_avarege.png" alt="Senha Média">
+    <img *ngIf="inputValue && passwordStrengthMessage === 'Senha forte'" src="../../../../assets/png/psw_strong.png" alt="Senha Forte">
   </div>
+
+  <ng-container *ngIf="inputValue">
+    <!-- <span *ngIf="type === 'password' && validateStrength && passwordStrengthMessage" class="passwordStrength">{{ passwordStrengthMessage }}</span> -->
+    <div *ngIf="type === 'password' && validateStrength && passwordRequirements.length > 0" class="password-requirements-container">
+      <div class="password-requirements">
+        <p *ngFor="let requirement of passwordRequirements" style="margin: 0 !important;" class="requirement">{{ requirement }}</p>
+      </div>
+    </div>
+  </ng-container>
 </div>

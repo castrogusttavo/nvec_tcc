@@ -62,13 +62,13 @@
             name="password"
             [maxlength]="16"
             required
-          >
-          </app-input>
-        </div>
+            [validateStrength]="true"
+          ></app-input>
+        </div>        
         <app-button-big type="submit" [disabled]="registerForm.invalid || passwordStrengthMessage === 'Senha fraca'">Cadastrar</app-button-big>
       </form>
 
-      <div class="line">
+      <!-- <div class="line">
         <div></div>
         <span>Ou cadastrar por</span>
         <div></div>
@@ -87,7 +87,7 @@
           [routerLink]="['/pre-page']"
           [disabled]="true"
         ></app-button-social>
-      </div>
+      </div> -->
     </div>
   </div>
 </ion-content>

@@ -19,39 +19,20 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder: string = '';
   @Input() name: string = '';
   @Input() maxlength!: number;
-  inputValue: string = '';
   @Input() readOnly: boolean = false;
   @Input() userName: string = '';
+  @Input() validateStrength: boolean = false; // Novo Input
 
+  inputValue: string = '';
   passwordStrengthMessage: string = '';
   passwordRequirements: string[] = [];
 
-  // Atualiza o contador de caracteres
-  updateCounter(event: any) {
-    const input = event.target;
-    const maxLength = parseInt(input.getAttribute('maxlength'), 10);
-    const currentLength = input.value.length;
-    const counter = input.parentElement.querySelector('.counter');
-    let passwordStrength = input.parentElement.querySelector('.passwordStrength');
-    if (counter) {
-      if (currentLength === 16) {
-        counter.textContent = 'Limite atingido';
-        counter.style.color = '#FF554A';
-        counter.style.fontSize = '12px';
-        counter.style.marginLeft = '280px';
-      } else if (currentLength > 0) {
-        counter.textContent = `${currentLength} / ${maxLength}`;
-        counter.style.color = '#888';
-        counter.style.fontSize = '12px';
-        counter.style.marginLeft = '340px';
-      } else {
-        counter.textContent = '';
-      }
-    }
-  }
-
   onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};
+
+  constructor(private platform: Platform) {}
+
+  ngOnInit() {}
 
   writeValue(value: any): void {
     this.inputValue = value;
@@ -65,13 +46,9 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  constructor(private platform: Platform) {}
-
-  ngOnInit() {}
-
   onInputChange(value: string) {
     this.inputValue = value;
-    if (this.type === 'password') {
+    if (this.type === 'password' && this.validateStrength) {
       this.passwordStrengthMessage = this.checkPasswordStrength(value);
       this.passwordRequirements = this.getPasswordRequirements(value);
       console.log(`Password strength: ${this.passwordStrengthMessage}`);
@@ -84,7 +61,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     const hasNumeric = /\d/.test(password); // Verifica se há pelo menos um dígito numérico
     const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password); // Verifica se há pelo menos um símbolo
     const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length; // Conta o número de tipos de caracteres presentes
-  
+
     if (password.length < 8 || /^[a-zA-Z]+$/.test(password) || /(.)\1{2,}/.test(password)) {
       return 'Senha fraca';
     } else if (password.length >= 8 && typesCount == 2 && !this.hasObviousSequence(password.toLowerCase())) {
@@ -149,5 +126,28 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   isSimilarToPersonalData(password: string): boolean {
     if (!this.userName) return false;
     return password.toLowerCase().includes(this.userName.toLowerCase());
+  }
+
+  // Atualiza o contador de caracteres
+  updateCounter(event: any) {
+    const input = event.target;
+    const maxLength = parseInt(input.getAttribute('maxlength'), 10);
+    const currentLength = input.value.length;
+    const counter = input.parentElement.querySelector('.counter');
+    if (counter) {
+      if (currentLength === maxLength) {
+        counter.textContent = 'Limite atingido';
+        counter.style.color = '#FF554A';
+        counter.style.fontSize = '12px';
+        counter.style.marginLeft = '280px';
+      } else if (currentLength > 0) {
+        counter.textContent = `${currentLength} / ${maxLength}`;
+        counter.style.color = '#888';
+        counter.style.fontSize = '12px';
+        counter.style.marginLeft = '340px';
+      } else {
+        counter.textContent = '';
+      }
+    }
   }
 }

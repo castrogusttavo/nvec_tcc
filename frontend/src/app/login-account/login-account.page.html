@@ -42,15 +42,16 @@
             placeholder="Senha"
             formControlName="password"
             required
-          >
-          </app-input>
+            [validateStrength]="false" 
+          ></app-input>
+
         </div>
         <app-button-big type="submit" [disabled]="loginForm.invalid"
           >Entrar</app-button-big
         >
       </form>
 
-      <div class="line">
+      <!-- <div class="line">
         <div></div>
         <span>Ou entrar usando</span>
         <div></div>
@@ -69,7 +70,7 @@
           [routerLink]="['/tabs/tab1']"
           [disabled]="true"
         ></app-button-social>
-      </div>
+      </div> -->
 
     </div>
   </div>
