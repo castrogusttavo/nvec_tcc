@@ -5,7 +5,7 @@ const { db_query } = require("../../frameworks/db/db");
 // Recent Lists
 router.get("/recentListUser", async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     if (!userId) {
       res.status(400).json({ error: "ID do usuário não fornecido" });
@@ -27,7 +27,7 @@ router.get("/recentListUser", async (req, res) => {
 // Recent Communities
 router.get("/recentCommunitiesUser", async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     if (!userId) {
       res.status(400).json({ error: "ID do usuário não fornecido" });
@@ -56,7 +56,7 @@ router.get("/recentCommunitiesUser", async (req, res) => {
 // Count User Created Communities
 router.get("/createdCommunitiesCount", async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     if (!userId) {
       res.status(400).json({ error: "ID do usuário não fornecido" });
@@ -93,7 +93,7 @@ router.get("/createdCommunitiesCount", async (req, res) => {
 // Count User Login Communities
   router.get("/loginCommunitiesCount", async (req, res) => {
     try {
-      const { userId } = req.body;
+      const { userId } = req.query;
 
       if (!userId) {
         res.status(400).json({ error: "ID do usuário não fornecido" });
@@ -133,7 +133,7 @@ router.get("/createdCommunitiesCount", async (req, res) => {
 // Count User Invitations
 router.get("/invitationCommunitiesCount", async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     if (!userId) {
       res.status(400).json({ error: "ID do usuário não fornecido" });
