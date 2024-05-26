@@ -33,17 +33,15 @@ export class Tab1Page implements OnInit {
 
   getUserName(): void {
     const token = localStorage.getItem('token');
-    console.log('Token:', token);
+    console.log('Token:', token); 
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken);
+      console.log('Decoded Token:', decodedToken); 
       this.userName = decodedToken.userName;
-      this.userId = decodedToken.userid;
+      this.userId = decodedToken.userId;
     }
   }
 
-  //forkjoin faz uma cmbinação com vários observables, igual ao join no mysql
-  //pipe pega qualquer numero de operadores como argumento e retorna um novo observable
   getRecentLists(): void {
     forkJoin({
       lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId:this.userId } }),
