@@ -17,6 +17,7 @@ export class Tab2Page {
 
   email: string = '';
   userName: string | undefined;
+  userId!: number;
 
   lists!:any[];
   recentLists!:any[];
@@ -39,7 +40,7 @@ export class Tab2Page {
 
   getRecentLists(): void {
     forkJoin({
-      lists: this.http.get<any[]>(this.apiRecentLists),
+      lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId:this.userId } }),
       categories: this.http.get<any[]>(this.apiCategories)
     }).pipe(
       map(({ lists, categories }) => {
@@ -56,12 +57,15 @@ export class Tab2Page {
       error => console.error('Erro ao buscar dados: ', error)
     );
   }
+
   getLists():Observable<any[]>{
-    return this.http.get<any[]>(this.apiLists);
+    return this.http.get<any[]>(this.apiLists, { params: { userId:this.userId } });
   }
+
   clearSearchText() {
     this.searchText = '';
   }
+  
   searchText: string = '';
   originalItems: any[] = [
     { title: 'Guloseimas', description: 'Doces pros irmãos'},
@@ -103,6 +107,7 @@ export class Tab2Page {
       const decodedToken = this.jwtHelper.decodeToken(token);
       console.log('Decoded Token:', decodedToken); // Adicione esta linha para verificar o token decodificado no console
       this.userName = decodedToken.userName; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
+      this.userId = decodedToken.userId; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
     }
   }
 }

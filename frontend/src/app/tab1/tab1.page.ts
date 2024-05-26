@@ -15,6 +15,7 @@ export class Tab1Page implements OnInit {
   private apiCategories="http://localhost:3001/api/categories";
   private apiRecentCommunities="http://localhost:3001/api/recentCommunities";
   recentLists!:any[];
+  userId!: number;
 
 
   constructor(
@@ -37,6 +38,7 @@ export class Tab1Page implements OnInit {
       const decodedToken = this.jwtHelper.decodeToken(token);
       console.log('Decoded Token:', decodedToken);
       this.userName = decodedToken.userName;
+      this.userId = decodedToken.userid;
     }
   }
 
@@ -44,7 +46,7 @@ export class Tab1Page implements OnInit {
   //pipe pega qualquer numero de operadores como argumento e retorna um novo observable
   getRecentLists(): void {
     forkJoin({
-      lists: this.http.get<any[]>(this.apiRecentLists),
+      lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId:this.userId } }),
       categories: this.http.get<any[]>(this.apiCategories)
     }).pipe(
       map(({ lists, categories }) => {
