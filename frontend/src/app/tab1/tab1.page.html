@@ -29,6 +29,7 @@
          [price]="list.rd_lista"  
          [date]="list.dt_criacao"  
          class="card-blue"
+         [routerLink]="['/lists-items', list.id_lista]"
          ></app-card-list>
         <!-- <app-card-list title="Feirinha" category="Mercado" price="R$70/R$93" date="30/11/2023" class="card-orange"></app-card-list>
         <app-card-list title="Material Escola" category="Papelaria" price="R$50/R$103" date="30/03/2024" class="card-green"></app-card-list>

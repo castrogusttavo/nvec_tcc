@@ -164,7 +164,12 @@ const routes: Routes = [
   {
     path: 'update-item-user',
     loadChildren: () => import('./update-item-user/update-item-user.module').then( m => m.UpdateItemUserPageModule)
+  },
+  {
+    path: 'update-list/:id',
+    loadChildren: () => import('./update-list/update-list.module').then( m => m.UpdateListPageModule)
   }
+
 
 ];
 @NgModule({

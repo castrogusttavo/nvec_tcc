@@ -1,16 +1,16 @@
 <ion-content>
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
   <div class="content">
-    <div class="card-list-all">
+    <div *ngIf="lista" class="card-list-all">
       <app-card-list-all
-      *ngIf="lista"
+      
         [limite]="lista.rd_lista"
         [nomeLista]="lista.nm_lista" 
         [categoriaLista]="lista.ds_categoria" 
         gasto="39,35" 
         [dataLista]="lista.dt_criacao">
       </app-card-list-all>
-      <button class="btn-edit">
+      <button [routerLink]="['/update-list', lista.id_lista]" class="btn-edit">
         <img src="../../../../assets/svg/edit.svg" alt="">
       </button>
     </div>
