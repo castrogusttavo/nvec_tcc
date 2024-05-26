@@ -4,10 +4,15 @@
   [placeholder]="placeholder"
   [name]="name"
   [(ngModel)]="inputValue"
-  (ngModelChange)="onChange($event)"
+  (ngModelChange)="onInputChange($event)"
   (input)="updateCounter($event)"
   [maxlength]="maxlength"
   [readonly]="readOnly"
 />
 <div [class.counter]="type === 'password'"></div>
-<ng-content></ng-content>
+<span *ngIf="type === 'password' && passwordStrengthMessage" class="passwordStrength">{{ passwordStrengthMessage }}</span>
+<div *ngIf="type === 'password' && passwordRequirements.length > 0" class="password-requirements-container">
+  <div class="password-requirements">
+    <p *ngFor="let requirement of passwordRequirements" style="margin: 0 !important;">{{ requirement }}</p>
+  </div>
+</div>

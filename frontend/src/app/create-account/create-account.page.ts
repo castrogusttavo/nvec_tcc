@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, 
 })
 export class CreateAccountPage implements OnInit {
   registerForm: FormGroup;
+  passwordStrengthMessage: string = '';
 
   name: string = '';
   email: string = '';
@@ -19,11 +20,14 @@ export class CreateAccountPage implements OnInit {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8), passwordAverageValidator()]]
+      password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]]
     });
-   }
+  }
 
   ngOnInit() {
+    this.registerForm.get('password')?.valueChanges.subscribe(value => {
+      this.passwordStrengthMessage = this.checkPasswordStrength(value);
+    });
   }
 
   async createUser(event: { preventDefault: () => void; }) {
@@ -54,40 +58,50 @@ export class CreateAccountPage implements OnInit {
     }
   }
 
-}
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (!value) return null;
 
-export function passwordAverageValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
-    const name = control.parent?.get('name')?.value; // Adicionando verificação para control.parent e control.parent.get('name')
+      const hasLetter = /[a-zA-Z]+/.test(value);
+      const hasNumeric = /[0-9]+/.test(value);
+      const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value);
+      const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
 
-    if (!value || !name) {
-      return null;
+      if (value.length < 8 || /^[a-zA-Z]+$/.test(value) || /(.)\1{2,}/.test(value)) {
+        return { weakPassword: true };
+      } else if (value.length >= 8 && typesCount == 2 && !this.hasObviousSequence(value.toLowerCase())) {
+        return null;
+      } else if (value.length >= 12 && typesCount == 3 && !this.hasObviousSequence(value.toLowerCase()) && !this.containsCommonWords(value.toLowerCase())) {
+        return null;
+      }
+      return { weakPassword: true };
+    };
+  }
+
+  checkPasswordStrength(password: string): string {
+    const hasLetter = /[a-zA-Z]/.test(password); // Verifica se há pelo menos uma letra
+    const hasNumeric = /\d/.test(password); // Verifica se há pelo menos um dígito numérico
+    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password); // Verifica se há pelo menos um símbolo
+    const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length; // Conta o número de tipos de caracteres presentes
+  
+    if (password.length < 8 || /^[a-zA-Z]+$/.test(password) || /(.)\1{2,}/.test(password)) {
+      return 'Senha fraca';
+    } else if (password.length >= 8 && typesCount == 2 && !this.hasObviousSequence(password.toLowerCase())) {
+      return 'Senha média';
+    } else if (password.length >= 12 && typesCount == 3 && !this.hasObviousSequence(password.toLowerCase()) && !this.containsCommonWords(password.toLowerCase())) {
+      return 'Senha forte';
     }
+    return 'Senha fraca';
+  } 
 
-    const hasUpperCase = /[A-Z]+/.test(value);
-    const hasLowerCase = /[a-z]+/.test(value);
-    const hasNumeric = /[0-9]+/.test(value);
-    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value);
+  hasObviousSequence(value: string): boolean {
+    const obviousSequences = ["1234", "abcd", "password", "qwerty"];
+    return obviousSequences.some(sequence => value.includes(sequence));
+  }
 
-    const noObviousSequence = !hasObviousSequence(value.toLowerCase());
-
-    const notSimilarToPersonalData = !similarToPersonalData(value, name); // Verificando a semelhança com o nome do usuário
-
-    const passwordValid = (hasUpperCase && hasLowerCase && hasNumeric) || (hasNumeric && hasSymbol) || (hasUpperCase && hasLowerCase && hasSymbol);
-
-    return passwordValid && noObviousSequence && notSimilarToPersonalData ? null : { passwordAverage: true };
-  };
-}
-
-function hasObviousSequence(value: string): boolean {
-  // Verifica se a senha contém sequências óbvias
-  const obviousSequences = ["1234", "abcd"]; // Adicione outras sequências óbvias conforme necessário
-  return obviousSequences.some(sequence => value.includes(sequence));
-}
-
-function similarToPersonalData(password: string, personalData: string): boolean {
-  // Verifica se a senha é semelhante a dados pessoais
-  const similarToUsername = password.toLowerCase().includes(personalData.toLowerCase());
-  return similarToUsername;
+  containsCommonWords(value: string): boolean {
+    const commonWords = ["password", "123456", "qwerty", "abc123"];
+    return commonWords.some(word => value.includes(word));
+  }
 }
