@@ -13,7 +13,6 @@ export class ListsItensScreenPage implements OnInit {
   items!: any[];
   lista:any = {}; 
   categories!:any[];
-  category!:string;
   apiList =  `http://localhost:3001/api/list`
   apiCategories = "http://localhost:3001/api/categories"
 
@@ -33,25 +32,29 @@ export class ListsItensScreenPage implements OnInit {
 
   getList(): void {
     if(this.listaId){
-      const apiLista =  `${this.apiList}/${this.listaId}`   
+      const apiLista =  `${this.apiList}/${this.listaId}`;
     
       forkJoin({
-        list: this.http.get<any[]>(apiLista),
+        list: this.http.get<any>(apiLista),
         categories: this.http.get<any[]>(this.apiCategories)
       }).subscribe(
         ({ list, categories }) => {
-          this.lista = list; 
           this.categories = categories; 
 
           const category = this.categories.find(
-            categoria => categoria.id_categoria === this.lista.id_categoria
+            categoria => categoria.id_categoria === list.id_categoria
           );
-          this.category = category ? category.ds_categoria : 'Categoria Desconhecida'
+          this.lista={
+            ...list,
+            ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
+          }
         },
         error => {
           console.error('Erro ao buscar dados:', error);
         }
       );
+    } else{
+      console.error("Id não encontrado")
     }
   }
 
