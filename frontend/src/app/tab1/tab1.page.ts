@@ -40,10 +40,8 @@ export class Tab1Page implements OnInit {
 
   getUserName(): void {
     const token = localStorage.getItem('token');
-    console.log('Token:', token);
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken);
       this.userName = decodedToken.userName;
     }
   }
@@ -106,8 +104,8 @@ export class Tab1Page implements OnInit {
   fetchRecentLists(): void {
     this.getRecentList().subscribe(
       (data) => {
-        console.log('Recent Lists:', data);
         this.recentLists = data;
+        this.checkRecentLists(); // Atualizar o estado após buscar as listas
       },
       (error) => {
         console.error('Erro ao buscar listas recentes', error);
@@ -116,10 +114,10 @@ export class Tab1Page implements OnInit {
   }
 
   fetchRecentCommunities(): void {
-    this.getRecentCommunities().subscribe( // Corrigido o método chamado aqui
+    this.getRecentCommunities().subscribe(
       (data) => {
-        console.log('Recent Communities:', data);
         this.recentCommunities = data;
+        this.checkRecentCommunities(); // Atualizar o estado após buscar as comunidades
       },
       (error) => {
         console.error('Erro ao buscar comunidades recentes', error);
@@ -154,5 +152,4 @@ export class Tab1Page implements OnInit {
   checkRecentCommunities(): void {
     this.noRecentCommunities = this.recentCommunities.length === 0;
   }
-
 }

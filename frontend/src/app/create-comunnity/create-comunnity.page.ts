@@ -57,11 +57,6 @@ export class CreateComunnityPage implements OnInit {
   async createCommunity(event: { preventDefault: () => void; }) {
     event.preventDefault();
 
-    console.log('Name:', this.name);
-    console.log('Categoria:', this.category);
-    console.log('Sobre:', this.about);
-    console.log('address:', this.address);
-
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/communities',

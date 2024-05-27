@@ -34,9 +34,6 @@ export class LoginAccountPage implements OnInit {
 
     const { email, password } = this.loginForm.value;
 
-    console.log('Email:', email);
-    console.log('Senha:', password);
-
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/login',

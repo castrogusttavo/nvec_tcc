@@ -65,10 +65,8 @@ export class Tab4Page implements OnInit {
 
   getUserName(): void {
     const token = localStorage.getItem('token');
-    console.log('Token:', token);
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken);
       this.userName = decodedToken.userName;
       this.cdr.detectChanges(); // Notify Angular to detect changes
     }
@@ -116,7 +114,6 @@ export class Tab4Page implements OnInit {
       params: { userId: this.userId }
     }).subscribe(
       (data) => {
-        console.log('Created Communities Count:', data);
         this.createdCommunitiesCount = data.length > 0 ? data[0].communities : 0;
       },
       (error) => {
@@ -130,7 +127,6 @@ export class Tab4Page implements OnInit {
       params: { userId: this.userId }
     }).subscribe(
       (data) => {
-        console.log('Login Communities Count:', data);
         this.loginCommunitiesCount = data.length > 0 ? data[0]['comunidades entradas'] : 0;
       },
       (error) => {
@@ -144,7 +140,6 @@ export class Tab4Page implements OnInit {
       params: { userId: this.userId }
     }).subscribe(
       (data) => {
-        console.log('Invitation Communities Count:', data);
         this.invitationCommunitiesCount = data.invitationCount;
       },
       (error) => {

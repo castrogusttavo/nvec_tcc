@@ -128,14 +128,29 @@ module.exports = function (secretKey) {
   
       await db_query(query, values);
   
-      res.sendStatus(204); // Sucesso, sem conteúdo
+      // Gerar um token JWT para o usuário atualizado
+      const token = jwt.sign(
+        { userId: userId, userEmail: updateData.email_usuario, userName: updateData.nm_usuario, subscriptionId: updateData.id_assinatura },
+        secretKey,
+        { expiresIn: "3h" }
+      );
+  
+      // Extraindo os dados do usuário atualizados
+      const userData = {
+        id_usuario: userId,
+        name: updateData.nm_usuario,
+        email: updateData.email_usuario,
+        password: updateData.senha_usuario,
+        subscriptionId: updateData.id_assinatura
+      };
+  
+      // Retornar o token e os dados do usuário atualizados
+      res.json({ token, userData });
     } catch (err) {
       console.error("Erro ao atualizar usuário:", err);
       res.status(500).send("Erro ao atualizar usuário");
     }
-});
-
-  
+  });
 
   router.delete("/users/:id", async (req, res) => {
     try {

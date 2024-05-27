@@ -34,7 +34,6 @@ export class ReportCssPage implements OnInit {
   ) {}
 
   segmentChanged(event: any) {
-    console.log('Segment changed:', event.detail.value);
     this.segmentValue = event.detail.value;
   }
 
@@ -49,10 +48,8 @@ export class ReportCssPage implements OnInit {
 
   getUserId(): void {
     const token = localStorage.getItem('token');
-    console.log('Token:', token);
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken.userId);
       this.user = decodedToken.userId;
     }
   }
@@ -88,8 +85,6 @@ export class ReportCssPage implements OnInit {
       totalValueByCategory: this.getTotalValueByCategory(),
     }).subscribe(
       ({ totalSpend, totalValueByCategory }) => {
-        console.log('Total Spend:', totalSpend);
-        console.log('Total Value By Category:', totalValueByCategory);
 
         this.totalSpend = totalSpend;
         this.totalValueByCategory = totalValueByCategory;
@@ -103,7 +98,6 @@ export class ReportCssPage implements OnInit {
           );
         });
 
-        console.log('Heights:', this.heights);
       },
       (err) => {
         console.error('Erro ao carregar dados', err);
@@ -123,7 +117,6 @@ export class ReportCssPage implements OnInit {
       })
       .subscribe(
         (data) => {
-          console.log('Total Saved:', data);
           this.totalSaved = data;
 
           // Calcular alturas para cada categoria em totalSaved
@@ -135,7 +128,6 @@ export class ReportCssPage implements OnInit {
             );
           });
 
-          console.log('HeightsSaved:', this.heightsSaved);
         },
         (err) => {
           console.error('Erro ao buscar total economizado', err);
@@ -155,7 +147,6 @@ export class ReportCssPage implements OnInit {
       })
       .subscribe(
         (data) => {
-          console.log('Balance:', data);
           this.balance = data;
         },
         (err) => {
@@ -179,11 +170,6 @@ export class ReportCssPage implements OnInit {
   calculateHeight(totalGasto: string, totalRendas: number): string {
     const totalGastoNum = parseFloat(totalGasto);
 
-    console.log('Calculating height for:', {
-      totalGasto: totalGastoNum,
-      totalRendas,
-    });
-
     if (isNaN(totalGastoNum) || totalRendas === 0) {
       return '0%';
     }
@@ -191,7 +177,6 @@ export class ReportCssPage implements OnInit {
     const percentageSpent = (totalGastoNum / totalRendas) * 100;
     const maxHeight = 100;
     const height = Math.min(percentageSpent, maxHeight);
-    console.log(`Height calculated: ${height}%`);
     return `${height}%`;
   }
 

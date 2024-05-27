@@ -41,9 +41,6 @@ export class CreateAccountPage implements OnInit {
 
     const { name, email, password } = this.registerForm.value;
 
-    console.log('Email:', email);
-    console.log('Senha:', password);
-
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/register',
