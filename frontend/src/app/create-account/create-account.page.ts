@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, 
 export class CreateAccountPage implements OnInit {
   registerForm: FormGroup;
   passwordStrengthMessage: string = '';
+  showErrorToast: boolean = false;
 
   name: string = '';
   email: string = '';
@@ -55,7 +56,15 @@ export class CreateAccountPage implements OnInit {
       this.router.navigate(['/pre-page']);
     } catch (err) {
       console.error('Erro ao criar conta:', err);
+      this.showToast();
     }
+  }
+
+  showToast() {
+    this.showErrorToast = true;
+    setTimeout(() => {
+      this.showErrorToast = false;
+    }, 5000); // Ocultar o Toast após 5 segundos
   }
 
   passwordValidator(): ValidatorFn {
@@ -84,7 +93,7 @@ export class CreateAccountPage implements OnInit {
     const hasNumeric = /\d/.test(password); // Verifica se há pelo menos um dígito numérico
     const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password); // Verifica se há pelo menos um símbolo
     const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length; // Conta o número de tipos de caracteres presentes
-  
+
     if (password.length < 8 || /^[a-zA-Z]+$/.test(password) || /(.)\1{2,}/.test(password)) {
       return 'Senha fraca';
     } else if (password.length >= 8 && typesCount == 2 && !this.hasObviousSequence(password.toLowerCase())) {
@@ -93,7 +102,7 @@ export class CreateAccountPage implements OnInit {
       return 'Senha forte';
     }
     return 'Senha fraca';
-  } 
+  }
 
   hasObviousSequence(value: string): boolean {
     const obviousSequences = ["1234", "abcd", "password", "qwerty"];

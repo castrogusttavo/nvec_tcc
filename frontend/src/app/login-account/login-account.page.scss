@@ -151,3 +151,25 @@ line span{
 .forms{
     padding-top: 64px;
 }
+
+
+.custom-toast {
+  position: fixed;
+  top: 32px; /* Alterado para top */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.custom-toast.show {
+  display: block;
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.custom-toast.hide {
+  transform: translateX(-50%) translateY(-100%);
+  opacity: 0;
+}
+

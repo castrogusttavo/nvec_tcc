@@ -1,5 +1,13 @@
 <ion-content scrollY="false">
   <div class="body">
+    <app-toast-error
+    id="myToast"
+    class="custom-toast"
+    [visible]="showErrorToast"
+    titulo="Erro ao criar conta!"
+    conteudo="O e-mail inserido já está cadastrado. Por favor, use um e-mail diferente.">
+  </app-toast-error>
+
     <div class="header">
       <img
         src="../../assets/svg/arrow.svg"
@@ -64,7 +72,7 @@
             required
             [validateStrength]="true"
           ></app-input>
-        </div>        
+        </div>
         <app-button-big type="submit" [disabled]="registerForm.invalid || passwordStrengthMessage === 'Senha fraca'">Cadastrar</app-button-big>
       </form>
 

@@ -1,5 +1,12 @@
 <ion-content scrollY="false">
   <div class="body">
+    <app-toast-error
+    id="myToast"
+    class="custom-toast"
+    [visible]="showErrorToast"
+    titulo="Erro ao fazer login!"
+    conteudo="E-mail ou senha incorretos. Por favor, verifique suas credenciais e tente novamente.">
+  </app-toast-error>
     <div class="header">
       <img
         src="../../assets/svg/arrow.svg"
@@ -42,7 +49,7 @@
             placeholder="Senha"
             formControlName="password"
             required
-            [validateStrength]="false" 
+            [validateStrength]="false"
           ></app-input>
 
         </div>
