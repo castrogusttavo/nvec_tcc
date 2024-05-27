@@ -36,12 +36,17 @@ router.get("/recentCommunitiesUser", async (req, res) => {
 
     const recentCommunities = await db_query(
       `
-        SELECT * FROM 
-          tb_comunidade_usuario AS cu
-        JOIN 
-          tb_comunidade AS c ON cu.id_comunidade = c.id_comunidade
-        WHERE 
-          cu.id_usuario = 2;
+      SELECT 
+        c.nm_comunidade,
+        cat.ds_categoria
+      FROM 
+        tb_comunidade_usuario AS cu
+      JOIN 
+        tb_comunidade AS c ON cu.id_comunidade = c.id_comunidade
+      JOIN 
+        tb_categoria AS cat ON c.id_categoria = cat.id_categoria
+      WHERE 
+        cu.id_usuario = ?;
           `,
       [userId]
     );

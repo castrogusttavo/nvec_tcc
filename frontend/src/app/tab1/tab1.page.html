@@ -29,10 +29,17 @@
       </div>
 
       <div class="lists-created scroll-horizontal">
-        <app-card-list title="Lanche da Escola" category="Mercado" price="R$200/R$235"  date="03/12/2023"  class="card-blue"></app-card-list>
-        <app-card-list title="Feirinha" category="Mercado" price="R$70/R$93" date="30/11/2023" class="card-orange"></app-card-list>
-        <app-card-list title="Material Escola" category="Papelaria" price="R$50/R$103" date="30/03/2024" class="card-green"></app-card-list>
-        <app-card-list title="Jogos de Vídeo Game" category="Jogos" price="R$153/R$190" date="04/04/2024" class="card-red"></app-card-list>
+        <app-card-list *ngFor="let list of recentLists; let i = index"
+          [title]="list.nm_lista"
+          [category]="list.ds_lista"
+          [vl_gasto]="'R$' + ((list.vl_gasto || 0) | number:'1.2-2')"
+          [rd_lista]="'R$' + ((list.rd_lista || 0) | number:'1.2-2')"
+          [date]="formatDate(list.dt_criacao)"
+          [colorClass]="getListClass(i + 1)">
+        </app-card-list>
+        <p class="no-recent-data" *ngIf="recentLists.length === 0">
+          Você ainda não criou nenhuma lista.
+        </p>
       </div>
     </div>
 
@@ -55,19 +62,26 @@
       <app-card-icon-home></app-card-icon-home>
     </div>
 
-    <div class="card-communities scroll-horizontal">
-      <app-card-home-community
-        title="Mercado"
-        content="Atacadista"
-      ></app-card-home-community>
-      <app-card-home-community
-        title="Escola"
-        content="Volta às aulas"
-      ></app-card-home-community>
-      <app-card-home-community
-        title="Trabalho"
-        content="Ferramentas"
-      ></app-card-home-community>
+    <div class="lists communities">
+      <div class="recent-lists">
+        <h6>Comunidades recentes</h6>
+        <div class="see-more" >
+          <span [routerLink]="['/tabs/tab4']">Ver todas</span>
+          <img src="./../../assets/svg/arrow_forward_home.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="card-communities scroll-horizontal">
+        <ng-container *ngFor="let community of recentCommunities">
+          <app-card-home-community
+            [title]="community.ds_categoria"
+            [content]="community.nm_comunidade"
+          ></app-card-home-community>
+        </ng-container>
+        <ng-template #noRecentCommunities>
+          <p class="no-recent-data">Você ainda não está em nenhuma comunidade.</p>
+        </ng-template>
+      </div>
     </div>
   </div>
 </ion-content>

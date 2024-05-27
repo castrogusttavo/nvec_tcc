@@ -11,7 +11,7 @@
         border-radius: 16px;
         border: var(--Space-space-025, 2px) solid var(--Color-brand1, #006EFF);
         background: var(--Color-bg, #FFF);
-        width: 182px;
+        width: 200px;
         height: 119px;
     }
     button{
@@ -37,6 +37,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: 16px;
+        width: 100px;
     }
     .ellipse{
         width: 8px;
@@ -47,9 +48,9 @@
     }
     .title{
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        
+
     }
 }
 
