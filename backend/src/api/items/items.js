@@ -4,11 +4,11 @@ const { db_query } = require("../../frameworks/db/db");
 
 router.post("/items", async (req, res) => {
   try {
-    const { nm_item, vl_uni,qtde_item, id_status,id_medida, id_lista } = req.body;
+    const { nm_item, vl_uni,qtde_item,id_medida, id_lista } = req.body;
 
     const result = await db_query(
-        "INSERT INTO tb_item (nm_item, vl_uni,qtde_item, id_status, id_medida, id_lista) VALUES (?, ?, ?, ?)",
-        [nm_item, vl_uni,qtde_item, id_status,id_medida, id_lista]
+        "INSERT INTO tb_item (nm_item, vl_uni,qtde_item, id_medida, id_lista) VALUES (?, ?, ?, ?, ?)",
+        [nm_item, vl_uni,qtde_item,id_medida, id_lista]
       );
 
     res.status(201).json({ id_item: result.insertId });

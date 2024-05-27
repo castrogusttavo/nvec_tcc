@@ -47,7 +47,7 @@ const routes: Routes = [
     loadChildren: () => import('./tab5/tab5.module').then( m => m.Tab5PageModule)
   },
   {
-    path: 'create-item',
+    path: 'create-item/:id',
     loadChildren: () => import('./create-item/create-item.module').then( m => m.CreateItemPageModule)
   },
   {

@@ -5,16 +5,24 @@
     <img  src="../../assets/png/imagem.png" alt="">
   </div>
 
+ <form (ngSubmit)="createItem($event)">
   <div class="inputs">  
-    <input placeholder="Nome" class="inputText" >
-    <input placeholder="Categoria" class="inputText">
-    <input placeholder="Valor" class="inputText" type="number">
-    <input placeholder="Peso" class="inputText" type="number">
+    <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
+    <ion-item  class="inputText">
+      <ion-select placeholder="Medida" [(ngModel)]="medidaSelecionada" name="measures">
+        <ion-select-option *ngFor="let measure of measures" [value]="measure.id_medida">
+          {{ measure.ds_medida }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <input name="price" [(ngModel)]="price" placeholder="Valor unitário" class="inputText" type="number">
+    <input name="quantity" [(ngModel)]="quantity" placeholder="Quantidade" class="inputText" type="number">
   </div>
 
   <div class="buttonBig">
     <app-button-big>Adicionar item</app-button-big>
   </div>
+ </form>
   
 
 </ion-content>

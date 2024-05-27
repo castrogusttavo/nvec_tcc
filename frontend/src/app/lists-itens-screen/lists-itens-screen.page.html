@@ -1,7 +1,7 @@
 <ion-content>
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/tabs/tab2']">
-  <div class="content">
-    <div *ngIf="lista" class="card-list-all">
+  <div *ngIf="lista" class="content">
+    <div  class="card-list-all">
       <app-card-list-all
       
         [limite]="lista.rd_lista"
@@ -21,7 +21,7 @@
     </div>
 
     <div class="itens-div">
-      <app-card-box action="Criar" description="Adicionar um novo item" [routerLink]="['/create-item']"></app-card-box>
+      <app-card-box action="Criar" description="Adicionar um novo item" [routerLink]="['/create-item', lista.id_lista]"></app-card-box>
 
       <app-card-item *ngFor="let item of items" [price]="item.price" [itemName]="item.name" [description]="item.description" [routerLink]="['/update-item', item.id]" [imagePath]="item.imagePath"></app-card-item>
     </div>

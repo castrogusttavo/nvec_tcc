@@ -6,7 +6,7 @@ import { SharedModule } from 'src/components/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 
 import { CreateItemPageRoutingModule } from './create-item-routing.module';
-
+import { HttpClientModule } from '@angular/common/http';
 import { CreateItemPage } from './create-item.page';
 
 @NgModule({
@@ -15,7 +15,8 @@ import { CreateItemPage } from './create-item.page';
     FormsModule,
     IonicModule,
     CreateItemPageRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   declarations: [CreateItemPage]
 })
