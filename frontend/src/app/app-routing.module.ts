@@ -168,7 +168,12 @@ const routes: Routes = [
   {
     path: 'update-list/:id',
     loadChildren: () => import('./update-list/update-list.module').then( m => m.UpdateListPageModule)
+  },
+  {
+    path: 'select-item/:idList/:idItem',
+    loadChildren: () => import('./select-item/select-item.module').then( m => m.SelectItemPageModule)
   }
+
 
 
 ];

@@ -30,8 +30,8 @@ export class CreateItemPage implements OnInit {
     this.route.params.subscribe(params => {
       this.listaId = params['id'];
     });
-    this.getMeasures().subscribe(categories => {
-      this.measures = categories;
+    this.getMeasures().subscribe(measures => {
+      this.measures = measures;
     });
   }
 
