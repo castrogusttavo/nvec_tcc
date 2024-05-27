@@ -12,17 +12,16 @@
       <form>
         <ion-row class="ion-justify-content-between">
           <ion-col>
-            <app-input type="name" name="name" [(ngModel)]="name" [placeholder]="userName" class="input-config-name"></app-input>
+            <app-input type="text" name="name" [(ngModel)]="name" [placeholder]="userName" class="input-config-name"></app-input>
           </ion-col>
           <ion-col class="align-center" size="auto">
             <app-button-medium class="button-medium-config" [routerLink]="['/plans-screen']">Assinatura</app-button-medium>
           </ion-col>
         </ion-row>
 
-
         <ion-row>
           <ion-col>
-            <app-input  type="email" name="email" [(ngModel)]="email" [placeholder]="userEmail" class="input-config-email" [readOnly]="true"></app-input>
+            <app-input type="email" name="email" [(ngModel)]="email" [placeholder]="userEmail" class="input-config-email" [readOnly]="true"></app-input>
           </ion-col>
         </ion-row>
       </form>
@@ -37,8 +36,7 @@
     </ion-row>
   </ion-grid>
     <p class="logoutAccount" (click)="logout()">Sair da conta</p>
-    <app-button-medium type="submit" class="button-medium-save">Salvar</app-button-medium>
-
+    <app-button-medium type="button" class="button-medium-save" (click)="updateUser()">Salvar</app-button-medium>
 
   </div>
 </ion-content>

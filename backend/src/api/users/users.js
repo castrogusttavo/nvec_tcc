@@ -92,48 +92,50 @@ module.exports = function (secretKey) {
 
   router.patch("/users/:id", async (req, res) => {
     try {
-      const userId = req.params.id;
+      const userId = req.params.id; // Obtendo o ID do usuário dos parâmetros da URL
       const updateData = req.body;
-
+  
       // Crie a query dinamicamente com base nos campos fornecidos
       let query = "UPDATE tb_usuario SET ";
       const updateFields = [];
       const values = [];
-
+  
       // Verifique quais campos foram fornecidos para atualização
       if (updateData.nm_usuario) {
         query += "nm_usuario = ?, ";
         values.push(updateData.nm_usuario);
       }
-
+  
       if (updateData.email_usuario) {
         query += "email_usuario = ?, ";
         values.push(updateData.email_usuario);
       }
-
+  
       if (updateData.senha_usuario) {
         const hashedPassword = await bcrypt.hash(updateData.senha_usuario, 10);
         query += "senha_usuario = ?, ";
         values.push(hashedPassword);
       }
-
+  
       if (updateData.id_assinatura) {
         query += "id_assinatura = ?, ";
         values.push(updateData.id_assinatura);
       }
-
+  
       // Remova a vírgula no final e adicione a cláusula WHERE
       query = query.slice(0, -2) + " WHERE id_usuario = ?";
       values.push(userId);
-
+  
       await db_query(query, values);
-
+  
       res.sendStatus(204); // Sucesso, sem conteúdo
     } catch (err) {
       console.error("Erro ao atualizar usuário:", err);
       res.status(500).send("Erro ao atualizar usuário");
     }
-  });
+});
+
+  
 
   router.delete("/users/:id", async (req, res) => {
     try {
