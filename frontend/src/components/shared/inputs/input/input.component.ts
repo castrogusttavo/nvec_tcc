@@ -74,15 +74,15 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   getPasswordRequirements(password: string): string[] {
     const requirements: string[] = [];
-
-    if (password.length < 8) {
-      requirements.push('- Pelo menos 8 caracteres.');
-    }
-
     const hasLetter = /[a-zA-Z]+/.test(password);
     const hasNumeric = /[0-9]+/.test(password);
     const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
+
+    
+    if (password.length < 8) {
+      requirements.push('- Pelo menos 8 caracteres');
+    }
 
     if (typesCount < 2) {
       requirements.push('- 2 tipos de caracteres (letras, números, símbolos)');
@@ -91,7 +91,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     if (password.length >= 8 && typesCount == 2 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase())) {
       if (password.length < 12) {
         requirements.push('Senha forte (opcional):');
-        requirements.push('- Pelo menos 12 caracteres.');
+        requirements.push('- Pelo menos 12 caracteres');
       }
       if (password.length <= 12) {
         requirements.push('Senha forte (opcional):');
