@@ -131,7 +131,7 @@ const routes: Routes = [
     loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
   },
   {
-    path: 'update-item',
+    path: 'update-item/:idList/:idItem',
     loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
   },
   {
@@ -142,7 +142,7 @@ const routes: Routes = [
     path: 'comunnity-lists-item',
     loadChildren: () => import('./comunnity-lists-item/comunnity-lists-item.module').then( m => m.ComunnityListsItemPageModule)
   },
-  { path: 'community-lists-sobre',
+  { path: 'communitylistId-lists-sobre',
     loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
   },
   {

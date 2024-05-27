@@ -15,6 +15,11 @@ export class ListsItensScreenPage implements OnInit {
   categories!:any[];
   apiList =  `http://localhost:3001/api/list`
   apiCategories = "http://localhost:3001/api/categories"
+  apiItems='http://localhost:3001/api/items'
+  apiMeasures = "http://localhost:3001/api/measures"
+  apiStatus = "http://localhost:3001/api/status"
+  measures!:any[];
+  status!:any[];
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -24,10 +29,44 @@ export class ListsItensScreenPage implements OnInit {
       this.listaId = params['id'];
     });
     this.getList();
-    console.log(
-      this.lista
-    )
+    this.getItems();
+
   }
+
+  getItems(): void {
+    if (this.listaId) {
+      forkJoin({
+        items: this.http.get<any[]>(this.apiItems, { params: { listId:this.listaId } }),
+        measures: this.http.get<any[]>(this.apiMeasures),
+        status: this.http.get<any[]>(this.apiStatus)
+      }).pipe(
+        map(({ items, measures, status }) => {
+          return items.map(item => {
+            const measure = measures.find(
+              medida => medida.id_medida === item.id_medida
+            );
+            const ic_status = status.find(
+              status => status.id_status === item.id_status
+            );
+            return {
+              ...item,
+              ds_medida: measure ? measure.ds_medida : 'Medida Desconhecida',
+              ds_categoria: ic_status ? ic_status.ds_status : 'Status Desconhecida',
+            };
+          });
+        })
+      ).subscribe(
+        data => {
+          this.items = data;
+          console.log(this.items);
+        },
+        error => console.error('Erro ao buscar dados:', error)
+      );
+    } else {
+      console.error("Id não encontrado");
+    }
+  }
+
 
 
   getList(): void {

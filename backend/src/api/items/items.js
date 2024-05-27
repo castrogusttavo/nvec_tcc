@@ -20,7 +20,10 @@ router.post("/items", async (req, res) => {
 
 router.get("/items", async (req, res) => {
   try {
-    const items = await db_query("SELECT * FROM tb_item");
+    const listId=req.query.listId;
+    const items = await db_query("SELECT * FROM tb_item where id_lista=?",
+    [listId]
+    );
 
     res.json(items);
   } catch (err) {
