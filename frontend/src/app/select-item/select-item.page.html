@@ -1,5 +1,5 @@
 <ion-content  *ngIf="item" [fullscreen]="true" scrollY="false">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/lists-itens-screen']">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/lists-items', item.id_lista]">
 
   <div class="status">
     {{item.ds_status}}

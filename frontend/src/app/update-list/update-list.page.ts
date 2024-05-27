@@ -57,6 +57,7 @@ export class UpdateListPage implements OnInit {
 
 
   async updateList(event: { preventDefault: () => void; }) {
+   if(this.listaId){
     event.preventDefault();
 
     console.log('Name:', this.name);
@@ -76,6 +77,7 @@ export class UpdateListPage implements OnInit {
     } catch (err) {
       console.error('Erro ao atualizar lista:', err);
     }
+   }
   }
 
   getUserId(): void {

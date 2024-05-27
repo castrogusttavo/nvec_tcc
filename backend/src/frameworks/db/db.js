@@ -9,7 +9,7 @@ const dbConfig = {
     connectionLimit: 300,
     queueLimit: 0,
     // port: '3306' 
-    // port: '3307' 
+    port: '3307' 
 };
 
 const connection = mysql.createConnection(dbConfig);

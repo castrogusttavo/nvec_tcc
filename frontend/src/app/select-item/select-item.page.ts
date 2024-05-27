@@ -24,8 +24,6 @@ export class SelectItemPage implements OnInit {
   item: any={};
 
 
-
-  
   constructor(private route: ActivatedRoute, private http: HttpClient,private formBuilder: FormBuilder) {
     // Inicialização do FormGroup para validação dos campos de texto
     this.textForm = this.formBuilder.group({
