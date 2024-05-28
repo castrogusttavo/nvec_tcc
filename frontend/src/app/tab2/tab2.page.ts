@@ -26,11 +26,9 @@ export class Tab2Page {
   private apiRecentLists="http://localhost:3001/api/recentLists";
   private apiCategories="http://localhost:3001/api/categories";
 
-  // FormGroup para validação dos campos de texto
   textForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private http:HttpClient, private jwtHelper: JwtHelperService) {
-    // Inicialização do FormGroup para validação dos campos de texto
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       valor: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
