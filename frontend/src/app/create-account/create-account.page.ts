@@ -74,7 +74,7 @@ export class CreateAccountPage implements OnInit {
       const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value);
       const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
 
-      if (value.length < 8 || /^[a-zA-Z]+$/.test(value) || /(.)\1{2,}/.test(value)) {
+      if (value.length < 8 || /^[a-zA-Z]+$/.test(value) || /(.)\1{2,}/.test(value) || this.isSimilarToPersonalData(value)) {
         return { weakPassword: true };
       } else if (value.length >= 8 && typesCount == 2 && !this.hasObviousSequence(value.toLowerCase())) {
         return null;
@@ -86,19 +86,22 @@ export class CreateAccountPage implements OnInit {
   }
 
   checkPasswordStrength(password: string): string {
-    const hasLetter = /[a-zA-Z]/.test(password); // Verifica se há pelo menos uma letra
-    const hasNumeric = /\d/.test(password); // Verifica se há pelo menos um dígito numérico
-    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password); // Verifica se há pelo menos um símbolo
-    const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length; // Conta o número de tipos de caracteres presentes
+    const hasLetter = /[a-zA-Z]/.test(password);
+    const hasNumeric = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+    const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
 
-    if (password.length < 8 || /^[a-zA-Z]+$/.test(password) || /(.)\1{2,}/.test(password)) {
+    if (password.length < 8 || /^[a-zA-Z]+$/.test(password) || /(.)\1{2,}/.test(password) || this.isSimilarToPersonalData(password)) {
       return 'Senha fraca';
-    } else if (password.length >= 8 && typesCount == 2 && !this.hasObviousSequence(password.toLowerCase())) {
+    } else if (password.length >= 8 && password.length < 12 && typesCount >= 2 && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)) {
       return 'Senha média';
-    } else if (password.length >= 12 && typesCount == 3 && !this.hasObviousSequence(password.toLowerCase()) && !this.containsCommonWords(password.toLowerCase())) {
+    } else if(password.length >= 12 && typesCount == 2 && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)){
+      return 'Senha média';
+    }
+    else if (password.length >= 12 && typesCount == 3 && !this.hasObviousSequence(password.toLowerCase()) && !this.containsCommonWords(password.toLowerCase()) && !this.isSimilarToPersonalData(password)) {
       return 'Senha forte';
     }
-    return 'Senha fraca';
+    return 'A senha não se encaixa em nenhum dos padrões';
   }
 
   hasObviousSequence(value: string): boolean {
@@ -109,5 +112,10 @@ export class CreateAccountPage implements OnInit {
   containsCommonWords(value: string): boolean {
     const commonWords = ["password", "123456", "qwerty", "abc123"];
     return commonWords.some(word => value.includes(word));
+  }
+
+  isSimilarToPersonalData(password: string): boolean {
+    const userName = this.registerForm.get('name')?.value.toLowerCase() || '';
+    return password.toLowerCase().includes(userName);
   }
 }
