@@ -149,6 +149,7 @@ create table if not exists tb_item (
     nm_item varchar(50) not null,
 	vl_uni decimal(10,2) not null,
 	qtde_item int not null,
+	qtde_medida_item int not null,
     id_status int not null default 1,
     id_medida int not null,
     id_lista int not null,
