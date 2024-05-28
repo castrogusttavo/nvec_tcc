@@ -17,16 +17,21 @@ router.post("/communities", async (req, res) => {
       [nm_comunidade, id_categoria, sb_comunidade, end_comunidade]
     );
 
-    const communityId=result.insertId;
-    res.status(201).json({ id_comunidade:communityId});
+    res.status(201).json({ id_comunidade:result.insertId});
 
-    const UserCommunity = await db_query(
-      "INSERT INTO tb_comunidade_usuario(id_comunidade, id_usuario) VALUES (?,?) ",
-      [communityId, userId]
-    );
+    if(communityId.affectedRows === 1){
+      const UserCommunity = await db_query(
+        "INSERT INTO tb_comunidade_usuario(id_comunidade, id_usuario) VALUES (?,?) ",
+        [communityId, userId]
+      );
+  
+      if (!UserCommunity.insertId) {
+        return res.status(500).json({ error: "Erro ao inserir na tabela tb_comunidade_usuario." });
+      }
 
-    if (!UserCommunity.insertId) {
-      return res.status(500).json({ error: "Erro ao inserir na tabela tb_comunidade_usuario." });
+  
+    } else{
+      console.error('Erro ao inserir comunidade');
     }
 
   } catch (err) {
@@ -52,7 +57,11 @@ router.post("/communities", async (req, res) => {
 // Rota GET para buscar todas as comunidades
 router.get("/communities", async (req, res) => {
   try {
-    const comunidades = await db_query("SELECT * FROM tb_comunidade");
+    const userId=req.query.userId;
+
+    const comunidades = await db_query("SELECT * FROM tb_comunidade c JOIN tb_comunidade_usuario cu ON c.id_comunidade = cu.id_comunidade WHERE cu.id_usuario=?",
+      [userId]
+    );
     res.json(comunidades);
   } catch (err) {
     console.error("Erro ao buscar comunidades:", err);

@@ -12,8 +12,6 @@ export class Tab4Page implements OnInit {
   searchText: string = '';
   originalItems: any[] = [
     { title: 'Criar comunidade', imagePath: './../assets/svg/add.svg' },
-    { title: 'Volta às Aulas', imagePath: 'https://blog.etiquetaseadesivos.com.br/wp-content/uploads/2021/12/various-stationery-school-and-office-supplies-over-wooden-texture-picture-id546761524.jpg' },
-    { title: 'Atacadista', imagePath: 'https://newtrade.com.br/wp-content/uploads/2017/05/supermercado-10-05.jpg' }
   ];
   itemsToShow: any[] = this.originalItems;
 
@@ -28,12 +26,15 @@ export class Tab4Page implements OnInit {
   private apiCommunity = "http://localhost:3001/api/communities";
 
   getCommunities():Observable<any[]>{
-    return this.http.get<any[]>(this.apiCommunity,{ params: { id_usuario:this.userId } });
+    return this.http.get<any[]>(this.apiCommunity,{ params: { userId:this.userId } });
   }
 
   ngOnInit(): void {
+    this.getUserName();
+    console.log(this.userId);
     this.getCommunities().subscribe(communities=>{
       this.communities=communities;
+      console.log(this.communities);
     })
   }
 
@@ -63,4 +64,5 @@ export class Tab4Page implements OnInit {
       this.userId = decodedToken.userId; 
     }
   }
+  
 }
