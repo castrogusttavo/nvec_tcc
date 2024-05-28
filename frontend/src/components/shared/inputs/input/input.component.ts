@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ElementRef, Renderer2 } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -21,7 +21,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() maxlength!: number;
   @Input() readOnly: boolean = false;
   @Input() userName: string = '';
-  @Input() validateStrength: boolean = false; // Novo Input
+  @Input() validateStrength: boolean = false;
 
   inputValue: string = '';
   passwordStrengthMessage: string = '';
@@ -30,7 +30,11 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};
 
-  constructor(private platform: Platform) {}
+  constructor(
+    private platform: Platform,
+    private elRef: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {}
 
@@ -51,25 +55,29 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     if (this.type === 'password' && this.validateStrength) {
       this.passwordStrengthMessage = this.checkPasswordStrength(value);
       this.passwordRequirements = this.getPasswordRequirements(value);
+      this.updatePasswordRequirementsMargin(value);
       console.log(`Password strength: ${this.passwordStrengthMessage}`);
     }
     this.onChange(value);
   }
 
   checkPasswordStrength(password: string): string {
-    const hasLetter = /[a-zA-Z]/.test(password); // Verifica se há pelo menos uma letra
-    const hasNumeric = /\d/.test(password); // Verifica se há pelo menos um dígito numérico
-    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password); // Verifica se há pelo menos um símbolo
-    const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length; // Conta o número de tipos de caracteres presentes
+    const hasLetter = /[a-zA-Z]/.test(password);
+    const hasNumeric = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+    const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
 
-    if (password.length < 8 || /^[a-zA-Z]+$/.test(password) || /(.)\1{2,}/.test(password)) {
+    if (password.length < 8 || /^[a-zA-Z]+$/.test(password) || /(.)\1{2,}/.test(password) || this.isSimilarToPersonalData(password)) {
       return 'Senha fraca';
-    } else if (password.length >= 8 && typesCount == 2 && !this.hasObviousSequence(password.toLowerCase())) {
+    } else if (password.length >= 8 && password.length < 12 && typesCount >= 2 && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)) {
       return 'Senha média';
-    } else if (password.length >= 12 && typesCount == 3 && !this.hasObviousSequence(password.toLowerCase()) && !this.containsCommonWords(password.toLowerCase())) {
+    } else if(password.length >= 12 && typesCount == 2 && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)){
+      return 'Senha média';
+    }
+    else if (password.length >= 12 && typesCount == 3 && !this.hasObviousSequence(password.toLowerCase()) && !this.containsCommonWords(password.toLowerCase()) && !this.isSimilarToPersonalData(password)) {
       return 'Senha forte';
     }
-    return 'Senha fraca';
+    return 'A senha não se encaixa em nenhum dos padrões';
   }
 
   getPasswordRequirements(password: string): string[] {
@@ -79,7 +87,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
 
-    
     if (password.length < 8) {
       requirements.push('- Pelo menos 8 caracteres');
     }
@@ -88,16 +95,18 @@ export class InputComponent implements OnInit, ControlValueAccessor {
       requirements.push('- 2 tipos de caracteres (letras, números, símbolos)');
     }
 
-    if (password.length >= 8 && typesCount == 2 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase())) {
+    if (password.length >= 8 && typesCount >= 2 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)) {
       if (password.length < 12) {
+        if( typesCount < 3){
+        requirements.push('Senha forte (opcional):');
+        requirements.push('- Pelo menos 12 caracteres');
+        requirements.push('- 3 tipos de caracteres (letras, números, símbolos)');
+      } else{
         requirements.push('Senha forte (opcional):');
         requirements.push('- Pelo menos 12 caracteres');
       }
-      if (password.length <= 12) {
+      }else if (password.length >= 12 && typesCount < 3 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase())) {
         requirements.push('Senha forte (opcional):');
-        requirements.push('- 3 tipos de caracteres (letras, números, símbolos)');
-      }
-      if (password.length > 12 && typesCount < 3 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase())) {
         requirements.push('- 3 tipos de caracteres (letras, números, símbolos)');
       }
     }
@@ -128,7 +137,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     return password.toLowerCase().includes(this.userName.toLowerCase());
   }
 
-  // Atualiza o contador de caracteres
   updateCounter(event: any) {
     const input = event.target;
     const maxLength = parseInt(input.getAttribute('maxlength'), 10);
@@ -147,6 +155,42 @@ export class InputComponent implements OnInit, ControlValueAccessor {
         counter.style.marginLeft = '340px';
       } else {
         counter.textContent = '';
+      }
+    }
+  }
+
+  updatePasswordRequirementsMargin(password: string) {
+    const hasLetter = /[a-zA-Z]+/.test(password);
+    const hasNumeric = /[0-9]+/.test(password);
+    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+    const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
+
+    const requirementsContainer = this.elRef.nativeElement.querySelector('.password-requirements-container');
+    if (requirementsContainer) {
+      if (password.length < 8 && typesCount === 2 && !this.hasObviousSequence(password.toLowerCase()) && !this.containsCommonWords(password.toLowerCase()) && !this.isSimilarToPersonalData(password) && !/(.)\1{2,}/.test(password.toLowerCase()) ) {
+        this.renderer.setStyle(requirementsContainer, 'marginRight', '224px');
+      }
+      else if (password.length >= 8 && typesCount >= 2 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)) {
+        if (password.length < 12) {
+          if( typesCount < 3){
+          // requirements.push('Senha forte (opcional):');
+          // requirements.push('- Pelo menos 12 caracteres');
+          // requirements.push('- 3 tipos de caracteres (letras, números, símbolos)');
+          this.renderer.setStyle(requirementsContainer, 'marginRight', '75px');
+
+        } else{
+          // requirements.push('Senha forte (opcional):');
+          // requirements.push('- Pelo menos 12 caracteres');
+        }
+        }else if (password.length >= 12 && typesCount < 3 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase())) {
+          // requirements.push('Senha forte (opcional):');
+          // requirements.push('- 3 tipos de caracteres (letras, números, símbolos)');
+        }
+      }
+      else if (password.length >= 8 && password.length < 12 && typesCount >= 2 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)){
+        this.renderer.setStyle(requirementsContainer, 'marginRight', '220px');
+      }else {
+        this.renderer.removeStyle(requirementsContainer, 'marginRight');
       }
     }
   }
