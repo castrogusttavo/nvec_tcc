@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const { db_query } = require("../../frameworks/db/db");
 
-// Rota POST para criar uma nova comunidade
 router.post("/communities", async (req, res) => {
   try {
-    const { nm_comunidade, id_categoria, sb_comunidade, end_comunidade, userId} = req.body;
+    const { nm_comunidade, id_categoria, sb_comunidade, end_comunidade, userId } = req.body;
 
-    if (!nm_comunidade || !id_categoria  || !sb_comunidade || !end_comunidade) {
+    if (!nm_comunidade || !id_categoria || !sb_comunidade || !end_comunidade || !userId) {
+      console.error("Campos obrigatórios ausentes.");
       return res.status(400).json({ error: "Campos obrigatórios ausentes." });
-
     }
 
     const result = await db_query(
@@ -17,28 +16,34 @@ router.post("/communities", async (req, res) => {
       [nm_comunidade, id_categoria, sb_comunidade, end_comunidade]
     );
 
-    res.status(201).json({ id_comunidade:result.insertId});
+    console.log("inserção na tb_comunidade:", result);
 
-    if(communityId.affectedRows === 1){
-      const UserCommunity = await db_query(
-        "INSERT INTO tb_comunidade_usuario(id_comunidade, id_usuario) VALUES (?,?) ",
+    const communityId = result.insertId;
+
+    if (result.affectedRows === 1) {
+      const userCommunityResult = await db_query(
+        "INSERT INTO tb_comunidade_usuario (id_comunidade, id_usuario) VALUES (?, ?)",
         [communityId, userId]
       );
-  
-      if (!UserCommunity.insertId) {
+
+      console.log("inserção na tb_comunidade_usuario:", userCommunityResult);
+
+      if (userCommunityResult.affectedRows === 1) {
+        return res.status(201).json({ id_comunidade: communityId });
+      } else {
+        console.error("Erro ao inserir na tabela tb_comunidade_usuario.");
         return res.status(500).json({ error: "Erro ao inserir na tabela tb_comunidade_usuario." });
       }
-
-  
-    } else{
-      console.error('Erro ao inserir comunidade');
+    } else {
+      console.error("Erro ao inserir na tabela tb_comunidade.");
+      return res.status(500).json({ error: "Erro ao inserir na tabela tb_comunidade." });
     }
-
   } catch (err) {
     console.error("Erro ao inserir comunidade:", err);
-    res.status(500).send("Erro ao inserir comunidade.");
+    return res.status(500).send("Erro ao inserir comunidade.");
   }
 });
+
 
 // router.get('/recentCommunities', async (req, res) => {
 //   try {
