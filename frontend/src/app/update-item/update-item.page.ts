@@ -123,8 +123,10 @@ export class UpdateItemPage implements OnInit {
     }
   }
 
+
   deleteItem(): void {
-    this.http.delete<any>(`${this.apiItems}/${this.itemId}`).subscribe(
+    this.http.delete<any>(`http://localhost:3001/api/items/${this.itemId}`)
+    .subscribe(
       response => {
         console.log('Item excluído com sucesso:', response);
         this.router.navigate(['/tabs/tab1']);
@@ -134,6 +136,7 @@ export class UpdateItemPage implements OnInit {
       }
     );
   }
+
 
 
   // updateCounter(event: any) {

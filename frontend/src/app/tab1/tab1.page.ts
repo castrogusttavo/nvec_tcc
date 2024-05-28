@@ -17,6 +17,8 @@ export class Tab1Page implements OnInit {
   recentLists!:any[];
   userId!: number;
 
+  communities!:any[];
+  private apiCommunity = "http://localhost:3001/api/communities";
 
   constructor(
     private http:  HttpClient, 
@@ -26,9 +28,29 @@ export class Tab1Page implements OnInit {
   ngOnInit(): void {
     this.getUserName();
     this.checkTokenChanges();
-    this.getRecentLists();
+    this.getRecentLists();    
+    this.getCommunities();
   }
 
+  getCommunities():void{
+    forkJoin({
+      communities: this.http.get<any[]>(this.apiCommunity,{ params: { userId:this.userId } }),
+      categories: this.http.get<any[]>(this.apiCategories)
+    }).pipe(
+      map(({ communities, categories }) => {
+        return communities.map(community => {
+          const category = categories.find(categoria => categoria.id_categoria === community.id_categoria);
+          return {
+            ...community,
+            ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
+          };
+        });
+      })
+    ).subscribe(
+      data => this.communities = data,
+      error => console.error('Erro ao buscar dados: ', error)
+    );
+  }
 
 
   getUserName(): void {

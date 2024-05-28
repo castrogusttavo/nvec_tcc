@@ -150,7 +150,7 @@ const routes: Routes = [
     loadChildren: () => import('./teste-senha/teste-senha.module').then( m => m.TesteSenhaPageModule)
   },
   {
-    path: 'update-comunnity',
+    path: 'update-community/:idUser/:idCommunity',
     loadChildren: () => import('./update-comunnity/update-comunnity.module').then( m => m.UpdateComunnityPageModule)
   },
   {

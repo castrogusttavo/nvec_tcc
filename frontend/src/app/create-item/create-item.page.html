@@ -8,14 +8,17 @@
  <form (ngSubmit)="createItem($event)">
   <div class="inputs">  
     <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
-    <ion-item  class="inputText">
-      <ion-select placeholder="Medida" [(ngModel)]="medidaSelecionada" name="measures">
-        <ion-select-option *ngFor="let measure of measures" [value]="measure.id_medida">
-          {{ measure.ds_medida }}
-        </ion-select-option>
+    
+    <ion-item class="item">
+      <input name="quantity_measure" [(ngModel)]="quantity_measure" placeholder="Medida" >
+
+      <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
+        <ion-select-option *ngFor="let measure of measures" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
       </ion-select>
     </ion-item>
+
     <input name="price" [(ngModel)]="price" placeholder="Valor unitário" class="inputText" type="number">
+    
     <input name="quantity" [(ngModel)]="quantity" placeholder="Quantidade" class="inputText" type="number">
   </div>
 

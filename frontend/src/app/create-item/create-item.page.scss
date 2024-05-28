@@ -19,6 +19,10 @@
     justify-content: center;
 }
 
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
+}
 
 
 input{

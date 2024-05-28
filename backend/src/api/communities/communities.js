@@ -121,18 +121,50 @@ router.put("/communities/:id", async (req, res) => {
   }
 });
 
-// Rota DELETE para deletar uma comunidade por ID
-router.delete("/communities/:id", async (req, res) => {
+router.patch("/communities/:id", async (req, res) => {
   try {
     const comunidadeId = req.params.id;
+    const updateFields = req.body;
 
-    const result = await db_query("DELETE FROM tb_comunidade WHERE id_comunidade = ?", [comunidadeId]);
+    const keys = Object.keys(updateFields);
+    const values = Object.values(updateFields);
 
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Comunidade não encontrada." });
+    const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
+    
+    await db_query(
+      `UPDATE tb_comunidade SET ${setQuery} WHERE id_comunidade = ?`,
+      [...values, comunidadeId]
+    );
+
+    res.status(200).json({ message: "Item atualizado com sucesso." });
+  } catch (err) {
+    console.error("Erro ao atualizar parcialmente a lista", err);
+    res.sendStatus(500).send("Erro ao atualizar parcialmente a lista");
+  }
+});
+
+// Rota DELETE para deletar uma comunidade por ID
+router.delete("/communities/:idUser/:idCommunity", async (req, res) => {
+  try {
+    const comunidadeId = req.params.idCommunity;
+    const userId = req.params.idUser;
+
+    const result = await db_query("DELETE FROM tb_comunidade_usuario WHERE id_comunidade = ? AND id_usuario=?",
+     [comunidadeId, userId]);
+
+     console.log("delete tb_comunidade_usuario: ", result);
+
+     if(result.affectedRows===1){
+      const resultCommunity = await db_query("DELETE FROM tb_comunidade WHERE id_comunidade = ?", [comunidadeId]);
+
+      console.log("delete tb_comunidade: ",resultCommunity)
+      if (resultCommunity.affectedRows===1) {
+        res.status(204).json({ message: "Comunidade deletada com sucesso." });
+      } else{
+        return res.status(404).json({ error: "Comunidade não encontrada." });
+      }
     }
 
-    res.status(204).json({ message: "Comunidade deletada com sucesso." });
   } catch (err) {
     console.error("Erro ao deletar comunidade:", err);
     res.status(500).send("Erro ao deletar comunidade.");

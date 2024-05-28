@@ -18,8 +18,9 @@ export class CreateItemPage implements OnInit {
   medidaSelecionada!:string;
 
   name!:string;
-  price!:string;
-  quantity!:string;
+  price!:number;
+  quantity!:number;
+  quantity_measure!:number;
 
   listaId!:number;
 
@@ -49,7 +50,7 @@ export class CreateItemPage implements OnInit {
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/items',
-        { nm_item: this.name, vl_uni:this.price,id_medida:this.medidaSelecionada, qtde_item:this.quantity,id_lista:this.listaId }
+        { nm_item: this.name, vl_uni:this.price,id_medida:this.medidaSelecionada,qtde_medida_item:this.quantity_measure, qtde_item:this.quantity,id_lista:this.listaId }
       ).toPromise();
 
       console.log('Lista criada com sucesso:', response);
