@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -17,16 +17,18 @@ export class Tab2Page {
 
   email: string = '';
   userName: string | undefined;
+  userId!: number;
 
   lists!:any[];
+  recentLists!:any[];
   category!:string;
   private apiLists = "http://localhost:3001/api/lists";
+  private apiRecentLists="http://localhost:3001/api/recentLists";
+  private apiCategories="http://localhost:3001/api/categories";
 
-  // FormGroup para validação dos campos de texto
   textForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private http:HttpClient, private jwtHelper: JwtHelperService) {
-    // Inicialização do FormGroup para validação dos campos de texto
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       valor: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
@@ -34,12 +36,34 @@ export class Tab2Page {
     });
   }
 
-  getLists():Observable<any[]>{
-    return this.http.get<any[]>(this.apiLists);
+  getRecentLists(): void {
+    forkJoin({
+      lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId:this.userId } }),
+      categories: this.http.get<any[]>(this.apiCategories)
+    }).pipe(
+      map(({ lists, categories }) => {
+        return lists.map(list => {
+          const category = categories.find(categoria => categoria.id_categoria === list.id_categoria);
+          return {
+            ...list,
+            ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
+          };
+        });
+      })
+    ).subscribe(
+      data => this.recentLists = data,
+      error => console.error('Erro ao buscar dados: ', error)
+    );
   }
+
+  getLists():Observable<any[]>{
+    return this.http.get<any[]>(this.apiLists, { params: { userId:this.userId } });
+  }
+
   clearSearchText() {
     this.searchText = '';
   }
+
   searchText: string = '';
   originalItems: any[] = [
     { title: 'Guloseimas', description: 'Doces pros irmãos'},
@@ -71,10 +95,15 @@ export class Tab2Page {
     this.getLists().subscribe(lists=>{
       this.lists = lists;
     })
+    this.getRecentLists();
   }
 
   getUserName(): void {
     const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userName = decodedToken.userName; 
+      this.userId = decodedToken.userId;
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       this.userName = decodedToken.userName; // Supondo que o email do usuário esteja no token com a chave 'userEmail'

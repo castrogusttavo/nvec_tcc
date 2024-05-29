@@ -20,6 +20,8 @@ export class Tab3Page {
   expense!:string;
   address!:string;
   user!:string;
+  date:string = new Date().toISOString().split('T')[0];;
+
   inputTextValue: string | undefined;
   categoriaSelecionada!:string;
   private apiCategories = 'http://localhost:3001/api/categories'
@@ -62,11 +64,10 @@ export class Tab3Page {
 
   async createList(event: { preventDefault: () => void; }) {
     event.preventDefault();
-
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/lists',
-        { nm_lista: this.name, rd_lista:this.expense, ds_lista:this.description,id_categoria:this.categoriaSelecionada, id_usuario:this.user, dt_criacao:'2002-02-01', end_lista:this.address }
+        { nm_lista: this.name, rd_lista:this.expense, ds_lista:this.description,id_categoria:this.categoriaSelecionada, id_usuario:this.user, end_lista:this.address }
       ).toPromise();
 
       console.log('Lista criada com sucesso:', response);

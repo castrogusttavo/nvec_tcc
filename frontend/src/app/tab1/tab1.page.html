@@ -35,7 +35,8 @@
           [vl_gasto]="'R$' + ((list.vl_gasto || 0) | number:'1.2-2')"
           [rd_lista]="'R$' + ((list.rd_lista || 0) | number:'1.2-2')"
           [date]="formatDate(list.dt_criacao)"
-          [colorClass]="getListClass(i + 1)">
+          [colorClass]="getListClass(i + 1)"
+          [routerLink]="['/lists-items', list.id_lista]">
         </app-card-list>
         <p class="no-recent-data" *ngIf="recentLists.length === 0">
           Você ainda não criou nenhuma lista.

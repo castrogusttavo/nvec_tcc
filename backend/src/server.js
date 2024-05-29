@@ -20,12 +20,13 @@ const itemsRouter = require("./api/items/items");
 const listsRouter = require("./api/lists/lists");
 const usersRouter = require("./api/users/users")(secretKey);
 const categoriesRouter = require("./api/categories/categories");
+const measuresRouter = require("./api/measures/measures");
+const statusRouter = require("./api/status/status");
 const dataUserRouter = require("./api/users/dataUser");
 const reportRouter = require("./api/report/report");
 
 const checkInternetRouter = require("./api/system/ping");
 const cacheRouter = require("./api/system/cache")(secretKey);
-
 const app = express();
 
 app.use(cors({
@@ -46,6 +47,8 @@ app.use('/api', itemsRouter);
 app.use('/api', listsRouter);
 app.use('/api', usersRouter);
 app.use('/api', categoriesRouter);
+app.use('/api', measuresRouter);
+app.use('/api', statusRouter);
 app.use('/api', dataUserRouter);
 app.use('/api', reportRouter);
 

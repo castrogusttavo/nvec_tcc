@@ -17,20 +17,19 @@
 
     <div class="communities" [ngClass]="{'slide-up-animation': searchText}">
       <app-card-list-search
-        *ngFor="let item of itemsToShow"
-        [routerLink]="['/create-comunnity']"
-        class="card-list-search-create"
-        [imagePath]="item.imagePath"
-        [title]="item.title">
-      </app-card-list-search>
+      *ngFor="let item of itemsToShow"
+      [routerLink]="['/create-comunnity']"
+      class="card-list-search-create"
+      [imagePath]="item.imagePath"
+      [title]="item.title"
+      ></app-card-list-search>
     </div>
 
     <div>
       <app-card-list-search
-        *ngFor="let community of communities"
-        name="community"
-        [title]="community.nm_comunidade">
-      </app-card-list-search>
+      *ngFor="let community of communities" name="community"
+      [title]="community.nm_comunidade"
+      [routerLink]="['/update-community', community.id_usuario,community.id_comunidade]"></app-card-list-search>
     </div>
   </div>
 </ion-content>

@@ -14,14 +14,12 @@ export class Tab4Page implements OnInit {
   searchText: string = '';
   originalItems: any[] = [
     { title: 'Criar comunidade', imagePath: './../assets/svg/add.svg' },
-    { title: 'Volta às Aulas', imagePath: 'https://blog.etiquetaseadesivos.com.br/wp-content/uploads/2021/12/various-stationery-school-and-office-supplies-over-wooden-texture-picture-id546761524.jpg' },
-    { title: 'Atacadista', imagePath: 'https://newtrade.com.br/wp-content/uploads/2017/05/supermercado-10-05.jpg' }
   ];
   itemsToShow: any[] = this.originalItems;
 
   email: string = '';
+  userId!:number;
   userName!: string;
-  userId!: string;
 
   createdCommunitiesCount: number = 0;
   loginCommunitiesCount: number = 0;
@@ -29,12 +27,11 @@ export class Tab4Page implements OnInit {
   state: string = 'Offline';  // Initialize the state as Offline
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private cdr: ChangeDetectorRef) {}
-
   communities!: any[];
   private apiCommunity = 'http://localhost:3001/api/communities';
 
-  getCommunities(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiCommunity);
+  getCommunities():Observable<any[]>{
+    return this.http.get<any[]>(this.apiCommunity,{ params: { userId:this.userId } });
   }
 
   ngOnInit(): void {
@@ -45,6 +42,10 @@ export class Tab4Page implements OnInit {
     this.getUserName();
     this.getUserId();  // Fetch userId on initialization
     this.checkTokenChanges();  // Check for token changes every second
+    this.getCommunities().subscribe(communities=>{
+      this.communities=communities;
+      console.log(this.communities);
+    })
   }
 
   onSearchInput(event: any) {
@@ -65,6 +66,15 @@ export class Tab4Page implements OnInit {
 
   getUserName(): void {
     const token = localStorage.getItem('token');
+    console.log('Token:', token);
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      console.log('Decoded Token:', decodedToken); 
+      this.userName = decodedToken.userName;
+      this.userId = decodedToken.userId; 
+    }
+  }
+ 
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       this.userName = decodedToken.userName;

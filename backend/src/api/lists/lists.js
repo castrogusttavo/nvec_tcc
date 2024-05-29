@@ -4,11 +4,11 @@ const { db_query } = require("../../frameworks/db/db");
 
 router.post("/lists", async (req, res) => {
   try {
-    const { nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria, id_usuario, end_lista } = req.body;
+    const { nm_lista, rd_lista, ds_lista, id_categoria, id_usuario, end_lista } = req.body;
 
     const result = await db_query(
-      "INSERT INTO tb_lista (nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria,end_lista, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [nm_lista, dt_criacao, rd_lista, ds_lista, id_categoria,end_lista, id_usuario]
+      "INSERT INTO tb_lista (nm_lista, rd_lista, ds_lista, id_categoria,end_lista, id_usuario) VALUES (?, ?, ?, ?, ?,?)",
+      [nm_lista, rd_lista, ds_lista, id_categoria,end_lista, id_usuario]
     );
 
     res.status(201).json({ id_lista: result.insertId });
@@ -20,7 +20,10 @@ router.post("/lists", async (req, res) => {
 
 router.get("/lists", async (req, res) => {
   try {
-    const lists = await db_query("SELECT * FROM tb_lista");
+    const userId = req.query.userId;
+    const lists = await db_query("SELECT * FROM tb_lista where id_usuario=?",
+      [userId]
+    );
     res.json(lists);
   } catch (err) {
     console.error("Erro ao buscar listas", err);
@@ -30,8 +33,10 @@ router.get("/lists", async (req, res) => {
 
 router.get('/recentLists', async (req, res) => {
   try {
+    const userId = req.query.userId;
     const recentLists = await db_query(
-      "SELECT * FROM tb_lista ORDER BY dt_criacao DESC LIMIT 4"
+      "SELECT * FROM tb_lista where id_usuario=? ORDER BY dt_criacao ASC LIMIT 4",
+      [userId]
     );
 
     res.status(200).json(recentLists);
@@ -41,7 +46,7 @@ router.get('/recentLists', async (req, res) => {
   }
 });
 
-router.get("/lists/:id", async (req, res) => {
+router.get("/list/:id", async (req, res) => {
   try {
     const listId = req.params.id;
 
