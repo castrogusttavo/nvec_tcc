@@ -64,7 +64,7 @@ export class CreateComunnityPage implements OnInit {
       ).toPromise();
 
       console.log('Comunidade criada com sucesso:', response);
-      this.router.navigate(['/tabs/tab4']);
+      this.router.navigate(['/list-adm-community']);
     } catch (err) {
       console.error('Erro ao criar comunidade:', err);
     }

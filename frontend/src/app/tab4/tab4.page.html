@@ -18,7 +18,7 @@
     <div class="communities" [ngClass]="{'slide-up-animation': searchText}">
       <app-card-list-search
         *ngFor="let item of itemsToShow"
-        [routerLink]="['/create-comunnity']"
+        [routerLink]="['/load-screen-community']"
         class="card-list-search-create"
         [imagePath]="item.imagePath"
         [title]="item.title">
