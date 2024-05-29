@@ -8,10 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardPlansComponent  implements OnInit {
 
   @Input() planItems: string[] | undefined;
-  @Input() planTitle: string | undefined;
+  @Input() planTitle: string | null | undefined;
   @Input() planPreco: string | undefined;
   @Input() planDesc: string | undefined;
-
+  @Input() customClass: string | undefined;
 
   constructor() { }
 

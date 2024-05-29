@@ -1,6 +1,14 @@
 <ion-content>
   <div class="content">
-    <app-card-user-community numInvitesCommunity="10" numEnteredCommunity="06" numCreatedCommunity="05" state="Online" greeting="Boa noite!" [imagePath]="'./../assets/svg/character.svg'"></app-card-user-community>
+    <app-card-user-community
+      [numInvitesCommunity]="formatNumber(invitationCommunitiesCount)"
+      [numEnteredCommunity]="formatNumber(loginCommunitiesCount)"
+      [numCreatedCommunity]="formatNumber(createdCommunitiesCount)"
+      [state]="state"
+      greeting="Boa noite!"
+      [userName]="userName"
+      [imagePath]="'./../assets/svg/character.svg'">
+    </app-card-user-community>
 
     <div class="input-button">
       <input type="text" placeholder="Pesquisa..." (input)="onSearchInput($event)">
@@ -15,15 +23,13 @@
       [imagePath]="item.imagePath"
       [title]="item.title"
       ></app-card-list-search>
-
     </div>
 
-    <div >
+    <div>
       <app-card-list-search
       *ngFor="let community of communities" name="community"
       [title]="community.nm_comunidade"
       [routerLink]="['/update-community', community.id_usuario,community.id_comunidade]"></app-card-list-search>
-
     </div>
   </div>
 </ion-content>

@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, 
 })
 export class CreateAccountPage implements OnInit {
   registerForm: FormGroup;
+  passwordStrengthMessage: string = '';
+  showErrorToast: boolean = false;
 
   name: string = '';
   email: string = '';
@@ -19,11 +21,14 @@ export class CreateAccountPage implements OnInit {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8), passwordAverageValidator()]]
+      password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]]
     });
-   }
+  }
 
   ngOnInit() {
+    this.registerForm.get('password')?.valueChanges.subscribe(value => {
+      this.passwordStrengthMessage = this.checkPasswordStrength(value);
+    });
   }
 
   async createUser(event: { preventDefault: () => void; }) {
@@ -35,9 +40,6 @@ export class CreateAccountPage implements OnInit {
     }
 
     const { name, email, password } = this.registerForm.value;
-
-    console.log('Email:', email);
-    console.log('Senha:', password);
 
     try {
       const response: any = await this.http.post(
@@ -51,43 +53,69 @@ export class CreateAccountPage implements OnInit {
       this.router.navigate(['/pre-page']);
     } catch (err) {
       console.error('Erro ao criar conta:', err);
+      this.showToast();
     }
   }
 
-}
+  showToast() {
+    this.showErrorToast = true;
+    setTimeout(() => {
+      this.showErrorToast = false;
+    }, 5000); // Ocultar o Toast após 5 segundos
+  }
 
-export function passwordAverageValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
-    const name = control.parent?.get('name')?.value; // Adicionando verificação para control.parent e control.parent.get('name')
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (!value) return null;
 
-    if (!value || !name) {
-      return null;
+      const hasLetter = /[a-zA-Z]+/.test(value);
+      const hasNumeric = /[0-9]+/.test(value);
+      const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value);
+      const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
+
+      if (value.length < 8 || /^[a-zA-Z]+$/.test(value) || /(.)\1{2,}/.test(value) || this.isSimilarToPersonalData(value)) {
+        return { weakPassword: true };
+      } else if (value.length >= 8 && typesCount == 2 && !this.hasObviousSequence(value.toLowerCase())) {
+        return null;
+      } else if (value.length >= 12 && typesCount == 3 && !this.hasObviousSequence(value.toLowerCase()) && !this.containsCommonWords(value.toLowerCase())) {
+        return null;
+      }
+      return { weakPassword: true };
+    };
+  }
+
+  checkPasswordStrength(password: string): string {
+    const hasLetter = /[a-zA-Z]/.test(password);
+    const hasNumeric = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+    const typesCount = [hasLetter, hasNumeric, hasSymbol].filter(Boolean).length;
+
+    if (password.length < 8 || /^[a-zA-Z]+$/.test(password) || /(.)\1{2,}/.test(password) || this.isSimilarToPersonalData(password)) {
+      return 'Senha fraca';
+    } else if (password.length >= 8 && password.length < 12 && typesCount >= 2 && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)) {
+      return 'Senha média';
+    } else if(password.length >= 12 && typesCount == 2 && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)){
+      return 'Senha média';
     }
+    else if (password.length >= 12 && typesCount == 3 && !this.hasObviousSequence(password.toLowerCase()) && !this.containsCommonWords(password.toLowerCase()) && !this.isSimilarToPersonalData(password)) {
+      return 'Senha forte';
+    }
+    return 'A senha não se encaixa em nenhum dos padrões';
+  }
 
-    const hasUpperCase = /[A-Z]+/.test(value);
-    const hasLowerCase = /[a-z]+/.test(value);
-    const hasNumeric = /[0-9]+/.test(value);
-    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value);
+  hasObviousSequence(value: string): boolean {
+    const obviousSequences = ["1234", "abcd", "password", "qwerty"];
+    return obviousSequences.some(sequence => value.includes(sequence));
+  }
 
-    const noObviousSequence = !hasObviousSequence(value.toLowerCase());
+  containsCommonWords(value: string): boolean {
+    const commonWords = ["password", "123456", "qwerty", "abc123"];
+    return commonWords.some(word => value.includes(word));
+  }
 
-    const notSimilarToPersonalData = !similarToPersonalData(value, name); // Verificando a semelhança com o nome do usuário
-
-    const passwordValid = (hasUpperCase && hasLowerCase && hasNumeric) || (hasNumeric && hasSymbol) || (hasUpperCase && hasLowerCase && hasSymbol);
-
-    return passwordValid && noObviousSequence && notSimilarToPersonalData ? null : { passwordAverage: true };
-  };
-}
-
-function hasObviousSequence(value: string): boolean {
-  // Verifica se a senha contém sequências óbvias
-  const obviousSequences = ["1234", "abcd"]; // Adicione outras sequências óbvias conforme necessário
-  return obviousSequences.some(sequence => value.includes(sequence));
-}
-
-function similarToPersonalData(password: string, personalData: string): boolean {
-  // Verifica se a senha é semelhante a dados pessoais
-  const similarToUsername = password.toLowerCase().includes(personalData.toLowerCase());
-  return similarToUsername;
+  isSimilarToPersonalData(password: string): boolean {
+    const userName = this.registerForm.get('name')?.value.toLowerCase() || '';
+    return password.toLowerCase().includes(userName);
+  }
 }

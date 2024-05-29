@@ -1,4 +1,4 @@
-<button class="buttonSocial">
+<button class="buttonSocial" [disabled]="disabled" [ngClass]="getButtonClasses()">
   <span class="buttonContent">
     <img [src]="imageSocial" ><span>{{ texto }}</span>
   </span>

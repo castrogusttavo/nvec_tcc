@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ReportPageRoutingModule } from './report-routing.module';
+import { ReportCssPageRoutingModule } from './report-css-routing.module';
 
-import { ReportPage } from './report.page';
+import { ReportCssPage } from './report-css.page';
 import { SharedModule } from 'src/components/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,10 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReportPageRoutingModule,
+    ReportCssPageRoutingModule,
     SharedModule,
     HttpClientModule
   ],
-  declarations: [ReportPage]
+  declarations: [ReportCssPage]
 })
-export class ReportPageModule {}
+export class ReportCssPageModule {}

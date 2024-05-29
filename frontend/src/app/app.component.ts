@@ -18,10 +18,8 @@ export class AppComponent implements OnInit{
 
   getUserName(): void {
     const token = localStorage.getItem('token');
-    console.log('Token:', token);
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken);
       this.userName = decodedToken.userName;
     }
   }

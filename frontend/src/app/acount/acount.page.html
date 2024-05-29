@@ -11,18 +11,17 @@
     <ion-grid >
       <form>
         <ion-row class="ion-justify-content-between">
-          <ion-col size="auto">
-            <app-input type="name" name="name" [(ngModel)]="name" placeholder="Nome" class="input-config-name"></app-input>
+          <ion-col>
+            <app-input type="text" name="name" [(ngModel)]="name" [placeholder]="userName" class="input-config-name"></app-input>
           </ion-col>
           <ion-col class="align-center" size="auto">
-            <app-button-medium class="button-medium-config">Assinatura</app-button-medium>
+            <app-button-medium class="button-medium-config" [routerLink]="['/plans-screen']">Assinatura</app-button-medium>
           </ion-col>
         </ion-row>
 
-
         <ion-row>
           <ion-col>
-            <app-input  type="email" name="email" [(ngModel)]="email" placeholder="Email" class="input-config-email"></app-input>
+            <app-input type="email" name="email" [(ngModel)]="email" [placeholder]="userEmail" class="input-config-email" [readOnly]="true"></app-input>
           </ion-col>
         </ion-row>
       </form>
@@ -36,9 +35,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-    <p (click)="logout()">Sair da conta</p>
-    <app-button-medium type="submit" class="button-medium-save">Salvar</app-button-medium>
-
+    <p class="logoutAccount" (click)="logout()">Sair da conta</p>
+    <app-button-medium type="button" class="button-medium-save" (click)="updateUser()">Salvar</app-button-medium>
 
   </div>
 </ion-content>

@@ -92,43 +92,60 @@ module.exports = function (secretKey) {
 
   router.patch("/users/:id", async (req, res) => {
     try {
-      const userId = req.params.id;
+      const userId = req.params.id; // Obtendo o ID do usuário dos parâmetros da URL
       const updateData = req.body;
-
+  
       // Crie a query dinamicamente com base nos campos fornecidos
       let query = "UPDATE tb_usuario SET ";
       const updateFields = [];
       const values = [];
-
+  
       // Verifique quais campos foram fornecidos para atualização
       if (updateData.nm_usuario) {
         query += "nm_usuario = ?, ";
         values.push(updateData.nm_usuario);
       }
-
+  
       if (updateData.email_usuario) {
         query += "email_usuario = ?, ";
         values.push(updateData.email_usuario);
       }
-
+  
       if (updateData.senha_usuario) {
         const hashedPassword = await bcrypt.hash(updateData.senha_usuario, 10);
         query += "senha_usuario = ?, ";
         values.push(hashedPassword);
       }
-
+  
       if (updateData.id_assinatura) {
         query += "id_assinatura = ?, ";
         values.push(updateData.id_assinatura);
       }
-
+  
       // Remova a vírgula no final e adicione a cláusula WHERE
       query = query.slice(0, -2) + " WHERE id_usuario = ?";
       values.push(userId);
-
+  
       await db_query(query, values);
-
-      res.sendStatus(204); // Sucesso, sem conteúdo
+  
+      // Gerar um token JWT para o usuário atualizado
+      const token = jwt.sign(
+        { userId: userId, userEmail: updateData.email_usuario, userName: updateData.nm_usuario, subscriptionId: updateData.id_assinatura },
+        secretKey,
+        { expiresIn: "3h" }
+      );
+  
+      // Extraindo os dados do usuário atualizados
+      const userData = {
+        id_usuario: userId,
+        name: updateData.nm_usuario,
+        email: updateData.email_usuario,
+        password: updateData.senha_usuario,
+        subscriptionId: updateData.id_assinatura
+      };
+  
+      // Retornar o token e os dados do usuário atualizados
+      res.json({ token, userData });
     } catch (err) {
       console.error("Erro ao atualizar usuário:", err);
       res.status(500).send("Erro ao atualizar usuário");
@@ -221,7 +238,7 @@ module.exports = function (secretKey) {
 
       // Gerar um token JWT para o usuário recém-cadastrado
       const token = jwt.sign(
-        { userId: result.insertId, userEmail: email, userName: name },
+        { userId: result.insertId, userEmail: email, userName: name,  subscriptionId: id_assinatura},
         secretKey,
         { expiresIn: "3h" }
       );
@@ -232,6 +249,7 @@ module.exports = function (secretKey) {
         name: name,
         email: email,
         password: password,
+        subscriptionId: id_assinatura
       };
 
       // Exibir os dados do usuário no console
@@ -286,6 +304,7 @@ module.exports = function (secretKey) {
           userId: user[0].id_usuario,
           userEmail: user[0].email_usuario,
           userName: user[0].nm_usuario,
+          subscriptionId: user[0].id_assinatura
         },
         secretKey,
         { expiresIn: "3h" }
@@ -297,6 +316,7 @@ module.exports = function (secretKey) {
         name: user[0].nm_usuario,
         email: user[0].email_usuario,
         password: senha,
+        subscriptionId: user[0].id_assinatura
       };
 
       // Exibir os dados do usuário no console

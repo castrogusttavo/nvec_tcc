@@ -5,11 +5,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.page.html',
-  styleUrls: ['./report.page.scss'],
+  selector: 'app-report-css',
+  templateUrl: './report-css.page.html',
+  styleUrls: ['./report-css.page.scss'],
 })
-export class ReportPage implements OnInit {
+export class ReportCssPage implements OnInit {
   public segmentValue: string = 'segment';
   private previousToken: string | null = null;
 
@@ -85,6 +85,7 @@ export class ReportPage implements OnInit {
       totalValueByCategory: this.getTotalValueByCategory(),
     }).subscribe(
       ({ totalSpend, totalValueByCategory }) => {
+
         this.totalSpend = totalSpend;
         this.totalValueByCategory = totalValueByCategory;
 
@@ -96,6 +97,7 @@ export class ReportPage implements OnInit {
             totalRendas
           );
         });
+
       },
       (err) => {
         console.error('Erro ao carregar dados', err);
@@ -125,6 +127,7 @@ export class ReportPage implements OnInit {
               totalRendas
             );
           });
+
         },
         (err) => {
           console.error('Erro ao buscar total economizado', err);
@@ -155,6 +158,8 @@ export class ReportPage implements OnInit {
   checkTokenChanges(): void {
     setInterval(() => {
       const currentToken = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
+
       if (currentToken !== this.previousToken) {
         this.previousToken = currentToken;
         this.getUserId();
@@ -182,4 +187,49 @@ export class ReportPage implements OnInit {
     const totalRendas = category ? parseFloat(category.total_rendas) : 0;
     return isNaN(totalRendas) ? 0 : totalRendas;
   }
+
+  /*
+    calculatePercentageDifference(): void {
+    const differences = this.totalValueByCategory
+      .map((category) => {
+        const spendData = this.totalSpend.find(
+          (spend) => spend.ds_categoria === category.ds_categoria
+        );
+        if (spendData) {
+          const total_rendas = parseFloat(category.total_rendas);
+          const total_gasto = parseFloat(spendData.total_gasto);
+
+          if (total_gasto !== 0) {
+            const difference =
+              ((total_rendas - total_gasto) / total_rendas) * 100;
+            return {
+              categoria: category.ds_categoria,
+              difference: difference,
+            };
+          } else {
+            return {
+              categoria: category.ds_categoria,
+              difference: 'N/A',
+            };
+          }
+        }
+        return null;
+      })
+      .filter((item) => item !== null);
+
+    differences.forEach((diff) => {
+      if (typeof diff!.difference === 'number') {
+        console.log(
+          `Categoria: ${
+            diff!.categoria
+          }, Diferença (%): ${diff!.difference.toFixed(2)}`
+        );
+      } else {
+        console.log(
+          Categoria: ${diff!.categoria}, Diferença (%): ${diff!.difference}
+        );
+      }
+    });
+  }
+  */
 }

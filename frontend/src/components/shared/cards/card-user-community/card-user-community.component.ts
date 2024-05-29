@@ -17,6 +17,12 @@ export class CardUserCommunityComponent  implements OnInit {
   @Input() state: string | undefined;
   constructor() { }
 
+  backgroundColor: string = '#27AE60';
+
+  ngOnChanges() {
+    this.backgroundColor = this.state === 'Online' ? '#27AE60' : '#AE4747';
+  }
+
   ngOnInit() {}
 
 }

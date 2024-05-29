@@ -4,12 +4,12 @@
     <h2>{{ titulo }}</h2>
     <p>{{ conteudo }}</p>
   </div>
-  
+
   <div class="card-image-btn">
     <div class="card-image">
       <img [src]="imagePath" alt="Imagem compartilhada">
     </div>
-    <button class="card-btn">Quero conhecer</button>
+    <button class="card-btn" [routerLink]="['/plans-screen']">Quero conhecer</button>
   </div>
 
 </ion-card>

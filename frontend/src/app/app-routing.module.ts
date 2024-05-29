@@ -172,6 +172,10 @@ const routes: Routes = [
   {
     path: 'select-item/:idList/:idItem',
     loadChildren: () => import('./select-item/select-item.module').then( m => m.SelectItemPageModule)
+    path: 'report-css',
+  },
+  {
+    loadChildren: () => import('./report-css/report-css.module').then( m => m.ReportCssPageModule)
   }
 
 

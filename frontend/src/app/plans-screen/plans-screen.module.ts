@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { PlansScreenPageRoutingModule } from './plans-screen-routing.module';
 
 import { PlansScreenPage } from './plans-screen.page';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { PlansScreenPage } from './plans-screen.page';
     FormsModule,
     IonicModule,
     PlansScreenPageRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   declarations: [PlansScreenPage]
 })

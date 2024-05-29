@@ -16,9 +16,6 @@ export class TesteSenhaPage implements OnInit {
   }
 
   createUser() {
-    console.log('Nome:', this.name);
-    console.log('Email:', this.email);
-    console.log('Senha:', this.password);
   }
-  
+
 }

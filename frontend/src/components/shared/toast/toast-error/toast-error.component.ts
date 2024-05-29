@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ToastErrorComponent  implements OnInit {
   @Input() titulo: string | undefined; // titulo modificavel
   @Input() conteudo: string | undefined;  // conteudo modificavel
+  @Input() visible: boolean = false;
 
   constructor() { }
 

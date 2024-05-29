@@ -1,18 +1,17 @@
-<ion-card class="cardLista">
-  <ion-card-header>
+<ion-card class="cardLista" [ngClass]="colorClass">
+  <ion-card-header [ngClass]="colorClass"> <!-- Aplicando a classe diretamente ao ion-card-header -->
     <h5>{{title}}</h5>
     <div class="ctg-lista">
       <span>{{category}}</span>
       <div class="visu-gastos">
-        <h5>{{price}}</h5>
-        <button><img src="./../../../../assets/svg/eye.svg" alt=""></button>
+        <h5>{{vl_gasto}}</h5>
+        <h5>{{rd_lista}}</h5>
       </div>
     </div>
   </ion-card-header>
   <ion-card-content>
     <div class="dt-lista">
       <span>{{date}}</span>
-      <button><img src="./../../../../assets/svg/arrow_forward_home.svg" alt=""></button>
     </div>
   </ion-card-content>
 </ion-card>

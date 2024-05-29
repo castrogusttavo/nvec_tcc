@@ -8,6 +8,7 @@ import { PreferencesPageRoutingModule } from './preferences-routing.module';
 
 import { PreferencesPage } from './preferences.page';
 import {SharedModule} from '../../components/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {SharedModule} from '../../components/shared/shared.module';
     FormsModule,
     IonicModule,
     PreferencesPageRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   declarations: [PreferencesPage]
 })

@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="user-state">
-    <div class="user-online">{{state}}</div>
+    <div class="user-online" [ngStyle]="{ 'background-color': backgroundColor }">{{state}}</div>
   </div>
   <div class="communities">
     <div class="created-communities">

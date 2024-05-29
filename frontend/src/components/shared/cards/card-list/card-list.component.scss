@@ -39,6 +39,7 @@
     .visu-gastos{
         display: flex;
         justify-content: space-between;
+        flex-direction: column;
     }
     .eye-icon{
         margin-top: 8%;
@@ -46,22 +47,22 @@
     button{
         background: none;
     }
-    
+
 
 }
 
-:host.card-blue ion-card-header{
-    background: #{$brand1};
+ion-card-header.card-blue {
+  background: #{$brand1};
 }
 
-:host.card-orange ion-card-header{
-    background: #{$brand2};
+ion-card-header.card-orange {
+  background: #{$brand2};
 }
 
-:host.card-green ion-card-header{
-    background: #{$G400-sucess};
+ion-card-header.card-green {
+  background: #{$G400-sucess};
 }
 
-:host.card-red ion-card-header{
-    background: #{$R600-danger};
+ion-card-header.card-red {
+  background: #{$R600-danger};
 }

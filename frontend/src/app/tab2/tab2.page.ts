@@ -100,12 +100,13 @@ export class Tab2Page {
 
   getUserName(): void {
     const token = localStorage.getItem('token');
-    console.log('Token:', token); 
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken); 
       this.userName = decodedToken.userName; 
       this.userId = decodedToken.userId;
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userName = decodedToken.userName; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
     }
   }
 }

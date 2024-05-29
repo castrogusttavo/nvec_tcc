@@ -53,12 +53,6 @@ export class CreateComunnityPage implements OnInit {
   async createCommunity(event: { preventDefault: () => void; }) {
     event.preventDefault();
 
-    console.log('Name: ', this.name);
-    console.log('Categoria: ', this.categoriaSelecionada);
-    console.log('Sobre: ', this.about);
-    console.log('Endereço: ', this.address);
-    console.log('Id do usuário: ', this.userId);
-
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/communities',
@@ -83,4 +77,5 @@ export class CreateComunnityPage implements OnInit {
     }
   }
 
+}
 }
