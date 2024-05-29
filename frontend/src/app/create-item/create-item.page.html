@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" scrollY="false">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
+  <img *ngIf="listaId"  [routerLink]="['/lists-items', listaId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
 
   <div class="imageIlustrator">
     <img  src="../../assets/png/imagem.png" alt="">
@@ -7,12 +7,11 @@
 
  <form (ngSubmit)="createItem($event)">
   <div class="inputs">  
-    
+
     <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
     
     <ion-item class="item">
-      <input name="quantity_measure" [(ngModel)]="quantity_measure" placeholder="Medida" >
-
+      <input class="inputText" name="quantity_measure" [(ngModel)]="quantity_measure" placeholder="Medida" >
       <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
         <ion-select-option *ngFor="let measure of measures" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
       </ion-select>

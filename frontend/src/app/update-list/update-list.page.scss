@@ -18,9 +18,8 @@
     flex-wrap: wrap;
     justify-content: center;
 }
-
-
-input{
+input,
+.input{
     margin: 10px;
     width: 183px;
     height: 55px;
@@ -29,7 +28,19 @@ input{
     border: var(--Space-space-025, 2px) solid $N300;
     background: transparent;
 }
-  
+.description{
+    width: 382px;
+    min-height: 80px;
+    font-size: 16px; 
+    margin: 10px;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    background: transparent;
+
+}
+.description::placeholder{
+    padding: 8px;
+}
 ::placeholder {
     color: $N800D;
     font-family: 'Poppins';
@@ -52,7 +63,10 @@ input{
     left: 10px;
     text-align: top;
 }
-
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
+}
 .inputName{
     width: 382px;
     height: 55px;

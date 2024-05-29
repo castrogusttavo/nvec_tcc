@@ -56,7 +56,7 @@
     <!-- Botão Bolean cancelar e Excluir -->
     <div class="bolean">
       <!-- Botão Cancelar -->
-      <a class="cancelar">Cancelar</a>
+      <a style="text-decoration: none;" [routerLink]="['/select-item',item.id_lista, item.id_item]" class="cancelar">Cancelar</a>
       <!-- Botão Excluir -->
       <div (click)="deleteItem()" class="excluir">
         <p>Excluir</p>

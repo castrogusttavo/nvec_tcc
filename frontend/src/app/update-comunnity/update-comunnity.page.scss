@@ -10,7 +10,15 @@
     justify-content: space-between;
     align-items: baseline;
 }
-
+.input{
+    margin: 10px;
+    width: 183px;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    background: transparent;
+}
 .options{
     display: flex;
     justify-content: space-between;
