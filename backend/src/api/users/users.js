@@ -217,7 +217,7 @@ module.exports = function (secretKey) {
 
   router.post("/register", async (req, res) => {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password   } = req.body;
 
       const emailCheck = await db_query(
         "SELECT * FROM tb_usuario WHERE email_usuario = ?",
@@ -236,9 +236,19 @@ module.exports = function (secretKey) {
         [name, email, hashedPassword]
       );
 
+      const user = await db_query(
+        "SELECT * FROM tb_usuario WHERE email_usuario = ?",
+        [email]
+      );
+
       // Gerar um token JWT para o usuário recém-cadastrado
       const token = jwt.sign(
-        { userId: result.insertId, userEmail: email, userName: name,  subscriptionId: id_assinatura},
+        { 
+          userId: result.insertId, 
+          userEmail: email, 
+          userName: name,
+         subscriptionId: user[0].id_assinatura
+        },
         secretKey,
         { expiresIn: "3h" }
       );
@@ -249,7 +259,7 @@ module.exports = function (secretKey) {
         name: name,
         email: email,
         password: password,
-        subscriptionId: id_assinatura
+       subscriptionId: user[0].id_assinatura
       };
 
       // Exibir os dados do usuário no console

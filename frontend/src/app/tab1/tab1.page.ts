@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, forkJoin, map } from 'rxjs';
-=======
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,69 +11,45 @@ import { HttpClient } from '@angular/common/http';
 export class Tab1Page implements OnInit {
   userName: string | undefined;
   private previousToken: string | null = null;
-  private apiRecentLists="http://localhost:3001/api/recentLists";
-  private apiCategories="http://localhost:3001/api/categories";
-  private apiRecentCommunities="http://localhost:3001/api/recentCommunities";
-  recentLists!:any[];
-  userId!: number;
-
-  communities!:any[];
+  private apiRecentLists = "http://localhost:3001/api/recentLists";
+  private apiCategories = "http://localhost:3001/api/categories";
+  private apiRecentCommunities = "http://localhost:3001/api/recentCommunities";
   private apiCommunity = "http://localhost:3001/api/communities";
-
-  constructor(
-    private http:  HttpClient, 
-    private jwtHelper: JwtHelperService
-  ) {}
+  
   recentLists: any[] = [];
   recentCommunities: any[] = [];
+  communities: any[] = [];
   public noRecentLists: boolean = true;
   public noRecentCommunities: boolean = true;
 
-  user!: string;
-
-  constructor(private jwtHelper: JwtHelperService, private http: HttpClient) {}
+  userId!: number;
+  
+  constructor(
+    private http: HttpClient, 
+    private jwtHelper: JwtHelperService
+  ) {}
 
   ngOnInit(): void {
     this.getUserName();
     this.checkTokenChanges();
-    this.getRecentLists();    
-    this.getCommunities();
+    this.getUserId(); 
+    this.fetchDataAfterUserId();
   }
 
-  getCommunities():void{
-    forkJoin({
-      communities: this.http.get<any[]>(this.apiCommunity,{ params: { userId:this.userId } }),
-      categories: this.http.get<any[]>(this.apiCategories)
-    }).pipe(
-      map(({ communities, categories }) => {
-        return communities.map(community => {
-          const category = categories.find(categoria => categoria.id_categoria === community.id_categoria);
-          return {
-            ...community,
-            ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
-          };
-        });
-      })
-    ).subscribe(
-      data => this.communities = data,
-      error => console.error('Erro ao buscar dados: ', error)
-    );
-    this.CallBackToast();
-    this.getUserId();
+  fetchDataAfterUserId(): void {
+    this.getRecentLists();
+    this.getCommunities();
     this.fetchRecentLists();
     this.fetchRecentCommunities();
-    this.checkRecentLists();
-    this.checkRecentCommunities();
   }
 
   getUserId(): void {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      this.user = decodedToken.userId;
+      this.userId = decodedToken.userId;
     }
   }
-
 
   getUserName(): void {
     const token = localStorage.getItem('token');
@@ -82,8 +57,6 @@ export class Tab1Page implements OnInit {
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       console.log('Decoded Token:', decodedToken); 
-    if (token) {
-      const decodedToken = this.jwtHelper.decodeToken(token);
       this.userName = decodedToken.userName;
       this.userId = decodedToken.userId;
     }
@@ -91,7 +64,7 @@ export class Tab1Page implements OnInit {
 
   getRecentLists(): void {
     forkJoin({
-      lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId:this.userId } }),
+      lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId: this.userId } }),
       categories: this.http.get<any[]>(this.apiCategories)
     }).pipe(
       map(({ lists, categories }) => {
@@ -109,6 +82,25 @@ export class Tab1Page implements OnInit {
     );
   }
 
+  getCommunities(): void {
+    forkJoin({
+      communities: this.http.get<any[]>(this.apiCommunity, { params: { userId: this.userId } }),
+      categories: this.http.get<any[]>(this.apiCategories)
+    }).pipe(
+      map(({ communities, categories }) => {
+        return communities.map(community => {
+          const category = categories.find(categoria => categoria.id_categoria === community.id_categoria);
+          return {
+            ...community,
+            ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
+          };
+        });
+      })
+    ).subscribe(
+      data => this.communities = data,
+      error => console.error('Erro ao buscar dados: ', error)
+    );
+  }
 
   checkTokenChanges(): void {
     setInterval(() => {
@@ -133,7 +125,7 @@ export class Tab1Page implements OnInit {
         setTimeout(() => {
           toast.style.display = 'none';
         }, 500); // Tempo de duração da animação de saída
-      }, 7000); // 10 segundos antes de ocultar o toast
+      }, 200); // 10 segundos antes de ocultar o toast
     }
   }
 
@@ -145,7 +137,7 @@ export class Tab1Page implements OnInit {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         params: {
-          userId: this.user,
+          userId: this.userId,
         },
       }
     );
@@ -159,7 +151,7 @@ export class Tab1Page implements OnInit {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         params: {
-          userId: this.user,
+          userId: this.userId,
         },
       }
     );

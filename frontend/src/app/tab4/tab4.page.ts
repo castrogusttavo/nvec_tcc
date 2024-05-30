@@ -18,7 +18,7 @@ export class Tab4Page implements OnInit {
   itemsToShow: any[] = this.originalItems;
 
   email: string = '';
-  userId!:number;
+  userId!: number;
   userName!: string;
 
   createdCommunitiesCount: number = 0;
@@ -26,26 +26,30 @@ export class Tab4Page implements OnInit {
   invitationCommunitiesCount: number = 0;
   state: string = 'Offline';  // Initialize the state as Offline
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
   communities!: any[];
   private apiCommunity = 'http://localhost:3001/api/communities';
 
-  getCommunities():Observable<any[]>{
-    return this.http.get<any[]>(this.apiCommunity,{ params: { userId:this.userId } });
+  getCommunities(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiCommunity, { params: { userId: this.userId } });
   }
 
   ngOnInit(): void {
-    this.getCommunities().subscribe(communities => {
-      this.communities = communities;
-    });
     this.getUserState(); // Determine the user state based on the token
     this.getUserName();
     this.getUserId();  // Fetch userId on initialization
     this.checkTokenChanges();  // Check for token changes every second
-    this.getCommunities().subscribe(communities=>{
-      this.communities=communities;
+
+    // Fetch communities only after userId is obtained
+    this.getCommunities().subscribe(communities => {
+      this.communities = communities;
       console.log(this.communities);
-    })
+    });
   }
 
   onSearchInput(event: any) {
@@ -69,15 +73,9 @@ export class Tab4Page implements OnInit {
     console.log('Token:', token);
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log('Decoded Token:', decodedToken); 
+      console.log('Decoded Token:', decodedToken);
       this.userName = decodedToken.userName;
-      this.userId = decodedToken.userId; 
-    }
-  }
- 
-    if (token) {
-      const decodedToken = this.jwtHelper.decodeToken(token);
-      this.userName = decodedToken.userName;
+      this.userId = decodedToken.userId;
       this.cdr.detectChanges(); // Notify Angular to detect changes
     }
   }
