@@ -34,6 +34,7 @@ export class Tab1Page implements OnInit {
     this.checkTokenChanges();
     this.getUserId(); 
     this.fetchDataAfterUserId();
+    this.CallBackToast();
   }
 
   fetchDataAfterUserId(): void {
@@ -125,7 +126,7 @@ export class Tab1Page implements OnInit {
         setTimeout(() => {
           toast.style.display = 'none';
         }, 500); // Tempo de duração da animação de saída
-      }, 200); // 10 segundos antes de ocultar o toast
+      }, 7000); // 10 segundos antes de ocultar o toast
     }
   }
 
