@@ -8,6 +8,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./frameworks/db/db");
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
+
 
 const secretKey = "VjFjd2VGSXhXWGROVldoc1VrVktZVlpzV2xwbFJsWlpZMFZPYTFJd05VcFZNV2hyVmpGS1ZrNVZWVDA9IwSwq2ITFKuKJTEBIyqbp1IeIxgMIycmI2kjoSWfJycMZSMCLGSWq05IpSMAI2ulIzcTF1MeAIMJIQN9";
 
@@ -24,6 +26,7 @@ const measuresRouter = require("./api/measures/measures");
 const statusRouter = require("./api/status/status");
 const dataUserRouter = require("./api/users/dataUser");
 const reportRouter = require("./api/report/report");
+const reportSemesterRouter = require("./api/report/reportSemester");
 
 const checkInternetRouter = require("./api/system/ping");
 const cacheRouter = require("./api/system/cache")(secretKey);
@@ -51,6 +54,7 @@ app.use('/api', measuresRouter);
 app.use('/api', statusRouter);
 app.use('/api', dataUserRouter);
 app.use('/api', reportRouter);
+app.use('/api', reportSemesterRouter);
 
   // Rotas e Dados do sistema
 app.use('/api', checkInternetRouter);
@@ -69,4 +73,19 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
+});
+
+// Define a senha que será hash
+const senha = 'teste123';
+
+// Define o número de salt rounds
+const saltRounds = 10;
+
+// Gera o hash da senha
+bcrypt.hash(senha, saltRounds, (err, hash) => {
+  if (err) {
+    console.error('Erro ao gerar o hash:', err);
+  } else {
+    console.log('Hash gerado:', hash);
+  }
 });
