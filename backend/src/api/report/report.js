@@ -11,21 +11,24 @@ router.get("/report/totalSpend/", async (req, res) => {
 
     const spend = await db_query(
       `
-      SELECT 
+      SELECT
         c.ds_categoria,
         COALESCE(SUM(COALESCE(i.vl_uni * i.qtde_item, 0)), 0) AS total_gasto
       FROM
-        vw_relatorio v
+          tb_item i
       JOIN
-        tb_lista l ON v.listId = l.id_lista
+          tb_lista l ON i.id_lista = l.id_lista
       JOIN
-        tb_categoria c ON l.id_categoria = c.id_categoria
+          tb_categoria c ON l.id_categoria = c.id_categoria
+      JOIN
+          tb_usuario u ON l.id_usuario = u.id_usuario
       WHERE
-        v.userId = ?
+          i.id_status = 2
+          AND u.id_usuario = ?
       GROUP BY
-        c.ds_categoria
+          c.ds_categoria
       ORDER BY
-        total_gasto DESC
+          total_gasto DESC
       LIMIT 4
     `,
       [userId]
@@ -46,22 +49,25 @@ router.get("/report/totalSaved/", async (req, res) => {
 
     const saved = await db_query(
       `
-        SELECT
-          c.ds_categoria,
-          COALESCE(SUM(l.rd_lista - (i.vl_uni * i.qtde_item)), 0) as total_economizado
-        FROM
-          vw_relatorio v
-        JOIN
-          tb_lista l ON v.listId = l.id_lista
-        JOIN
+      SELECT
+        c.ds_categoria,
+        COALESCE(SUM(l.rd_lista - (i.vl_uni * i.qtde_item)), 0) AS total_economizado
+      FROM
+          tb_item i
+      JOIN
+          tb_lista l ON i.id_lista = l.id_lista
+      JOIN
           tb_categoria c ON l.id_categoria = c.id_categoria
-        WHERE
-          v.userId = ?
-        GROUP BY
+      JOIN
+          tb_usuario u ON l.id_usuario = u.id_usuario
+      WHERE
+          i.id_status = 2
+          AND u.id_usuario = ?
+      GROUP BY
           c.ds_categoria
-        ORDER BY
+      ORDER BY
           total_economizado DESC
-        LIMIT 4
+      LIMIT 4
       `,
       [userId]
     );
@@ -82,12 +88,12 @@ router.get("/report/balance/", async (req, res) => {
 
     const createdLists = await db_query(
       `
-        SELECT 
+      SELECT 
         COUNT(*) as lists_created
-        FROM
-          tb_lista
-        WHERE
-          id_usuario = ?
+      FROM
+        tb_lista
+      WHERE
+        id_usuario = ?
       `,
       [userId]
     );
@@ -102,22 +108,22 @@ router.get("/report/balance/", async (req, res) => {
         tb_comunidade AS c 
         ON cu.id_comunidade = c.id_comunidade
       WHERE
-        cu.id_usuario = ?;
+        cu.id_usuario = ?
       `,
       [userId]
     );
 
     const completedLists = await db_query(
       `
-        SELECT
+      SELECT
         COUNT(*) as lists_completed
-        FROM
-          tb_lista l
-        JOIN
-          vw_relatorio v ON l.id_lista = v.listId
-        WHERE
-          l.id_usuario = ?
-        AND (l.rd_lista - (v.item * v.quantidade)) = 0
+      FROM
+        tb_lista l
+      JOIN
+        vw_relatorio v ON l.id_lista = v.listId
+      WHERE
+        l.id_usuario = ?
+      AND (l.rd_lista - (v.item * v.quantidade)) >= 0;
       `,
       [userId]
     );
@@ -127,37 +133,6 @@ router.get("/report/balance/", async (req, res) => {
       completedLists: { lists_completed: completedLists[0].lists_completed },
       communities: { communities: communities[0].communities },
     });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Valor Total das listas por categoria
-router.get("/report/totalValueByCategory/", async (req, res) => {
-  try {
-    const { userId } = req.query;
-
-    const totalValueByCategory = await db_query(
-      `
-        SELECT 
-        c.ds_categoria,
-        SUM(l.rd_lista) as total_rendas
-      FROM
-        tb_lista l
-      JOIN
-        tb_categoria c ON l.id_categoria = c.id_categoria
-      WHERE
-        l.id_usuario = ?
-      GROUP BY
-        c.ds_categoria
-      ORDER BY
-        total_rendas DESC
-      LIMIT 4
-      `,
-      [userId]
-    );
-
-    res.json(totalValueByCategory);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

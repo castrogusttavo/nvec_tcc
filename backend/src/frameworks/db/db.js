@@ -3,13 +3,13 @@ const mysql = require('mysql2','mysql');
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '',
     database: 'db_nvec',
     waitForConnections: true,
     connectionLimit: 300,
     queueLimit: 0,
     // port: '3306' 
-    port: '3307' 
+    // port: '3307' 
 };
 
 const connection = mysql.createConnection(dbConfig);
