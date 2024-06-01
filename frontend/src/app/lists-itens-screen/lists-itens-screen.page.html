@@ -27,8 +27,10 @@
       [price]="item.vl_uni" 
       [itemName]="item.nm_item" 
       [description]="item.ds_item" 
-      [routerLink]="['/select-item',lista.id_lista, item.id_item]"
+      [itemId]="item.id_item"
+      [listaId]="item.id_lista"
       [status]="item.id_status"
+      [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
       (statusChange)="onStatusChange(item.id_item, $event)"
       ></app-card-item>
     </div>

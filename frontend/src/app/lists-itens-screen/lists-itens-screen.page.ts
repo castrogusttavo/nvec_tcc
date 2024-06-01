@@ -10,7 +10,8 @@ import { Observable, forkJoin, map } from 'rxjs';
 })
 export class ListsItensScreenPage implements OnInit {
   
-  listaId!: string;
+  public listaId!: string;
+  
   items!: any[];
   lista:any = {}; 
   categories!:any[];

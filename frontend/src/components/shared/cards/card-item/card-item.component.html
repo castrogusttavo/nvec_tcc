@@ -1,14 +1,13 @@
-<ion-card>
-  <div   class="image-item">
+<ion-card >
+  <div [routerLink]="['/select-item', listaId, itemId]"  class="image-item">
     <img [src]="imagePath" alt="">
   </div>
   <div class="text-item">
     <div class="checkbox" style="display: flex; align-items: center;">
-      <ion-checkbox [checked]="status" 
-      (ionChange)="onStatusChange($event)" class="chekbox-item" labelPlacement="end"></ion-checkbox>
+      <ion-checkbox class="chekbox-item" labelPlacement="end"></ion-checkbox>
       <p style="margin: 0; margin-left: 4px; color: #000000; font-weight: 600;">{{itemName}}</p>
     </div>
-    <p>
+    <p [routerLink]="['/select-item', listaId, itemId]">
       <span>{{description}}</span>
       <span><b>{{price}}</b></span>
     </p>

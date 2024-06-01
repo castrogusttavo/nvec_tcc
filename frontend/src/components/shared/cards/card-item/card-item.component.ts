@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -8,7 +9,7 @@ import { IonicModule } from '@ionic/angular';
 })
 export class CardItemComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   @Input() itemId!: number;
   @Input() listaId!: number;
