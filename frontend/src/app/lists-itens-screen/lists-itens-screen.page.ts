@@ -121,5 +121,6 @@ export class ListsItensScreenPage implements OnInit {
       }
     )
   }
+  
 
 }

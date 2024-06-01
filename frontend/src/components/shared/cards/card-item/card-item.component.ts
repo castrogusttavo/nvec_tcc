@@ -19,7 +19,7 @@ export class CardItemComponent  implements OnInit {
   @Input() imagePath:string|undefined
   @Input() price:string|undefined
 
-  @Input() status: boolean = false;; //vai receber o status atual do item
+  @Input() status!: boolean;
   @Output() statusChange = new EventEmitter<boolean>(); //ele vai receber a mudança do status
 
   onStatusChange(event: any) {

@@ -4,7 +4,12 @@
   </div>
   <div class="text-item">
     <div class="checkbox" style="display: flex; align-items: center;">
-      <ion-checkbox class="chekbox-item" labelPlacement="end"></ion-checkbox>
+      <ion-checkbox  
+        [checked]="status === true"
+        (ionChange)="onStatusChange($event)"
+        class="chekbox-item" 
+        labelPlacement="end"
+      ></ion-checkbox>
       <p style="margin: 0; margin-left: 4px; color: #000000; font-weight: 600;">{{itemName}}</p>
     </div>
     <p [routerLink]="['/select-item', listaId, itemId]">
