@@ -37,3 +37,15 @@ INSERT INTO tb_comunidade_lista (id_comunidade, id_lista_fixa) VALUES
 INSERT INTO tb_comunidade_usuario (id_comunidade, id_usuario) VALUES
     (1, 1),
     (2, 2);
+
+-- Preencher a tabela de listas com mais dados
+INSERT INTO tb_lista (nm_lista, dt_criacao, ds_lista, rd_lista, end_lista, id_categoria, id_usuario) VALUES
+    ('Lista de Eletrônicos', '2024-05-03', 'Lista de compras de eletrônicos', 500.00, 'Endereco Eletrônicos', 9, 1),
+    ('Lista de Roupas', '2024-05-04', 'Lista de compras de roupas', 200.00, 'Endereco Roupas', 16, 1),
+    ('Lista de Limpeza', '2024-05-05', 'Lista de compras de produtos de limpeza', 80.00, 'Endereco Limpeza', 15, 1);
+
+-- Preencher a tabela de itens com mais dados
+INSERT INTO tb_item (nm_item, vl_uni, qtde_item, qtde_medida_item, id_status, id_medida, id_lista) VALUES
+    ('TV', 1000.00, 1, 1, 2, 1, 3),
+    ('Camisa', 50.00, 2, 1, 2, 1, 4),
+    ('Sabão em Pó', 10.00, 2, 1, 2, 1, 5);
