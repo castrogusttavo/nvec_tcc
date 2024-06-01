@@ -11,25 +11,22 @@ router.get("/report/totalSpend/", async (req, res) => {
       `
       SELECT
         c.ds_categoria,
-        COALESCE(SUM(COALESCE(i.vl_uni * i.qtde_item, 0)), 0) AS total_gasto
+        COALESCE(SUM(COALESCE(r.vl_uni * r.qtde_item, 0)), 0) AS total_gasto
       FROM
-        tb_item i
+        vw_relatorio r
       JOIN
-        tb_lista l ON i.id_lista = l.id_lista
+        tb_lista l ON r.id_lista = l.id_lista
       JOIN
         tb_categoria c ON l.id_categoria = c.id_categoria
-      JOIN
-        tb_usuario u ON l.id_usuario = u.id_usuario
       WHERE
-        i.id_status = 2
-        AND u.id_usuario = ?
+        r.id_usuario = ?
         AND MONTH(l.dt_criacao) = MONTH(CURRENT_DATE())
         AND YEAR(l.dt_criacao) = YEAR(CURRENT_DATE())
       GROUP BY
         c.ds_categoria
       ORDER BY
         total_gasto DESC
-      LIMIT 4
+      LIMIT 4;
       `,
       [userId]
     );
@@ -49,25 +46,22 @@ router.get("/report/totalSaved/", async (req, res) => {
       `
       SELECT
         c.ds_categoria,
-        COALESCE(SUM(l.rd_lista - (i.vl_uni * i.qtde_item)), 0) AS total_economizado
+        COALESCE(SUM(l.rd_lista - (r.vl_uni * r.qtde_item)), 0) AS total_economizado
       FROM
-        tb_item i
+        vw_relatorio r
       JOIN
-        tb_lista l ON i.id_lista = l.id_lista
+        tb_lista l ON r.id_lista = l.id_lista
       JOIN
         tb_categoria c ON l.id_categoria = c.id_categoria
-      JOIN
-        tb_usuario u ON l.id_usuario = u.id_usuario
       WHERE
-        i.id_status = 2
-        AND u.id_usuario = ?
+        r.id_usuario = ?
         AND MONTH(l.dt_criacao) = MONTH(CURRENT_DATE())
         AND YEAR(l.dt_criacao) = YEAR(CURRENT_DATE())
       GROUP BY
         c.ds_categoria
       ORDER BY
         total_economizado DESC
-      LIMIT 4
+      LIMIT 4;
       `,
       [userId]
     );
@@ -148,11 +142,13 @@ router.get("/report/totalValueByCategory/", async (req, res) => {
         c.ds_categoria,
         SUM(l.rd_lista) as total_rendas
       FROM
-        tb_lista l
+        vw_relatorio r
+      JOIN
+        tb_lista l ON r.id_lista = l.id_lista
       JOIN
         tb_categoria c ON l.id_categoria = c.id_categoria
       WHERE
-        l.id_usuario = ?
+        r.id_usuario = ?
         AND MONTH(l.dt_criacao) = MONTH(CURRENT_DATE())
         AND YEAR(l.dt_criacao) = YEAR(CURRENT_DATE())
       GROUP BY
