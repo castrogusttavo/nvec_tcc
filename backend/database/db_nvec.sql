@@ -1,5 +1,7 @@
 create database if not exists db_nvec default character set utf8;
 
+use db_nvec;
+
 create table if not exists tb_status (
 	id_status int auto_increment not null,
     ds_status enum('Pendente', 'Comprado') not null,
