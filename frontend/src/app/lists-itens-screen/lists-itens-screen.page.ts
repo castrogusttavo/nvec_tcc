@@ -9,7 +9,9 @@ import { Observable, forkJoin, map } from 'rxjs';
   styleUrls: ['./lists-itens-screen.page.scss'],
 })
 export class ListsItensScreenPage implements OnInit {
-  listaId!: string;
+  
+  public listaId!: string;
+  
   items!: any[];
   lista:any = {}; 
   categories!:any[];
@@ -98,5 +100,27 @@ export class ListsItensScreenPage implements OnInit {
   }
 
 
+  onStatusChange(itemId:number, status:boolean){
+    console.log(`Item ID: ${itemId}, Novo status: ${status}`);
+
+    const statusId=status? 2 : 1;
+
+    this.http.patch(`http://localhost:3001/api/items/${itemId}`, 
+    { id_status:statusId})
+    .subscribe(
+      response=>{
+        console.log("Status atualizado: ", response);
+
+        const item=this.items.find(i=>i.id_item === itemId);
+        if(item){
+          item.id_status=statusId;
+        }
+      },
+      error=>{
+        console.error("Erro ao atualizar status do item: ", error);
+      }
+    )
+  }
+  
 
 }

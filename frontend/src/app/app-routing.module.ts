@@ -139,10 +139,10 @@ const routes: Routes = [
     loadChildren: () => import('./tes-toast/tes-toast.module').then( m => m.TesToastPageModule)
   },
   {
-    path: 'comunnity-lists-item',
+    path: 'comunnity-lists-item/:userId/:communityId',
     loadChildren: () => import('./comunnity-lists-item/comunnity-lists-item.module').then( m => m.ComunnityListsItemPageModule)
   },
-  { path: 'communitylistId-lists-sobre',
+  { path: 'community-lists-sobre/:userId/:communityId',
     loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
   },
   {
@@ -150,7 +150,7 @@ const routes: Routes = [
     loadChildren: () => import('./teste-senha/teste-senha.module').then( m => m.TesteSenhaPageModule)
   },
   {
-    path: 'update-community/:idUser/:idCommunity',
+    path: 'update-community/:userId/:communityId',
     loadChildren: () => import('./update-comunnity/update-comunnity.module').then( m => m.UpdateComunnityPageModule)
   },
   {
@@ -176,6 +176,14 @@ const routes: Routes = [
   {
     path: 'report-css',
     loadChildren: () => import('./report-css/report-css.module').then( m => m.ReportCssPageModule)
+  },
+  {
+    path: 'list-adm-community/:userId/:communityId',
+    loadChildren: () => import('./list-adm-community/list-adm-community.module').then( m => m.ListAdmCommunityPageModule)
+  },
+  {
+    path: 'community-lists-sobre/:userId/:communityId',
+    loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
   },
   {
     path: 'load-screen-community',

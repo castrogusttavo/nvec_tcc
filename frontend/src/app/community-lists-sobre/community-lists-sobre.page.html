@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <div class="content">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab4']">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/list-adm-community',userId,communityId]">
   <ion-segment class="header" color="secondary" value="segment" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="segment">
       <ion-label>Listas</ion-label>
@@ -33,7 +33,7 @@
               <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
               <!-- <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
   
-              <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item']">
+              <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId]">
                 <img src="../../assets/svg/arrow_forward.svg" alt="">
               </button>
             </div>
@@ -67,7 +67,7 @@
       </div> -->
 
 
-      <div class="usersLists">
+      <div  class="usersLists">
         <button class="btn-lists" style="color: #ffffff">Comparar Listas</button>
 
           <div class="lists-component">
@@ -96,39 +96,45 @@
  
     <div *ngSwitchCase="'secondary'">
 
-      <h2>Atacadista{{communityName}}</h2>
+      <div  *ngIf="community" >
+        <div class="info">
+          <h2>{{community.nm_comunidade}}</h2>
+          <button [routerLink]="['/update-community', userId,communityId]" class="btn-edit">
+            <img src="../../../../assets/svg/edit.svg" alt="">
+          </button>
+        </div>
 
-      <div class="category">
-        <h6><b  class="title">Categoria:</b></h6>
-        <h6 style="text-transform: uppercase; margin: 0px;">Mercado{{category}}</h6>
-      </div>
+        <div class="category">
+          <h6><b  class="title">Categoria:</b></h6>
+          <h6 style="text-transform: uppercase; margin: 0px;">{{community.ds_categoria}}</h6>
+        </div>
 
-      <div class="divider">
-
-      </div>
-
-      <div class="description">
-        <h6><b  class="title">Descrição:</b></h6>
-        <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora quia sint eveniet doloremque accusamus debitis, nam quidem quos placeat quod ullam fugit, vero dolorem voluptate vel nihil molestias velit? Dignissimos?{{description}}</h6>
-      </div>
-      
-      <div class=" participantes">
-        <h5 class="title">Participantes</h5>
-
-        <div class="guests">
-
-          <div class="creator">
-            <h5>Gabrielly {{creatorName}}</h5>
-            <div style="width: 100px; height: 40px; display: flex; align-items: center; justify-content: center; color: #ffffff;" class="btn-lists">Criador</div>
-          </div>
-
-          <div class="other-guest" style="margin-top: 20px;">
-            <h5>outroMembro{{usersName}}</h5>
-          </div>
-
+        <div class="divider">
 
         </div>
 
+        <div class="description">
+          <h6><b class="title">Descrição:</b></h6>
+          <h6>{{community.sb_comunidade}}</h6>
+        </div>
+        
+        <div class=" participantes">
+          <h5 class="title">Participantes</h5>
+
+          <div class="guests">
+
+            <div class="creator">
+              <h5>Gabrielly {{creatorName}}</h5>
+              <div style="width: 100px; height: 40px; display: flex; align-items: center; justify-content: center; color: #ffffff;" class="btn-lists">Criador</div>
+            </div>
+
+            <div class="other-guest" style="margin-top: 20px;">
+              <h5>outroMembro{{usersName}}</h5>
+            </div>
+
+
+          </div>
+        </div>
 
       </div>
 

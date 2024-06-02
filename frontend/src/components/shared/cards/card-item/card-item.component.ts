@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -8,17 +9,21 @@ import { IonicModule } from '@ionic/angular';
 })
 export class CardItemComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  @Input() itemId!: number;
+  @Input() listaId!: number;
 
   @Input() itemName:string|undefined
   @Input() description:string|undefined
   @Input() imagePath:string|undefined
   @Input() price:string|undefined
-  @Input() status: boolean|undefined;
-  @Output() statusChange = new EventEmitter<boolean>();
 
-  changeStatus(isChecked: boolean) {
-    this.statusChange.emit(isChecked);
+  @Input() status!: boolean;
+  @Output() statusChange = new EventEmitter<boolean>(); //ele vai receber a mudança do status
+
+  onStatusChange(event: any) {
+    this.statusChange.emit(event.detail.checked);  //ele vai mudar o valor do status quando ocheckbox for alterado
   }
 
   ngOnInit() {}

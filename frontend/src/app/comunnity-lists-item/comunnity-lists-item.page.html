@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar" [routerLink]="['/community-lists-sobre']">
+  <img  [routerLink]="['/community-lists-sobre', userId, communityId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar">
   <div class="content">
 
       <div class="list">
@@ -18,20 +18,6 @@
     <div class="itens-div">
       <app-card-item price="2,40" itemName="Oreo" description="Biscoito"  [routerLink]="['/update-item-user']"
         [imagePath]="'https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/lahhlxg8nk6goxrcbcpz'"></app-card-item>
-      <app-card-item price="5,23" itemName="Negresco" description="Biscoito"
-        [imagePath]="'https://images.tcdn.com.br/img/img_prod/645811/biscoito_negresco_e_chocolate_branco_103gr_nestle_5231_2_a6b9cf73dcb34bef1f9746d77306d90c.jpg'"></app-card-item>
-      <app-card-item price="1,67" itemName="Trakinas" description="Biscoito"
-        [imagePath]="'https://drogariacristal.com/media/catalog/product/cache/dc75f304252411b8c602e1e96d99390d/b/i/biscoito_recheado_trakinas_morango_126g.jpg'"></app-card-item>
-      <app-card-item price="0,23" itemName="7 Belo" description="Bala"
-        [imagePath]="'https://jadoces.com.br/wp-content/uploads/2022/08/produto-7belo-bala-framboesa-un.jpg.webp'"></app-card-item>
-      <app-card-item price="7,57" itemName="Fini Dentadura" description="Bala"
-        [imagePath]="'https://armazemsaovito.fbitsstatic.net/img/p/balas-de-gelatina-dentaduras-fini-500g-161936/359903.jpg?w=256&h=256&v=no-change&qs=ignore'"></app-card-item>
-      <app-card-item price="3,56" itemName="Deliket" description="Bala"
-        [imagePath]="'https://images.rappi.com.br/products/2096837847-1581347939359.jpg?d=136x136&e=webp'"></app-card-item>
-      <app-card-item price="12,35" itemName="Paçoquinha" description="Bala"
-        [imagePath]="'https://cdn.awsli.com.br/600x700/1030/1030675/produto/40404622/2fce6d7011.jpg'"></app-card-item>
-      <app-card-item price="6,34" itemName="Doce de banana" description="Bala"
-        [imagePath]="'https://img.sitemercado.com.br/produtos/9bc4b94199ba5a675707da010c2df37dd43b77b4972f1118bbb8f8c8970f8687_full.jpg'"></app-card-item>
     </div>
   </div>
 </ion-content>

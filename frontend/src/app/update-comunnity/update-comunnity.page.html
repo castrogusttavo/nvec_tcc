@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" scrollY="false">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab4']">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/community-lists-sobre',userId, communityId]">
 
   <div class="imageIlustrator">
     <img  src="../../assets/png/imagem.png" alt="">
@@ -30,7 +30,7 @@
   </form>
 
   <div class="options">
-    <app-button-small [routerLink]="['/tabs/tab4']" class="textButton">Cancelar</app-button-small>
+    <app-button-small  [routerLink]="['/community-lists-sobre',userId, communityId]" class="textButton">Cancelar</app-button-small>
     <div (click)="deleteCommunity()" class="excluir">
       <p>Excluir</p>
     </div>
