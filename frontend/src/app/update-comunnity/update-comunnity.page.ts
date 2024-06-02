@@ -27,8 +27,8 @@ export class UpdateComunnityPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.userId = params['idUser'];
-      this.communityId = params['idCommunity'];
+      this.userId = params['userId'];
+      this.communityId = params['communityId'];
     });
     this.getCategories().subscribe(categories => {
       this.category = categories;

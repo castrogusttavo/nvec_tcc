@@ -26,10 +26,14 @@
     </div>
 
     <div>
+      <!-- <app-card-list-search
+      *ngFor="let community of communities" name="community"
+      [title]="community.nm_comunidade"
+      [routerLink]="['/update-community', community.id_usuario,community.id_comunidade]"></app-card-list-search> -->
       <app-card-list-search
       *ngFor="let community of communities" name="community"
       [title]="community.nm_comunidade"
-      [routerLink]="['/update-community', community.id_usuario,community.id_comunidade]"></app-card-list-search>
+      [routerLink]="['/list-adm-community', community.id_usuario,community.id_comunidade]"></app-card-list-search>
     </div>
   </div>
 </ion-content>

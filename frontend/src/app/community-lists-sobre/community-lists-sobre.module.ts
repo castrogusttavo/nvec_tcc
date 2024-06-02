@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { CommunityListsSobrePageRoutingModule } from './community-lists-sobre-routing.module';
-
+import { HttpClientModule } from '@angular/common/http';
 import { CommunityListsSobrePage } from './community-lists-sobre.page';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { CommunityListsSobrePage } from './community-lists-sobre.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CommunityListsSobrePageRoutingModule
+    CommunityListsSobrePageRoutingModule,
+    HttpClientModule
   ],
   declarations: [CommunityListsSobrePage]
 })
