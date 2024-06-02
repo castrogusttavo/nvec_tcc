@@ -4,11 +4,11 @@ const { db_query } = require("../../frameworks/db/db");
 
 router.post("/items", async (req, res) => {
   try {
-    const { nm_item, vl_uni,qtde_item, id_status,id_medida, id_lista } = req.body;
+    const { nm_item, vl_uni,qtde_item,id_medida, id_lista,qtde_medida_item } = req.body;
 
     const result = await db_query(
-        "INSERT INTO tb_item (nm_item, vl_uni,qtde_item, id_status, id_medida, id_lista) VALUES (?, ?, ?, ?)",
-        [nm_item, vl_uni,qtde_item, id_status,id_medida, id_lista]
+        "INSERT INTO tb_item (nm_item, vl_uni,qtde_item,qtde_medida_item, id_medida, id_lista) VALUES (?, ?, ?, ?, ?,?)",
+        [nm_item, vl_uni,qtde_item,qtde_medida_item,id_medida, id_lista]
       );
 
     res.status(201).json({ id_item: result.insertId });
@@ -20,7 +20,10 @@ router.post("/items", async (req, res) => {
 
 router.get("/items", async (req, res) => {
   try {
-    const items = await db_query("SELECT * FROM tb_item");
+    const listId=req.query.listId;
+    const items = await db_query("SELECT * FROM tb_item where id_lista=?",
+    [listId]
+    );
 
     res.json(items);
   } catch (err) {
@@ -53,18 +56,18 @@ router.get("/items/:id", async (req, res) => {
 router.put("/items/:id", async (req, res) => {
   try {
     const itemId = req.params.id;
-    const { nm_item, vl_uni,qtde_item, id_status,id_medida, id_lista } = req.body;
+    const { nm_item, vl_uni,qtde_item, id_status,qtde_medida_item,id_medida, id_lista } = req.body;
 
     // Verificar se os campos necessários estão presentes no corpo da solicitação
-    if (!nm_item || !vl_uni || !qtde_item || !id_status || !id_medida || !id_lista) {
+    if (!nm_item || !vl_uni || !qtde_item || !id_status || !qtde_medida_item|| !id_medida || !id_lista) {
       return res.status(400).json({
         error: "Campos obrigatórios ausentes no corpo da solicitação.",
       });
     }
 
     const result = await db_query(
-      "UPDATE tb_item SET nm_item = ?, vl_uni = ?, qtde_item = ?, id_status = ?, id_medida = ?, id_lista = ? WHERE id_item = ?",
-      [nm_item, vl_uni,qtde_item, id_status,id_medida, id_lista, itemId]
+      "UPDATE tb_item SET nm_item = ?, vl_uni = ?, qtde_item = ?, id_status = ?,qtde_medida_item=?, id_medida = ?, id_lista = ? WHERE id_item = ?",
+      [nm_item, vl_uni,qtde_item, id_status,qtde_medida_item,id_medida, id_lista, itemId]
     );
 
     // Verificar se a atualização teve êxito
@@ -84,7 +87,7 @@ router.put("/items/:id", async (req, res) => {
 router.patch("/items/:id", async (req, res) => {
   try {
     const itemId = req.params.id;
-    const { nm_item, vl_uni, qtde_item, id_status, id_medida, id_lista } = req.body;
+    const { nm_item, vl_uni, qtde_item, id_status,qtde_medida_item, id_medida, id_lista } = req.body;
 
     // Criar a query dinamicamente, com base nos campos enviados
     let setClause = [];
@@ -118,6 +121,11 @@ router.patch("/items/:id", async (req, res) => {
     if (id_medida) {
       setClause.push("id_medida = ?");
       setValues.push(id_medida);
+    }
+    
+    if (qtde_medida_item) {
+      setClause.push("qtde_medida_item = ?");
+      setValues.push(qtde_medida_item);
     }
 
     // Verificar se pelo menos um campo foi enviado para atualização

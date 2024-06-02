@@ -117,7 +117,99 @@
         </div>
       </div>
       <div *ngSwitchCase="'secondary'">
-        <!-- Sem dados por enquanto -->
+        <!-- === Total Gasto Semestral === -->
+        <div class="totalSpend">
+          <h1>Total Gasto Semestral</h1>
+      
+          <div class="graph">
+            <div class="columnData" *ngFor="let spend of totalSpendSemester">
+              <p class="categoryName">{{ spend.ds_categoria }}</p>
+      
+              <div class="lineData">
+                <!-- Barra de progresso (cinza) -->
+                <div
+                  class="percentData"
+                  [style.height]="heightsSemester[spend.ds_categoria]"
+                ></div>
+                <!-- Barra de avanço (vermelha) -->
+              </div>
+      
+              <p class="numberValue">
+                {{ spend.total_gasto | currency: 'BRL' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <!-- === Total Economizado Semestral === -->
+        <div class="totalSaved">
+          <h1>Total Economizado Semestral</h1>
+      
+          <div class="graph">
+            <div class="columnData" *ngFor="let save of totalSavedSemester">
+              <p class="categoryName">{{ save.ds_categoria }}</p>
+      
+              <div class="lineData">
+                <!-- Barra de progresso (cinza) -->
+                <div
+                  class="percentData"
+                  [style.height]="heightsSavedSemester[save.ds_categoria]"
+                ></div>
+                <!-- Barra de avanço (vermelha) -->
+              </div>
+      
+              <p class="numberValue">
+                {{ save.total_economizado | currency: 'BRL' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <!-- === Balanço Geral Semestral === -->
+        <div class="balance">
+          <h1>Balanço Geral Semestral</h1>
+      
+          <div class="graph">
+            <div class="createdLists">
+              <div class="bgIcon"></div>
+      
+              <p class="balanceName">
+                Listas <br />
+                criadas
+              </p>
+      
+              <div class="numberTotal">
+                <span>{{ balanceSemester.createdList.lists_created }}</span>
+              </div>
+            </div>
+      
+            <div class="communities">
+              <div class="bgIcon"></div>
+      
+              <p class="balanceName">
+                Comunidades <br />
+                criadas
+              </p>
+      
+              <div class="numberTotal">
+                <span>{{ balanceSemester.communities.communities }}</span>
+              </div>
+            </div>
+      
+            <div class="completedLists">
+              <div class="bgIcon"></div>
+      
+              <p class="balanceName">
+                Listas <br />
+                completas
+              </p>
+      
+              <div class="numberTotal">
+                <span>{{ balanceSemester.completedLists.lists_completed }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

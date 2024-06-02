@@ -4,19 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
-import { UpdateItemUserPageRoutingModule } from './update-item-user-routing.module';
-
-import { UpdateItemUserPage } from './update-item-user.page';
+import { UpdateListPageRoutingModule } from './update-list-routing.module';
 import { SharedModule } from 'src/components/shared/shared.module';
+import { UpdateListPage } from './update-list.page';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UpdateItemUserPageRoutingModule,
-    SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    UpdateListPageRoutingModule,
+    SharedModule
   ],
-  declarations: [UpdateItemUserPage]
+  declarations: [UpdateListPage]
 })
-export class UpdateItemUserPageModule {}
+export class UpdateListPageModule {}

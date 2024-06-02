@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-create-comunnity',
@@ -9,6 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./create-comunnity.page.scss'],
 })
 export class CreateComunnityPage implements OnInit {
+
+  userId!:number;
 
   name!:string;
   category!:any[];
@@ -22,16 +25,10 @@ export class CreateComunnityPage implements OnInit {
     return this.http.get<any[]>(this.apiCategories);
   }
 
-  // dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
-  // selectedOption: string | undefined = 'Kg';
-  // dropdownVisible: boolean = false;
-  // toggleDropdown() {
-  //   this.dropdownVisible = !this.dropdownVisible;
-  // }
-
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
+    this.getUserName();
     this.getCategories().subscribe(categories => {
       this.category = categories;
     });
@@ -53,20 +50,30 @@ export class CreateComunnityPage implements OnInit {
     }
   }
 
-
   async createCommunity(event: { preventDefault: () => void; }) {
     event.preventDefault();
 
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/communities',
-        { nm_comunidade: this.name, id_categoria: this.categoriaSelecionada, sb_comunidade:this.about, end_comunidade:this.address }
+        { nm_comunidade: this.name, id_categoria: this.categoriaSelecionada, sb_comunidade:this.about, end_comunidade:this.address,userId: this.userId}
       ).toPromise();
 
       console.log('Comunidade criada com sucesso:', response);
       this.router.navigate(['/list-adm-community']);
     } catch (err) {
       console.error('Erro ao criar comunidade:', err);
+    }
+  }
+
+  getUserName(): void {
+    const token = localStorage.getItem('token');
+    console.log('Token:', token); 
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      console.log('Decoded Token:', decodedToken.userId);
+      this.userId = decodedToken.userId;
+      console.log(this.userId);
     }
   }
 

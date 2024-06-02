@@ -25,6 +25,18 @@ export class ReportPage implements OnInit {
   heights: { [key: string]: string } = {};
   heightsSaved: { [key: string]: string } = {}; // Adicionada propriedade
 
+  totalSpendSemester: any[] = [];
+  totalSavedSemester: any[] = [];
+  totalValueByCategorySemester: any[] = [];
+  balanceSemester: any = {
+    createdList: [],
+    completedLists: [],
+    communities: [],
+  };
+
+  heightsSemester: { [key: string]: string } = {};
+  heightsSavedSemester: { [key: string]: string } = {};
+
   user!: string;
 
   constructor(
@@ -44,6 +56,10 @@ export class ReportPage implements OnInit {
     this.loadData();
     this.getTotalSaved();
     this.getBalance();
+
+    this.loadSemesterData();
+    this.getTotalSavedSemester();
+    this.getBalanceSemester();
   }
 
   getUserId(): void {
@@ -79,6 +95,34 @@ export class ReportPage implements OnInit {
     );
   }
 
+  getTotalSpendSemester() {
+    return this.http.get<any[]>(
+      'http://localhost:3001/api/reportSemester/totalSpend',
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        params: {
+          userId: this.user,
+        },
+      }
+    );
+  }
+
+  getTotalValueByCategorySemester() {
+    return this.http.get<any[]>(
+      'http://localhost:3001/api/reportSemester/totalValueByCategory',
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        params: {
+          userId: this.user,
+        },
+      }
+    );
+  }
+
   loadData(): void {
     forkJoin({
       totalSpend: this.getTotalSpend(),
@@ -92,6 +136,30 @@ export class ReportPage implements OnInit {
         this.totalSpend.forEach((spend) => {
           const totalRendas = this.getTotalRendas(spend.ds_categoria);
           this.heights[spend.ds_categoria] = this.calculateHeight(
+            spend.total_gasto,
+            totalRendas
+          );
+        });
+      },
+      (err) => {
+        console.error('Erro ao carregar dados', err);
+      }
+    );
+  }
+
+  loadSemesterData(): void {
+    forkJoin({
+      totalSpend: this.getTotalSpendSemester(),
+      totalValueByCategory: this.getTotalValueByCategorySemester(),
+    }).subscribe(
+      ({ totalSpend, totalValueByCategory }) => {
+        this.totalSpendSemester = totalSpend;
+        this.totalValueByCategorySemester = totalValueByCategory;
+
+        // Calcular alturas para cada categoria em totalSpendSemester
+        this.totalSpendSemester.forEach((spend) => {
+          const totalRendas = this.getTotalRendasSemester(spend.ds_categoria);
+          this.heightsSemester[spend.ds_categoria] = this.calculateHeight(
             spend.total_gasto,
             totalRendas
           );
@@ -132,6 +200,35 @@ export class ReportPage implements OnInit {
       );
   }
 
+  getTotalSavedSemester(): void {
+    this.http
+      .get<any[]>('http://localhost:3001/api/reportSemester/totalSaved', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        params: {
+          userId: this.user,
+        },
+      })
+      .subscribe(
+        (data) => {
+          this.totalSavedSemester = data;
+
+          // Calcular alturas para cada categoria em totalSavedSemester
+          this.totalSavedSemester.forEach((save) => {
+            const totalRendas = this.getTotalRendasSemester(save.ds_categoria);
+            this.heightsSavedSemester[save.ds_categoria] = this.calculateHeight(
+              save.total_economizado,
+              totalRendas
+            );
+          });
+        },
+        (err) => {
+          console.error('Erro ao buscar total economizado', err);
+        }
+      );
+  }
+
   getBalance(): void {
     this.http
       .get<any>('http://localhost:3001/api/report/balance', {
@@ -145,6 +242,26 @@ export class ReportPage implements OnInit {
       .subscribe(
         (data) => {
           this.balance = data;
+        },
+        (err) => {
+          console.error('Erro ao buscar balanço', err);
+        }
+      );
+  }
+
+  getBalanceSemester(): void {
+    this.http
+      .get<any>('http://localhost:3001/api/reportSemester/balance', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        params: {
+          userId: this.user,
+        },
+      })
+      .subscribe(
+        (data) => {
+          this.balanceSemester = data;
         },
         (err) => {
           console.error('Erro ao buscar balanço', err);
@@ -177,6 +294,14 @@ export class ReportPage implements OnInit {
 
   getTotalRendas(categoria: string): number {
     const category = this.totalValueByCategory.find(
+      (cat) => cat.ds_categoria === categoria
+    );
+    const totalRendas = category ? parseFloat(category.total_rendas) : 0;
+    return isNaN(totalRendas) ? 0 : totalRendas;
+  }
+
+  getTotalRendasSemester(categoria: string): number {
+    const category = this.totalValueByCategorySemester.find(
       (cat) => cat.ds_categoria === categoria
     );
     const totalRendas = category ? parseFloat(category.total_rendas) : 0;

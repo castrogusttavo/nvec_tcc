@@ -21,7 +21,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() maxlength!: number;
   @Input() readOnly: boolean = false;
   @Input() userName: string = '';
-  @Input() validateStrength: boolean = false;
+  @Input() validateStrength: boolean = false
 
   inputValue: string = '';
   passwordStrengthMessage: string = '';
@@ -167,6 +167,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
     const requirementsContainer = this.elRef.nativeElement.querySelector('.password-requirements-container');
     if (requirementsContainer) {
+      console.log("---------------")
+      console.log("Condição 6")
       if (password.length < 8 && typesCount === 2 && !this.hasObviousSequence(password.toLowerCase()) && !this.containsCommonWords(password.toLowerCase()) && !this.isSimilarToPersonalData(password) && !/(.)\1{2,}/.test(password.toLowerCase()) ) {
         this.renderer.setStyle(requirementsContainer, 'marginRight', '224px');
       }
@@ -177,21 +179,36 @@ export class InputComponent implements OnInit, ControlValueAccessor {
           // requirements.push('- Pelo menos 12 caracteres');
           // requirements.push('- 3 tipos de caracteres (letras, números, símbolos)');
           this.renderer.setStyle(requirementsContainer, 'marginRight', '75px');
-
+          console.log("---------------")
+          console.log("Condição 1")
         } else{
+          this.renderer.setStyle(requirementsContainer, 'marginRight', '215px');
+          console.log("---------------")
+          console.log("Condição 2")
           // requirements.push('Senha forte (opcional):');
-          // requirements.push('- Pelo menos 12 caracteres');
+          // requirements.push('- Pelo menos 12 caracteres');215px
         }
         }else if (password.length >= 12 && typesCount < 3 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase())) {
+          // this.renderer.setStyle(requirementsContainer, 'marginRight', '215px');
+          console.log("---------------")
+          console.log("Condição 3")
           // requirements.push('Senha forte (opcional):');
           // requirements.push('- 3 tipos de caracteres (letras, números, símbolos)');
         }
       }
       else if (password.length >= 8 && password.length < 12 && typesCount >= 2 && !/(.)\1{2,}/.test(password) && !this.hasObviousSequence(password.toLowerCase()) && !this.isSimilarToPersonalData(password)){
         this.renderer.setStyle(requirementsContainer, 'marginRight', '220px');
+        console.log("---------------")
+        console.log("Condição 4")
       }else {
+        console.log("---------------")
+        console.log("Condição 5")
         this.renderer.removeStyle(requirementsContainer, 'marginRight');
       }
+    }else{
+      // this.renderer.setStyle(requirementsContainer, 'marginRight', '215px');
+      console.log("---------------")
+      console.log("Condição ELSE")
     }
   }
 }

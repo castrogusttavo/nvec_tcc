@@ -13,8 +13,8 @@ router.post("/categories", async (req, res) => {
 
     res.status(201).json({ id_categoria: result.insertId });
   } catch (err) {
-    console.error("Erro ao inserir despesa variável", err);
-    res.status(500).send("Erro ao inserir despesa variável");
+    console.error("Erro ao inserir categoria", err);
+    res.status(500).send("Erro ao inserir categoria");
   }
 });
 
@@ -45,8 +45,8 @@ router.get("/categories/:id", async (req, res) => {
 
     res.json(categoriasList[0]);
   } catch (err) {
-    console.error("Erro ao buscar despesa variável", err);
-    res.status(500).send("Erro ao buscar despesa variável");
+    console.error("Erro ao buscar categoria", err);
+    res.status(500).send("Erro ao buscar categoria");
   }
 });
 
@@ -62,8 +62,8 @@ router.put("/categories/:id", async (req, res) => {
 
     res.sendStatus(200);
   } catch (err) {
-    console.error("Erro ao atualizar despesa variável", err);
-    res.status(500).send("Erro ao atualizar despesa variável");
+    console.error("Erro ao atualizar categoria", err);
+    res.status(500).send("Erro ao atualizar categoria");
   }
 });
 
@@ -75,8 +75,8 @@ router.delete("/categories/:id", async (req, res) => {
 
     res.sendStatus(200);
   } catch (err) {
-    console.error("Erro ao deletar despesa variável", err);
-    res.status(500).send("Erro ao deletar despesa variável");
+    console.error("Erro ao deletar categoria", err);
+    res.status(500).send("Erro ao deletar categoria");
   }
 });
 

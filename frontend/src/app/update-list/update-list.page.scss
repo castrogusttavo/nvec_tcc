@@ -1,0 +1,101 @@
+@import "../../global.scss";
+
+.forward{
+    padding-left:  5%;
+    padding-top: 5%;
+}
+
+.imageIlustrator{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
+
+.inputs{
+    padding-top: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+input,
+.input{
+    margin: 10px;
+    width: 183px;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    background: transparent;
+}
+.description{
+    width: 382px;
+    min-height: 80px;
+    font-size: 16px; 
+    margin: 10px;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    background: transparent;
+
+}
+.description::placeholder{
+    padding: 8px;
+}
+::placeholder {
+    color: $N800D;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
+}
+
+.buttonBig{
+    padding-top: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputText::placeholder{
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+}
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
+}
+.inputName{
+    width: 382px;
+    height: 55px;
+}
+
+.inputName::placeholder{
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    padding: 0px 24px 40px 24px;
+}
+
+.excluir{
+    background-color: #FF554A;
+    padding: 0px 32px 0px 32px;
+    font-size: 16px;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+

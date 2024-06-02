@@ -47,7 +47,7 @@ const routes: Routes = [
     loadChildren: () => import('./tab5/tab5.module').then( m => m.Tab5PageModule)
   },
   {
-    path: 'create-item',
+    path: 'create-item/:id',
     loadChildren: () => import('./create-item/create-item.module').then( m => m.CreateItemPageModule)
   },
   {
@@ -75,7 +75,7 @@ const routes: Routes = [
     loadChildren: () => import('./create-comunnity/create-comunnity.module').then( m => m.CreateComunnityPageModule)
   },
   {
-    path: 'lists-itens-screen',
+    path: 'lists-items/:id',
     loadChildren: () => import('./lists-itens-screen/lists-itens-screen.module').then( m => m.ListsItensScreenPageModule)
   },
   {
@@ -131,7 +131,7 @@ const routes: Routes = [
     loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
   },
   {
-    path: 'update-item',
+    path: 'update-item/:idList/:idItem',
     loadChildren: () => import('./update-item/update-item.module').then( m => m.UpdateItemPageModule)
   },
   {
@@ -142,7 +142,7 @@ const routes: Routes = [
     path: 'comunnity-lists-item',
     loadChildren: () => import('./comunnity-lists-item/comunnity-lists-item.module').then( m => m.ComunnityListsItemPageModule)
   },
-  { path: 'community-lists-sobre',
+  { path: 'communitylistId-lists-sobre',
     loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
   },
   {
@@ -150,7 +150,7 @@ const routes: Routes = [
     loadChildren: () => import('./teste-senha/teste-senha.module').then( m => m.TesteSenhaPageModule)
   },
   {
-    path: 'update-comunnity',
+    path: 'update-community/:idUser/:idCommunity',
     loadChildren: () => import('./update-comunnity/update-comunnity.module').then( m => m.UpdateComunnityPageModule)
   },
   {
@@ -164,6 +164,14 @@ const routes: Routes = [
   {
     path: 'update-item-user',
     loadChildren: () => import('./update-item-user/update-item-user.module').then( m => m.UpdateItemUserPageModule)
+  },
+  {
+    path: 'update-list/:id',
+    loadChildren: () => import('./update-list/update-list.module').then( m => m.UpdateListPageModule)
+  },
+  {
+    path: 'select-item/:idList/:idItem',
+    loadChildren: () => import('./select-item/select-item.module').then( m => m.SelectItemPageModule)
   },
   {
     path: 'report-css',
@@ -181,7 +189,6 @@ const routes: Routes = [
     path: 'list-adm-community',
     loadChildren: () => import('./list-adm-community/list-adm-community.module').then(m => m.ListAdmCommunityPageModule )
   }
-
 ];
 @NgModule({
   imports: [

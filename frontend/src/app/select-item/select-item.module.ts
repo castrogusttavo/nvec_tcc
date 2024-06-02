@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from 'src/components/shared/shared.module';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreateItemPageRoutingModule } from './create-item-routing.module';
+import { SelectItemPageRoutingModule } from './select-item-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CreateItemPage } from './create-item.page';
+
+import { SelectItemPage } from './select-item.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreateItemPageRoutingModule,
-    SharedModule,
+    SelectItemPageRoutingModule,
     HttpClientModule
   ],
-  declarations: [CreateItemPage]
+  declarations: [SelectItemPage]
 })
-export class CreateItemPageModule {}
+export class SelectItemPageModule {}

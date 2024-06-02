@@ -5,20 +5,22 @@
     <img  src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <form >
+  <form (ngSubmit)="updateCommunity($event)" >
     <div class="inputs">  
-      <input name="name"  placeholder="Nome" class="inputText" >
-      <!-- <input name="category" [(ngModel)]="category" placeholder="Categoria" class="inputText" > -->
       
-      <ion-item>
-        <ion-select placeholder="Categoria"  name="category">
-          <ion-select-option >
-
+      <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
+      
+      <ion-item class="input item inputText">
+        <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
+          <ion-select-option *ngFor="let category of category" [value]="category.id_categoria">
+            {{ category.ds_categoria }}
           </ion-select-option>
         </ion-select>
       </ion-item>
+
+      <input style="width: 382px;" name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText" >
       <div>
-        <textarea name="about"   placeholder="Descrição" class="description"  maxlength="100"></textarea>
+        <textarea name="about" [(ngModel)]="about"  placeholder="Descrição" class="description inputText" (input)="updateCounter($event)" maxlength="100"></textarea>
         <div class="counter"></div>
       </div>
     </div>
@@ -28,8 +30,8 @@
   </form>
 
   <div class="options">
-    <app-button-small class="textButton">Cancelar</app-button-small>
-    <div  class="excluir">
+    <app-button-small [routerLink]="['/tabs/tab4']" class="textButton">Cancelar</app-button-small>
+    <div (click)="deleteCommunity()" class="excluir">
       <p>Excluir</p>
     </div>
   </div>

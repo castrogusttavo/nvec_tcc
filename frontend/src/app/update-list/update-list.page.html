@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true" scrollY="false">
+  <img *ngIf="listaId"  [routerLink]="['/lists-items', listaId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
+
+  <div class="imageIlustrator">
+    <img  src="../../assets/png/imagem.png" alt="">
+  </div>
+
+  <form (ngSubmit)="updateList($event)">
+    <div class="inputs">  
+      <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
+
+      <ion-item class="inputText input">
+        <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
+          <ion-select-option *ngFor="let category of category" [value]="category.id_categoria">
+            {{ category.ds_categoria }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <input name="expense" [(ngModel)]="expense" placeholder="Valor máximo" class="inputText" >
+
+      <input name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText" >
+      <div>
+        <textarea name="description" [(ngModel)]="description"  placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
+        <div class="counter"></div>
+      </div>
+    </div>
+
+    <div class="buttonBig">
+      <app-button-big  >Alterar Lista</app-button-big>
+    </div>
+
+  </form>
+  
+    <div class="options">
+      <app-button-small *ngIf="listaId" [routerLink]="['/lists-items', listaId]" class="textButton">Cancelar</app-button-small>
+      <div (click)="deleteList()" class="excluir">
+        <p class="excluir">Excluir</p>
+      </div>
+    </div>
+
+
+
+
+  
+
+</ion-content>
+

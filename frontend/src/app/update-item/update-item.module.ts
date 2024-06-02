@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { UpdateItemPageRoutingModule } from './update-item-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { UpdateItemPage } from './update-item.page';
 import { SharedModule } from 'src/components/shared/shared.module';
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveForms
     IonicModule,
     UpdateItemPageRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [UpdateItemPage]
 })
