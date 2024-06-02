@@ -176,10 +176,19 @@ const routes: Routes = [
   {
     path: 'report-css',
     loadChildren: () => import('./report-css/report-css.module').then( m => m.ReportCssPageModule)
+  },
+  {
+    path: 'load-screen-community',
+    loadChildren: () => import('./load-screen-community/load-screen-community.module').then( m => m.LoadScreenCommunityPageModule)
+  },
+  {
+    path: 'load-screen-community-two',
+    loadChildren: () => import('./load-screen-community-two/load-screen-community-two.module').then( m => m.LoadScreenCommunityTwoPageModule)
+  },
+  {
+    path: 'list-adm-community',
+    loadChildren: () => import('./list-adm-community/list-adm-community.module').then(m => m.ListAdmCommunityPageModule )
   }
-
-
-
 ];
 @NgModule({
   imports: [

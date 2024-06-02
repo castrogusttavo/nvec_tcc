@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <div class="content">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab1']">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/tabs/tab4']">
   <ion-segment class="header" color="secondary" value="segment" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="segment">
       <ion-label>Listas</ion-label>
@@ -18,7 +18,6 @@
   
   <div [ngSwitch]="segmentValue" class="todosGrafico">
     <div *ngSwitchCase="'segment'">
-
       <div class="list-user">
         <div class="list">
           <h3 class="yellow-text">Esta é a sua lista</h3>
@@ -34,7 +33,7 @@
               <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
               <!-- <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
   
-              <button class="btn-lists btn-list">
+              <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item']">
                 <img src="../../assets/svg/arrow_forward.svg" alt="">
               </button>
             </div>
@@ -85,7 +84,7 @@
                 <h3  class="yellow-text">R$ <b class="yellow-text">300,34</b></h3>
                 <!-- <h3  class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
     
-                <button class="btn-lists btn-list">
+                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item']">
                   <img src="../../assets/svg/arrow_forward.svg" alt="">
                 </button>
               </div>
