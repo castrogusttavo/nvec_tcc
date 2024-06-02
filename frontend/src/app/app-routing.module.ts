@@ -184,10 +184,19 @@ const routes: Routes = [
   {
     path: 'community-lists-sobre/:userId/:communityId',
     loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
+  },
+  {
+    path: 'load-screen-community',
+    loadChildren: () => import('./load-screen-community/load-screen-community.module').then( m => m.LoadScreenCommunityPageModule)
+  },
+  {
+    path: 'load-screen-community-two',
+    loadChildren: () => import('./load-screen-community-two/load-screen-community-two.module').then( m => m.LoadScreenCommunityTwoPageModule)
+  },
+  {
+    path: 'list-adm-community',
+    loadChildren: () => import('./list-adm-community/list-adm-community.module').then(m => m.ListAdmCommunityPageModule )
   }
-
-
-
 ];
 @NgModule({
   imports: [

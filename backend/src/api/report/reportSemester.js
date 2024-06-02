@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { db_query } = require("../../frameworks/db/db");
 
-// Total Gasto
-router.get("/report/totalSpend/", async (req, res) => {
+// Total Gasto Semestral
+router.get("/reportSemester/totalSpend/", async (req, res) => {
   try {
     const { userId } = req.query;
 
@@ -20,13 +20,12 @@ router.get("/report/totalSpend/", async (req, res) => {
         tb_categoria c ON l.id_categoria = c.id_categoria
       WHERE
         r.id_usuario = ?
-        AND MONTH(l.dt_criacao) = MONTH(CURRENT_DATE())
-        AND YEAR(l.dt_criacao) = YEAR(CURRENT_DATE())
+        AND l.dt_criacao >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)
       GROUP BY
         c.ds_categoria
       ORDER BY
         total_gasto DESC
-      LIMIT 4;
+      LIMIT 4
       `,
       [userId]
     );
@@ -37,8 +36,8 @@ router.get("/report/totalSpend/", async (req, res) => {
   }
 });
 
-// Total Economizado
-router.get("/report/totalSaved/", async (req, res) => {
+// Total Economizado Semestral
+router.get("/reportSemester/totalSaved/", async (req, res) => {
   try {
     const { userId } = req.query;
 
@@ -55,13 +54,12 @@ router.get("/report/totalSaved/", async (req, res) => {
         tb_categoria c ON l.id_categoria = c.id_categoria
       WHERE
         r.id_usuario = ?
-        AND MONTH(l.dt_criacao) = MONTH(CURRENT_DATE())
-        AND YEAR(l.dt_criacao) = YEAR(CURRENT_DATE())
+        AND l.dt_criacao >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)
       GROUP BY
         c.ds_categoria
       ORDER BY
         total_economizado DESC
-      LIMIT 4;
+      LIMIT 4
       `,
       [userId]
     );
@@ -72,8 +70,8 @@ router.get("/report/totalSaved/", async (req, res) => {
   }
 });
 
-// Balanço geral
-router.get("/report/balance/", async (req, res) => {
+// Balanço geral Semestral
+router.get("/reportSemester/balance/", async (req, res) => {
   try {
     const { userId } = req.query;
 
@@ -85,8 +83,7 @@ router.get("/report/balance/", async (req, res) => {
         tb_lista
       WHERE
         id_usuario = ?
-        AND MONTH(dt_criacao) = MONTH(CURRENT_DATE())
-        AND YEAR(dt_criacao) = YEAR(CURRENT_DATE())
+        AND dt_criacao >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)
       `,
       [userId]
     );
@@ -115,8 +112,7 @@ router.get("/report/balance/", async (req, res) => {
       WHERE
         l.id_usuario = ?
         AND (l.rd_lista - (SELECT SUM(i.vl_uni * i.qtde_item) FROM tb_item i WHERE i.id_lista = l.id_lista AND i.id_status = 2)) <= 0
-        AND MONTH(l.dt_criacao) = MONTH(CURRENT_DATE())
-        AND YEAR(l.dt_criacao) = YEAR(CURRENT_DATE())
+        AND l.dt_criacao >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)
       `,
       [userId]
     );
@@ -131,8 +127,8 @@ router.get("/report/balance/", async (req, res) => {
   }
 });
 
-// Valor Total das listas por categoria
-router.get("/report/totalValueByCategory/", async (req, res) => {
+// Valor Total das listas por categoria Semestral
+router.get("/reportSemester/totalValueByCategory/", async (req, res) => {
   try {
     const { userId } = req.query;
 
@@ -149,8 +145,7 @@ router.get("/report/totalValueByCategory/", async (req, res) => {
         tb_categoria c ON l.id_categoria = c.id_categoria
       WHERE
         r.id_usuario = ?
-        AND MONTH(l.dt_criacao) = MONTH(CURRENT_DATE())
-        AND YEAR(l.dt_criacao) = YEAR(CURRENT_DATE())
+        AND l.dt_criacao >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)
       GROUP BY
         c.ds_categoria
       ORDER BY
