@@ -19,7 +19,6 @@
     justify-content: center;
 }
 
-
 input{
     margin: 10px;
     width: 183px;
@@ -44,6 +43,10 @@ input{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.textButton{
+    align-content: space-evenly;
 }
 
 .inputText::placeholder{

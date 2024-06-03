@@ -46,6 +46,10 @@ input{
     align-items: center;
 }
 
+.textButton{
+    align-content: space-evenly;
+}
+
 .inputText::placeholder{
     position: absolute;
     top: 10px;
