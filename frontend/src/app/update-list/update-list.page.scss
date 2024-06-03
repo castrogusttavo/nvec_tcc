@@ -99,3 +99,27 @@ input,
     align-items: baseline;
 }
 
+*{
+    --padding-start: 0px;
+}
+
+ion-select {
+    --placeholder-color: #9FADBC;
+    --placeholder-opacity: 1;
+    width: 100%;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    left: 10px;
+    bottom: 5px;
+}
+  
+ion-select::part(placeholder),
+ion-select::part(text) {
+    flex: 0 0 auto;
+}
+
+ion-select::part(icon) {
+    color: #9FADBC;
+    opacity: 1;
+}

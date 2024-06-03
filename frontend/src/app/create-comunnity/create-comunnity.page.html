@@ -8,7 +8,7 @@
   <form (ngSubmit)="createCommunity($event)" >
     <div class="inputs">  
       <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
-      
+
       <ion-item class="input item">
         <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
           <ion-select-option *ngFor="let category of category" [value]="category.id_categoria">
