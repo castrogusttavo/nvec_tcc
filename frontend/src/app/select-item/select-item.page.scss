@@ -206,7 +206,7 @@ p{
 .quant{
     display: flex;
     position: absolute; 
-    left: 55px; 
+    left: 75px; 
     top: -15px; 
     color: var(--Color-Neutral-Dark-N400, #454F59);
     font-family: Poppins;
@@ -233,6 +233,7 @@ p{
 }
 
 .backOneOne{
+    width: 130px;
     position: relative;
     display: flex;
     padding: 4px var(--Space-32, 32px);

@@ -117,6 +117,7 @@ ion-select {
 ion-select::part(placeholder),
 ion-select::part(text) {
     flex: 0 0 auto;
+    color: #9FADBC;
 }
 
 ion-select::part(icon) {
