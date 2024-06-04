@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, forkJoin, map } from 'rxjs';
 
 @Component({
@@ -9,22 +9,20 @@ import { Observable, forkJoin, map } from 'rxjs';
   styleUrls: ['./lists-itens-screen.page.scss'],
 })
 export class ListsItensScreenPage implements OnInit {
-  
+
   public listaId!: string;
-  
   items!: any[];
-  lista:any = {}; 
-  categories!:any[];
-  apiList =  `http://localhost:3001/api/list`
+  lista: any = {};
+  categories!: any[];
+  apiList = `http://localhost:3001/api/list`
   apiCategories = "http://localhost:3001/api/categories"
-  apiItems='http://localhost:3001/api/items'
+  apiItems = 'http://localhost:3001/api/items'
   apiMeasures = "http://localhost:3001/api/measures"
   apiStatus = "http://localhost:3001/api/status"
-  measures!:any[];
-  status!:any[];
+  measures!: any[];
+  status!: any[];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
-
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -32,13 +30,12 @@ export class ListsItensScreenPage implements OnInit {
     });
     this.getList();
     this.getItems();
-
   }
 
   getItems(): void {
     if (this.listaId) {
       forkJoin({
-        items: this.http.get<any[]>(this.apiItems, { params: { listId:this.listaId } }),
+        items: this.http.get<any[]>(this.apiItems, { params: { listId: this.listaId } }),
         measures: this.http.get<any[]>(this.apiMeasures),
         status: this.http.get<any[]>(this.apiStatus)
       }).pipe(
@@ -59,8 +56,8 @@ export class ListsItensScreenPage implements OnInit {
         })
       ).subscribe(
         data => {
+          console.log('Dados dos itens:', data); // Adiciona este console.log para exibir os dados
           this.items = data;
-          console.log(this.items);
         },
         error => console.error('Erro ao buscar dados:', error)
       );
@@ -69,23 +66,22 @@ export class ListsItensScreenPage implements OnInit {
     }
   }
 
-
-
   getList(): void {
-    if(this.listaId){
-      const apiLista =  `${this.apiList}/${this.listaId}`;
-    
+    if (this.listaId) {
+      const apiLista = `${this.apiList}/${this.listaId}`;
+
       forkJoin({
         list: this.http.get<any>(apiLista),
         categories: this.http.get<any[]>(this.apiCategories)
       }).subscribe(
         ({ list, categories }) => {
-          this.categories = categories; 
+          console.log('Dados da lista:', list); // Adiciona este console.log para exibir os dados da lista
+          this.categories = categories;
 
           const category = this.categories.find(
             categoria => categoria.id_categoria === list.id_categoria
           );
-          this.lista={
+          this.lista = {
             ...list,
             ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
           }
@@ -94,33 +90,31 @@ export class ListsItensScreenPage implements OnInit {
           console.error('Erro ao buscar dados:', error);
         }
       );
-    } else{
+    } else {
       console.error("Id não encontrado")
     }
   }
 
-
-  onStatusChange(itemId:number, status:boolean){
+  onStatusChange(itemId: number, status: boolean) {
     console.log(`Item ID: ${itemId}, Novo status: ${status}`);
 
-    const statusId=status? 2 : 1;
+    const statusId = status ? 2 : 1;
 
-    this.http.patch(`http://localhost:3001/api/items/${itemId}`, 
-    { id_status:statusId})
-    .subscribe(
-      response=>{
-        console.log("Status atualizado: ", response);
+    this.http.patch(`http://localhost:3001/api/items/${itemId}`,
+      { id_status: statusId })
+      .subscribe(
+        response => {
+          console.log("Status atualizado: ", response);
 
-        const item=this.items.find(i=>i.id_item === itemId);
-        if(item){
-          item.id_status=statusId;
+          const item = this.items.find(i => i.id_item === itemId);
+          if (item) {
+            item.id_status = statusId;
+          }
+        },
+        error => {
+          console.error("Erro ao atualizar status do item: ", error);
         }
-      },
-      error=>{
-        console.error("Erro ao atualizar status do item: ", error);
-      }
-    )
+      )
   }
-  
 
 }

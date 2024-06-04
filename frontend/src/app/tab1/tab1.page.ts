@@ -63,25 +63,29 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  getRecentLists(): void {
-    forkJoin({
-      lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId: this.userId } }),
-      categories: this.http.get<any[]>(this.apiCategories)
-    }).pipe(
-      map(({ lists, categories }) => {
-        return lists.map(list => {
-          const category = categories.find(categoria => categoria.id_categoria === list.id_categoria);
-          return {
-            ...list,
-            ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
-          };
-        });
-      })
-    ).subscribe(
-      data => this.recentLists = data,
-      error => console.error('Erro ao buscar dados: ', error)
-    );
-  }
+getRecentLists(): void {
+  forkJoin({
+    lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId: this.userId } }),
+    categories: this.http.get<any[]>(this.apiCategories)
+  }).pipe(
+    map(({ lists, categories }) => {
+      return lists.map(list => {
+        const category = categories.find(categoria => categoria.id_categoria === list.id_categoria);
+        return {
+          ...list,
+          ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
+        };
+      });
+    })
+  ).subscribe(
+    data => {
+      console.log('Dados recebidos: ', data); // Adiciona este console.log para exibir os dados
+      this.recentLists = data;
+    },
+    error => console.error('Erro ao buscar dados: ', error)
+  );
+}
+
 
   getCommunities(): void {
     forkJoin({

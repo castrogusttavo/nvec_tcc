@@ -13,7 +13,28 @@ router.get("/recentListUser", async (req, res) => {
     }
 
     const recentLists = await db_query(
-      "SELECT * FROM tb_lista WHERE id_usuario = ? ORDER BY dt_criacao DESC LIMIT 4",
+      `SELECT 
+        l.id_lista,
+        l.nm_lista,
+        l.dt_criacao,
+        l.ds_lista,
+        l.rd_lista,
+        l.end_lista,
+        l.id_categoria,
+        l.id_usuario,
+        (SELECT SUM(i.vl_uni * i.qtde_item) 
+      FROM 
+        tb_item i 
+      WHERE 
+        i.id_lista = l.id_lista AND i.id_status = 2) AS vl_gasto
+      FROM 
+        tb_lista l
+      WHERE 
+        l.id_usuario = ?
+      ORDER BY 
+        l.dt_criacao DESC
+      LIMIT 4
+      `,
       [userId]
     );
 
@@ -96,19 +117,19 @@ router.get("/createdCommunitiesCount", async (req, res) => {
 });
 
 // Count User Login Communities
-  router.get("/loginCommunitiesCount", async (req, res) => {
-    try {
-      const { userId } = req.query;
+router.get("/loginCommunitiesCount", async (req, res) => {
+  try {
+    const { userId } = req.query;
 
-      if (!userId) {
-        res.status(400).json({ error: "ID do usuário não fornecido" });
-        return;
-      }
+    if (!userId) {
+      res.status(400).json({ error: "ID do usuário não fornecido" });
+      return;
+    }
 
-      let loginCommunities = [];
+    let loginCommunities = [];
 
-      const communitiesCount = await db_query(
-        `
+    const communitiesCount = await db_query(
+      `
         SELECT 
           COUNT(*) as 'comunidades entradas'
         FROM 
@@ -120,20 +141,19 @@ router.get("/createdCommunitiesCount", async (req, res) => {
             WHERE cu.id_usuario = ? AND cu.id_comunidade = c.id_comunidade
           );
         `,
-        [userId]
-      );
+      [userId]
+    );
 
-      if (communitiesCount.length > 0) {
-        loginCommunities = communitiesCount;
-      }
-
-      res.status(200).json(loginCommunities);
-    } catch (err) {
-      console.error("Erro ao buscar comunidades acessadas", err);
-      res.status(500).send("Erro ao buscar comunidades acessadas");
+    if (communitiesCount.length > 0) {
+      loginCommunities = communitiesCount;
     }
-  });
 
+    res.status(200).json(loginCommunities);
+  } catch (err) {
+    console.error("Erro ao buscar comunidades acessadas", err);
+    res.status(500).send("Erro ao buscar comunidades acessadas");
+  }
+});
 
 // Count User Invitations
 router.get("/invitationCommunitiesCount", async (req, res) => {
@@ -164,7 +184,7 @@ router.get("/invitationCommunitiesCount", async (req, res) => {
     );
 
     if (communitiesCount.length > 0) {
-      const entriesCount = communitiesCount[0]['comunidades entradas'];
+      const entriesCount = communitiesCount[0]["comunidades entradas"];
       invitationCount = entriesCount + 5;
     }
 
