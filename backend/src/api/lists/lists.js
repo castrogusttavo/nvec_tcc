@@ -50,7 +50,15 @@ router.get("/list/:id", async (req, res) => {
   try {
     const listId = req.params.id;
 
-    const lists = await db_query("SELECT * FROM tb_lista WHERE id_lista = ?", [listId]);
+    const lists = await db_query(`SELECT 
+    l.*,
+    (SELECT SUM(i.vl_uni * i.qtde_item) 
+     FROM tb_item i 
+     WHERE i.id_lista = l.id_lista AND i.id_status = 2) AS vl_gasto
+FROM 
+    tb_lista l
+WHERE 
+    l.id_lista = ?;`, [listId]);
 
     if (lists.length === 0) {
       res.status(404).send("Lista não encontrada");

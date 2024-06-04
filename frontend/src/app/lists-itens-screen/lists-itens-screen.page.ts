@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, forkJoin, map } from 'rxjs';
+import { forkJoin, map } from 'rxjs';
 
 @Component({
   selector: 'app-lists-itens-screen',
@@ -76,6 +76,8 @@ export class ListsItensScreenPage implements OnInit {
       }).subscribe(
         ({ list, categories }) => {
           console.log('Dados da lista:', list); // Adiciona este console.log para exibir os dados da lista
+          console.log('Dados das categorias:', categories); // Adiciona este console.log para exibir os dados das categorias
+
           this.categories = categories;
 
           const category = this.categories.find(
