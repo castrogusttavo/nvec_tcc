@@ -32,6 +32,14 @@ export class ListsItensScreenPage implements OnInit {
     this.getItems();
   }
 
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Mês é base zero, então adicionamos 1
+    const year = date.getFullYear().toString().slice(-2); // Pegamos os últimos dois dígitos do ano
+    return `${day}/${month}/${year}`;
+  }
+
   getItems(): void {
     if (this.listaId) {
       forkJoin({
