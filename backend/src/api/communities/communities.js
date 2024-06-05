@@ -29,7 +29,21 @@ router.post("/communities", async (req, res) => {
       console.log("inserção na tb_comunidade_usuario:", userCommunityResult);
 
       if (userCommunityResult.affectedRows === 1) {
-        return res.status(201).json({ id_comunidade: communityId });
+
+        const resultList = await db_query(
+          "INSERT INTO tb_lista_fixa (id_lista,id_usuario) VALUES (?,?)",
+          [communityId,userId]
+        );
+
+        console.log("inserção na tb_lista_fixa:", resultList);
+
+        if (resultList.affectedRows === 1) {
+          return res.status(201).json({ id_comunidade: communityId });
+        } else{
+          console.error("Erro ao inserir na tabela tb_lista_fixa.");
+          return res.status(500).json({ error: "Erro ao inserir na tabela tb_lista_fixa." });  
+        }
+
       } else {
         console.error("Erro ao inserir na tabela tb_comunidade_usuario.");
         return res.status(500).json({ error: "Erro ao inserir na tabela tb_comunidade_usuario." });
@@ -38,6 +52,31 @@ router.post("/communities", async (req, res) => {
       console.error("Erro ao inserir na tabela tb_comunidade.");
       return res.status(500).json({ error: "Erro ao inserir na tabela tb_comunidade." });
     }
+  } catch (err) {
+    console.error("Erro ao inserir comunidade:", err);
+    return res.status(500).send("Erro ao inserir comunidade.");
+  }
+});
+
+router.post("/communities/:userId/:communityId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const communityId = req.params.communityId;
+
+    const { nm_item, id_medida, qtde_item } = req.body;
+
+    if (!nm_item || !id_medida || !qtde_item  ) {
+      console.error("Campos obrigatórios ausentes.");
+      return res.status(400).json({ error: "Campos obrigatórios ausentes." });
+    }
+
+    const result = await db_query(
+      "INSERT INTO tb_item_fixo (nm_item, id_medida, qtde_item, id_lista) VALUES (?, ?, ?, ?)",
+      [nm_item, id_medida, qtde_item, communityId]
+    );
+
+    console.log("inserção na tb_item_fixo:", result);
+
   } catch (err) {
     console.error("Erro ao inserir comunidade:", err);
     return res.status(500).send("Erro ao inserir comunidade.");
@@ -166,6 +205,65 @@ router.delete("/communities/:idUser/:idCommunity", async (req, res) => {
   } catch (err) {
     console.error("Erro ao deletar comunidade:", err);
     res.status(500).send("Erro ao deletar comunidade.");
+  }
+});
+
+
+router.get('/items/:userId/:communityId', async (req, res) => {
+  try {
+    const communityId = req.params.communityId;
+    const userId = req.params.communityId;
+
+    const itemCommunity = await db_query(`
+      SELECT *
+      FROM 
+        tb_lista_fixa li
+      JOIN 
+        tb_item_fixo i
+      ON i.id_lista = li.id_lista
+      WHERE 
+        i.id_lista = ?
+        AND
+        li.id_lista = ?
+        AND
+        li.id_usuario = ?
+    `, [communityId,communityId,userId])
+
+    res.json(itemCommunity);
+
+
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
+router.get('/item/:idUser/:idCommunity/:idItem', async (req, res) => {
+  try {
+    const idCommunity = req.params.idCommunity;
+
+    const lowestList = await db_query(`
+      SELECT *
+      FROM
+        tb_lista l
+      JOIN
+        tb_comunidade_lista cl ON l.id_lista = cl.id_lista
+      WHERE
+        cl.id_comunidade = ?
+      ORDER BY
+        vl_gasto
+      LIMIT 1
+    `, [idCommunity])
+
+    // Limpar a data
+    const cleanedListsCommunity = lowestList.map(list => {
+      const date = new Date(list.dt_criacao);
+      const formattedDate = date.toISOString().split('T')[0];
+      return { ...list, dt_criacao: formattedDate };
+    });
+
+    res.send(cleanedListsCommunity);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
   }
 });
 

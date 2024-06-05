@@ -35,6 +35,7 @@ export class ListAdmCommunityPage implements OnInit {
       this.communityId = params['communityId'];
     });
     this.getCommunity();
+    this.getItems();
   }
 
   
@@ -65,6 +66,39 @@ export class ListAdmCommunityPage implements OnInit {
       );
     } else{
       console.error("Id não encontrado")
+    }
+  }
+
+  getItems(): void {
+    if (this.communityId) {
+
+      const items =  `${this.apiItems}/${this.userId}/${this.communityId}`;
+
+      forkJoin({
+        items: this.http.get<any[]>(items),
+        measures: this.http.get<any[]>(this.apiMeasures)
+        // status: this.http.get<any[]>(this.apiStatus)
+      }).pipe(
+        map(({ items, measures }) => {
+          return items.map(item => {
+            const measure = measures.find(
+              medida => medida.id_medida === item.id_medida
+            );
+            return {
+              ...item,
+              ds_medida: measure ? measure.ds_medida : 'Medida Desconhecida',
+            };
+          });
+        })
+      ).subscribe(
+        data => {
+          console.log('Dados dos itens:', data);
+          this.items = data;
+        },
+        error => console.error('Erro ao buscar dados:', error)
+      );
+    } else {
+      console.error("Id não encontrado");
     }
   }
 
