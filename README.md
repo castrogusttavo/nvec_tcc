@@ -1,6 +1,6 @@
 # Na Volta Eu Compro
 
-![Logo do Projeto](./frontend/src/assets/svg/logo.svg)
+![Logo do Projeto](./public/logoHorizontal.png)
 
 ## Descrição
 
@@ -62,10 +62,6 @@ __Gusttavo Castro__ (Back-end & Designer) <br/>
 __Jennifer Gama__ (Analista de Banco de Dados) <br/>
 __Sofia Rocha__ (Front-end) <br/>
 
-## Licença
-
-Este projeto é licenciado sob a Licença [MIT](./LICENSE).
-
 ## Linguagens Utilizadas
  - Front-end
    - Ionic
@@ -78,3 +74,7 @@ Este projeto é licenciado sob a Licença [MIT](./LICENSE).
    - TypeScript
  - Banco de Dados
    - MySQL
+
+## Licença
+
+Este projeto é licenciado sob a Licença [MIT](./LICENSE).
