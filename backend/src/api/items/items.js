@@ -53,12 +53,32 @@ router.get("/items/:id", async (req, res) => {
   }
 });
 
+router.get("/fixItems/:id", async (req, res) => {
+  try {
+    const itemId = req.params.id;
+
+    const items = await db_query(
+        "SELECT * FROM tb_item_fixo WHERE id_item = ?",
+        [itemId]
+      );
+
+    if (items.length === 0) {
+      res.status(404).send("Item não encontrado");
+      return;
+    }
+
+    res.json(items[0]);
+  } catch (err) {
+    console.error("Erro ao buscar item", err);
+    res.sendStatus(500).send("Erro ao buscar item");
+  }
+});
+
 router.put("/items/:id", async (req, res) => {
   try {
     const itemId = req.params.id;
     const { nm_item, vl_uni,qtde_item, id_status,qtde_medida_item,id_medida, id_lista } = req.body;
 
-    // Verificar se os campos necessários estão presentes no corpo da solicitação
     if (!nm_item || !vl_uni || !qtde_item || !id_status || !qtde_medida_item|| !id_medida || !id_lista) {
       return res.status(400).json({
         error: "Campos obrigatórios ausentes no corpo da solicitação.",

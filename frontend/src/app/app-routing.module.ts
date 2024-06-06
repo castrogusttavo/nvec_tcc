@@ -196,7 +196,13 @@ const routes: Routes = [
   {
     path: 'list-adm-community',
     loadChildren: () => import('./list-adm-community/list-adm-community.module').then(m => m.ListAdmCommunityPageModule )
+  },
+  {
+    path: 'select-item-community/:idList/:idItem',
+    loadChildren: () => import('./select-item-community/select-item-community.module').then( m => m.SelectItemCommunityPageModule)
   }
+
+
 ];
 @NgModule({
   imports: [

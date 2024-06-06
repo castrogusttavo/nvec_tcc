@@ -12,8 +12,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./list-adm-community.page.scss'],
 })
 export class ListAdmCommunityPage implements OnInit {
-  userId!: number;
-  communityId!: number;
+  userId!: string;
+  communityId!: string;
+  listaId!: number;
   items!: any[];
   categories!: any[];
   measures!: any[];
@@ -39,6 +40,7 @@ export class ListAdmCommunityPage implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
+      this.listaId = params['communityId'];
       console.log(`Params - userId: ${this.userId}, communityId: ${this.communityId}`);
     });
     this.getCommunity();

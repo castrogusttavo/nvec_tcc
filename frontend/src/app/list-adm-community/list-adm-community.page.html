@@ -40,7 +40,9 @@
     [itemName]="item.nm_item" 
     [itemId]="item.id_item"
     [listaId]="item.id_lista"
+    [userId]="userId"
     [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
+    [routerLink]="['/select-item-community', listaId.toString(), item.id_item.toString()]"
     ></app-card-item>
     <!-- <app-card-item 
     *ngFor="let item of items"  
