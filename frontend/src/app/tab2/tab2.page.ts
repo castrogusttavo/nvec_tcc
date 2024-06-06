@@ -1,34 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, forkJoin, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
   isModalOpen = false;
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
+  filteredLists: any[] = [];
 
   email: string = '';
   userName: string | undefined;
   userId!: number;
+  originalItems: any[] = [
+    { title: 'Criar lista', imagePath: './../assets/svg/add.svg', routerLink: ['/create-list'] },
+  ];
+  itemsToShow: any[] = this.originalItems;
 
-  lists!:any[];
-  recentLists!:any[];
-  category!:string;
+  lists!: any[];
+  recentLists!: any[];
+  category!: string;
   private apiLists = "http://localhost:3001/api/lists";
-  private apiRecentLists="http://localhost:3001/api/recentLists";
-  private apiCategories="http://localhost:3001/api/categories";
+  private apiRecentLists = "http://localhost:3001/api/recentLists";
+  private apiCategories = "http://localhost:3001/api/categories";
 
   textForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http:HttpClient, private jwtHelper: JwtHelperService) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private jwtHelper: JwtHelperService, private cdr: ChangeDetectorRef) {
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       valor: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
@@ -38,7 +44,7 @@ export class Tab2Page {
 
   getRecentLists(): void {
     forkJoin({
-      lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId:this.userId } }),
+      lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId: this.userId } }),
       categories: this.http.get<any[]>(this.apiCategories)
     }).pipe(
       map(({ lists, categories }) => {
@@ -56,45 +62,42 @@ export class Tab2Page {
     );
   }
 
-  getLists():Observable<any[]>{
-    return this.http.get<any[]>(this.apiLists, { params: { userId:this.userId } });
+  getLists(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiLists, { params: { userId: this.userId } });
   }
 
   clearSearchText() {
     this.searchText = '';
+    this.filteredLists = this.lists;
   }
 
   searchText: string = '';
-  originalItems: any[] = [
-    { title: 'Guloseimas', description: 'Doces pros irmãos'},
-    { title: 'Compras do mês', description: 'Não esquecer o leite'},
-    { title: 'Móveis para mudança', description: 'Principalmente cadeiras'}
-  ];
-  itemsToShow: any[] = this.originalItems;
 
   onSearchInput(event: any) {
-    const searchText = event.target.value.replace(/\s/g, ''); // Remover espaços
-    this.searchText = searchText;
+    this.searchText = event.target.value;
     this.filterItems();
   }
 
   filterItems() {
-    if (this.searchText === '') {
-      this.itemsToShow = this.originalItems;
+    // Normalize the search text: remove extra spaces
+    const normalizedSearchText = this.searchText.trim().replace(/\s+/g, ' ').toLowerCase();
+
+    if (normalizedSearchText === '') {
+      this.filteredLists = this.lists;
       return;
     }
 
-    const searchTextLower = this.searchText.toLowerCase();
-    this.itemsToShow = this.originalItems.filter(item =>
-      item.title.toLowerCase().includes(searchTextLower)
+    this.filteredLists = this.lists.filter(list =>
+      list.nm_lista.toLowerCase().includes(normalizedSearchText)
     );
   }
 
   ngOnInit(): void {
     this.getUserName();
-    this.getLists().subscribe(lists=>{
+    this.getLists().subscribe(lists => {
       this.lists = lists;
-    })
+      this.filteredLists = lists; // Initialize filteredLists with all lists
+    });
     this.getRecentLists();
   }
 
@@ -102,12 +105,8 @@ export class Tab2Page {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      this.userName = decodedToken.userName; 
+      this.userName = decodedToken.userName;
       this.userId = decodedToken.userId;
-    if (token) {
-      const decodedToken = this.jwtHelper.decodeToken(token);
-      this.userName = decodedToken.userName; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
     }
   }
-}
 }

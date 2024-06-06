@@ -12,28 +12,25 @@
 
     <div class="input-button">
       <input type="text" placeholder="Pesquisa..." (input)="onSearchInput($event)">
-      <button type="button">Buscar</button>
+      <button type="button" (click)="filterItems()">Buscar</button>
     </div>
 
     <div class="communities" [ngClass]="{'slide-up-animation': searchText}">
       <app-card-list-search
-      *ngFor="let item of itemsToShow"
-      [routerLink]="['/create-comunnity']"
-      class="card-list-search-create"
-      [imagePath]="item.imagePath"
-      [title]="item.title"
-      ></app-card-list-search>
+        *ngFor="let item of itemsToShow"
+        [routerLink]="item.routerLink"
+        class="card-list-search-create"
+        [imagePath]="item.imagePath"
+        [title]="item.title">
+      </app-card-list-search>
     </div>
 
-    <div>
-      <!-- <app-card-list-search
-      *ngFor="let community of communities" name="community"
-      [title]="community.nm_comunidade"
-      [routerLink]="['/update-community', community.id_usuario,community.id_comunidade]"></app-card-list-search> -->
+    <div *ngIf="filteredCommunities.length > 0">
       <app-card-list-search
-      *ngFor="let community of communities" name="community"
-      [title]="community.nm_comunidade"
-      [routerLink]="['/list-adm-community', community.id_usuario,community.id_comunidade]"></app-card-list-search>
+        *ngFor="let community of filteredCommunities" name="community"
+        [title]="community.nm_comunidade"
+        [routerLink]="['/list-adm-community', community.id_usuario, community.id_comunidade]">
+      </app-card-list-search>
     </div>
   </div>
 </ion-content>
