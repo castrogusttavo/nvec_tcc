@@ -212,7 +212,7 @@ router.delete("/communities/:idUser/:idCommunity", async (req, res) => {
 router.get('/items/:userId/:communityId', async (req, res) => {
   try {
     const communityId = req.params.communityId;
-    const userId = req.params.communityId;
+    const userId = req.params.userId;
 
     const itemCommunity = await db_query(`
       SELECT *
@@ -227,15 +227,17 @@ router.get('/items/:userId/:communityId', async (req, res) => {
         li.id_lista = ?
         AND
         li.id_usuario = ?
-    `, [communityId,communityId,userId])
+    `, [communityId, communityId, userId]);
+
+    console.log(itemCommunity);
 
     res.json(itemCommunity);
-
-
   } catch (err) {
+    console.error('Error fetching items:', err);
     res.status(500).send({ error: err.message });
   }
 });
+
 
 router.get('/item/:idUser/:idCommunity/:idItem', async (req, res) => {
   try {
