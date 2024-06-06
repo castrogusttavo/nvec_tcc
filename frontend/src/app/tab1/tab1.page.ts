@@ -130,7 +130,7 @@ getRecentLists(): void {
         setTimeout(() => {
           toast.style.display = 'none';
         }, 500); // Tempo de duração da animação de saída
-      }, 7000); // 10 segundos antes de ocultar o toast
+      }, 4000); // 4 segundos antes de ocultar o toast
     }
   }
 
