@@ -11,6 +11,7 @@ import { Observable, forkJoin, map } from 'rxjs';
 })
 export class SelectItemCommunityPage implements OnInit {
 
+  userId!:string;
   listaId!:string;
   itemId!:string;
 
@@ -37,6 +38,7 @@ export class SelectItemCommunityPage implements OnInit {
     this.route.params.subscribe(params => {
       this.listaId = params['idLista'];
       this.itemId = params['idItem'];
+      this.userId = params['userId'];
     });
     this.getItem();
   }
@@ -63,6 +65,8 @@ export class SelectItemCommunityPage implements OnInit {
             ds_medida: measure ? measure.ds_medida : 'Medida Desconhecida',
             ds_status: ic_status ? ic_status.ds_status : 'Status Desconhecido'
           }
+
+          console.log("AAAAAAAAA",this.item.id_lista, this.item.id_item, this.userId)
         },
         error => {
           console.error('Erro ao buscar dados:', error);

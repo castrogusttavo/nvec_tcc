@@ -63,7 +63,7 @@ router.post("/communities/:userId/:communityId", async (req, res) => {
     const userId = req.params.userId;
     const communityId = req.params.communityId;
 
-    const { nm_item, id_medida, qtde_item } = req.body;
+    const { nm_item, id_medida, qtde_item, qtde_medida } = req.body;
 
     if (!nm_item || !id_medida || !qtde_item  ) {
       console.error("Campos obrigatórios ausentes.");
@@ -71,8 +71,8 @@ router.post("/communities/:userId/:communityId", async (req, res) => {
     }
 
     const result = await db_query(
-      "INSERT INTO tb_item_fixo (nm_item, id_medida, qtde_item, id_lista) VALUES (?, ?, ?, ?)",
-      [nm_item, id_medida, qtde_item, communityId]
+      "INSERT INTO tb_item_fixo (nm_item, id_medida, qtde_item,qtde_medida, id_lista) VALUES (?, ?, ?, ?,?)",
+      [nm_item, id_medida, qtde_item,qtde_medida, communityId]
     );
 
     console.log("inserção na tb_item_fixo:", result);
@@ -209,64 +209,5 @@ router.delete("/communities/:idUser/:idCommunity", async (req, res) => {
 });
 
 
-router.get('/items/:userId/:communityId', async (req, res) => {
-  try {
-    const communityId = req.params.communityId;
-    const userId = req.params.userId;
-
-    const itemCommunity = await db_query(`
-      SELECT *
-      FROM 
-        tb_lista_fixa li
-      JOIN 
-        tb_item_fixo i
-      ON i.id_lista = li.id_lista
-      WHERE 
-        i.id_lista = ?
-        AND
-        li.id_lista = ?
-        AND
-        li.id_usuario = ?
-    `, [communityId, communityId, userId]);
-
-    console.log(itemCommunity);
-
-    res.json(itemCommunity);
-  } catch (err) {
-    console.error('Error fetching items:', err);
-    res.status(500).send({ error: err.message });
-  }
-});
-
-
-router.get('/item/:idUser/:idCommunity/:idItem', async (req, res) => {
-  try {
-    const idCommunity = req.params.idCommunity;
-
-    const lowestList = await db_query(`
-      SELECT *
-      FROM
-        tb_lista l
-      JOIN
-        tb_comunidade_lista cl ON l.id_lista = cl.id_lista
-      WHERE
-        cl.id_comunidade = ?
-      ORDER BY
-        vl_gasto
-      LIMIT 1
-    `, [idCommunity])
-
-    // Limpar a data
-    const cleanedListsCommunity = lowestList.map(list => {
-      const date = new Date(list.dt_criacao);
-      const formattedDate = date.toISOString().split('T')[0];
-      return { ...list, dt_criacao: formattedDate };
-    });
-
-    res.send(cleanedListsCommunity);
-  } catch (err) {
-    res.status(500).send({ error: err.message });
-  }
-});
 
 module.exports = router;

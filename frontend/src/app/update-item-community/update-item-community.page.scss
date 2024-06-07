@@ -1,0 +1,115 @@
+@import "../../global.scss";
+
+*{
+    --padding-start: 0px !important;
+}
+
+.forward{
+    padding-left:  5%;
+    padding-top: 5%;
+}
+
+.buttonBig{
+    padding-top: 8%;
+    display: flex;
+    justify-content: center;
+}
+
+.bolean{
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    padding: 0px 24px 40px 24px;
+}
+
+.cancelar{
+    padding: 0px 32px 0px 32px;
+    font-weight: 600;
+    color: $brand1;
+    align-self: center;
+}
+
+.excluir{
+    background-color: #FF554A;
+    padding: 0px 32px 0px 32px;
+    font-size: 16px;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.excluir p{
+    padding: 0px;
+}
+
+.inputs{
+    padding-top: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+input{
+    margin: 10px;
+    width: 183px;
+    height: 55px;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+}
+
+ion-input{
+    margin: 10px;
+    width: 183px;
+    height: 55px;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+}
+
+textarea{
+    width: 183px;
+    height: 55px;
+    border-radius: var(--Space-8, 8px);
+    border: var(--Space-space-025, 2px) solid $N300;
+    padding-top:  5%;
+    padding-bottom:  5%;
+}
+
+.description{
+    width: 382px;
+    min-height: 125px;
+    font-size: 16px; 
+    margin: 10px;
+}
+
+::placeholder {
+    color: $N800D;
+    font-size: 12px;
+    font-weight: 600;
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+}
+
+.inputText{
+    width: 382px;
+    font-size: 16px; 
+    margin: 10px;
+}
+
+.counter {
+    margin-right: 10px;
+    text-align-last: right;
+    font-size: 12px;
+    color: #888;
+}
+
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
+}
+

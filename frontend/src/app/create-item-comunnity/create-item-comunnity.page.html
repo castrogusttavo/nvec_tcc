@@ -10,7 +10,7 @@
     <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
     
     <ion-item class="item">
-      <input class="inputText" placeholder="Medida" >
+      <input class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" placeholder="Medida" >
       <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
         <ion-select-option *ngFor="let measure of measure" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
       </ion-select>

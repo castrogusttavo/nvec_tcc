@@ -27,6 +27,7 @@ const statusRouter = require("./api/status/status");
 const dataUserRouter = require("./api/users/dataUser");
 const reportRouter = require("./api/report/report");
 const reportSemesterRouter = require("./api/report/reportSemester");
+const listsCommunity = require("./api/communities/listsCommunities");
 
 const checkInternetRouter = require("./api/system/ping");
 const cacheRouter = require("./api/system/cache")(secretKey);
@@ -55,6 +56,7 @@ app.use('/api', statusRouter);
 app.use('/api', dataUserRouter);
 app.use('/api', reportRouter);
 app.use('/api', reportSemesterRouter);
+app.use('/api', listsCommunity);
 
   // Rotas e Dados do sistema
 app.use('/api', checkInternetRouter);

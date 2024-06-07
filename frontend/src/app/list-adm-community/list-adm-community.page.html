@@ -19,7 +19,7 @@
           >Acessar comunidade</h3>
         </ion-col>
         <ion-col class="col" >
-          <button class="btn-edit" [routerLink]="['/update-comunnity']">
+          <button class="btn-edit" [routerLink]="['/update-community', userId,communityId]">
             <img src="../../../../assets/svg/edit.svg" alt="">
           </button>
         </ion-col>
@@ -42,7 +42,7 @@
     [listaId]="item.id_lista"
     [userId]="userId"
     [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
-    [routerLink]="['/select-item-community', listaId.toString(), item.id_item.toString()]"
+    [routerLink]="['/select-item-community',userId, listaId.toString(), item.id_item.toString()]"
     ></app-card-item>
     <!-- <app-card-item 
     *ngFor="let item of items"  

@@ -198,9 +198,14 @@ const routes: Routes = [
     loadChildren: () => import('./list-adm-community/list-adm-community.module').then(m => m.ListAdmCommunityPageModule )
   },
   {
-    path: 'select-item-community/:idList/:idItem',
+    path: 'select-item-community/:userId/:idList/:idItem',
     loadChildren: () => import('./select-item-community/select-item-community.module').then( m => m.SelectItemCommunityPageModule)
+  },
+  {
+    path: 'update-item-community/:userId/:idList/:idItem',
+    loadChildren: () => import('./update-item-community/update-item-community.module').then( m => m.UpdateItemCommunityPageModule)
   }
+
 
 
 ];
