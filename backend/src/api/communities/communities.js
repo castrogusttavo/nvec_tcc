@@ -12,8 +12,8 @@ router.post("/communities", async (req, res) => {
     }
 
     const result = await db_query(
-      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria, sb_comunidade, end_comunidade) VALUES (?, ?, ?, ?)",
-      [nm_comunidade, id_categoria, sb_comunidade, end_comunidade]
+      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria, sb_comunidade, end_comunidade, id_criador) VALUES (?, ?, ?, ?,?)",
+      [nm_comunidade, id_categoria, sb_comunidade, end_comunidade,userId]
     );
 
     console.log("inserção na tb_comunidade:", result);
@@ -31,8 +31,8 @@ router.post("/communities", async (req, res) => {
       if (userCommunityResult.affectedRows === 1) {
 
         const resultList = await db_query(
-          "INSERT INTO tb_lista_fixa (id_lista,id_usuario) VALUES (?,?)",
-          [communityId,userId]
+          "INSERT INTO tb_lista_fixa (id_lista_fixa) VALUES (?)",
+          [communityId]
         );
 
         console.log("inserção na tb_lista_fixa:", resultList);
@@ -71,7 +71,7 @@ router.post("/communities/:userId/:communityId", async (req, res) => {
     }
 
     const result = await db_query(
-      "INSERT INTO tb_item_fixo (nm_item, id_medida, qtde_item,qtde_medida, id_lista) VALUES (?, ?, ?, ?,?)",
+      "INSERT INTO tb_item_fixo (nm_item, id_medida, qtde_item,qtde_medida, id_lista_fixa) VALUES (?, ?, ?, ?,?)",
       [nm_item, id_medida, qtde_item,qtde_medida, communityId]
     );
 
