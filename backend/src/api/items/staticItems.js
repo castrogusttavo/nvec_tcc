@@ -2,26 +2,30 @@ const express = require("express");
 const router = express.Router();
 const { db_query } = require("../../frameworks/db/db");
 
-router.post("/staticItems", async (req, res) => {
+router.post("/staticItems/:userId/:communityId", async (req, res) => {
   try {
-    const { nm_item,qtde_item,id_medida,qtde_medida,id_lista } = req.body;
+    const userId = req.params.userId;
+    const communityId = req.params.communityId;
+
+    const { nm_item, qtde_item, id_medida, qtde_medida } = req.body;
 
     const result = await db_query(
-        "INSERT INTO tb_item_fixo (nm_item,qtde_item,qtde_medida, id_medida, id_lista) VALUES (?, ?, ?, ?, ?)",
-        [nm_item,qtde_item,qtde_medida,id_medida,id_lista]
+        "INSERT INTO tb_item_fixo (nm_item,qtde_item,qtde_medida, id_medida, id_lista_fixa) VALUES (?, ?, ?, ?, ?)",
+        [nm_item,qtde_item,qtde_medida,id_medida, communityId]
       );
 
-    res.status(201).json({ id_item: result.insertId });
+    res.status(201).json({ id_item_fixo: result.insertId });
   } catch (err) {
     console.error("Erro ao inserir item", err);
     res.sendStatus(500).send("Erro ao inserir item");
   }
 });
 
-router.get("/staticItems/:listId", async (req, res) => {
+router.get("/staticItems/:userId/:listId", async (req, res) => {
   try {
     const listId=req.params.listId;
-    const items = await db_query("SELECT * FROM tb_item_fixo where id_lista=?",
+    const userId=req.params.userId;
+    const items = await db_query("SELECT * FROM tb_item_fixo where id_lista_fixa=?",
       [listId]
     );
 
@@ -38,8 +42,8 @@ router.get("/staticItems/:listId/:itemId", async (req, res) => {
     const listId = req.params.listId;
 
     const items = await db_query(
-        "SELECT * FROM tb_item_fixo WHERE id_item = ? AND id_lista=?",
-        [itemId, listId]
+        "SELECT * FROM tb_item_fixo WHERE id_lista_fixa=? AND id_item_fixo = ?",
+        [listId,itemId]
       );
 
     if (items.length === 0) {
@@ -66,7 +70,7 @@ router.put("/staticItems/:listId/:itemId", async (req, res) => {
     }
 
     const result = await db_query(
-      "UPDATE tb_item SET nm_item = ?, qtde_item = ?,qtde_medida=?, id_medida = ?, id_lista = ? WHERE id_item = ?",
+      "UPDATE tb_item SET nm_item = ?, qtde_item = ?,qtde_medida=?, id_medida = ?, id_lista_fixa = ? WHERE id_item_fixo = ?",
       [nm_item,qtde_item,qtde_medida,id_medida, id_lista, itemId]
     );
 
@@ -119,7 +123,7 @@ router.patch("/staticItems/:listId/:itemId", async (req, res) => {
 
     setValues.push(itemId);
 
-    const query = `UPDATE tb_item_fixo SET ${setClause.join(", ")} WHERE id_item = ? AND id_lista=?`;
+    const query = `UPDATE tb_item_fixo SET ${setClause.join(", ")} WHERE id_item_fixo = ? AND id_lista_fixa=?`;
 
     const result = await db_query(query, setValues);
 
@@ -139,7 +143,7 @@ router.delete("/staticItems/:listId/:itemId", async (req, res) => {
     const listId = req.params.listId;
     const itemId = req.params.itemId;
 
-    await db_query("DELETE FROM tb_item_fixo WHERE id_item = ? AND id_lista=?", [itemId,listId]);
+    await db_query("DELETE FROM tb_item_fixo WHERE id_item_fixo = ? AND id_lista_fixa=?", [itemId,listId]);
 
     res.sendStatus(200);
   } catch (err) {

@@ -23,7 +23,7 @@ export class ListAdmCommunityPage implements OnInit {
   
   apiList = 'http://localhost:3001/api/list';
   apiCategories = 'http://localhost:3001/api/categories';
-  apiItems = 'http://localhost:3001/api/items';
+  apiItems = 'http://localhost:3001/api/staticItems';
   apiMeasures = 'http://localhost:3001/api/measures';
   apiStatus = 'http://localhost:3001/api/status';
   apiCommunity = 'http://localhost:3001/api/communities';
@@ -41,8 +41,9 @@ export class ListAdmCommunityPage implements OnInit {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
       this.listaId = params['communityId'];
-      console.log(`Params - userId: ${this.userId}, communityId: ${this.communityId}`);
     });
+    console.log('Id comunidade: ', this.communityId);
+    console.log('Id usuario: ', this.userId);
     this.getCommunity();
     this.getItems();
   }
@@ -77,7 +78,6 @@ export class ListAdmCommunityPage implements OnInit {
   getItems(): void {
     if (this.communityId) {
       const itemsUrl = `${this.apiItems}/${this.userId}/${this.communityId}`;
-      console.log(`Fetching items from: ${itemsUrl}`);
 
       forkJoin({
         items: this.http.get<any[]>(itemsUrl),

@@ -46,12 +46,12 @@ export class CreateItemComunnityPage implements OnInit {
 
     try {
       const response: any = await this.http.post(
-        `http://localhost:3001/api/communities/${this.userId}/${this.communityId}`,
+        `http://localhost:3001/api/staticItems/${this.userId}/${this.communityId}`,
         { nm_item: this.name, id_medida: this.medidaSelecionada, qtde_medida:this.measure_quantity, qtde_item:this.quantity}
       ).toPromise();
 
       console.log('Item da comunidade inserido com sucesso:', response);
-      this.router.navigate(['/tabs/tab1']);
+      this.router.navigate(['/list-adm-community',this.userId,this.communityId]);
     } catch (err) {
       console.error('Erro ao inserir item da comunidade:', err);
     }

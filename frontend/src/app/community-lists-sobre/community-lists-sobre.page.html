@@ -121,12 +121,17 @@
           <div class="guests">
 
             <div class="creator">
-              <h5>Gabrielly {{creatorName}}</h5>
+              <h5>{{community.nm_usuario}}</h5>
               <div style="width: 100px; height: 40px; display: flex; align-items: center; justify-content: center; color: #ffffff;" class="btn-lists">Criador</div>
             </div>
 
-            <div class="other-guest" style="margin-top: 20px;">
-              <h5>outroMembro{{usersName}}</h5>
+            <div 
+              *ngFor="let user of usersCommunity" 
+              name="usersCommunity" 
+              class="other-guest" 
+              style="margin-top: 20px;"
+              >
+              <h5>{{user.nm_usuario}}</h5>
             </div>
 
 

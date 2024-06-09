@@ -198,13 +198,14 @@ const routes: Routes = [
     loadChildren: () => import('./list-adm-community/list-adm-community.module').then(m => m.ListAdmCommunityPageModule )
   },
   {
-    path: 'select-item-community/:userId/:idList/:idItem',
+    path: 'select-item-community/:userId/:communityId/:idItem',
     loadChildren: () => import('./select-item-community/select-item-community.module').then( m => m.SelectItemCommunityPageModule)
   },
   {
-    path: 'update-item-community/:userId/:idList/:idItem',
-    loadChildren: () => import('./update-item-community/update-item-community.module').then( m => m.UpdateItemCommunityPageModule)
+    path: 'update-static-item/:userId/:communityId/:itemId/',
+    loadChildren: () => import('./update-static-item/update-static-item.module').then( m => m.UpdateStaticItemPageModule)
   }
+
 
 
 

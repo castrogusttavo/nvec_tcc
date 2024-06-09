@@ -58,31 +58,6 @@ router.post("/communities", async (req, res) => {
   }
 });
 
-router.post("/communities/:userId/:communityId", async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const communityId = req.params.communityId;
-
-    const { nm_item, id_medida, qtde_item, qtde_medida } = req.body;
-
-    if (!nm_item || !id_medida || !qtde_item  ) {
-      console.error("Campos obrigatórios ausentes.");
-      return res.status(400).json({ error: "Campos obrigatórios ausentes." });
-    }
-
-    const result = await db_query(
-      "INSERT INTO tb_item_fixo (nm_item, id_medida, qtde_item,qtde_medida, id_lista_fixa) VALUES (?, ?, ?, ?,?)",
-      [nm_item, id_medida, qtde_item,qtde_medida, communityId]
-    );
-
-    console.log("inserção na tb_item_fixo:", result);
-
-  } catch (err) {
-    console.error("Erro ao inserir comunidade:", err);
-    return res.status(500).send("Erro ao inserir comunidade.");
-  }
-});
-
 // router.get('/recentCommunities', async (req, res) => {
 //   try {
 //     const recentCommunities = await db_query(

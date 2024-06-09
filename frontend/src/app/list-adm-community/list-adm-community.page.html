@@ -35,15 +35,15 @@
   <div class="itens-div">
     
     <app-card-box action="Criar" description="Adicionar um novo item" [routerLink]="['/create-item-comunnity', userId,communityId]"></app-card-box>
-    <app-card-item 
+    <app-card-item-community 
     *ngFor="let item of items"  
     [itemName]="item.nm_item" 
-    [itemId]="item.id_item"
+    [itemId]="item.id_item_fixo"
     [listaId]="item.id_lista"
     [userId]="userId"
     [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
-    [routerLink]="['/select-item-community',userId, listaId.toString(), item.id_item.toString()]"
-    ></app-card-item>
+    [routerLink]="['/select-item-community',userId, communityId, item.id_item_fixo]"
+    ></app-card-item-community>
     <!-- <app-card-item 
     *ngFor="let item of items"  
     [itemName]="item.nm_item" 

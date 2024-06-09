@@ -1,9 +1,6 @@
-<ion-content  *ngIf="item" [fullscreen]="true" scrollY="false">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/list-adm-community', userId, item.id_lista ]">
+<ion-content *ngIf="item"  [fullscreen]="true" scrollY="false">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/list-adm-community', userId, listaId]">
 
-  <div class="status">
-    {{item.ds_status}}
-  </div>
 
   <ion-grid>
     <ion-row class="ion-align-items-center">
@@ -18,39 +15,28 @@
 
   <ion-grid class="cards">
     <ion-row class="ion-align-items-center">
-      <ion-col size="auto" class="ion-text-center ">
+      <ion-col size="auto" class="ion-text-center">
         <div class="backOne">R$ {{item.vl_uni}}</div>
-        <div class="backTwo">
-        </div>
+        <div class="backTwo"></div>
         <p>{{item.qtde_item}}x quant:</p>
       </ion-col>
-      <ion-col size="auto" class="ion-text-center ">
+      <ion-col size="auto" class="ion-text-center">
         <ion-col size="auto" class="ion-text-center">
-          <div class="backTwoTwo">
-          </div>
+          <div class="backTwoTwo"></div>
           <p class="quant">{{item.qtde_item}}x quant:</p>
-          <div class="backOneOne">{{item.qtde_medida_item}}</div>
+          <div class="backOneOne">{{item.qtde_medida}}</div>
         </ion-col>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <div class="valor">
-    Total: R$ 4,80
-  </div>
-
   <div class="buttonBig">
-   <button [routerLink]="['/update-item-community',userId, item.id_lista,item.id_item]">
-    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="30" viewBox="0 0 29 30" fill="none">
-    <path d="M18.5025 7.90767L20.1545 6.2556C21.067 5.34319 22.5463 5.34319 23.4588 6.2556C24.3711 7.16801 24.3711 8.64733 23.4588 9.55975L21.8066 11.2118M18.5025 7.90767L8.7983 17.6119C7.56634 18.8439 6.95034 19.4598 6.5309 20.2104C6.11144 20.9611 5.68943 22.7335 5.28589 24.4284C6.98078 24.0249 8.75323 23.6028 9.50387 23.1834C10.2545 22.7639 10.8705 22.148 12.1025 20.9161L21.8066 11.2118M18.5025 7.90767L21.8066 11.2118" stroke="white" stroke-width="1.76786" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M13.5359 24.4287H20.6073" stroke="white" stroke-width="1.76786" stroke-linecap="round"/>
-    </svg>
-    Alterar
-  </button>
-
-
-
+    <button [routerLink]="['/update-item-community', userId, item.id_lista, item.id_item]">
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="30" viewBox="0 0 29 30" fill="none">
+        <path d="M18.5025 7.90767L20.1545 6.2556C21.067 5.34319 22.5463 5.34319 23.4588 6.2556C24.3711 7.16801 24.3711 8.64733 23.4588 9.55975L21.8066 11.2118M18.5025 7.90767L8.7983 17.6119C7.56634 18.8439 6.95034 19.4598 6.5309 20.2104C6.11144 20.9611 5.68943 22.7335 5.28589 24.4284C6.98078 24.0249 8.75323 23.6028 9.50387 23.1834C10.2545 22.7639 10.8705 22.148 12.1025 20.9161L21.8066 11.2118M18.5025 7.90767L21.8066 11.2118" stroke="white" stroke-width="1.76786" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13.5359 24.4287H20.6073" stroke="white" stroke-width="1.76786" stroke-linecap="round"/>
+      </svg>
+      Alterar
+    </button>
   </div>
-
-
 </ion-content>

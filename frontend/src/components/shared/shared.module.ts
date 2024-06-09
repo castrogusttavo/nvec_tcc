@@ -35,6 +35,7 @@ import { ToogleThemeComponent } from './toogle-theme/toogle-theme.component';
 import { ToastErrorComponent } from './toast/toast-error/toast-error.component';
 import { ToastInfoComponent } from './toast/toast-info/toast-info.component';
 import { ToastSuccessComponent } from './toast/toast-success/toast-success.component';
+import { CardItemCommunityComponent } from './cards/card-item-community/card-item-community.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ToastSuccessComponent } from './toast/toast-success/toast-success.compo
     ToogleThemeComponent,
     ToastErrorComponent,
     ToastInfoComponent,
-    ToastSuccessComponent
+    ToastSuccessComponent,
+    CardItemCommunityComponent
   ],
   imports: [
     IonicModule,
@@ -89,6 +91,7 @@ import { ToastSuccessComponent } from './toast/toast-success/toast-success.compo
     RouterModule.forChild([{path: '../../../components/shared/modals/example', component: ExampleComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/modals/typeahead', component: TypeaheadComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/modals/modal-item', component: ModalItemComponent}]),
+    RouterModule.forChild([{path: '../../../components/shared/cards/card-item-community', component: CardItemCommunityComponent}]),
     // Toasts
     RouterModule.forChild([{path: '../../../components/shared/toast/toast-error', component: ToastErrorComponent}]),
     RouterModule.forChild([{path: '../../../components/shared/toast/toast-info', component: ToastInfoComponent}]),
@@ -125,7 +128,8 @@ import { ToastSuccessComponent } from './toast/toast-success/toast-success.compo
     ToogleThemeComponent,
     ToastErrorComponent,
     ToastInfoComponent,
-    ToastSuccessComponent
+    ToastSuccessComponent,
+    CardItemCommunityComponent
   ]
 })
 export class SharedModule { }
