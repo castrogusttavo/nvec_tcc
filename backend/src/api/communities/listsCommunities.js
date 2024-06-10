@@ -145,5 +145,33 @@ const { db_query } = require("../../frameworks/db/db");
     }
   })
 
+  router.get('/itemsListUsers/:userId/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+      const userId = req.params.userId;
+
+      const lists = await db_query(`
+              SELECT
+                  *
+              FROM
+                  tb_lista_variavel lv
+              JOIN
+                  tb_item_variavel iv ON lv.id_lista_variavel = iv.id_lista_variavel
+              JOIN
+                  tb_item_fixo fix ON fix.id_item_fixo = iv.id_item_fixo
+                  JOIN tb_usuario u ON u.id_usuario = lv.id_usuario
+              WHERE
+                  lv.id_lista_fixa = ?
+            AND lv.id_usuario = ?;
+      `, [idCommunity,userId])
+
+      console.log("Lists:", lists); 
+
+      res.json(lists);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
 
   module.exports = router;

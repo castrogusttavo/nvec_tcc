@@ -12,8 +12,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class ComunnityListsItemPage implements OnInit {
 
-  userId!:number;
+  userId!:string;
   communityId!:number;
+  apiBase =  `http://localhost:3001/api`
+  list!:any[];
   
   constructor(private jwtHelper: JwtHelperService,private route: ActivatedRoute, private http: HttpClient, private router: Router,private formBuilder: FormBuilder) {}
 
@@ -22,8 +24,16 @@ export class ComunnityListsItemPage implements OnInit {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
     });
+    this.getListCommunity().subscribe(list => {
+      this.list = list;
+      console.log(this.list);
+    });
+
   }
 
-  
+  getListCommunity(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiBase}/itemsListUsers/${this.userId}/${this.communityId}`);
+  }
+
 
 }

@@ -1,11 +1,11 @@
 <ion-content [fullscreen]="true">
   <img  [routerLink]="['/community-lists-sobre', userId, communityId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar">
-  <div class="content">
+  <div  class="content">
 
       <div class="list">
         <div class="user-price">
           <div class="name-address">
-            <h5 class="black-text">Nome do usuário</h5>
+            <h5 class="black-text">d</h5>
             <span class="grey-text">Local: local da lista</span>
           </div>
           <div class="totalList">
@@ -16,8 +16,13 @@
 
       <hr>
     <div class="itens-div">
-      <app-card-item price="2,40" itemName="Oreo" description="Biscoito"  [routerLink]="['/update-item-user']"
-        [imagePath]="'https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/lahhlxg8nk6goxrcbcpz'"></app-card-item>
-    </div>
+        <app-card-item-community 
+        *ngFor="let list of list"
+        [itemName]="list.nm_item"
+        [itemId]="list.id_item_fixo"
+        [userId]="userId"
+        [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
+        ></app-card-item-community>
+      </div>
   </div>
 </ion-content>
