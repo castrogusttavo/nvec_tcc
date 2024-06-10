@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -29,7 +29,8 @@ export class Tab4Page implements OnInit {
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   communities!: any[];
@@ -159,4 +160,13 @@ export class Tab4Page implements OnInit {
   formatNumber(num: number): string {
     return num < 10 ? '0' + num : num.toString();
   }
+
+  navigateToCommunityPage(communityId: number, creatorId: number): void {
+
+    if (this.userId === creatorId) {
+        this.router.navigate(['/list-adm-community', this.userId, communityId]);
+    } else {
+        this.router.navigate(['/community-lists-sobre', this.userId, communityId]);
+    }
+}
 }

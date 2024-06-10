@@ -58,7 +58,7 @@ router.get("/fixItems/:id", async (req, res) => {
     const itemId = req.params.id;
 
     const items = await db_query(
-        "SELECT * FROM tb_item_fixo WHERE id_item = ?",
+        "SELECT * FROM tb_item_fixo WHERE id_item_fixo = ?",
         [itemId]
       );
 

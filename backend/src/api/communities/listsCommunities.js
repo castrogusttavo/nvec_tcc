@@ -69,15 +69,19 @@ const { db_query } = require("../../frameworks/db/db");
       const idCommunity = req.params.idCommunity;
 
       const users = await db_query(`
-        SELECT *
-        FROM
+      SELECT
+          u.*,
+          c.*
+      FROM
           tb_usuario u
-        JOIN
+      JOIN
           tb_comunidade_usuario cu ON cu.id_usuario = u.id_usuario
-        WHERE
+      JOIN
+          tb_comunidade c ON c.id_comunidade = cu.id_comunidade
+      WHERE
           cu.id_comunidade = ?
-          AND cu.id_usuario != (SELECT id_criador FROM tb_comunidade WHERE id_comunidade = ?);
-      `, [idCommunity,idCommunity])
+        AND cu.id_usuario != c.id_criador;
+      `, [idCommunity])
 
 
       res.json(users);

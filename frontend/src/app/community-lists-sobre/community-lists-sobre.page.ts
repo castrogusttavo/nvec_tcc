@@ -53,6 +53,8 @@ export class CommunityListsSobrePage implements OnInit {
   measures!:any[];
   status!:any[];
 
+  idCriador!:string;
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.userId = params['userId'];
@@ -87,6 +89,8 @@ export class CommunityListsSobrePage implements OnInit {
             user =>user.id_usuario === community.id_criador
           )
 
+          this.idCriador = user;
+
           this.community={
             ...community,
             ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida',
@@ -107,5 +111,18 @@ export class CommunityListsSobrePage implements OnInit {
   getUsersCommunity(): Observable<any[]>{
       return this.http.get<any[]>(`${this.apiBase}/userCommunity/${this.communityId}`);
   }
+
+  navigateToCommunityPage(communityId: number, creatorId: number): void {
+
+    const user = String(this.userId);
+    const creator = String(creatorId);
+
+    if (user === creator) {
+        this.router.navigate(['/list-adm-community', user, communityId]);
+    } else {
+      console.log(user, creator);
+        this.router.navigate(['/tabs/tab4']);
+    }
+}
 
 }
