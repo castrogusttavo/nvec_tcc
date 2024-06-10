@@ -24,4 +24,6 @@ export class ComunnityListsItemPage implements OnInit {
     });
   }
 
+  
+
 }

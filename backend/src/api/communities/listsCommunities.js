@@ -96,14 +96,7 @@ const { db_query } = require("../../frameworks/db/db");
       const userId = req.params.userId;
 
       const lists = await db_query(`
-              SELECT
-               *
-              FROM
-                    tb_lista_variavel lv
-              JOIN tb_usuario u ON u.id_usuario = lv.id_usuario
-                WHERE
-                    lv.id_lista_fixa = ?
-              AND lv.id_usuario = ?
+              SELECT * FROM view_total_lista WHERE id_lista_fixa= ? AND id_usuario=?;
       `, [idCommunity,userId])
 
       console.log("Lists:", lists); 
@@ -126,6 +119,22 @@ const { db_query } = require("../../frameworks/db/db");
               JOIN tb_usuario u ON u.id_usuario = lv.id_usuario
                 WHERE
                     lv.id_lista_fixa = ?
+      `, [idCommunity])
+
+      console.log("Lists:", lists); 
+
+      res.json(lists);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
+  router.get('/totalListUsers/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+
+      const lists = await db_query(`
+              SELECT * FROM view_total_lista WHERE id_lista_fixa= ?;
       `, [idCommunity])
 
       console.log("Lists:", lists); 

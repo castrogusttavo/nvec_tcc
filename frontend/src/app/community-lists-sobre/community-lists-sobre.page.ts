@@ -55,6 +55,8 @@ export class CommunityListsSobrePage implements OnInit {
 
   lists!:any[];
   usersLists!:any[];
+  totalLista!:any[];
+
   idCriador!:string;
 
   ngOnInit() {
@@ -75,6 +77,7 @@ export class CommunityListsSobrePage implements OnInit {
       this.usersLists = usersLists;
       console.log(this.usersLists);
     });
+
   }
 
   
@@ -126,8 +129,9 @@ export class CommunityListsSobrePage implements OnInit {
     return this.http.get<any[]>(`${this.apiBase}/listCommunity/${this.userId}/${this.communityId}`);
   }
   getListsCommunity(): Observable<any[]>{
-    return this.http.get<any[]>(`${this.apiBase}/listsCommunity/${this.communityId}`);
+    return this.http.get<any[]>(`${this.apiBase}/totalListUsers/${this.communityId}`);
   }
+
 
   navigateToCommunityPage(communityId: number, creatorId: number): void {
 

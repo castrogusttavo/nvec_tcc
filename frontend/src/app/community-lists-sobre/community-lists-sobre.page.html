@@ -32,7 +32,7 @@
             </div>
   
             <div class="totalList">
-              <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
+              <h3 class="yellow-text">R$ <b class="yellow-text">{{list.valor_total}}</b></h3>
               <!-- <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
   
               <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId]">
@@ -83,7 +83,7 @@
               </div>
     
               <div class="total-list">
-                <h3  class="yellow-text">R$ <b class="yellow-text">300,34</b></h3>
+                <h3  class="yellow-text">R$ <b class="yellow-text">{{lists.valor_total}}</b></h3>
                 <!-- <h3  class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
     
                 <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item']">
