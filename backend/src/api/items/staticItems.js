@@ -14,6 +14,17 @@ router.post("/staticItems/:userId/:communityId", async (req, res) => {
         [nm_item,qtde_item,qtde_medida,id_medida, communityId]
       );
 
+      const itemId = result.insertId;
+
+    const participantes = await db_query("SELECT * FROM tb_lista_variavel WHERE id_lista_fixa = ?", [communityId]);
+
+    for (const participante of participantes) {
+        await db_query(
+            "INSERT INTO tb_item_variavel (vl_uni, id_lista_variavel, id_item_fixo) VALUES (?, ?, ?)",
+            [null, participante.id_lista_variavel, itemId]
+        );
+    }
+
     res.status(201).json({ id_item_fixo: result.insertId });
   } catch (err) {
     console.error("Erro ao inserir item", err);

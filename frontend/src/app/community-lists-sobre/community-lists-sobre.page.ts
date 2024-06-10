@@ -53,6 +53,8 @@ export class CommunityListsSobrePage implements OnInit {
   measures!:any[];
   status!:any[];
 
+  lists!:any[];
+  usersLists!:any[];
   idCriador!:string;
 
   ngOnInit() {
@@ -64,6 +66,14 @@ export class CommunityListsSobrePage implements OnInit {
     this.getUsersCommunity().subscribe(usersCommunity => {
       this.usersCommunity = usersCommunity;
       console.log(this.usersCommunity);
+    });
+    this.getListCommunity().subscribe(lists => {
+      this.lists = lists;
+      console.log(this.lists);
+    });
+    this.getListsCommunity().subscribe(usersLists => {
+      this.usersLists = usersLists;
+      console.log(this.usersLists);
     });
   }
 
@@ -112,6 +122,13 @@ export class CommunityListsSobrePage implements OnInit {
       return this.http.get<any[]>(`${this.apiBase}/userCommunity/${this.communityId}`);
   }
 
+  getListCommunity(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiBase}/listCommunity/${this.userId}/${this.communityId}`);
+  }
+  getListsCommunity(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiBase}/listsCommunity/${this.communityId}`);
+  }
+
   navigateToCommunityPage(communityId: number, creatorId: number): void {
 
     const user = String(this.userId);
@@ -123,6 +140,6 @@ export class CommunityListsSobrePage implements OnInit {
       console.log(user, creator);
         this.router.navigate(['/tabs/tab4']);
     }
-}
+  }
 
 }

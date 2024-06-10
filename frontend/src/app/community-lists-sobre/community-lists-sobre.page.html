@@ -21,11 +21,11 @@
   <div [ngSwitch]="segmentValue" class="todosGrafico">
     <div *ngSwitchCase="'segment'">
       <div class="list-user">
-        <div class="list">
+        <div *ngFor="let list of lists" name="lists" class="list">
           <h3 class="yellow-text">Esta é a sua lista</h3>
           <div class="user-price">
             <div class="name-address">
-              <h5 class="black-text">Nome do usuário</h5>
+              <h5 class="black-text">{{list.nm_usuario}}</h5>
               <span class="grey-text">Local: local da lista</span>
               <!-- <h4 class="yellow-text">{{userName}}</h4><br>
               <span class="yellow-text">{{listAddress}}</span> -->
@@ -74,9 +74,9 @@
 
           <div class="lists-component">
 
-            <div class="lists-users">
+            <div *ngFor="let lists of usersLists" class="lists-users">
               <div class="name-address">
-                <h4 class="black-text">Nome</h4>
+                <h4 class="black-text">{{lists.nm_usuario}}</h4>
                 <span class="grey-text span">Local: local</span>
                 <!-- <h4>{{userName}}</h4><br>
                 <span>{{listAddress}}</span> -->
