@@ -14,20 +14,20 @@
   
   <div [ngSwitch]="segmentValue" class="todosGrafico">
     <div *ngSwitchCase="'segment'">
-      <div class="list-user">
+      <div *ngFor="let list of lists" class="list-user">
         <h3 class="yellow-text">Esta é a sua lista</h3>
-
-        <div *ngFor="let list of lists" name="lists" class="list">
+      
+        <div>
           <div class="user-price">
             <div class="name-address">
-              <h5 class="black-text">{{list.nm_usuario}}</h5>
+              <h5 class="black-text">{{ list.nm_usuario }}</h5>
               <span class="grey-text">Local: local da lista</span>
             </div>
-  
+      
             <div class="totalList">
-              <h3 class="yellow-text">R$ <b class="yellow-text">{{list.valor_total}}</b></h3>
-  
-              <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId]">
+              <h3 class="yellow-text">R$ <b class="yellow-text">{{ list.valor_total }}</b></h3>
+      
+              <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId, list.id_lista_variavel]">
                 <img src="../../assets/svg/arrow_forward.svg" alt="">
               </button>
             </div>
@@ -55,7 +55,7 @@
               <div class="totalList">
                 <h3 class="yellow-text">R$ <b class="yellow-text">{{resultComparacao[0].totalLista}}</b></h3>
     
-                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId]">
+                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', resultComparacao[0].id_usuario, communityId,resultComparacao[0].id_lista_variavel]">
                   <img src="../../assets/svg/arrow_forward.svg" alt="">
                 </button>
               </div>
@@ -81,7 +81,7 @@
                 <h3  class="yellow-text">R$ <b class="yellow-text">{{lists.valor_total}}</b></h3>
                 <!-- <h3  class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
     
-                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item']">
+                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', lists.id_usuario, communityId, lists.id_lista_variavel]">
                   <img src="../../assets/svg/arrow_forward.svg" alt="">
                 </button>
               </div>

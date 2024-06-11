@@ -16,6 +16,9 @@ export class ComunnityListsItemPage implements OnInit {
   communityId!:string;
   apiBase =  `http://localhost:3001/api`
   list!:any[];
+  usersLists:any = {};
+
+  listId!:string
   
   constructor(private jwtHelper: JwtHelperService,private route: ActivatedRoute, private http: HttpClient, private router: Router,private formBuilder: FormBuilder) {}
 
@@ -23,15 +26,22 @@ export class ComunnityListsItemPage implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
+      this.listId = params['listId'];
     });
     this.getListCommunity().subscribe(list => {
       this.list = list;
       console.log(this.list);
     });
+    this.getListsCommunity().subscribe(usersLists => {
+      this.usersLists = usersLists;
+    });
   }
 
   getListCommunity(): Observable<any[]>{
     return this.http.get<any[]>(`${this.apiBase}/itemsListUsers/${this.userId}/${this.communityId}`);
+  }
+  getListsCommunity(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiBase}/totalListUser/${this.communityId}/${this.userId}`);
   }
 
 }

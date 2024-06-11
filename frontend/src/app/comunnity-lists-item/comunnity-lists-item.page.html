@@ -1,15 +1,17 @@
 <ion-content [fullscreen]="true">
-  <img  [routerLink]="['/community-lists-sobre', userId, communityId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar">
+  <img  [routerLink]="['/community-lists-sobre', communityId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar">
   <div  class="content">
 
-      <div class="list">
+      <div *ngIf="usersLists" class="list">
         <div class="user-price">
           <div class="name-address">
-            <h5 class="black-text">d</h5>
-            <span class="grey-text">Local: local da lista</span>
+            <h5 class="black-text">{{usersLists.nm_usuario}}</h5>
+            <span [routerLink]="['/update-item-comunnity', userId, communityId, usersLists.id_lista_variavel]"
+            class="grey-text">Local: local da lista</span>
+            
           </div>
           <div class="totalList">
-            <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
+            <h3 class="yellow-text">R$ <b class="yellow-text">{{usersLists.valor_total}}</b></h3>
           </div>
         </div>
       </div>

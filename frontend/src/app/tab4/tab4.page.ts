@@ -166,7 +166,7 @@ export class Tab4Page implements OnInit {
     if (this.userId === creatorId) {
         this.router.navigate(['/list-adm-community', this.userId, communityId]);
     } else {
-        this.router.navigate(['/community-lists-sobre', this.userId, communityId]);
+        this.router.navigate(['/community-lists-sobre', communityId]);
     }
 }
 }

@@ -63,8 +63,8 @@ export class CommunityListsSobrePage implements OnInit {
   idCriador!:string;
 
   ngOnInit() {
+    this.getUserId();
     this.route.params.subscribe(params => {
-      this.userId = params['userId'];
       this.communityId = params['communityId'];
     });
     this.getCommunity();
@@ -78,6 +78,14 @@ export class CommunityListsSobrePage implements OnInit {
       this.usersLists = usersLists;
     });
 
+  }
+
+  getUserId(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userId = decodedToken.userId;
+    }
   }
 
   
@@ -128,6 +136,7 @@ export class CommunityListsSobrePage implements OnInit {
   getListCommunity(): Observable<any[]>{
     return this.http.get<any[]>(`${this.apiBase}/listCommunity/${this.userId}/${this.communityId}`);
   }
+
   getListsCommunity(): Observable<any[]>{
     return this.http.get<any[]>(`${this.apiBase}/totalListUsers/${this.communityId}`);
   }

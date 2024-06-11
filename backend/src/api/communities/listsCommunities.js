@@ -145,6 +145,23 @@ const { db_query } = require("../../frameworks/db/db");
     }
   })
 
+  router.get('/totalListUser/:idCommunity/:userId', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+      const userId = req.params.userId;
+
+      const lists = await db_query(`
+              SELECT * FROM view_total_lista WHERE id_lista_fixa= ? AND id_usuario=?;
+      `, [idCommunity, userId])
+
+      console.log("Lists:", lists); 
+
+      res.json(lists[0]);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
   router.get('/itemsListUsers/:userId/:idCommunity', async (req, res) => {
     try {
       const idCommunity = req.params.idCommunity;

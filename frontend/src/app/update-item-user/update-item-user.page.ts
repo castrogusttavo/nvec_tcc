@@ -21,6 +21,8 @@ export class UpdateItemUserPage implements OnInit {
 
   vl_uni!:number
 
+  item:any={};
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.userId = params['userId'];
@@ -28,12 +30,25 @@ export class UpdateItemUserPage implements OnInit {
       this.itemId = params['itemId'];
       this.listId = params['listId'];
     });
+    this.getItem();
+  }
+
+  getItem():void{
+      
+    try {
+      const response: any = this.http.get(
+        `http://localhost:3001/api/varItem/${this.communityId}/${this.listId}/${this.itemId}`
+      ).toPromise();
+  
+      this.item = response;
+      console.log("aaaaaaaa", this.item)
+    } catch (err) {
+      console.error('Erro ao enviar solicitação PATCH: ', err);
+    }
   }
 
   async updateItem(event: { preventDefault: () => void; }) {
     event.preventDefault();
-  
-    console.log("Enviando solicitação PATCH...");
   
     try {
       const response: any = await this.http.patch(
@@ -41,10 +56,9 @@ export class UpdateItemUserPage implements OnInit {
         { vl_uni: this.vl_uni }
       ).toPromise();
   
-      console.log('Resposta da solicitação PATCH:', response);
       this.router.navigate(['/tabs/tab1']);
     } catch (err) {
-      console.error('Erro ao enviar solicitação PATCH: ', err);
+      console.error('Erro ao atualizar item: ', err);
     }
   }
   

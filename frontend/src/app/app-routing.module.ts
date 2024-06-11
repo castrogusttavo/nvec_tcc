@@ -139,10 +139,10 @@ const routes: Routes = [
     loadChildren: () => import('./tes-toast/tes-toast.module').then( m => m.TesToastPageModule)
   },
   {
-    path: 'comunnity-lists-item/:userId/:communityId',
+    path: 'comunnity-lists-item/:userId/:communityId/:listId',
     loadChildren: () => import('./comunnity-lists-item/comunnity-lists-item.module').then( m => m.ComunnityListsItemPageModule)
   },
-  { path: 'community-lists-sobre/:userId/:communityId',
+  { path: 'community-lists-sobre/:communityId',
     loadChildren: () => import('./community-lists-sobre/community-lists-sobre.module').then( m => m.CommunityListsSobrePageModule)
   },
   {
@@ -158,7 +158,7 @@ const routes: Routes = [
     loadChildren: () => import('./create-item-comunnity/create-item-comunnity.module').then( m => m.CreateItemComunnityPageModule)
   },
   {
-    path: 'update-item-comunnity/:userId/:communityId/:itemId',
+    path: 'update-item-comunnity/:userId/:communityId/:listId',
     loadChildren: () => import('./update-item-comunnity/update-item-comunnity.module').then( m => m.UpdateItemComunnityPageModule)
   },
   {
