@@ -158,11 +158,11 @@ const routes: Routes = [
     loadChildren: () => import('./create-item-comunnity/create-item-comunnity.module').then( m => m.CreateItemComunnityPageModule)
   },
   {
-    path: 'update-item-comunnity',
+    path: 'update-item-comunnity/:userId/:communityId/:itemId',
     loadChildren: () => import('./update-item-comunnity/update-item-comunnity.module').then( m => m.UpdateItemComunnityPageModule)
   },
   {
-    path: 'update-item-user',
+    path: 'update-item-user/:userId/:communityId/:listId/:itemId',
     loadChildren: () => import('./update-item-user/update-item-user.module').then( m => m.UpdateItemUserPageModule)
   },
   {

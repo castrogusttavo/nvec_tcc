@@ -11,29 +11,21 @@
       <ion-label>Sobre</ion-label>
     </ion-segment-button>
   </ion-segment>
-
-  <!-- <div>
-    <button ion-button (click)="toggleDateTime()">Selecionar data</button>
-    <ion-datetime *ngIf="showDateTime" minuteValues="0,15,30,45" dayValues="5,10,15,20,25,30"></ion-datetime>
-  </div>
-   -->
   
   <div [ngSwitch]="segmentValue" class="todosGrafico">
     <div *ngSwitchCase="'segment'">
       <div class="list-user">
+        <h3 class="yellow-text">Esta é a sua lista</h3>
+
         <div *ngFor="let list of lists" name="lists" class="list">
-          <h3 class="yellow-text">Esta é a sua lista</h3>
           <div class="user-price">
             <div class="name-address">
               <h5 class="black-text">{{list.nm_usuario}}</h5>
               <span class="grey-text">Local: local da lista</span>
-              <!-- <h4 class="yellow-text">{{userName}}</h4><br>
-              <span class="yellow-text">{{listAddress}}</span> -->
             </div>
   
             <div class="totalList">
               <h3 class="yellow-text">R$ <b class="yellow-text">{{list.valor_total}}</b></h3>
-              <!-- <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
   
               <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId]">
                 <img src="../../assets/svg/arrow_forward.svg" alt="">
@@ -44,29 +36,6 @@
      </div>
   
      <div class="compare-lists">
-
-      <!-- <div class="listEconomic">
-        <div class="list">
-          <h3 class="titleText">Esta é a lista mais barata</h3>
-          <div class="value">
-            <div class="name-address">
-              <h5 class="black-text">Nome do usuário</h5>
-              <span class="grey-text">Local: local da lista</span>
-              <h4 class="yellow-text">{{userName}}</h4><br>
-              <span class="yellow-text">{{listAddress}}</span>
-            </div>
-  
-            <div class="totalList">
-              <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
-              <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3>
-  
-              <button class="btn-lists btn-list">
-                <img src="../../assets/svg/arrow_forward.svg" alt="">
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
 
       <div  class="usersLists">

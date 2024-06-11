@@ -16,13 +16,16 @@
 
       <hr>
     <div class="itens-div">
-        <app-card-item-community 
-        *ngFor="let list of list"
-        [itemName]="list.nm_item"
-        [itemId]="list.id_item_fixo"
-        [userId]="userId"
-        [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
-        ></app-card-item-community>
+      <app-card-item-community 
+      *ngFor="let list of list"
+      [itemName]="list.nm_item"
+      [itemId]="list.id_item_variavel"
+      [userId]="userId"
+      [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
+      [routerLink]="['/update-item-user', userId, communityId, list.id_lista_variavel, list.id_item_variavel]"
+    ></app-card-item-community>
+    
+    
       </div>
   </div>
 </ion-content>

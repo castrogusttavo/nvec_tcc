@@ -163,4 +163,5 @@ router.delete("/staticItems/:listId/:itemId", async (req, res) => {
   }
 });
 
+
 module.exports = router;

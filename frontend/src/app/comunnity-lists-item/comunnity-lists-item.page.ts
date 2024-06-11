@@ -13,7 +13,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class ComunnityListsItemPage implements OnInit {
 
   userId!:string;
-  communityId!:number;
+  communityId!:string;
   apiBase =  `http://localhost:3001/api`
   list!:any[];
   
@@ -28,12 +28,10 @@ export class ComunnityListsItemPage implements OnInit {
       this.list = list;
       console.log(this.list);
     });
-
   }
 
   getListCommunity(): Observable<any[]>{
     return this.http.get<any[]>(`${this.apiBase}/itemsListUsers/${this.userId}/${this.communityId}`);
   }
-
 
 }

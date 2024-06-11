@@ -71,7 +71,7 @@ export class CommunityListsSobrePage implements OnInit {
     });
     this.getListCommunity().subscribe(lists => {
       this.lists = lists;
-      console.log(this.lists);
+      console.log("aaaaaaaaaaaa", this.lists);
     });
     this.getListsCommunity().subscribe(usersLists => {
       this.usersLists = usersLists;
