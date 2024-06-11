@@ -39,7 +39,33 @@
 
 
       <div  class="usersLists">
-        <button class="btn-lists" style="color: #ffffff">Comparar Listas</button>
+
+        <div *ngIf="divComparacao" class="lists-users">
+
+          <div *ngIf="resultComparacao" class="list-user">
+
+            <h4 class="yellow-text">Esta é a lista mais barata</h4>
+            <div class="user-price">
+              
+              <div class="name-address">
+                  <h5 class="black-text">{{resultComparacao[0].nm_usuario}}</h5>
+                <span class="grey-text">Local: local da lista</span>
+              </div>
+    
+              <div class="totalList">
+                <h3 class="yellow-text">R$ <b class="yellow-text">{{resultComparacao[0].totalLista}}</b></h3>
+    
+                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId]">
+                  <img src="../../assets/svg/arrow_forward.svg" alt="">
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button (click)="procedureComparacao()" class="btn-lists" style="color: #ffffff">Comparar Listas</button>
 
           <div class="lists-component">
 

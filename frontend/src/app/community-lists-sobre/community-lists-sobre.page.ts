@@ -53,6 +53,9 @@ export class CommunityListsSobrePage implements OnInit {
   measures!:any[];
   status!:any[];
 
+  resultComparacao:any;
+  divComparacao:boolean=false;
+
   lists!:any[];
   usersLists!:any[];
   totalLista!:any[];
@@ -67,15 +70,12 @@ export class CommunityListsSobrePage implements OnInit {
     this.getCommunity();
     this.getUsersCommunity().subscribe(usersCommunity => {
       this.usersCommunity = usersCommunity;
-      console.log(this.usersCommunity);
     });
     this.getListCommunity().subscribe(lists => {
       this.lists = lists;
-      console.log("aaaaaaaaaaaa", this.lists);
     });
     this.getListsCommunity().subscribe(usersLists => {
       this.usersLists = usersLists;
-      console.log(this.usersLists);
     });
 
   }
@@ -145,5 +145,17 @@ export class CommunityListsSobrePage implements OnInit {
         this.router.navigate(['/tabs/tab4']);
     }
   }
+
+  async procedureComparacao() {
+    try {
+      const result = await this.http.get<any>(`${this.apiBase}/comparacao/${this.communityId}`).toPromise();
+      this.resultComparacao = result;
+      this.divComparacao = true;
+      console.log(this.resultComparacao)
+    } catch (error) {
+      console.error('Erro ao chamar a procedure de comparação:', error);
+    }
+  }
+  
 
 }

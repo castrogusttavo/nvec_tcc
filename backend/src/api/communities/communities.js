@@ -42,7 +42,16 @@ router.post("/communities", async (req, res) => {
         console.log("Inserção na tb_lista_fixa:", resultList);
 
         if (resultList.affectedRows === 1) {
-          return res.status(201).json({ id_comunidade: communityId });
+
+          const varList =await db_query(
+            "INSERT INTO tb_lista_variavel (id_lista_fixa,id_usuario) VALUES (?,?)",
+            [communityId, userId]
+          )
+
+          if(varList.affectedRows === 1){
+            return res.status(201).json({ id_comunidade: communityId });
+          }
+
         } else {
           console.error("Erro ao inserir na tabela tb_lista_fixa.");
           return res.status(500).json({ error: "Erro ao inserir na tabela tb_lista_fixa." });
