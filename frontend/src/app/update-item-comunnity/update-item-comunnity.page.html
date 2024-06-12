@@ -5,8 +5,8 @@
     <img  src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <form  class="inputs">
-    <input placeholder="Local"  class="inputName">
+  <form (click)="updateItem()" class="inputs">
+    <input [(ngModel)]="end_lista" name="end_lista"  placeholder="Local"  class="inputName">
   
     <div class="buttonBig">
       <app-button-big>Atualizar local</app-button-big>

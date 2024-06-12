@@ -30,7 +30,7 @@ router.patch("/varItem/:userId/:communityId/:listId/:itemId", async (req, res) =
     }
   });
 
-router.patch("/varItemLocal/:userId/:communityId/:listId/:itemId", async (req, res) => {
+router.patch("/varItemLocal/:userId/:communityId/:listId", async (req, res) => {
     try {
       const userId = req.params.userId;
       const listId = req.params.listId;
@@ -45,8 +45,8 @@ router.patch("/varItemLocal/:userId/:communityId/:listId/:itemId", async (req, r
       const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
       
       await db_query(
-        `UPDATE tb_item_variavel SET ${setQuery} WHERE id_lista_variavel = ?`,
-        [...values, itemId]
+        `UPDATE tb_lista_variavel SET ${setQuery} WHERE id_lista_variavel = ?`,
+        [...values, listId]
       );
     
   
