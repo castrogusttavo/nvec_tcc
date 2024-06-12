@@ -1,14 +1,3 @@
-<div class="header">
-  <div class="user-greeting">
-    <p>Boa noite! <br>
-    <b>{{ userName }}</b></p>
-  </div>
-  <div class="user">
-    <img src="./../../assets/svg/character.svg" alt="">
-  </div>
-</div>
-
-<!-- A tag ion-content só deve envolver tudo que está dentro do corpo da página -->
 <ion-content>
   <div class="content">
 
@@ -21,18 +10,8 @@
       <h1>Listas Recentes</h1>
       <div class="lists scroll-horizontal">
         <app-card-box [routerLink]="['/tabs/tab3']" action="Criar" description="Adicionar uma nova lista" (click)="setOpen(true)"></app-card-box>
-
-        <!-- Componentes adicionais -->
-        <!-- <app-card-list-recent 
-          class="card-blue list"
-          category="Comida"
-          name="Guloseimas"
-          description="Doces pros irmãos"
-          [routerLink]="['/lists-itens-screen']">
-        </app-card-list-recent> -->
-
         <app-card-list-recent
-         *ngFor="let list of recentLists"
+          *ngFor="let list of recentLists"
           name="list"
           class="card-blue list"
           [category]="list.ds_categoria"
@@ -46,24 +25,30 @@
         <h1>Todos as listas</h1>
         <img src="./../../assets/svg/filter.svg" alt="">
       </div>
-    </div>
 
-    <div class="all-lists" [ngClass]="{'slide-up-animation': searchText}">
-      <!-- <app-card-list-search
-        *ngFor="let item of itemsToShow"
-        [title]="item.title"
-        [description]="item.description"
-        [routerLink]="['/lists-itens-screen']">
-      </app-card-list-search> -->
-
-      <app-card-list-search
-      *ngFor="let list of lists"
+      <div class="all-lists">
+        <app-card-list-search
+          *ngFor="let list of lists"
           name="list"
           [title]="list.nm_lista"
           [description]="list.ds_lista"
           [routerLink]="['/lists-items', list.id_lista]">
+        </app-card-list-search>
+      </div>
+    </div>
+
+    <div *ngIf="searchText && filteredLists.length > 0" class="all-lists slide-up-animation">
+      <app-card-list-search
+        *ngFor="let list of filteredLists"
+        name="list"
+        [title]="list.nm_lista"
+        [description]="list.ds_lista"
+        [routerLink]="['/lists-items', list.id_lista]">
       </app-card-list-search>
     </div>
 
+    <div *ngIf="searchText && filteredLists.length === 0" class="no-results">
+      <p>Nenhuma lista encontrada.</p>
+    </div>
   </div>
 </ion-content>

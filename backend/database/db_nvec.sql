@@ -103,7 +103,7 @@ create table if not exists tb_lista_variavel(
 create table if not exists tb_lista (
 	id_lista int auto_increment not null,
     nm_lista varchar(50),
-    dt_criacao date,
+    dt_criacao date default current_date,
     ds_lista varchar(140),
     rd_lista decimal(10,2),
     end_lista varchar(50) not null,

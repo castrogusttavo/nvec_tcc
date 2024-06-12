@@ -13,7 +13,7 @@ export class Tab4Page implements OnInit {
   private previousToken: string | null = null;
   searchText: string = '';
   originalItems: any[] = [
-    { title: 'Criar comunidade', imagePath: './../assets/svg/add.svg' },
+    { title: 'Criar comunidade', imagePath: './../assets/svg/add.svg', routerLink: ['/create-comunnity'] },
   ];
   itemsToShow: any[] = this.originalItems;
 
@@ -26,19 +26,16 @@ export class Tab4Page implements OnInit {
   invitationCommunitiesCount: number = 0;
   state: string = 'Offline';  // Initialize the state as Offline
 
+  communities!: any[];
+  filteredCommunities: any[] = [];  // Add this line
+  private apiCommunity = 'http://localhost:3001/api/communities';
+
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
     private cdr: ChangeDetectorRef,
     private router: Router
   ) {}
-
-  communities!: any[];
-  private apiCommunity = 'http://localhost:3001/api/communities';
-
-  getCommunities(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiCommunity, { params: { userId: this.userId } });
-  }
 
   ngOnInit(): void {
     this.getUserState(); // Determine the user state based on the token
@@ -47,10 +44,15 @@ export class Tab4Page implements OnInit {
     this.checkTokenChanges();  // Check for token changes every second
 
     // Fetch communities only after userId is obtained
-    this.getCommunities().subscribe(communities => {
+    this.fetchCommunities().subscribe(communities => {
       this.communities = communities;
+      this.filteredCommunities = communities;  // Initialize filteredCommunities with all communities
       console.log(this.communities);
     });
+  }
+
+  fetchCommunities(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiCommunity, { params: { userId: this.userId } });
   }
 
   onSearchInput(event: any) {
@@ -59,13 +61,21 @@ export class Tab4Page implements OnInit {
   }
 
   filterItems() {
-    if (this.searchText === '') {
+    // Normalize the search text: remove extra spaces
+    const normalizedSearchText = this.searchText.trim().replace(/\s+/g, ' ').toLowerCase();
+
+    if (normalizedSearchText === '') {
       this.itemsToShow = this.originalItems;
+      this.filteredCommunities = this.communities;
       return;
     }
 
     this.itemsToShow = this.originalItems.filter(item =>
-      item.title.toLowerCase().includes(this.searchText.toLowerCase())
+      item.title.toLowerCase().includes(normalizedSearchText)
+    );
+
+    this.filteredCommunities = this.communities.filter(community =>
+      community.nm_comunidade.toLowerCase().includes(normalizedSearchText)
     );
   }
 
