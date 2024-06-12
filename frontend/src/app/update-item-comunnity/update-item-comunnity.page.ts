@@ -28,6 +28,9 @@ export class UpdateItemComunnityPage implements OnInit {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
       this.listId = params['listId'];
+      console.log("userId ", this.userId);
+      console.log("listId ", this.listId);
+      console.log("communityId ", this.communityId);
     });
   }
   async updateItem(event: { preventDefault: () => void; }) {

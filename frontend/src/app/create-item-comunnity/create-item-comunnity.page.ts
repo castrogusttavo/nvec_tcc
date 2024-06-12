@@ -61,6 +61,4 @@ export class CreateItemComunnityPage implements OnInit {
     return this.http.get<any[]>(this.apiMeasures);
   }
 
- 
-
 }
