@@ -30,7 +30,7 @@ router.patch("/varItem/:userId/:communityId/:listId/:itemId", async (req, res) =
     }
   });
 
-router.patch("/varItemLocal/:userId/:communityId/:listId/:itemId", async (req, res) => {
+router.patch("/varItemLocal/:userId/:communityId/:listId", async (req, res) => {
     try {
       const userId = req.params.userId;
       const listId = req.params.listId;
@@ -45,15 +45,15 @@ router.patch("/varItemLocal/:userId/:communityId/:listId/:itemId", async (req, r
       const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
       
       await db_query(
-        `UPDATE tb_item_variavel SET ${setQuery} WHERE id_lista_variavel = ?`,
-        [...values, itemId]
+        `UPDATE tb_lista_variavel SET ${setQuery} WHERE id_lista_variavel = ? AND id_usuario = ? AND id_lista_fixa = ?`,
+        [...values, listId, userId, communityId]
       );
-    
+
   
-      res.status(200).json({ message: "Item atualizado com sucesso." });
+      res.status(200).json({ message: "Lista atualizada com sucesso." });
     } catch (err) {
-      console.error("Erro ao atualizar item:", err);
-      res.status(500).send("Erro ao atualizar item.");
+      console.error("Erro ao atualizar lista:", err);
+      res.status(500).send("Erro ao atualizar lista.");
     }
   });
 

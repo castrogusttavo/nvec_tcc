@@ -7,7 +7,7 @@
           <div class="name-address">
             <h5 class="black-text">{{usersLists.nm_usuario}}</h5>
             <span [routerLink]="['/update-item-comunnity', userId, communityId, usersLists.id_lista_variavel]"
-            class="grey-text">Local: local da lista</span>
+            class="grey-text">Local: <span>{{usersLists.end_lista}}</span></span>
             
           </div>
           <div class="totalList">

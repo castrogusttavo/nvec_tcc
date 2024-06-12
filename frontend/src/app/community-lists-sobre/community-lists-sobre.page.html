@@ -21,7 +21,7 @@
           <div class="user-price">
             <div class="name-address">
               <h5 class="black-text">{{ list.nm_usuario }}</h5>
-              <span class="grey-text">Local: local da lista</span>
+              <span class="grey-text">Local: {{list.end_lista}}</span>
             </div>
       
             <div class="totalList">
@@ -49,7 +49,7 @@
               
               <div class="name-address">
                   <h5 class="black-text">{{resultComparacao[0].nm_usuario}}</h5>
-                <span class="grey-text">Local: local da lista</span>
+                <span class="grey-text">Local: {{resultComparacao[0].end_lista}}</span>
               </div>
     
               <div class="totalList">
@@ -72,7 +72,7 @@
             <div *ngFor="let lists of usersLists" class="lists-users">
               <div class="name-address">
                 <h4 class="black-text">{{lists.nm_usuario}}</h4>
-                <span class="grey-text span">Local: local</span>
+                <span class="grey-text span">Local: {{lists.end_lista}}</span>
                 <!-- <h4>{{userName}}</h4><br>
                 <span>{{listAddress}}</span> -->
               </div>

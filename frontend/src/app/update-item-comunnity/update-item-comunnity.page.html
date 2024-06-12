@@ -1,26 +1,19 @@
 <ion-content [fullscreen]="true" scrollY="false">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/comunnity-lists-item', userId, communityId,listId]">
 
   <div class="imageIlustrator">
-    <img  src="../../assets/png/imagem.png" alt="">
+    <img src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <form (click)="updateItem($event)" class="inputs">
-    <input [(ngModel)]="end_lista" placeholder="Local"  class="inputName">
+  <form (submit)="updateItem($event)" class="inputs">
+    <input [(ngModel)]="end_lista" name="endLista" placeholder="Local" class="inputName">
   
     <div class="buttonBig">
       <app-button-big>Atualizar local</app-button-big>
     </div>
   </form>
 
-
-
   <div class="options">
-    <app-button-small class="textButton">Cancelar</app-button-small>
-    <div  class="excluir">
-      <p>Excluir</p>
-    </div>
+    <app-button-small [routerLink]="['/comunnity-lists-item', userId, communityId,listId]" class="textButton">Cancelar</app-button-small>
   </div>
-
-
 </ion-content>

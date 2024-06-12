@@ -1,9 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, forkJoin, map } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-update-item-comunnity',
@@ -12,16 +9,16 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class UpdateItemComunnityPage implements OnInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router,private formBuilder: FormBuilder) {}
+  userId!: string;
+  communityId!: string;
+  listId!: string;
+  end_lista!: string;
 
-  userId!:string;
-  communityId!:string;
-  listId!:string;
-  itemId!:string;
-
-  end_lista!:string
-
-  item:any={};
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -30,7 +27,8 @@ export class UpdateItemComunnityPage implements OnInit {
       this.listId = params['listId'];
     });
   }
-  async updateItem(event: { preventDefault: () => void; }) {
+
+  async updateItem(event: Event) {
     event.preventDefault();
   
     try {
@@ -39,10 +37,12 @@ export class UpdateItemComunnityPage implements OnInit {
         { end_lista: this.end_lista }
       ).toPromise();
   
+      console.log('Lista atualizada com sucesso:', response);
+  
       this.router.navigate(['/tabs/tab1']);
     } catch (err) {
       console.error('Erro ao atualizar item: ', err);
     }
   }
-
+  
 }

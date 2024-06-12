@@ -35,6 +35,8 @@ export class ComunnityListsItemPage implements OnInit {
     });
     this.getListsCommunity().subscribe(usersLists => {
       this.usersLists = usersLists;
+      console.log('usersLists após atualização:', this.usersLists);
+
     });
     this.getUserId();
   }
@@ -48,7 +50,8 @@ export class ComunnityListsItemPage implements OnInit {
 
   navigationUpdate(userId: string, communityId:string, varList:string,varItem:string){
 
-    if (this.userId === userId) {
+    console.log(userId,this.userId)
+    if (this.userId == userId) {
       this.router.navigate(['/update-item-user', userId, communityId, varList, varItem]);
     }
   
