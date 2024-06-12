@@ -30,11 +30,11 @@ export class ComunnityListsItemPage implements OnInit {
     });
     this.getListCommunity().subscribe(list => {
       this.list = list;
-      console.log(this.list);
     });
     this.getListsCommunity().subscribe(usersLists => {
       this.usersLists = usersLists;
     });
+    this.getUserId();
   }
 
   getListCommunity(): Observable<any[]>{
@@ -42,6 +42,30 @@ export class ComunnityListsItemPage implements OnInit {
   }
   getListsCommunity(): Observable<any[]>{
     return this.http.get<any[]>(`${this.apiBase}/totalListUser/${this.communityId}/${this.userId}`);
+  }
+
+  navigationUpdate(userId: string, communityId:string, varList:string,varItem:string){
+
+    console.log(userId,this.userId)
+    if (this.userId == userId) {
+      this.router.navigate(['/update-item-user', userId, communityId, varList, varItem]);
+    }
+  
+  }
+  navigationAddress(userId: string, communityId:string, varList:string){
+
+    if (this.userId == userId) {
+      this.router.navigate(['/update-item-comunnity', userId, communityId, varList]);
+    }
+  
+  }
+
+  getUserId(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userId = decodedToken.userId;
+    }
   }
 
 }

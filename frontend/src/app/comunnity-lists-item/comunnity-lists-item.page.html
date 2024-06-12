@@ -6,8 +6,9 @@
         <div class="user-price">
           <div class="name-address">
             <h5 class="black-text">{{usersLists.nm_usuario}}</h5>
-            <span [routerLink]="['/update-item-comunnity', userId, communityId, usersLists.id_lista_variavel]"
-            class="grey-text">Local: local da lista</span>
+            <span 
+            (click)="navigationAddress(usersLists.id_usuario,communityId,usersLists.id_lista_variavel)"
+            class="grey-text">Local: <span>{{usersLists.end_lista}}</span></span>
             
           </div>
           <div class="totalList">
@@ -24,7 +25,7 @@
       [itemId]="list.id_item_variavel"
       [userId]="userId"
       [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
-      [routerLink]="['/update-item-user', userId, communityId, list.id_lista_variavel, list.id_item_variavel]"
+      (click)="navigationUpdate(list.id_usuario,communityId,list.id_lista_variavel,list.id_item_variavel)"
     ></app-card-item-community>
     
     

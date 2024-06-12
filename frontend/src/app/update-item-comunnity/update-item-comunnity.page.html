@@ -2,7 +2,7 @@
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/comunnity-lists-item', userId, communityId,listId]" alt="">
 
   <div class="imageIlustrator">
-    <img  src="../../assets/png/imagem.png" alt="">
+    <img src="../../assets/png/imagem.png" alt="">
   </div>
 
   <form (click)="updateItem()" class="inputs">
@@ -13,14 +13,7 @@
     </div>
   </form>
 
-
-
   <div class="options">
-    <app-button-small class="textButton">Cancelar</app-button-small>
-    <div  class="excluir">
-      <p>Excluir</p>
-    </div>
+    <app-button-small [routerLink]="['/comunnity-lists-item', userId, communityId,listId]" class="textButton">Cancelar</app-button-small>
   </div>
-
-
 </ion-content>

@@ -48,12 +48,12 @@ router.patch("/varItemLocal/:userId/:communityId/:listId", async (req, res) => {
         `UPDATE tb_lista_variavel SET ${setQuery} WHERE id_lista_variavel = ?`,
         [...values, listId]
       );
-    
+
   
-      res.status(200).json({ message: "Item atualizado com sucesso." });
+      res.status(200).json({ message: "Lista atualizada com sucesso." });
     } catch (err) {
-      console.error("Erro ao atualizar item:", err);
-      res.status(500).send("Erro ao atualizar item.");
+      console.error("Erro ao atualizar lista:", err);
+      res.status(500).send("Erro ao atualizar lista.");
     }
   });
 
