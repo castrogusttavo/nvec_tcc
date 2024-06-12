@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">NVEC</string>
+    <string name="title_activity_main">NVEC</string>
+    <string name="package_name">nvec.example.app</string>
+    <string name="custom_url_scheme">nvec.example.app</string>
+</resources>

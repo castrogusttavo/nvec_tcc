@@ -1,0 +1,9 @@
+{
+  "appId": "nvec.example.app",
+  "appName": "NVEC",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
