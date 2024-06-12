@@ -27,16 +27,12 @@ export class ComunnityListsItemPage implements OnInit {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
       this.listId = params['listId'];
-      console.log(this.userId)
     });
     this.getListCommunity().subscribe(list => {
       this.list = list;
-      console.log(this.list);
     });
     this.getListsCommunity().subscribe(usersLists => {
       this.usersLists = usersLists;
-      console.log('usersLists após atualização:', this.usersLists);
-
     });
     this.getUserId();
   }
@@ -53,6 +49,13 @@ export class ComunnityListsItemPage implements OnInit {
     console.log(userId,this.userId)
     if (this.userId == userId) {
       this.router.navigate(['/update-item-user', userId, communityId, varList, varItem]);
+    }
+  
+  }
+  navigationAddress(userId: string, communityId:string, varList:string){
+
+    if (this.userId == userId) {
+      this.router.navigate(['/update-item-comunnity', userId, communityId, varList]);
     }
   
   }
