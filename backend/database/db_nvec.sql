@@ -1,5 +1,4 @@
 create database if not exists db_nvec default character set utf8;
-
 use db_nvec;
 
 create table if not exists tb_status (
@@ -40,6 +39,12 @@ create table if not exists tb_assinatura (
     primary key (id_assinatura)
 ) default character set utf8;
 
+create table if not exists tb_medida_item(
+	id_medida int auto_increment not null,
+	ds_medida enum('kg', 'g', 'L', 'mL', 'm', 'cm', 'NA') not null,
+    primary key (id_medida)
+) default character set utf8;
+        
 create table if not exists tb_usuario (
 	id_usuario int not null auto_increment,
     nm_usuario varchar(50) not null,
@@ -51,59 +56,81 @@ create table if not exists tb_usuario (
     constraint assinatura
 		foreign key (id_assinatura)
 		references tb_assinatura(id_assinatura)) default character set utf8;
-        
+
 create table if not exists tb_comunidade (
 	id_comunidade int auto_increment not null,
     nm_comunidade varchar(30),
     sb_comunidade varchar(100) not null,
     end_comunidade varchar(50) not null,
+    dt_criacao date,
     id_categoria int not null,
+    id_criador int not null,
     primary key (id_comunidade),
     index categoria_comunidade (id_categoria asc) visible,
     constraint categoria_comunidade
 		foreign key (id_categoria) 
-        references tb_categoria(id_categoria)
-) default character set utf8;
-
-create table if not exists tb_medida_item(
-	id_medida int auto_increment not null,
-	ds_medida enum('kg', 'g', 'L', 'mL', 'm', 'Nenhuma medida') not null,
-    primary key (id_medida)
-) default character set utf8;
-
-create table if not exists tb_lista_fixa(
-	id_lista int auto_increment not null,
-    id_item varchar(50),
-    qtde_item int,
-    id_medida int,
-    id_usuario int,
-    primary key (id_lista),
-    constraint medida
-		foreign key (id_medida)
-        references tb_medida_item(id_medida),
-	constraint usuario_lista_fixa
-		foreign key(id_usuario)
+        references tb_categoria(id_categoria),
+	constraint id_criador
+		foreign key (id_criador) 
         references tb_usuario(id_usuario)
 ) default character set utf8;
 
-create table if not exists tb_lista_variavel(
-	id_lista_fixa int not null,
-    vl_uni decimal(10,2),
-    id_usuario int,
+create table if not exists tb_lista_fixa(
+	id_lista_fixa int not null auto_increment,
     primary key (id_lista_fixa),
+	constraint id_lista_fixa
+		foreign key(id_lista_fixa)
+        references tb_comunidade(id_comunidade)
+) default character set utf8;
+
+create table if not exists tb_item_fixo(
+    id_item_fixo int auto_increment not null,
+	id_lista_fixa int not null,
+    nm_item varchar(50),
+    qtde_medida int,
+    qtde_item int,
+    id_medida int,
+    primary key (id_item_fixo,id_lista_fixa),
+    constraint medida
+		foreign key (id_medida)
+        references tb_medida_item(id_medida),
+	constraint id_item_fixo
+		foreign key(id_lista_fixa)
+        references tb_lista_fixa(id_lista_fixa)
+) default character set utf8;
+
+create table if not exists tb_lista_variavel(
+	id_lista_variavel int not null auto_increment,
+	id_lista_fixa int not null,
+    id_usuario int not null,
+    end_lista varchar(50),
+    primary key(id_lista_variavel),
     constraint lista_fixa
 		foreign key(id_lista_fixa)
-        references tb_lista_fixa(id_lista),
+        references tb_lista_fixa(id_lista_fixa),
 	constraint usuario_lista_variavel
 		foreign key(id_usuario)
         references tb_usuario(id_usuario)
 ) default character set utf8;
 
-        
+create table if not exists tb_item_variavel(
+	id_item_variavel int not null auto_increment,
+    vl_uni decimal(10,2) default 0,
+	id_lista_variavel int not null,
+    id_item_fixo int not null,
+    primary key(id_item_variavel),
+	constraint id_lista_variavel
+		foreign key(id_lista_variavel)
+        references tb_lista_variavel(id_lista_variavel),
+	constraint id_item_fixo_comunidade
+		foreign key(id_item_fixo)
+        references tb_item_fixo(id_item_fixo)
+)default character set utf8;
+
 create table if not exists tb_lista (
 	id_lista int auto_increment not null,
     nm_lista varchar(50),
-    dt_criacao date default current_date,
+    dt_criacao date,
     ds_lista varchar(140),
     rd_lista decimal(10,2),
     end_lista varchar(50) not null,
@@ -118,18 +145,6 @@ create table if not exists tb_lista (
 	constraint categoria_li
 		foreign key (id_categoria)
         references tb_categoria(id_categoria)
-) default character set utf8;
-
-create table if not exists tb_comunidade_lista (
-    id_comunidade int not null,
-    id_lista_fixa int not null,
-    primary key (id_comunidade, id_lista_fixa),
-    constraint comunidade_lista
-		foreign key (id_comunidade)
-        references tb_comunidade(id_comunidade),
-	constraint lista_id_comu
-		foreign key (id_lista_fixa)
-        references tb_lista_fixa(id_lista)
 ) default character set utf8;
 
 create table if not exists tb_comunidade_usuario (
@@ -169,4 +184,3 @@ create table if not exists tb_item (
 		foreign key(id_medida)
         references tb_medida_item(id_medida)
         ) default character set utf8;
-
