@@ -63,4 +63,132 @@ const { db_query } = require("../../frameworks/db/db");
     }
   })
 
+
+  router.get('/userCommunity/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+
+      const users = await db_query(`
+      SELECT
+          u.*,
+          c.*
+      FROM
+          tb_usuario u
+      JOIN
+          tb_comunidade_usuario cu ON cu.id_usuario = u.id_usuario
+      JOIN
+          tb_comunidade c ON c.id_comunidade = cu.id_comunidade
+      WHERE
+          cu.id_comunidade = ?
+        AND cu.id_usuario != c.id_criador;
+      `, [idCommunity])
+
+
+      res.json(users);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
+  router.get('/listCommunity/:userId/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+      const userId = req.params.userId;
+
+      const lists = await db_query(`
+              SELECT * FROM view_total_lista WHERE id_lista_fixa= ? AND id_usuario=?;
+      `, [idCommunity,userId])
+
+      console.log("Lists:", lists); 
+
+      res.json(lists);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
+  router.get('/listsCommunity/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+
+      const lists = await db_query(`
+              SELECT
+               *
+              FROM
+                    tb_lista_variavel lv
+              JOIN tb_usuario u ON u.id_usuario = lv.id_usuario
+                WHERE
+                    lv.id_lista_fixa = ?
+      `, [idCommunity])
+
+      console.log("Lists:", lists); 
+
+      res.json(lists);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
+  router.get('/totalListUsers/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+
+      const lists = await db_query(`
+              SELECT * FROM view_total_lista WHERE id_lista_fixa= ?;
+      `, [idCommunity])
+
+      console.log("Lists:", lists); 
+
+      res.json(lists);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
+  router.get('/totalListUser/:idCommunity/:userId', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+      const userId = req.params.userId;
+
+      const lists = await db_query(`
+              SELECT * FROM view_total_lista WHERE id_lista_fixa= ? AND id_usuario=?;
+      `, [idCommunity, userId])
+
+      console.log("Lists:", lists); 
+
+      res.json(lists[0]);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
+  router.get('/itemsListUsers/:userId/:idCommunity', async (req, res) => {
+    try {
+      const idCommunity = req.params.idCommunity;
+      const userId = req.params.userId;
+
+      const lists = await db_query(`
+              SELECT
+                  *
+              FROM
+                  tb_lista_variavel lv
+              JOIN
+                  tb_item_variavel iv ON lv.id_lista_variavel = iv.id_lista_variavel
+              JOIN
+                  tb_item_fixo fix ON fix.id_item_fixo = iv.id_item_fixo
+                  JOIN tb_usuario u ON u.id_usuario = lv.id_usuario
+              WHERE
+                  lv.id_lista_fixa = ?
+            AND lv.id_usuario = ?;
+      `, [idCommunity,userId])
+
+      console.log("Lists:", lists); 
+
+      res.json(lists);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  })
+
+
   module.exports = router;

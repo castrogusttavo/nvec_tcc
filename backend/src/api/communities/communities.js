@@ -11,25 +11,51 @@ router.post("/communities", async (req, res) => {
       return res.status(400).json({ error: "Campos obrigatórios ausentes." });
     }
 
-    const result = await db_query(
-      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria, sb_comunidade, end_comunidade) VALUES (?, ?, ?, ?)",
-      [nm_comunidade, id_categoria, sb_comunidade, end_comunidade]
+    // Inserir na tabela tb_comunidade
+    const resultComunidade = await db_query(
+      "INSERT INTO tb_comunidade (nm_comunidade, id_categoria, sb_comunidade, end_comunidade, id_criador) VALUES (?, ?, ?, ?, ?)",
+      [nm_comunidade, id_categoria, sb_comunidade, end_comunidade, userId]
     );
 
-    console.log("inserção na tb_comunidade:", result);
+    console.log("Inserção na tb_comunidade:", resultComunidade);
 
-    const communityId = result.insertId;
+    // Verificar se a inserção na tabela tb_comunidade foi bem-sucedida
+    if (resultComunidade.affectedRows === 1) {
+      const communityId = resultComunidade.insertId;
 
-    if (result.affectedRows === 1) {
-      const userCommunityResult = await db_query(
+      // Inserir na tabela tb_comunidade_usuario
+      const resultUsuario = await db_query(
         "INSERT INTO tb_comunidade_usuario (id_comunidade, id_usuario) VALUES (?, ?)",
         [communityId, userId]
       );
 
-      console.log("inserção na tb_comunidade_usuario:", userCommunityResult);
+      console.log("Inserção na tb_comunidade_usuario:", resultUsuario);
 
-      if (userCommunityResult.affectedRows === 1) {
-        return res.status(201).json({ id_comunidade: communityId });
+      // Verificar se a inserção na tabela tb_comunidade_usuario foi bem-sucedida
+      if (resultUsuario.affectedRows === 1) {
+        // Inserir na tabela tb_lista_fixa
+        const resultList = await db_query(
+          "INSERT INTO tb_lista_fixa (id_lista_fixa) VALUES (?)",
+          [communityId]
+        );
+
+        console.log("Inserção na tb_lista_fixa:", resultList);
+
+        if (resultList.affectedRows === 1) {
+
+          const varList =await db_query(
+            "INSERT INTO tb_lista_variavel (id_lista_fixa,id_usuario) VALUES (?,?)",
+            [communityId, userId]
+          )
+
+          if(varList.affectedRows === 1){
+            return res.status(201).json({ id_comunidade: communityId });
+          }
+
+        } else {
+          console.error("Erro ao inserir na tabela tb_lista_fixa.");
+          return res.status(500).json({ error: "Erro ao inserir na tabela tb_lista_fixa." });
+        }
       } else {
         console.error("Erro ao inserir na tabela tb_comunidade_usuario.");
         return res.status(500).json({ error: "Erro ao inserir na tabela tb_comunidade_usuario." });
@@ -134,10 +160,10 @@ router.patch("/communities/:id", async (req, res) => {
       [...values, comunidadeId]
     );
 
-    res.status(200).json({ message: "Item atualizado com sucesso." });
+    res.status(200).json({ message: "Comunidade atualizado com sucesso." });
   } catch (err) {
-    console.error("Erro ao atualizar parcialmente a lista", err);
-    res.sendStatus(500).send("Erro ao atualizar parcialmente a lista");
+    console.error("Erro ao atualizar parcialmente a comunidade", err);
+    res.sendStatus(500).send("Erro ao atualizar parcialmente a comunidade");
   }
 });
 
@@ -168,5 +194,7 @@ router.delete("/communities/:idUser/:idCommunity", async (req, res) => {
     res.status(500).send("Erro ao deletar comunidade.");
   }
 });
+
+
 
 module.exports = router;

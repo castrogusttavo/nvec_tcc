@@ -1,0 +1,41 @@
+@import "./../../../../global.scss";
+
+:host{
+    ion-card{
+        width: 100px;
+        height: 146px;
+        margin: 0;
+    }
+    .image-item{
+        width: 100px;
+        height: 100px;
+ 
+    }
+    .text-item p {
+        margin: 0px;
+    }
+    p span{
+        margin-left: 3px;
+        margin-right: 3px;
+        color: #{$N500};
+    }
+    span b{
+        color: #121212;
+    }
+    ion-checkbox::part(container){
+        border-radius: 6px;
+    }
+    span{
+        font-size: #{$textSmalling};
+    }
+    .text-item{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items:center;
+    }
+    a {
+        text-decoration: none;
+    }
+
+}

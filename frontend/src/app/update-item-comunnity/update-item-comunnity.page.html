@@ -5,16 +5,15 @@
     <img  src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <form action="" class="inputs">
-    <input placeholder="Nome"  class="inputName" disabled>
-    <input placeholder="Quantidade" class="inputText" type="number" disabled>
-    <input placeholder="Valor Unitario" class="inputText" type="number">
-    <input placeholder="VALOR TOTAL:" class="inputText" type="number" disabled>
+  <form (click)="updateItem($event)" class="inputs">
+    <input [(ngModel)]="end_lista" placeholder="Local"  class="inputName">
+  
+    <div class="buttonBig">
+      <app-button-big>Atualizar local</app-button-big>
+    </div>
   </form>
 
-  <div class="buttonBig">
-    <app-button-big  >Adicionar item</app-button-big>
-  </div>
+
 
   <div class="options">
     <app-button-small class="textButton">Cancelar</app-button-small>

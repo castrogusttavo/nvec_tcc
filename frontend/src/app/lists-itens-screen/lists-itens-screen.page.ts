@@ -64,7 +64,7 @@ export class ListsItensScreenPage implements OnInit {
         })
       ).subscribe(
         data => {
-          console.log('Dados dos itens:', data); // Adiciona este console.log para exibir os dados
+          console.log('Dados dos itens:', data); 
           this.items = data;
         },
         error => console.error('Erro ao buscar dados:', error)

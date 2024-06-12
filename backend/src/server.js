@@ -27,6 +27,10 @@ const statusRouter = require("./api/status/status");
 const dataUserRouter = require("./api/users/dataUser");
 const reportRouter = require("./api/report/report");
 const reportSemesterRouter = require("./api/report/reportSemester");
+const listsCommunity = require("./api/communities/listsCommunities");
+const staticItemsRouter = require("./api/items/staticItems");
+const varItemsRouter = require("./api/items/varItem");
+const comparacaoRouter = require("./api/comparacao/comparacao");
 
 const checkInternetRouter = require("./api/system/ping");
 const cacheRouter = require("./api/system/cache")(secretKey);
@@ -55,6 +59,10 @@ app.use('/api', statusRouter);
 app.use('/api', dataUserRouter);
 app.use('/api', reportRouter);
 app.use('/api', reportSemesterRouter);
+app.use('/api', listsCommunity);
+app.use('/api', staticItemsRouter);
+app.use('/api', varItemsRouter);
+app.use('/api', comparacaoRouter);
 
   // Rotas e Dados do sistema
 app.use('/api', checkInternetRouter);

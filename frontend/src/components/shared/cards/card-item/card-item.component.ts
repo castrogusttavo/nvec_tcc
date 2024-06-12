@@ -11,8 +11,14 @@ export class CardItemComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  
+  ngOnInit() {}
+
+  @Input() routerLink!: string[];
+
   @Input() itemId!: number;
   @Input() listaId!: number;
+  @Input() userId!: string;
 
   @Input() itemName: string | undefined;
   @Input() description: string | undefined;
@@ -29,7 +35,5 @@ export class CardItemComponent implements OnInit {
   onStatusChange(event: any) {
     this.statusChange.emit(event.detail.checked);
   }
-
-  ngOnInit() {}
 
 }

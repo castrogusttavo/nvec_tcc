@@ -1,23 +1,33 @@
 <ion-content [fullscreen]="true">
-  <img  [routerLink]="['/community-lists-sobre', userId, communityId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar">
-  <div class="content">
+  <img  [routerLink]="['/community-lists-sobre', communityId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="seta para voltar">
+  <div  class="content">
 
-      <div class="list">
+      <div *ngIf="usersLists" class="list">
         <div class="user-price">
           <div class="name-address">
-            <h5 class="black-text">Nome do usuário</h5>
-            <span class="grey-text">Local: local da lista</span>
+            <h5 class="black-text">{{usersLists.nm_usuario}}</h5>
+            <span [routerLink]="['/update-item-comunnity', userId, communityId, usersLists.id_lista_variavel]"
+            class="grey-text">Local: local da lista</span>
+            
           </div>
           <div class="totalList">
-            <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
+            <h3 class="yellow-text">R$ <b class="yellow-text">{{usersLists.valor_total}}</b></h3>
           </div>
         </div>
       </div>
 
       <hr>
     <div class="itens-div">
-      <app-card-item price="2,40" itemName="Oreo" description="Biscoito"  [routerLink]="['/update-item-user']"
-        [imagePath]="'https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/lahhlxg8nk6goxrcbcpz'"></app-card-item>
-    </div>
+      <app-card-item-community 
+      *ngFor="let list of list"
+      [itemName]="list.nm_item"
+      [itemId]="list.id_item_variavel"
+      [userId]="userId"
+      [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
+      [routerLink]="['/update-item-user', userId, communityId, list.id_lista_variavel, list.id_item_variavel]"
+    ></app-card-item-community>
+    
+    
+      </div>
   </div>
 </ion-content>

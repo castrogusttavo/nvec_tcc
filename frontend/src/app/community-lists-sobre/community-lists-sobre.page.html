@@ -1,6 +1,8 @@
-<ion-content [fullscreen]="true">
+<ion-content *ngIf="community" [fullscreen]="true">
   <div class="content">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/list-adm-community',userId,communityId]">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt=""  
+  (click)="navigateToCommunityPage(community.id_comunidade, community.id_criador)"
+  >
   <ion-segment class="header" color="secondary" value="segment" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="segment">
       <ion-label>Listas</ion-label>
@@ -9,31 +11,23 @@
       <ion-label>Sobre</ion-label>
     </ion-segment-button>
   </ion-segment>
-
-  <!-- <div>
-    <button ion-button (click)="toggleDateTime()">Selecionar data</button>
-    <ion-datetime *ngIf="showDateTime" minuteValues="0,15,30,45" dayValues="5,10,15,20,25,30"></ion-datetime>
-  </div>
-   -->
   
   <div [ngSwitch]="segmentValue" class="todosGrafico">
     <div *ngSwitchCase="'segment'">
-      <div class="list-user">
-        <div class="list">
-          <h3 class="yellow-text">Esta é a sua lista</h3>
+      <div *ngFor="let list of lists" class="list-user">
+        <h3 class="yellow-text">Esta é a sua lista</h3>
+      
+        <div>
           <div class="user-price">
             <div class="name-address">
-              <h5 class="black-text">Nome do usuário</h5>
+              <h5 class="black-text">{{ list.nm_usuario }}</h5>
               <span class="grey-text">Local: local da lista</span>
-              <!-- <h4 class="yellow-text">{{userName}}</h4><br>
-              <span class="yellow-text">{{listAddress}}</span> -->
             </div>
-  
+      
             <div class="totalList">
-              <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
-              <!-- <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
-  
-              <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId]">
+              <h3 class="yellow-text">R$ <b class="yellow-text">{{ list.valor_total }}</b></h3>
+      
+              <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', userId, communityId, list.id_lista_variavel]">
                 <img src="../../assets/svg/arrow_forward.svg" alt="">
               </button>
             </div>
@@ -43,48 +37,51 @@
   
      <div class="compare-lists">
 
-      <!-- <div class="listEconomic">
-        <div class="list">
-          <h3 class="titleText">Esta é a lista mais barata</h3>
-          <div class="value">
-            <div class="name-address">
-              <h5 class="black-text">Nome do usuário</h5>
-              <span class="grey-text">Local: local da lista</span>
-              <h4 class="yellow-text">{{userName}}</h4><br>
-              <span class="yellow-text">{{listAddress}}</span>
-            </div>
-  
-            <div class="totalList">
-              <h3 class="yellow-text">R$ <b class="yellow-text">103,43</b></h3>
-              <h3 class="yellow-text">R$ <b>{{totalList}}</b></h3>
-  
-              <button class="btn-lists btn-list">
-                <img src="../../assets/svg/arrow_forward.svg" alt="">
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
 
       <div  class="usersLists">
-        <button class="btn-lists" style="color: #ffffff">Comparar Listas</button>
+
+        <div *ngIf="divComparacao" class="lists-users">
+
+          <div *ngIf="resultComparacao" class="list-user">
+
+            <h4 class="yellow-text">Esta é a lista mais barata</h4>
+            <div class="user-price">
+              
+              <div class="name-address">
+                  <h5 class="black-text">{{resultComparacao[0].nm_usuario}}</h5>
+                <span class="grey-text">Local: local da lista</span>
+              </div>
+    
+              <div class="totalList">
+                <h3 class="yellow-text">R$ <b class="yellow-text">{{resultComparacao[0].totalLista}}</b></h3>
+    
+                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', resultComparacao[0].id_usuario, communityId,resultComparacao[0].id_lista_variavel]">
+                  <img src="../../assets/svg/arrow_forward.svg" alt="">
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button (click)="procedureComparacao()" class="btn-lists" style="color: #ffffff">Comparar Listas</button>
 
           <div class="lists-component">
 
-            <div class="lists-users">
+            <div *ngFor="let lists of usersLists" class="lists-users">
               <div class="name-address">
-                <h4 class="black-text">Nome</h4>
+                <h4 class="black-text">{{lists.nm_usuario}}</h4>
                 <span class="grey-text span">Local: local</span>
                 <!-- <h4>{{userName}}</h4><br>
                 <span>{{listAddress}}</span> -->
               </div>
     
               <div class="total-list">
-                <h3  class="yellow-text">R$ <b class="yellow-text">300,34</b></h3>
+                <h3  class="yellow-text">R$ <b class="yellow-text">{{lists.valor_total}}</b></h3>
                 <!-- <h3  class="yellow-text">R$ <b>{{totalList}}</b></h3> -->
     
-                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item']">
+                <button class="btn-lists btn-list" [routerLink]="['/comunnity-lists-item', lists.id_usuario, communityId, lists.id_lista_variavel]">
                   <img src="../../assets/svg/arrow_forward.svg" alt="">
                 </button>
               </div>
@@ -96,12 +93,9 @@
  
     <div *ngSwitchCase="'secondary'">
 
-      <div  *ngIf="community" >
+      <div  >
         <div class="info">
           <h2>{{community.nm_comunidade}}</h2>
-          <button [routerLink]="['/update-community', userId,communityId]" class="btn-edit">
-            <img src="../../../../assets/svg/edit.svg" alt="">
-          </button>
         </div>
 
         <div class="category">
@@ -124,12 +118,17 @@
           <div class="guests">
 
             <div class="creator">
-              <h5>Gabrielly {{creatorName}}</h5>
+              <h5>{{community.nm_usuario}}</h5>
               <div style="width: 100px; height: 40px; display: flex; align-items: center; justify-content: center; color: #ffffff;" class="btn-lists">Criador</div>
             </div>
 
-            <div class="other-guest" style="margin-top: 20px;">
-              <h5>outroMembro{{usersName}}</h5>
+            <div 
+              *ngFor="let user of usersCommunity" 
+              name="usersCommunity" 
+              class="other-guest" 
+              style="margin-top: 20px;"
+              >
+              <h5>{{user.nm_usuario}}</h5>
             </div>
 
 

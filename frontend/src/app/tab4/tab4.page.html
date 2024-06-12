@@ -27,10 +27,10 @@
 
     <div *ngIf="filteredCommunities.length > 0">
       <app-card-list-search
-        *ngFor="let community of filteredCommunities" name="community"
-        [title]="community.nm_comunidade"
-        [routerLink]="['/list-adm-community', community.id_usuario, community.id_comunidade]">
-      </app-card-list-search>
+      *ngFor="let community of communities" name="community"
+      (click)="navigateToCommunityPage(community.id_comunidade, community.id_criador)"
+      [title]="community.nm_comunidade"
+      ></app-card-list-search>
     </div>
   </div>
 </ion-content>

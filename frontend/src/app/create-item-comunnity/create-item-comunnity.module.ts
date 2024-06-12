@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { CreateItemComunnityPageRoutingModule } from './create-item-comunnity-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CreateItemComunnityPage } from './create-item-comunnity.page';
 import { SharedModule } from 'src/components/shared/shared.module';
@@ -14,7 +15,8 @@ import { SharedModule } from 'src/components/shared/shared.module';
     FormsModule,
     IonicModule,
     CreateItemComunnityPageRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   declarations: [CreateItemComunnityPage]
 })
