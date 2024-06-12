@@ -148,7 +148,7 @@ create table if not exists tb_lista (
 ) default character set utf8;
 
 create table if not exists tb_comunidade_usuario (
-    id_comunidade int auto_increment not null,
+    id_comunidade int not null,
     id_usuario int not null,
     primary key (id_comunidade,id_usuario),
     index comunidade_usuario(id_comunidade asc) visible,
