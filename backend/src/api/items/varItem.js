@@ -45,8 +45,8 @@ router.patch("/varItemLocal/:userId/:communityId/:listId", async (req, res) => {
       const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
       
       await db_query(
-        `UPDATE tb_lista_variavel SET ${setQuery} WHERE id_lista_variavel = ? AND id_usuario = ? AND id_lista_fixa = ?`,
-        [...values, listId, userId, communityId]
+        `UPDATE tb_lista_variavel SET ${setQuery} WHERE id_lista_variavel = ?`,
+        [...values, listId]
       );
 
   
