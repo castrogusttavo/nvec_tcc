@@ -27,6 +27,7 @@ export class ComunnityListsItemPage implements OnInit {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
       this.listId = params['listId'];
+      console.log(this.userId)
     });
     this.getListCommunity().subscribe(list => {
       this.list = list;
@@ -35,6 +36,7 @@ export class ComunnityListsItemPage implements OnInit {
     this.getListsCommunity().subscribe(usersLists => {
       this.usersLists = usersLists;
     });
+    this.getUserId();
   }
 
   getListCommunity(): Observable<any[]>{
@@ -42,6 +44,22 @@ export class ComunnityListsItemPage implements OnInit {
   }
   getListsCommunity(): Observable<any[]>{
     return this.http.get<any[]>(`${this.apiBase}/totalListUser/${this.communityId}/${this.userId}`);
+  }
+
+  navigationUpdate(userId: string, communityId:string, varList:string,varItem:string){
+
+    if (this.userId === userId) {
+      this.router.navigate(['/update-item-user', userId, communityId, varList, varItem]);
+    }
+  
+  }
+
+  getUserId(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userId = decodedToken.userId;
+    }
   }
 
 }

@@ -24,7 +24,7 @@
       [itemId]="list.id_item_variavel"
       [userId]="userId"
       [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
-      [routerLink]="['/update-item-user', userId, communityId, list.id_lista_variavel, list.id_item_variavel]"
+      (click)="navigationUpdate(list.id_usuario,communityId,list.id_lista_variavel,list.id_item_variavel)"
     ></app-card-item-community>
     
     
