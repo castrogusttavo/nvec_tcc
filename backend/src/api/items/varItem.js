@@ -81,6 +81,55 @@ router.patch("/varItemLocal/:userId/:communityId/:listId", async (req, res) => {
     }
   });
 
+  router.get('/create-item/:communityId/:userId', async (req, res) => {
+    const { communityId, userId } = req.params;
+  
+    try {
+
+      const usuario_comunidade = await db_query(
+        'SELECT * FROM tb_comunidade_usuario WHERE id_comunidade = ? AND id_usuario = ?',
+        [communityId, userId]
+      );
+      
+      if (usuario_comunidade.length === 0) {
+        return res.status(404).json({ error: 'Usuário não encontrado na comunidade' });
+      }
+      
+      const item_fixo = await db_query(
+        'SELECT id_item_fixo FROM tb_item_fixo WHERE id_lista_fixa = ?',
+        [communityId]
+      );
+      
+      for (const item of item_fixo) {
+        const itemId = item.id_item_fixo;
+      
+        const lista_variavel = await db_query(
+          'SELECT * FROM tb_lista_variavel WHERE id_usuario = ?',
+          [userId]
+        );
+      
+        for (const lista of lista_variavel) {
+          const item_variavel = await db_query(
+            'SELECT * FROM tb_item_variavel WHERE id_lista_variavel = ? AND id_item_fixo = ?',
+            [lista.id_lista_variavel, itemId]
+          );
+      
+          if (item_variavel.length === 0) {
+            await db_query(
+              'INSERT INTO tb_item_variavel (id_lista_variavel, id_item_fixo, vl_uni) VALUES (?, ?, NULL)',
+              [lista.id_lista_variavel, itemId]
+            );
+          }
+        }
+      }
+          
+      res.status(200).json({ message: 'Itens variáveis atualizados para o usuário na comunidade' });
+    } catch (error) {
+      console.error('Erro ao acessar a comunidade:', error);
+      res.status(500).json({ error: 'Erro ao acessar a comunidade' });
+    }
+  });
+
 
 
   module.exports = router;

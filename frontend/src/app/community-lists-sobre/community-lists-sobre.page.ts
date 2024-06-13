@@ -60,6 +60,7 @@ export class CommunityListsSobrePage implements OnInit {
   usersLists!:any[];
   totalLista!:any[];
 
+  itemsCriados!:any[];
   idCriador!:string;
 
   ngOnInit() {
@@ -76,6 +77,9 @@ export class CommunityListsSobrePage implements OnInit {
     });
     this.getListsCommunity().subscribe(usersLists => {
       this.usersLists = usersLists;
+    });
+    this.getItemsCommunity().subscribe(itemsCriados => {
+      this.itemsCriados = itemsCriados;
     });
 
   }
@@ -139,6 +143,10 @@ export class CommunityListsSobrePage implements OnInit {
 
   getListsCommunity(): Observable<any[]>{
     return this.http.get<any[]>(`${this.apiBase}/totalListUsers/${this.communityId}`);
+  }
+
+  getItemsCommunity(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiBase}/create-item/${this.communityId}/${this.userId}`);
   }
 
 
