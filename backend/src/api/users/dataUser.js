@@ -67,7 +67,10 @@ router.get("/recentCommunitiesUser", async (req, res) => {
       JOIN 
         tb_categoria AS cat ON c.id_categoria = cat.id_categoria
       WHERE 
-        cu.id_usuario = ?;
+        cu.id_usuario = ?
+      ORDER BY
+        c.dt_criacao DESC
+      LIMIT 4
           `,
       [userId]
     );
