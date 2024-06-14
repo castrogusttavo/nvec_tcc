@@ -29,7 +29,8 @@ insert into tb_medida_item(ds_medida) values
 ('L'),
 ('mL'),
 ('m'),
-('Nenhuma medida');
+('cm'),
+('NA');
 
 insert into tb_status (ds_status, ic_status) 
 values ('Pendente', 0), ('Comprado', 1);

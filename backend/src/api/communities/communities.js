@@ -33,25 +33,29 @@ router.post("/communities", async (req, res) => {
 
       // Verificar se a inserção na tabela tb_comunidade_usuario foi bem-sucedida
       if (resultUsuario.affectedRows === 1) {
-        // Inserir na tabela tb_lista_fixa
+        // Inserir na tabela tb_lista_fixa com id_comunidade
         const resultList = await db_query(
-          "INSERT INTO tb_lista_fixa (id_lista_fixa) VALUES (?)",
+          "INSERT INTO tb_lista_fixa (id_comunidade) VALUES (?)",
           [communityId]
         );
 
         console.log("Inserção na tb_lista_fixa:", resultList);
 
         if (resultList.affectedRows === 1) {
+          const listId = resultList.insertId;
 
-          const varList =await db_query(
-            "INSERT INTO tb_lista_variavel (id_lista_fixa,id_usuario) VALUES (?,?)",
-            [communityId, userId]
-          )
+          // Inserir na tabela tb_lista_variavel
+          const varList = await db_query(
+            "INSERT INTO tb_lista_variavel (id_lista_fixa, id_usuario) VALUES (?, ?)",
+            [listId, userId]
+          );
 
-          if(varList.affectedRows === 1){
+          if (varList.affectedRows === 1) {
             return res.status(201).json({ id_comunidade: communityId });
+          } else {
+            console.error("Erro ao inserir na tabela tb_lista_variavel.");
+            return res.status(500).json({ error: "Erro ao inserir na tabela tb_lista_variavel." });
           }
-
         } else {
           console.error("Erro ao inserir na tabela tb_lista_fixa.");
           return res.status(500).json({ error: "Erro ao inserir na tabela tb_lista_fixa." });
