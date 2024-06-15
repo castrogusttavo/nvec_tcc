@@ -97,7 +97,6 @@ export class UpdateComunnityPage implements OnInit {
       },
       error => {
         console.error('Erro ao excluir comunidade:', error);
-        this.router.navigate(['/tabs/tab4']);
       }
     );
   }
