@@ -54,7 +54,7 @@ create table if not exists tb_usuario (
     id_assinatura int not null default 1,
     primary key (id_usuario),
     index assinatura(id_assinatura asc) visible,
-    constraint fk_assinatura
+    constraint assinatura
 		foreign key (id_assinatura)
 		references tb_assinatura(id_assinatura)) default character set utf8;
 
@@ -68,19 +68,19 @@ create table if not exists tb_comunidade (
     id_criador int not null,
     primary key (id_comunidade),
     index categoria_comunidade (id_categoria asc) visible,
-    constraint fk_categoria_comunidade
+    constraint categoria_comunidade
 		foreign key (id_categoria) 
         references tb_categoria(id_categoria),
-	constraint fk_criador
+	constraint id_criador
 		foreign key (id_criador) 
         references tb_usuario(id_usuario)
 ) default character set utf8;
 
 create table if not exists tb_lista_fixa(
-	id_lista_fixa int not null auto_increment,
-	constraint fk_comunidade_lista_fixa
+	id_lista_fixa int not null auto_increment unique,
+	constraint id_lista_fixa
 		foreign key(id_lista_fixa)
-        references tb_lista_fixa(id_lista_fixa)
+        references tb_comunidade(id_comunidade)
 ) default character set utf8;
 
 create table if not exists tb_item_fixo(
@@ -91,10 +91,10 @@ create table if not exists tb_item_fixo(
     qtde_item int,
     id_medida int,
     primary key (id_item_fixo),
-    constraint fk_medida
+    constraint medida
 		foreign key (id_medida)
         references tb_medida_item(id_medida),
-	constraint fk_lista_fixa
+	constraint id_item_fixo
 		foreign key(id_lista_fixa)
         references tb_lista_fixa(id_lista_fixa)
 ) default character set utf8;
@@ -105,10 +105,10 @@ create table if not exists tb_lista_variavel(
     id_usuario int not null,
     end_lista varchar(50),
     primary key(id_lista_variavel),
-    constraint fk_lista_fixa_variavel
+    constraint lista_fixa
 		foreign key(id_lista_fixa)
         references tb_lista_fixa(id_lista_fixa),
-	constraint fk_usuario_lista_variavel
+	constraint usuario_lista_variavel
 		foreign key(id_usuario)
         references tb_usuario(id_usuario)
 ) default character set utf8;
@@ -119,10 +119,10 @@ create table if not exists tb_item_variavel(
 	id_lista_variavel int not null,
     id_item_fixo int not null,
     primary key(id_item_variavel),
-	constraint fk_lista_variavel
+	constraint id_lista_variavel_fk
 		foreign key(id_lista_variavel)
         references tb_lista_variavel(id_lista_variavel),
-	constraint fk_item_fixo_comunidade
+	constraint id_item_fixo_comunidade
 		foreign key(id_item_fixo)
         references tb_item_fixo(id_item_fixo)
 )default character set utf8;
@@ -138,11 +138,11 @@ create table if not exists tb_lista (
     id_usuario int not null,
     primary key (id_lista),
     index usuario_li(id_usuario asc) visible,
-    constraint fk_usuario_li
+    constraint usuario_li
 		foreign key (id_usuario)
         references tb_usuario(id_usuario),
 	index categoria_li (id_categoria asc) visible,
-	constraint fk_categoria_li
+	constraint categoria_li
 		foreign key (id_categoria)
         references tb_categoria(id_categoria)
 ) default character set utf8;
@@ -152,11 +152,11 @@ create table if not exists tb_comunidade_usuario (
     id_usuario int not null,
     primary key (id_comunidade,id_usuario),
     index comunidade_usuario(id_comunidade asc) visible,
-    constraint fk_comunidade_usuario
+    constraint comunidade_usuario
 		foreign key (id_comunidade)
         references tb_comunidade(id_comunidade),
 	index usuario (id_usuario asc) visible,
-	constraint fk_usuario
+	constraint usuario
 		foreign key (id_usuario)
         references tb_usuario(id_usuario)
 ) default character set utf8;
@@ -172,15 +172,15 @@ create table if not exists tb_item (
     id_lista int not null,
     primary key (id_item),
     index lista_it (id_lista asc) visible,
-    constraint fk_lista_it
+    constraint lista_it
 		foreign key (id_lista)
         references tb_lista(id_lista),
 	index status_li(id_status asc) visible,
-    constraint fk_status_li
+    constraint status_li
 		foreign key(id_status)
         references tb_status(id_status),
 	index medida_item(id_medida asc) visible,
-    constraint fk_medida_item
+    constraint medida_item
 		foreign key(id_medida)
         references tb_medida_item(id_medida)
-) default character set utf8;
+        ) default character set utf8;
