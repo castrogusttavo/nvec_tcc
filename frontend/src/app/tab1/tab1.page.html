@@ -77,7 +77,8 @@
           <app-card-home-community
             [title]="community.ds_categoria"
             [content]="community.nm_comunidade"
-          ></app-card-home-community>
+            (click)="navigateToCommunityPage(community.id_comunidade, community.id_criador)"
+            ></app-card-home-community>
         </ng-container>
         <ng-template #noRecentCommunities>
           <p class="no-recent-data">Você ainda não está em nenhuma comunidade.</p>

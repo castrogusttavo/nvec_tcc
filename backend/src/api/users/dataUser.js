@@ -58,8 +58,7 @@ router.get("/recentCommunitiesUser", async (req, res) => {
     const recentCommunities = await db_query(
       `
       SELECT 
-        c.nm_comunidade,
-        cat.ds_categoria
+        *
       FROM 
         tb_comunidade_usuario AS cu
       JOIN 

@@ -22,6 +22,7 @@
       <app-card-item-community 
       *ngFor="let list of list"
       [itemName]="list.nm_item"
+      [itemValue]="list.vl_uni"
       [itemId]="list.id_item_variavel"
       [userId]="userId"
       [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"

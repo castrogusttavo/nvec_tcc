@@ -54,7 +54,7 @@ export class CreateItemPage implements OnInit {
       ).toPromise();
 
       console.log('Lista criada com sucesso:', response);
-      this.router.navigate(['/tabs/tab1']);
+      this.router.navigate(['/lists-items', this.listaId]);
     } catch (err) {
       console.error('Erro ao criar lista:', err);
     }
