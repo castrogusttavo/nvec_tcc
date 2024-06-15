@@ -38,15 +38,14 @@ export class PlansScreenPage implements OnInit {
       this.http.patch<any>(`http://localhost:3001/api/users/${userId}`, { id_assinatura: planId }).subscribe(
         (data) => {
           console.log('ID de assinatura do usuário atualizado com sucesso:', data);
-          this.userSubscriptionId = planId; // Atualiza o ID de assinatura do usuário localmente
+          this.userSubscriptionId = planId;
           if (data.token) {
-            this.cacheService.setCache('token', data.token); // Atualiza o token no cache
-            this.getUserSubscriptionId(); // Recarrega os dados do usuário com o novo token
+            this.cacheService.setCache('token', data.token); 
+            this.getUserSubscriptionId(); 
           }
         },
         (error) => {
           console.error('Erro ao atualizar ID de assinatura do usuário:', error);
-          // Tratar erros ou exibir uma mensagem de erro para o usuário
         }
       );
     }
