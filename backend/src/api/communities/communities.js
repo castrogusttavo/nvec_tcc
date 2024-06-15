@@ -167,42 +167,56 @@ router.patch("/communities/:id", async (req, res) => {
 
 // Rota DELETE para deletar uma comunidade por ID
 router.delete("/communities/:idUser/:idCommunity", async (req, res) => {
-  try {
-    const comunidadeId = req.params.idCommunity;
-
-    const deleteVarItem = await db_query("DELETE FROM tb_item_variavel WHERE id_lista_variavel IN (SELECT id_lista_variavel FROM tb_lista_variavel WHERE id_lista_fixa = ?)",
-      [comunidadeId]);
-
-    const deleteVarList = await db_query("DELETE FROM tb_lista_variavel WHERE id_lista_fixa=?",
-      [comunidadeId]);
-
-    const deleteStaticItem = await db_query("DELETE FROM tb_item_fixo WHERE id_lista_fixa =?",
-      [comunidadeId]);
-
-    const deleteStaticList = await db_query("DELETE FROM tb_lista_fixa WHERE id_lista_fixa=?",
-      [comunidadeId]);
-  
-      const result = await db_query("DELETE FROM tb_comunidade_usuario WHERE id_comunidade=?",
-      [comunidadeId]);
+  const comunidadeId = req.params.idCommunity;
 
 
-     if(result.affectedRows===1){
-      const resultCommunity = await db_query("DELETE FROM tb_comunidade WHERE id_comunidade = ?", [comunidadeId]);
+    try {
+      await db_query("SET FOREIGN_KEY_CHECKS = 0");
 
-      console.log("delete tb_comunidade: ",resultCommunity)
-      if (resultCommunity.affectedRows===1) {
-        res.status(204).json({ message: "Comunidade deletada com sucesso." });
-      } else{
-        return res.status(404).json({ error: "Comunidade não encontrada." });
+      await db_query(
+        "DELETE FROM tb_item_variavel WHERE id_lista_variavel IN (SELECT id_lista_variavel FROM tb_lista_variavel WHERE id_lista_fixa = ?)",
+        [comunidadeId]
+      );
+
+      await db_query(
+        "DELETE FROM tb_lista_variavel WHERE id_lista_fixa = ?",
+        [comunidadeId]
+      );
+
+      await db_query(
+        "DELETE FROM tb_item_fixo WHERE id_lista_fixa = ?",
+        [comunidadeId]
+      );
+
+      await db_query(
+        "DELETE FROM tb_lista_fixa WHERE id_lista_fixa = ?",
+        [comunidadeId]
+      );
+
+      await db_query(
+        "DELETE FROM tb_comunidade_usuario WHERE id_comunidade = ?",
+        [comunidadeId]
+      );
+
+      const resultCommunity = await db_query(
+        "DELETE FROM tb_comunidade WHERE id_comunidade = ?",
+        [comunidadeId]
+      );
+
+      await db_query("SET FOREIGN_KEY_CHECKS = 1");
+
+      if (resultCommunity.affectedRows === 1) {
+
+          res.status(204).json({ message: "Comunidade deletada com sucesso." });
+    
+      } else {
+          res.status(404).json({ error: "Comunidade não encontrada." });
       }
+    } catch (err) {
+      console.error("Erro ao deletar comunidade:", err);
+      res.status(500).send("Erro ao deletar comunidade.");
     }
-
-  } catch (err) {
-    console.error("Erro ao deletar comunidade:", err);
-    res.status(500).send("Erro ao deletar comunidade.");
-  }
-});
-
+  });
 
 
 module.exports = router;
