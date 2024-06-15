@@ -78,11 +78,9 @@ create table if not exists tb_comunidade (
 
 create table if not exists tb_lista_fixa(
 	id_lista_fixa int not null auto_increment,
-    id_comunidade int not null,
-    primary key (id_lista_fixa),
 	constraint fk_comunidade_lista_fixa
-		foreign key(id_comunidade)
-        references tb_comunidade(id_comunidade)
+		foreign key(id_lista_fixa)
+        references tb_lista_fixa(id_lista_fixa)
 ) default character set utf8;
 
 create table if not exists tb_item_fixo(

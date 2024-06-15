@@ -32,5 +32,9 @@
       [title]="community.nm_comunidade"
       ></app-card-list-search>
     </div>
+
+    <div *ngIf="searchText && filteredCommunities.length === 0" class="no-results">
+      <p>Nenhuma comunidade encontrada.</p>
+    </div>
   </div>
 </ion-content>
