@@ -7,7 +7,7 @@
 
   <form (ngSubmit)="updateList($event)">
     <div class="inputs">  
-      <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
+      <input name="name" [value]="lista.name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
 
       <ion-item class="inputText input">
         <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">

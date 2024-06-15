@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +25,11 @@ export class UpdateListPage implements OnInit {
   private apiCategories = 'http://localhost:3001/api/categories';
   private apiList = 'http://localhost:3001/api/lists';
 
+  items!: any[];
+  lista: any = {};
+  categories!: any[];
+
+
   getCategories():Observable<any[]>{
     return this.http.get<any[]>(this.apiCategories);
   }
@@ -39,6 +44,7 @@ export class UpdateListPage implements OnInit {
       this.category = categories;
     });
     this.getUserId();
+    this.getList();
   }
 
   customCounterFormatter(inputLength: number, maxLength: number) {
@@ -52,6 +58,37 @@ export class UpdateListPage implements OnInit {
     const counter = input.parentElement.querySelector('.counter');
     if (counter) {
       counter.textContent = currentLength > 0 ? `${currentLength} / ${maxLength}` : '';
+    }
+  }
+
+  getList(): void {
+    if (this.listaId) {
+      const apiLista = `${this.apiList}/${this.listaId}`;
+
+      forkJoin({
+        list: this.http.get<any>(apiLista),
+        categories: this.http.get<any[]>(this.apiCategories)
+      }).subscribe(
+        ({ list, categories }) => {
+          console.log('Dados da lista:', list); // Adiciona este console.log para exibir os dados da lista
+          console.log('Dados das categorias:', categories); // Adiciona este console.log para exibir os dados das categorias
+
+          this.categories = categories;
+
+          const category = this.categories.find(
+            categoria => categoria.id_categoria === list.id_categoria
+          );
+          this.lista = {
+            ...list,
+            ds_categoria: category ? category.ds_categoria : 'Categoria Desconhecida'
+          }
+        },
+        error => {
+          console.error('Erro ao buscar dados:', error);
+        }
+      );
+    } else {
+      console.error("Id não encontrado")
     }
   }
 
