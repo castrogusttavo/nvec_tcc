@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -12,6 +12,8 @@ import { ChangeDetectorRef } from '@angular/core';
 export class AcountPage implements OnInit {
   email: string = '';
   name: string = '';
+  userSubscriptionId: number | undefined;
+  showCard: boolean = false; // Variable to control card visibility
 
   userEmail: string = 'email';  // Placeholder value
   userName: string = 'username';  // Placeholder value
@@ -21,6 +23,7 @@ export class AcountPage implements OnInit {
   ngOnInit(): void {
     this.getUserName();
     this.getUserEmail();
+    this.getUserSubscriptionId();
   }
 
   async logout(): Promise<void> {
@@ -68,6 +71,32 @@ export class AcountPage implements OnInit {
           console.error('Erro ao atualizar usuário:', error);
         }
       );
+    }
+  }
+
+  getUserSubscriptionId(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userSubscriptionId = decodedToken.subscriptionId;
+    }
+  }
+
+  isPlanActive(planId: number): boolean {
+    return this.userSubscriptionId === planId;
+  }
+
+  toggleCardVisibility(): void {
+    this.showCard = !this.showCard;
+  }
+
+  @HostListener('document:click', ['$event'])
+  closeCard(event: MouseEvent): void {
+    if (this.showCard) {
+      const targetElement = event.target as HTMLElement;
+      if (!targetElement.closest('.card-container') && !targetElement.closest('.button-medium-config')) {
+        this.showCard = false;
+      }
     }
   }
 }
