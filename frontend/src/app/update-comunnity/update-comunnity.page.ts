@@ -93,10 +93,11 @@ export class UpdateComunnityPage implements OnInit {
     this.http.delete<any>(`http://localhost:3001/api/communities/${this.userId}/${this.communityId}`).subscribe(
       response => {
         console.log('Comnunidade excluída com sucesso:', response);
-        this.router.navigate(['/tabs/tab1']);
+        this.router.navigate(['/tabs/tab4']);
       },
       error => {
         console.error('Erro ao excluir comunidade:', error);
+        this.router.navigate(['/tabs/tab4']);
       }
     );
   }

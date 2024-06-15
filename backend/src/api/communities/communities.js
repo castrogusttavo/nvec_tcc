@@ -169,10 +169,9 @@ router.patch("/communities/:id", async (req, res) => {
 router.delete("/communities/:idUser/:idCommunity", async (req, res) => {
   try {
     const comunidadeId = req.params.idCommunity;
-    const userId = req.params.idUser;
 
-    const result = await db_query("DELETE FROM tb_comunidade_usuario WHERE id_comunidade = ? AND id_usuario=?",
-     [comunidadeId, userId]);
+    const result = await db_query("DELETE FROM tb_comunidade_usuario WHERE id_comunidade = ?",
+     [comunidadeId]);
 
      console.log("delete tb_comunidade_usuario: ", result);
 
