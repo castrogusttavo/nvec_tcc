@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, forkJoin, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -25,8 +26,9 @@ export class Tab1Page implements OnInit {
   userId!: number;
   
   constructor(
-    private http: HttpClient, 
-    private jwtHelper: JwtHelperService
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -213,4 +215,14 @@ getRecentLists(): void {
   checkRecentCommunities(): void {
     this.noRecentCommunities = this.recentCommunities.length === 0;
   }
+
+  navigateToCommunityPage(communityId: number, creatorId: number): void {
+
+    if (this.userId === creatorId) {
+        this.router.navigate(['/list-adm-community', this.userId, communityId]);
+    } else {
+        this.router.navigate(['/community-lists-sobre', communityId]);
+    }
+}
+
 }

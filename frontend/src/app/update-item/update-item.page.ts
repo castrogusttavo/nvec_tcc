@@ -54,8 +54,9 @@ export class UpdateItemPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.listaId = params['idLista'];
+      this.listaId = params['idList'];
       this.itemId = params['idItem'];
+      console.log(this.listaId)
     });
     this.getItem();
     this.getMeasures().subscribe(measures => {
@@ -108,7 +109,7 @@ export class UpdateItemPage implements OnInit {
    updateItem(event: { preventDefault: () => void; }) {
     event.preventDefault();
 
-    console.log('Name:', this.name);
+    console.log('Name:', this.listaId);
 
     try {
       const response: any = this.http.patch(
@@ -117,7 +118,7 @@ export class UpdateItemPage implements OnInit {
       ).toPromise();
 
       console.log('Item atualizado com sucesso:', response);
-      this.router.navigate(['/tabs/tab1']);
+      this.router.navigate([`/lists-items/${this.listaId}`]);
     } catch (err) {
       console.error('Erro ao atualizar item: ', err);
     }

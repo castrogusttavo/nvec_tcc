@@ -20,6 +20,7 @@ export class CardItemCommunityComponent  implements OnInit {
   @Input() userId!: string;
 
   @Input() itemName: string | undefined;
+  @Input() itemValue: string | undefined;
   @Input() imagePath: string | undefined;
 
 
