@@ -1,42 +1,101 @@
 <ion-content scrollY="false">
   <div class="content">
-    <img class="closeImg" src="./../../assets/svg/close.svg" alt="fechar aba do perfil" [routerLink]="['/tabs/tab5']">
+    <img
+      class="closeImg"
+      src="./../../assets/svg/close.svg"
+      alt="fechar aba do perfil"
+      [routerLink]="['/tabs/tab5']"
+    />
     <h1>Seu Perfil</h1>
-      <div class="infoPerfil">
-        <img class="imgPerfil" src="./../../assets/svg/avatar.svg" alt="">
-        <span>selecione um avatar</span>
-      </div>
+    <div class="infoPerfil">
+      <img class="imgPerfil" src="./../../assets/svg/avatar.svg" alt="" />
+      <span>selecione um avatar</span>
+    </div>
 
+    <div class="plan-container" *ngIf="showCard">
+      <app-card-plans
+      *ngIf="isPlanActive(1)"
+        [customClass]="isPlanActive(1) ? 'active-plan' : ''"
+        [planTitle]="isPlanActive(1) ? 'Plano Ativo' : null"
+        [planPreco]="'Grátis'"
+        [planDesc]="'Limitado a algumas funcionalidades para iniciar a gestão financeira.'"
+        [planItems]="['Entrar 1 comunidade','Criar em 2 comunidades', '3 comparações mensais']"
+      >
+      </app-card-plans>
 
-    <ion-grid >
+      <app-card-plans
+      *ngIf="isPlanActive(2)"
+        [customClass]="isPlanActive(2) ? 'active-plan' : ''"
+        [planTitle]="isPlanActive(2) ? 'Plano Ativo' : null"
+        [planPreco]="'R$9.90'"
+        [planDesc]="'Ideal para quem busca mais recursos para um controle mais abrangente.'"
+        [planItems]="['Criar 2 comunidades', 'Criar até 10 listas','10 comparações mensais', 'Relatórios mensais']"
+      >
+      </app-card-plans>
+
+      <app-card-plans
+      *ngIf="isPlanActive(3)"
+        [customClass]="isPlanActive(3) ? 'active-plan' : ''"
+        [planTitle]="isPlanActive(3) ? 'Plano Ativo' : null"
+        [planPreco]="'R$19.90'"
+        [planDesc]="'Oferece acesso total e ilimitado a todas as funções para uma gestão financeira completa.'"
+        [planItems]="['Comunidades ilimitadas', 'Listas Ilimitadas', 'Relatórios mensais e semestrais', 'Comparações ilimitadas']"
+      >
+      </app-card-plans>
+    </div>
+
+    <ion-grid>
       <form>
         <ion-row class="ion-justify-content-between">
           <ion-col>
-            <app-input type="text" name="name" [(ngModel)]="name" [placeholder]="userName" class="input-config-name"></app-input>
+            <app-input
+              type="text"
+              name="name"
+              [(ngModel)]="name"
+              [placeholder]="userName"
+              class="input-config-name"
+            ></app-input>
           </ion-col>
           <ion-col class="align-center" size="auto">
-            <app-button-medium class="button-medium-config" [routerLink]="['/plans-screen']">Assinatura</app-button-medium>
+            <app-button-medium class="button-medium-config" (click)="toggleCardVisibility()">
+              Assinatura
+            </app-button-medium>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <app-input type="email" name="email" [(ngModel)]="email" [placeholder]="userEmail" class="input-config-email" [readOnly]="true"></app-input>
+            <app-input
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              [placeholder]="userEmail"
+              class="input-config-email"
+              [readOnly]="true"
+            ></app-input>
           </ion-col>
         </ion-row>
       </form>
 
-    <ion-row class="row">
-      <ion-col>
-        <h3>Alterar Senha</h3>
-      </ion-col>
-      <ion-col class="alter-pass">
-          <app-button-arrow [imagePath]="'./../../assets/png/arrow_forward_white.png'" class="buttonArrow" [routerLink]="['/new-password']"></app-button-arrow>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <ion-row class="row">
+        <ion-col>
+          <h3>Alterar Senha</h3>
+        </ion-col>
+        <ion-col class="alter-pass">
+          <app-button-arrow
+            [imagePath]="'./../../assets/png/arrow_forward_white.png'"
+            class="buttonArrow"
+            [routerLink]="['/new-password']"
+          ></app-button-arrow>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <p class="logoutAccount" (click)="logout()">Sair da conta</p>
-    <app-button-medium type="button" class="button-medium-save" (click)="updateUser()">Salvar</app-button-medium>
-
+    <app-button-medium
+      type="button"
+      class="button-medium-save"
+      (click)="updateUser()"
+      >Salvar</app-button-medium
+    >
   </div>
 </ion-content>
