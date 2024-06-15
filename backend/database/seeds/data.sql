@@ -23,28 +23,3 @@ INSERT INTO tb_item (nm_item, vl_uni, qtde_item, qtde_medida_item, id_status, id
     ('TV', 1000.00, 1, 1, 2, 1, 3),
     ('Camisa', 50.00, 2, 1, 2, 1, 4),
     ('Sabão em Pó', 10.00, 2, 1, 2, 1, 5);
-
--- Preencher a tabela de listas fixas
-INSERT INTO tb_lista_fixa (id_comunidade) VALUES
-    (1),
-    (2);
-
--- Preencher a tabela de itens fixos
-INSERT INTO tb_item_fixo (id_lista_fixa, nm_item, qtde_medida, qtde_item, id_medida) VALUES
-    (1, 'Item Fixo 1', 2, 1, 1),
-    (2, 'Item Fixo 2', 3, 2, 2);
-
--- Preencher a tabela de listas variáveis
-INSERT INTO tb_lista_variavel (id_lista_fixa, id_usuario, end_lista) VALUES
-    (1, 1, 'Endereco 1'),
-    (2, 1, 'Endereco 2');
-
--- Preencher a tabela de itens variáveis
-INSERT INTO tb_item_variavel (vl_uni, id_lista_variavel, id_item_fixo) VALUES
-    (100.00, 1, 1),
-    (50.00, 2, 2);
-
--- Preencher a tabela de comunidade-usuário
-INSERT INTO tb_comunidade_usuario (id_comunidade, id_usuario) VALUES
-    (1, 1),
-    (2, 2);
