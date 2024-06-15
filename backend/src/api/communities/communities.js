@@ -170,10 +170,21 @@ router.delete("/communities/:idUser/:idCommunity", async (req, res) => {
   try {
     const comunidadeId = req.params.idCommunity;
 
-    const result = await db_query("DELETE FROM tb_comunidade_usuario WHERE id_comunidade = ?",
-     [comunidadeId]);
+    const deleteVarItem = await db_query("DELETE FROM tb_item_variavel WHERE id_lista_variavel IN (SELECT id_lista_variavel FROM tb_lista_variavel WHERE id_lista_fixa = ?)",
+      [comunidadeId]);
 
-     console.log("delete tb_comunidade_usuario: ", result);
+    const deleteVarList = await db_query("DELETE FROM tb_lista_variavel WHERE id_lista_fixa=?",
+      [comunidadeId]);
+
+    const deleteStaticItem = await db_query("DELETE FROM tb_item_fixo WHERE id_lista_fixa =?",
+      [comunidadeId]);
+
+    const deleteStaticList = await db_query("DELETE FROM tb_lista_fixa WHERE id_lista_fixa=?",
+      [comunidadeId]);
+  
+      const result = await db_query("DELETE FROM tb_comunidade_usuario WHERE id_comunidade=?",
+      [comunidadeId]);
+
 
      if(result.affectedRows===1){
       const resultCommunity = await db_query("DELETE FROM tb_comunidade WHERE id_comunidade = ?", [comunidadeId]);
