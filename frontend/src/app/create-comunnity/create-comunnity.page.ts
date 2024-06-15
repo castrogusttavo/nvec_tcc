@@ -56,7 +56,7 @@ export class CreateComunnityPage implements OnInit {
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/communities',
-        { nm_comunidade: this.name, id_categoria: this.categoriaSelecionada, sb_comunidade:this.about, end_comunidade:this.address,userId: this.userId}
+        { nm_comunidade: this.name, id_categoria: this.categoriaSelecionada, sb_comunidade:this.about, end_comunidade:this.address,userId: this.userId }
       ).toPromise();
 
       console.log('Comunidade criada com sucesso:', response);

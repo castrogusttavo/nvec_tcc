@@ -126,6 +126,7 @@ router.delete("/lists/:id", async (req, res) => {
   try {
     const listId = req.params.id;
 
+    await db_query("DELETE FROM tb_item WHERE id_lista = ?", [listId]);
     await db_query("DELETE FROM tb_lista WHERE id_lista = ?", [listId]);
 
     res.sendStatus(204);
