@@ -198,7 +198,7 @@ const routes: Routes = [
     loadChildren: () => import('./list-adm-community/list-adm-community.module').then(m => m.ListAdmCommunityPageModule )
   },
   {
-    path: 'select-item-community/:userId/:communityId/:idItem',
+    path: 'select-item-community/:userId/:communityId/:itemId',
     loadChildren: () => import('./select-item-community/select-item-community.module').then( m => m.SelectItemCommunityPageModule)
   },
   {

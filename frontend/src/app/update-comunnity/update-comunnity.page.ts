@@ -53,7 +53,7 @@ export class UpdateComunnityPage implements OnInit {
       ).toPromise();
 
       console.log('Comunidade atualizada com sucesso:', response);
-      this.router.navigate(['/tabs/tab4']);
+      this.router.navigate(['/list-adm-community',this.userId, this.communityId]);
     } catch (err) {
       console.error('Erro ao atualizar comunidade:', err);
     }

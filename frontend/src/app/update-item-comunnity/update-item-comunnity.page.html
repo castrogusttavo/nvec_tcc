@@ -5,7 +5,7 @@
     <img src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <form (click)="updateItem()" class="inputs">
+  <form  (ngSubmit)="updateItem()" class="inputs">
     <input [(ngModel)]="end_lista" name="end_lista"  placeholder="Local"  class="inputName">
   
     <div class="buttonBig">

@@ -8,6 +8,7 @@ import { SelectItemCommunityPageRoutingModule } from './select-item-community-ro
 import { HttpClientModule } from '@angular/common/http';
 
 import { SelectItemCommunityPage } from './select-item-community.page';
+import { SharedModule } from 'src/components/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SelectItemCommunityPage } from './select-item-community.page';
     FormsModule,
     IonicModule,
     SelectItemCommunityPageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   declarations: [SelectItemCommunityPage]
 })

@@ -36,7 +36,10 @@ export class UpdateItemComunnityPage implements OnInit {
       const response: any =  this.http.patch(
         `http://localhost:3001/api/varItemLocal/${this.userId}/${this.communityId}/${this.listId}`,
         { end_lista: this.end_lista }
+        
       ).toPromise();
+
+      this.router.navigate(['/comunnity-lists-item', this.userId, this.communityId,this.listId]);
     } catch (err) {
       console.error('Erro ao atualizar item: ', err);
     }

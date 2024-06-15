@@ -56,7 +56,7 @@ export class UpdateItemUserPage implements OnInit {
         { vl_uni: this.vl_uni }
       ).toPromise();
   
-      this.router.navigate(['/tabs/tab1']);
+      this.router.navigate(['/comunnity-lists-item', this.userId, this.communityId,this.listId]);
     } catch (err) {
       console.error('Erro ao atualizar item: ', err);
     }

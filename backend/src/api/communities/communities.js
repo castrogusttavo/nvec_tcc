@@ -11,7 +11,6 @@ router.post("/communities", async (req, res) => {
       return res.status(400).json({ error: "Campos obrigatórios ausentes." });
     }
 
-    // Inserir na tabela tb_comunidade
     const resultComunidade = await db_query(
       "INSERT INTO tb_comunidade (nm_comunidade, id_categoria, sb_comunidade, end_comunidade, id_criador) VALUES (?, ?, ?, ?, ?)",
       [nm_comunidade, id_categoria, sb_comunidade, end_comunidade, userId]
@@ -19,11 +18,9 @@ router.post("/communities", async (req, res) => {
 
     console.log("Inserção na tb_comunidade:", resultComunidade);
 
-    // Verificar se a inserção na tabela tb_comunidade foi bem-sucedida
     if (resultComunidade.affectedRows === 1) {
       const communityId = resultComunidade.insertId;
 
-      // Inserir na tabela tb_comunidade_usuario
       const resultUsuario = await db_query(
         "INSERT INTO tb_comunidade_usuario (id_comunidade, id_usuario) VALUES (?, ?)",
         [communityId, userId]
@@ -31,11 +28,9 @@ router.post("/communities", async (req, res) => {
 
       console.log("Inserção na tb_comunidade_usuario:", resultUsuario);
 
-      // Verificar se a inserção na tabela tb_comunidade_usuario foi bem-sucedida
       if (resultUsuario.affectedRows === 1) {
-        // Inserir na tabela tb_lista_fixa com id_comunidade
         const resultList = await db_query(
-          "INSERT INTO tb_lista_fixa (id_comunidade) VALUES (?)",
+          "INSERT INTO tb_lista_fixa (id_lista_fixa) VALUES (?)",
           [communityId]
         );
 
@@ -44,7 +39,6 @@ router.post("/communities", async (req, res) => {
         if (resultList.affectedRows === 1) {
           const listId = resultList.insertId;
 
-          // Inserir na tabela tb_lista_variavel
           const varList = await db_query(
             "INSERT INTO tb_lista_variavel (id_lista_fixa, id_usuario) VALUES (?, ?)",
             [listId, userId]

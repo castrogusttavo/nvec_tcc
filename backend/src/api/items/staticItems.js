@@ -132,7 +132,7 @@ router.patch("/staticItems/:listId/:itemId", async (req, res) => {
       return res.status(400).json({ error: "Nenhum campo para atualizar." });
     }
 
-    setValues.push(itemId);
+    setValues.push(itemId,listId);
 
     const query = `UPDATE tb_item_fixo SET ${setClause.join(", ")} WHERE id_item_fixo = ? AND id_lista_fixa=?`;
 
