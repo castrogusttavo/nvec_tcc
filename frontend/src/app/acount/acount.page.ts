@@ -20,10 +20,8 @@ export class AcountPage implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
-    this.getUserName();
-    this.getUserEmail();
-    this.getUserSubscriptionId();
+  ngOnInit() {
+    this.loadUserData();
   }
 
   async logout(): Promise<void> {
@@ -38,22 +36,16 @@ export class AcountPage implements OnInit {
     }
   }
 
-  getUserName(): void {
+  loadUserData(): void {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       this.userName = decodedToken.userName || 'username';
-      this.cdr.detectChanges();
-    }
-  }
-
-  getUserEmail(): void {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = this.jwtHelper.decodeToken(token);
       this.userEmail = decodedToken.userEmail || 'email';
+      this.userSubscriptionId = decodedToken.subscriptionId;
       this.cdr.detectChanges();
     }
+    console.log('Dados do usuário carregados:', this.userName, this.userEmail, this.userSubscriptionId);
   }
 
   updateUser(): void {
@@ -66,19 +58,15 @@ export class AcountPage implements OnInit {
           console.log('Usuário atualizado com sucesso:', data);
           this.userName = this.name; // Atualiza o nome do usuário exibido na interface
           this.name = ''; // Limpa o campo de entrada de nome
+          if (data.token) {
+            localStorage.setItem('token', data.token); // Atualiza o token no localStorage
+            this.loadUserData(); // Recarrega os dados do usuário com o novo token
+          }
         },
         (error) => {
           console.error('Erro ao atualizar usuário:', error);
         }
       );
-    }
-  }
-
-  getUserSubscriptionId(): void {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = this.jwtHelper.decodeToken(token);
-      this.userSubscriptionId = decodedToken.subscriptionId;
     }
   }
 

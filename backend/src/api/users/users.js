@@ -89,7 +89,8 @@ module.exports = function (secretKey) {
       res.status(500).send("Erro ao atualizar usuário");
     }
   });
-
+  
+  // Rota para atualizar o usuário
   router.patch("/users/:id", async (req, res) => {
     try {
       const userId = req.params.id; // Obtendo o ID do usuário dos parâmetros da URL
@@ -128,24 +129,41 @@ module.exports = function (secretKey) {
   
       await db_query(query, values);
   
+      // Obter os dados atualizados do usuário
+      const updatedUser = await db_query("SELECT * FROM tb_usuario WHERE id_usuario = ?", [userId]);
+  
+      if (updatedUser.length === 0) {
+        return res.status(404).json({ error: "Usuário não encontrado." });
+      }
+  
       // Gerar um token JWT para o usuário atualizado
-      const token = jwt.sign(
-        { userId: userId, userEmail: updateData.email_usuario, userName: updateData.nm_usuario, subscriptionId: updateData.id_assinatura },
+      const newToken = jwt.sign(
+        {
+          userId: updatedUser[0].id_usuario,
+          userEmail: updatedUser[0].email_usuario,
+          userName: updatedUser[0].nm_usuario,
+          subscriptionId: updatedUser[0].id_assinatura
+        },
         secretKey,
         { expiresIn: "3h" }
       );
   
       // Extraindo os dados do usuário atualizados
       const userData = {
-        id_usuario: userId,
-        name: updateData.nm_usuario,
-        email: updateData.email_usuario,
-        password: updateData.senha_usuario,
-        subscriptionId: updateData.id_assinatura
+        id_usuario: updatedUser[0].id_usuario,
+        name: updatedUser[0].nm_usuario,
+        email: updatedUser[0].email_usuario,
+        password: updateData.senha_usuario ? updateData.senha_usuario : undefined,
+        subscriptionId: updatedUser[0].id_assinatura
       };
   
+      res.cookie("token", newToken, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 3 * 60 * 60 * 1000),
+      });
+  
       // Retornar o token e os dados do usuário atualizados
-      res.json({ token, userData });
+      res.json({ token: newToken, userData });
     } catch (err) {
       console.error("Erro ao atualizar usuário:", err);
       res.status(500).send("Erro ao atualizar usuário");
@@ -171,44 +189,88 @@ module.exports = function (secretKey) {
     res.clearCookie('token').json({ message: 'Sessão encerrada com sucesso' });
   });
 
-  // Alter Password
-  router.patch("/change-password", verifyToken, async (req, res) => {
+  // Alter Data User
+  router.patch("/users/:id", verifyToken, async (req, res) => {
     try {
-      const { currentPassword, newPassword } = req.body;
-      const userId = req.userId;
+      const userId = req.params.id; // Obtendo o ID do usuário dos parâmetros da URL
+      const updateData = req.body;
   
-      if (!currentPassword || !newPassword) {
-        return res.status(400).json({ error: "Dados insuficientes para alteração de senha." });
+      // Verifique se o usuário autenticado está tentando atualizar seu próprio perfil
+      if (req.userId != userId) {
+        return res.status(403).json({ error: "Acesso negado. Você só pode atualizar seu próprio perfil." });
       }
   
-      if (newPassword.length < 8) {
-        return res.status(400).json({ error: "A nova senha deve ter pelo menos 8 caracteres." });
+      // Crie a query dinamicamente com base nos campos fornecidos
+      let query = "UPDATE tb_usuario SET ";
+      const updateFields = [];
+      const values = [];
+  
+      // Verifique quais campos foram fornecidos para atualização
+      if (updateData.nm_usuario) {
+        query += "nm_usuario = ?, ";
+        values.push(updateData.nm_usuario);
       }
   
-      // Recuperar o usuário pelo ID
-      const user = await db_query("SELECT * FROM tb_usuario WHERE id_usuario = ?", [userId]);
+      if (updateData.email_usuario) {
+        query += "email_usuario = ?, ";
+        values.push(updateData.email_usuario);
+      }
   
-      if (user.length === 0) {
+      if (updateData.senha_usuario) {
+        const hashedPassword = await bcrypt.hash(updateData.senha_usuario, 10);
+        query += "senha_usuario = ?, ";
+        values.push(hashedPassword);
+      }
+  
+      if (updateData.id_assinatura) {
+        query += "id_assinatura = ?, ";
+        values.push(updateData.id_assinatura);
+      }
+  
+      // Remova a vírgula no final e adicione a cláusula WHERE
+      query = query.slice(0, -2) + " WHERE id_usuario = ?";
+      values.push(userId);
+  
+      await db_query(query, values);
+  
+      // Obter os dados atualizados do usuário
+      const updatedUser = await db_query("SELECT * FROM tb_usuario WHERE id_usuario = ?", [userId]);
+  
+      if (updatedUser.length === 0) {
         return res.status(404).json({ error: "Usuário não encontrado." });
       }
   
-      // Comparar a senha atual com o hash armazenado
-      const passwordMatch = await bcrypt.compare(currentPassword, user[0].senha_usuario);
+      // Gerar um token JWT para o usuário atualizado
+      const newToken = jwt.sign(
+        {
+          userId: updatedUser[0].id_usuario,
+          userEmail: updatedUser[0].email_usuario,
+          userName: updatedUser[0].nm_usuario,
+          subscriptionId: updatedUser[0].id_assinatura
+        },
+        secretKey,
+        { expiresIn: "3h" }
+      );
   
-      if (!passwordMatch) {
-        return res.status(401).json({ error: "Senha atual incorreta." });
-      }
+      // Extraindo os dados do usuário atualizados
+      const userData = {
+        id_usuario: updatedUser[0].id_usuario,
+        name: updatedUser[0].nm_usuario,
+        email: updatedUser[0].email_usuario,
+        password: updateData.senha_usuario ? updateData.senha_usuario : undefined,
+        subscriptionId: updatedUser[0].id_assinatura
+      };
   
-      // Criptografar a nova senha
-      const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+      res.cookie("token", newToken, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 3 * 60 * 60 * 1000),
+      });
   
-      // Atualizar a senha no banco de dados
-      await db_query("UPDATE tb_usuario SET senha_usuario = ? WHERE id_usuario = ?", [hashedNewPassword, userId]);
-  
-      res.status(200).json({ message: "Senha alterada com sucesso." });
+      // Retornar o token e os dados do usuário atualizados
+      res.json({ token: newToken, userData });
     } catch (err) {
-      console.error("Erro ao alterar a senha:", err);
-      res.status(500).json({ error: "Erro ao alterar a senha." });
+      console.error("Erro ao atualizar usuário:", err);
+      res.status(500).send("Erro ao atualizar usuário");
     }
   });
 

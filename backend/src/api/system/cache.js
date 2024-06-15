@@ -7,15 +7,13 @@ let cache = {};
 module.exports = function (secretKey) {
   function verifyToken(req, res, next) {
     const { authorization } = req.headers;
-
+  
     if (!authorization || !authorization.startsWith("Bearer ")) {
-      return res
-        .status(401)
-        .json({ error: "Token de autorização não fornecido." });
+      return res.status(401).json({ error: "Token de autorização não fornecido." });
     }
-
+  
     const token = authorization.split(" ")[1];
-
+  
     jwt.verify(token, secretKey, (err, decoded) => {
       if (err) {
         return res.status(401).json({ error: "Token inválido ou expirado." });

@@ -14,7 +14,7 @@
 
     <div class="plan-container" *ngIf="showCard">
       <app-card-plans
-      *ngIf="isPlanActive(1)"
+        *ngIf="isPlanActive(1)"
         [customClass]="isPlanActive(1) ? 'active-plan' : ''"
         [planTitle]="isPlanActive(1) ? 'Plano Ativo' : null"
         [planPreco]="'Grátis'"
@@ -24,7 +24,7 @@
       </app-card-plans>
 
       <app-card-plans
-      *ngIf="isPlanActive(2)"
+        *ngIf="isPlanActive(2)"
         [customClass]="isPlanActive(2) ? 'active-plan' : ''"
         [planTitle]="isPlanActive(2) ? 'Plano Ativo' : null"
         [planPreco]="'R$9.90'"
