@@ -35,6 +35,7 @@
     
     <app-card-box action="Criar" description="Adicionar um novo item" [routerLink]="['/create-item-comunnity', userId,communityId]"></app-card-box>
     <app-card-item-community 
+    class="no-price"
     *ngFor="let item of items"  
     [itemName]="item.nm_item" 
     [itemId]="item.id_item_fixo"

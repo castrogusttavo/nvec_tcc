@@ -17,10 +17,10 @@
         grid-template-columns: repeat(auto-fill, 100px);
         justify-content: space-between;
         overflow: auto;
-        height: 400px;
+        height: 100%;
         width: 100%;
         overflow-x: clip;
-        padding-right: 40px;
+        padding: 10px;
     }
     .forward{
         padding-left:  5%;
