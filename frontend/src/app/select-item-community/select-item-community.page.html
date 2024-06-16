@@ -2,28 +2,26 @@
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/list-adm-community', userId, communityId]" alt="">
 
   <div class="imageIlustrator">
-    <img  src="../../assets/png/imagem.png" alt="">
+    <img width="200px" height="200px" src="../../assets/svg/defaultImgItem.svg" alt="">
   </div>
 
   <form (ngSubmit)="updateItemCommunity($event)" class="inputs">
 
-    <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
+    <input name="name" [(ngModel)]="name" [placeholder]="item?.nm_item || 'undefined'" class="inputText" >
     
     <ion-item class="item">
-      <input class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" placeholder="Medida" >
+      <input class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" [placeholder]="item?.qtde_medida || 'undefined'" >
       <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
         <ion-select-option *ngFor="let measure of measure" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
       </ion-select>
     </ion-item>
     
-    <input name="quantity" [(ngModel)]="quantity" placeholder="Quantidade" class="inputText" type="number">
+    <input name="quantity" [(ngModel)]="quantity" [placeholder]="item?.qtde_item || 'undefined'" class="inputText" type="number">
 
     
-  <div class="buttonBig">
-    <app-button-big >Atualizar item</app-button-big>
-  </div>
+    <div class="buttonBig">
+      <app-button-big >Atualizar item</app-button-big>
+    </div>
   </form>
-
-  
 
 </ion-content>
