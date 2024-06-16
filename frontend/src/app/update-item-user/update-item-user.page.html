@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" scrollY="false">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/comunnity-lists-item', userId, communityId, listId]">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/comunnity-lists-item', userId, communityId,listId]">
 
   <div class="imageIlustrator">
     <img width="200px" height="200px" src="../../assets/svg/defaultImgItem.svg" alt="">
@@ -7,16 +7,21 @@
 
   <form *ngIf="item" (ngSubmit)="updateItem($event)" class="inputs">
     <input placeholder="Nome" [value]="item.nm_item" [(ngModel)]="item.nm_item" name="nm_item" class="inputName" disabled>
-    <input placeholder="Quantidade" [value]="item.qtde_item" class="inputText" type="number" disabled>
-    <input [(ngModel)]="vl_uni" name="vl_uni" placeholder="Valor Unitário" class="inputText" type="number">
+    <input placeholder="Quantidade" class="inputText" type="number" disabled>
+    <input [(ngModel)]="vl_uni" name="vl_uni" placeholder="Valor Unitario" class="inputText" type="number">
     <input placeholder="VALOR TOTAL:" class="inputText" type="number" disabled>
     
     <div class="buttonBig">
-      <app-button-big>Atualizar item</app-button-big>
+      <app-button-big>Adicionar item</app-button-big>
     </div>
   </form>
 
+
+
   <div class="options">
-    <app-button-small [routerLink]="['/comunnity-lists-item', userId, communityId, listId]" class="textButton">Cancelar</app-button-small>
+    <app-button-small [routerLink]="['/comunnity-lists-item', userId, communityId,listId]" class="textButton">Cancelar</app-button-small>
   </div>
+  
+
 </ion-content>
+
