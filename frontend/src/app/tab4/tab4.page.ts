@@ -51,7 +51,6 @@ export class Tab4Page implements OnInit {
       this.communities = communities;
       this.filteredCommunities = communities;  // Initialize filteredCommunities with all communities
       console.log(this.communities);
-      this.comunidadeService.setComunidades(communities); // Set the initial communities in the service
     });
 
     // Subscribe to community changes
@@ -59,6 +58,8 @@ export class Tab4Page implements OnInit {
       this.communities = comunidades;
       this.filterItems();  // Ensure filtering logic is applied to updated communities
     });
+
+    this.fetchCommunities();
   }
 
   fetchCommunities(): Observable<any[]> {

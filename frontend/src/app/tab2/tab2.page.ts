@@ -54,8 +54,8 @@ export class Tab2Page implements OnInit {
     });
   }
 
-  getRecentLists(): void {
-    forkJoin({
+  getRecentLists(): Observable<any[]> {
+    return forkJoin({
       lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId: this.userId } }),
       categories: this.http.get<any[]>(this.apiCategories)
     }).pipe(
@@ -68,9 +68,6 @@ export class Tab2Page implements OnInit {
           };
         });
       })
-    ).subscribe(
-      data => this.recentLists = data,
-      error => console.error('Erro ao buscar dados: ', error)
     );
   }
 
@@ -105,11 +102,7 @@ export class Tab2Page implements OnInit {
 
   ngOnInit(): void {
     this.getUserName();
-    this.getLists().subscribe(lists => {
-      this.lists = lists;
-      this.filteredLists = lists; 
-    });
-    this.getRecentLists();
+    this.loadAllLists();
   }
 
   getUserName(): void {
@@ -119,6 +112,17 @@ export class Tab2Page implements OnInit {
       this.userName = decodedToken.userName;
       this.userId = decodedToken.userId;
     }
+  }
+
+  loadAllLists() {
+    forkJoin([this.getLists(), this.getRecentLists()]).subscribe(
+      ([lists, recentLists]) => {
+        this.lists = lists;
+        this.filteredLists = lists;
+        this.recentLists = recentLists;
+      },
+      error => console.error('Erro ao buscar dados: ', error)
+    );
   }
 
   addNewList(newList: any) {
