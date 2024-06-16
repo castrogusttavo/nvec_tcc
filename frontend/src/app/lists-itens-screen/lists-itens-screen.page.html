@@ -22,7 +22,7 @@
     <div class="itens-div">
       <app-card-box action="Criar" description="Adicionar um novo item" [routerLink]="['/create-item', lista.id_lista]"></app-card-box>
 
-      <app-card-item 
+      <app-card-item
       *ngFor="let item of items" 
       [price]="item.vl_uni" 
       [itemName]="item.nm_item" 

@@ -51,6 +51,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 60px;
+
+        margin: 0;
+        margin-left: 4px;
+        color: #000000;
+        font-weight: 600;
+        font-size: 14px;
     }
     .chekbox-item {
         display: flex;
