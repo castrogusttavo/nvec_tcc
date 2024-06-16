@@ -1,4 +1,7 @@
 <ion-card [ngClass]="customClass">
+  <img *ngIf="iconType === 'circle'" src="../../../../assets/svg/circle.svg" alt="" class="icon icon-right">
+  <img *ngIf="iconType === 'triangle'" src="../../../../assets/svg/triangle.svg" alt="" class="icon icon-right">
+  <img *ngIf="iconType === 'square'" src="../../../../assets/svg/square.svg" alt="" class="icon icon-right">
   <div class="content">
     <span
     [ngStyle]="{
@@ -8,7 +11,7 @@
     class="spanPlan">
     {{ planTitle }}
   </span>
-      <h1>{{ planPreco }}</h1>
+    <h1>{{ planPreco }}</h1>
     <p>{{ planDesc }}</p>
     <h2>Inclui:</h2>
     <ul>

@@ -12,6 +12,7 @@ export class CardPlansComponent  implements OnInit {
   @Input() planPreco: string | undefined;
   @Input() planDesc: string | undefined;
   @Input() customClass: string | undefined;
+  @Input() iconType: 'circle' | 'triangle' | 'square' = 'circle';
 
   constructor() { }
 
