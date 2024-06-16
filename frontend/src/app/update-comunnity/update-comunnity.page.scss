@@ -137,10 +137,3 @@ ion-select::part(icon) {
 .textButton{
     align-content: space-evenly;
 }
-
-input::placeholder,
-textarea::placeholder {
-  white-space: wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
