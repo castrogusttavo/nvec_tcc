@@ -30,6 +30,7 @@ export class UpdateComunnityPage implements OnInit {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
     });
+    this.getUserId();
     this.getCategories().subscribe(categories => {
       this.category = categories;
     });
@@ -40,20 +41,20 @@ export class UpdateComunnityPage implements OnInit {
 
     event.preventDefault();
 
-    console.log('Name: ', this.name);
-    console.log('Categoria: ', this.categoriaSelecionada);
-    console.log('Sobre: ', this.about);
-    console.log('Endereço: ', this.address);
-    console.log('Id do usuário: ', this.userId);
-
     try {
       const response: any = await this.http.patch(
         `http://localhost:3001/api/communities/${this.communityId}`,
-        { nm_comunidade: this.name, id_categoria: this.categoriaSelecionada, sb_comunidade:this.about, end_comunidade:this.address}
+        { 
+          nm_comunidade: this.name, 
+          id_categoria: this.categoriaSelecionada, 
+          sb_comunidade: this.about, 
+          end_comunidade: this.address 
+        }
       ).toPromise();
 
       console.log('Comunidade atualizada com sucesso:', response);
-      this.router.navigate(['/list-adm-community',this.userId, this.communityId]);
+
+      this.router.navigate(['/tabs/tab4']);
     } catch (err) {
       console.error('Erro ao atualizar comunidade:', err);
     }
@@ -86,6 +87,14 @@ export class UpdateComunnityPage implements OnInit {
     const counter = input.parentElement.querySelector('.counter');
     if (counter) {
       counter.textContent = currentLength > 0 ? `${currentLength} / ${maxLength}` : '';
+    }
+  }
+
+  getUserId(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userId = decodedToken.userId;
     }
   }
 

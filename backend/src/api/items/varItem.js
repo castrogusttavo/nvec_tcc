@@ -18,8 +18,8 @@ router.patch("/varItem/:userId/:communityId/:listId/:itemId", async (req, res) =
       const setQuery = keys.map((key, index) => `${key} = ?`).join(", ");
       
       await db_query(
-        `UPDATE tb_item_variavel SET ${setQuery} WHERE id_item_variavel = ?`,
-        [...values, itemId]
+        `UPDATE tb_item_variavel SET ${setQuery} WHERE id_item_variavel = ? AND id_lista_variavel = ?`,
+        [...values, itemId, listId]
       );
     
   
@@ -65,7 +65,7 @@ router.patch("/varItemLocal/:userId/:communityId/:listId", async (req, res) => {
       const communityId = req.params.communityId;
   
       const items = await db_query(
-          "SELECT iv.*, ifx.*, iv.vl_uni * ifx.qtde_item AS total FROM tb_item_variavel iv JOIN tb_item_fixo ifx ON iv.id_item_fixo = ifx.id_item_fixo WHERE ifx.id_lista_fixa = ? AND iv.id_lista_variavel = ? AND iv.id_item_variavel = ?",
+          "SELECT iv.*, ifx.*, iv.vl_uni * ifx.qtde_item AS total FROM tb_item_variavel iv JOIN tb_item_fixo ifx ON iv.id_item_fixo = ifx.id_item_fixo WHERE iv.id_lista_variavel = 18 and iv.id_item_variavel=34 and ifx.id_lista_fixa = 13;",
           [communityId,listId,itemId]
         );
   
