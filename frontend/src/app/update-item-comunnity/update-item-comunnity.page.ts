@@ -25,24 +25,20 @@ export class UpdateItemComunnityPage implements OnInit {
       this.userId = params['userId'];
       this.communityId = params['communityId'];
       this.listId = params['listId'];
-      console.log("userId ", this.userId);
-      console.log("listId ", this.listId);
-      console.log("communityId ", this.communityId);
     });
   }
-  updateItem():void {
+
+  async updateItem() {
     try {
-      console.log("ID DA LISTA: ", this.listId);
-      const response: any =  this.http.patch(
+      const response: any = await this.http.patch(
         `http://localhost:3001/api/varItemLocal/${this.userId}/${this.communityId}/${this.listId}`,
         { end_lista: this.end_lista }
-        
       ).toPromise();
 
-      this.router.navigate(['/comunnity-lists-item', this.userId, this.communityId,this.listId]);
+      console.log('Local do item atualizado com sucesso:', response);
+      this.router.navigate(['/comunnity-lists-item', this.userId, this.communityId, this.listId]);
     } catch (err) {
-      console.error('Erro ao atualizar item: ', err);
+      console.error('Erro ao atualizar local do item:', err);
     }
   }
-  
 }
