@@ -124,3 +124,11 @@ ion-select::part(icon) {
     color: #9FADBC;
     opacity: 1;
 }
+
+input::placeholder,
+textarea::placeholder {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  

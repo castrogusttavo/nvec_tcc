@@ -10,35 +10,58 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./update-list.page.scss'],
 })
 export class UpdateListPage implements OnInit {
-  name!:string;
-  category!:any[];
-  description!:string;
-  expense!:string;
-  address!:string;
-  user!:string;
+  name!: string;
+  oldName!: string;
+  categories: any[] = [];
+  description!: string;
+  oldDescription!: string;
+  expense!: string;
+  oldExpense!: string;
+  address!: string;
+  oldAddress!: string;
+  user!: string;
+  oldCategoria!: string;
 
-  inputTextValue: string | undefined;
-  categoriaSelecionada!:string;
-
+  categoriaSelecionada!: string;
   listaId!: string;
- 
+
   private apiCategories = 'http://localhost:3001/api/categories';
   private apiList = 'http://localhost:3001/api/lists';
 
-  getCategories():Observable<any[]>{
-    return this.http.get<any[]>(this.apiCategories);
-  }
-
-  constructor(private route: ActivatedRoute,private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router,
+    private jwtHelper: JwtHelperService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.listaId = params['id'];
+      if (this.listaId) {
+        this.getListDetails(this.listaId);
+      }
     });
     this.getCategories().subscribe(categories => {
-      this.category = categories;
+      this.categories = categories;
     });
     this.getUserId();
+  }
+
+  getCategories(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiCategories);
+  }
+
+  getListDetails(id: string): void {
+    this.http.get<any>(`${this.apiList}/${id}`).subscribe(list => {
+      this.oldName = list.nm_lista;
+      this.oldDescription = list.ds_lista;
+      this.oldExpense = list.rd_lista;
+      this.oldAddress = list.end_lista;
+      this.oldCategoria = list.id_categoria;
+      this.categoriaSelecionada = list.id_categoria;
+      this.user = list.id_usuario;
+    });
   }
 
   customCounterFormatter(inputLength: number, maxLength: number) {
@@ -55,29 +78,35 @@ export class UpdateListPage implements OnInit {
     }
   }
 
-
   async updateList(event: { preventDefault: () => void; }) {
-   if(this.listaId){
-    event.preventDefault();
+    if (this.listaId) {
+      event.preventDefault();
 
-    console.log('Name:', this.name);
-    console.log('Categoria:', this.categoriaSelecionada);
-    console.log('Descrição:', this.description);
-    console.log('Endereço:', this.address);
-    console.log('Valor máximo:', this.expense);
+      console.log('Name:', this.name);
+      console.log('Categoria:', this.categoriaSelecionada);
+      console.log('Descrição:', this.description);
+      console.log('Endereço:', this.address);
+      console.log('Valor máximo:', this.expense);
 
-    try {
-      const response: any = await this.http.patch(
-        `http://localhost:3001/api/lists/${this.listaId}`,
-        { nm_lista: this.name, rd_lista:this.expense, ds_lista:this.description,id_categoria:this.categoriaSelecionada, id_usuario:this.user, end_lista:this.address }
-      ).toPromise();
+      try {
+        const response: any = await this.http.patch(
+          `${this.apiList}/${this.listaId}`,
+          {
+            nm_lista: this.name,
+            rd_lista: this.expense,
+            ds_lista: this.description,
+            id_categoria: this.categoriaSelecionada,
+            id_usuario: this.user,
+            end_lista: this.address
+          }
+        ).toPromise();
 
-      console.log('Lista atualizada com sucesso:', response);
-      this.router.navigate(['/tabs/tab1']);
-    } catch (err) {
-      console.error('Erro ao atualizar lista:', err);
+        console.log('Lista atualizada com sucesso:', response);
+        this.router.navigate(['/tabs/tab1']);
+      } catch (err) {
+        console.error('Erro ao atualizar lista:', err);
+      }
     }
-   }
   }
 
   getUserId(): void {
@@ -91,17 +120,14 @@ export class UpdateListPage implements OnInit {
   }
 
   deleteList(): void {
-
-    this.http.delete(`http://localhost:3001/api/lists/${this.listaId}`)
-    .toPromise()
-    .then(() => {
-      console.log('Lista excluída com sucesso');
-      this.router.navigate(['/tabs/tab1']);
-    })
-    .catch(error => {
-      console.error('Erro ao excluir lista:', error);
-
-    });
-
+    this.http.delete(`${this.apiList}/${this.listaId}`)
+      .toPromise()
+      .then(() => {
+        console.log('Lista excluída com sucesso');
+        this.router.navigate(['/tabs/tab1']);
+      })
+      .catch(error => {
+        console.error('Erro ao excluir lista:', error);
+      });
   }
 }

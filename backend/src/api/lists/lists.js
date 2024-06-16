@@ -136,4 +136,24 @@ router.delete("/lists/:id", async (req, res) => {
   }
 });
 
+router.get("/lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
+    const list = await db_query(
+      `SELECT * FROM tb_lista WHERE id_lista = ?`,
+      [listId]
+    );
+
+    if (list.length === 0) {
+      res.status(404).send("Lista não encontrada");
+      return;
+    }
+
+    res.json(list[0]);
+  } catch (err) {
+    console.error("Erro ao buscar lista", err);
+    res.status(500).send("Erro ao buscar lista");
+  }
+});
+
 module.exports = router;

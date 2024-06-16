@@ -1,26 +1,25 @@
 <ion-content [fullscreen]="true" scrollY="false">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="" [routerLink]="['/list-adm-community',userId, communityId]">
+  <img *ngIf="communityId" [routerLink]="['/list-adm-community', userId, communityId]" class="forward" src="../../assets/svg/arrow_forward_ios.svg" alt="">
 
   <div class="imageIlustrator">
-    <img  src="../../assets/png/imagem.png" alt="">
+    <img src="../../assets/png/imagem.png" alt="">
   </div>
 
-  <form (ngSubmit)="updateCommunity($event)" >
+  <form (ngSubmit)="updateCommunity($event)">
     <div class="inputs">  
-      
-      <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" >
-      
-      <ion-item class="input item inputText">
-        <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
+      <input name="name" [(ngModel)]="name" [placeholder]="oldName || 'Nome'" class="inputText">
+
+      <ion-item class="inputText input">
+        <ion-select [(ngModel)]="categoriaSelecionada" name="category" [placeholder]="oldCategoria || 'Categoria'">
           <ion-select-option *ngFor="let category of category" [value]="category.id_categoria">
             {{ category.ds_categoria }}
           </ion-select-option>
         </ion-select>
       </ion-item>
 
-      <input style="width: 382px;" name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText" >
+      <input style="width: 382px;" name="address" [(ngModel)]="address" [placeholder]="oldAddress || 'Endereço'" class="inputText">
       <div>
-        <textarea name="about" [(ngModel)]="about"  placeholder="Descrição" class="description inputText" (input)="updateCounter($event)" maxlength="100"></textarea>
+        <textarea name="about" [(ngModel)]="about" [placeholder]="oldAbout || 'Sobre a comunidade'" class="description inputText" (input)="updateCounter($event)" maxlength="100"></textarea>
         <div class="counter"></div>
       </div>
     </div>
@@ -30,10 +29,9 @@
   </form>
 
   <div class="options">
-    <app-button-small  [routerLink]="['/list-adm-community',userId, communityId]" class="textButton">Cancelar</app-button-small>
+    <app-button-small *ngIf="communityId" [routerLink]="['/list-adm-community', userId, communityId]" class="textButton">Cancelar</app-button-small>
     <div (click)="deleteCommunity()" class="excluir">
       <p>Excluir</p>
     </div>
   </div>
-  
 </ion-content>
