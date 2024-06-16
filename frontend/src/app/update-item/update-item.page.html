@@ -1,58 +1,60 @@
 <ion-content *ngIf="item">
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/select-item',item.id_lista, item.id_item]">
 
+
+  <div class="imageIlustrator">
+    <img width="200px" height="200px" src="../../assets/svg/defaultImgList.svg" alt="">
+  </div>
+  
   <div> <!-- Conteúdo da modal -->
     <div class="modal-content">
       <form (ngSubmit)="updateItem($event)">
         <ng-container>
-          <div  class="inputs">
+          <div class="inputs">
             <!-- Input Nome -->
             <div>
               <input
                name="name" 
                [(ngModel)]="name"
-               placeholder="Nome"
+               [placeholder]="item.nm_item || 'Nome'"
                class="inputText">
               <div class="counter"></div>
             </div>
             <!-- Input Nome-->
-  
+
             <!-- Dropdown medida -->
             <ion-item class="item">
-              <input placeholder="Medida" >
-  
-              <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
+              <input [placeholder]="item.ds_medida || 'Medida'" >
+
+              <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;">
                 <ion-select-option *ngFor="let measure of measures" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
               </ion-select>
             </ion-item>
             <!-- Dropdown medida -->
-  
-            <!-- Input Quantidade                                             POR ENQUANTO NEM EXISTE NÉ-->
-            <input 
-            placeholder="Quantidade"
-            name="quantity" 
-            [(ngModel)]="quantity">
+
             <!-- Input Quantidade -->
-  
+            <input 
+              name="quantity" 
+              [(ngModel)]="quantity" 
+              [placeholder]="item.qtde_item || 'Quantidade'">
+            <!-- Input Quantidade -->
+
             <!-- Input Valor -->
             <input 
-            name="price" 
-            [(ngModel)]="price" 
-            placeholder="valor" 
-            class="inputText">
+              name="price" 
+              [(ngModel)]="price" 
+              [placeholder]="item.vl_uni || 'Valor'" 
+              class="inputText">
             <!-- Input Valor -->
           </div>
         </ng-container>
-  
+
         <div class="buttonBig">
           <app-button-big>Salvar Alterações</app-button-big>
         </div>
-  
       </form>
     </div>
-  
-  
-  
+
     <!-- Botão Bolean cancelar e Excluir -->
     <div class="bolean">
       <!-- Botão Cancelar -->
@@ -64,7 +66,4 @@
     </div>
     <!-- Botão Bolean cancelar e Excluir -->
   </div>
-  
-  
-  
 </ion-content>
