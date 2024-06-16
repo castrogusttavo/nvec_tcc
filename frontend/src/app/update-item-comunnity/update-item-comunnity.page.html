@@ -1,12 +1,12 @@
 <ion-content [fullscreen]="true" scrollY="false">
-  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/comunnity-lists-item', userId, communityId, listId]" alt="">
+  <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/comunnity-lists-item', userId, communityId,listId]" alt="">
 
   <div class="imageIlustrator">
     <img width="200px" height="200px" src="../../assets/svg/defaultImgItem.svg" alt="">
   </div>
 
-  <form (ngSubmit)="updateItem()" class="inputs">
-    <input [(ngModel)]="end_lista" name="end_lista" placeholder="Local" class="inputName">
+  <form  (ngSubmit)="updateItem()" class="inputs">
+    <input [(ngModel)]="end_lista" name="end_lista"  placeholder="Local"  class="inputName">
   
     <div class="buttonBig">
       <app-button-big>Atualizar local</app-button-big>
@@ -14,6 +14,6 @@
   </form>
 
   <div class="options">
-    <app-button-small [routerLink]="['/comunnity-lists-item', userId, communityId, listId]" class="textButton">Cancelar</app-button-small>
+    <app-button-small [routerLink]="['/comunnity-lists-item', userId, communityId,listId]" class="textButton">Cancelar</app-button-small>
   </div>
 </ion-content>

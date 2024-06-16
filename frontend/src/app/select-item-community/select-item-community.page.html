@@ -7,16 +7,16 @@
 
   <form (ngSubmit)="updateItemCommunity($event)" class="inputs">
 
-    <input name="name" [(ngModel)]="name" [placeholder]="item?.nm_item || 'Nome'" class="inputText" >
+    <input name="name" [(ngModel)]="name" [placeholder]="item?.nm_item || 'undefined'" class="inputText" >
     
     <ion-item class="item">
-      <input class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" [placeholder]="item?.qtde_medida || 'Quantidade de Medida'" >
+      <input class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" [placeholder]="item?.qtde_medida || 'undefined'" >
       <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
         <ion-select-option *ngFor="let measure of measure" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
       </ion-select>
     </ion-item>
     
-    <input name="quantity" [(ngModel)]="quantity" [placeholder]="item?.qtde_item || 'Quantidade'" class="inputText" type="number">
+    <input name="quantity" [(ngModel)]="quantity" [placeholder]="item?.qtde_item || 'undefined'" class="inputText" type="number">
 
     
     <div class="buttonBig">
