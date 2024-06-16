@@ -16,8 +16,6 @@ router.post("/communities", async (req, res) => {
       [nm_comunidade, id_categoria, sb_comunidade, end_comunidade, userId]
     );
 
-    console.log("Inserção na tb_comunidade:", resultComunidade);
-
     if (resultComunidade.affectedRows === 1) {
       const communityId = resultComunidade.insertId;
 
@@ -26,15 +24,11 @@ router.post("/communities", async (req, res) => {
         [communityId, userId]
       );
 
-      console.log("Inserção na tb_comunidade_usuario:", resultUsuario);
-
       if (resultUsuario.affectedRows === 1) {
         const resultList = await db_query(
           "INSERT INTO tb_lista_fixa (id_lista_fixa) VALUES (?)",
           [communityId]
         );
-
-        console.log("Inserção na tb_lista_fixa:", resultList);
 
         if (resultList.affectedRows === 1) {
           const listId = resultList.insertId;

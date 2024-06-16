@@ -114,7 +114,7 @@ export class Tab4Page implements OnInit {
     } else {
       this.state = 'Offline';
     }
-    this.cdr.detectChanges(); // Notify Angular to detect changes
+    this.cdr.detectChanges();
   }
 
   checkTokenChanges(): void {
