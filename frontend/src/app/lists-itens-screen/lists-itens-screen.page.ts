@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, map } from 'rxjs';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ItemService } from '../service/item.service';
 
 @Component({
   selector: 'app-lists-itens-screen',
@@ -14,15 +16,16 @@ export class ListsItensScreenPage implements OnInit {
   items!: any[];
   lista: any = {};
   categories!: any[];
-  apiList = `http://localhost:3001/api/list`
-  apiCategories = "http://localhost:3001/api/categories"
-  apiItems = 'http://localhost:3001/api/items'
-  apiMeasures = "http://localhost:3001/api/measures"
-  apiStatus = "http://localhost:3001/api/status"
+  vlGasto: number = 0;
+  apiList = `http://localhost:3001/api/list`;
+  apiCategories = "http://localhost:3001/api/categories";
+  apiItems = 'http://localhost:3001/api/items';
+  apiMeasures = "http://localhost:3001/api/measures";
+  apiStatus = "http://localhost:3001/api/status";
   measures!: any[];
   status!: any[];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private itemService: ItemService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -30,6 +33,12 @@ export class ListsItensScreenPage implements OnInit {
     });
     this.getList();
     this.getItems();
+    this.itemService.items$.subscribe(items => {
+      this.items = items;
+    });
+    this.itemService.vlGasto$.subscribe(vlGasto => {
+      this.vlGasto = vlGasto;
+    });
   }
 
   formatDate(dateString: string): string {
@@ -66,6 +75,7 @@ export class ListsItensScreenPage implements OnInit {
         data => {
           console.log('Dados dos itens:', data); 
           this.items = data;
+          this.itemService.setItems(data); // Atualize o serviço com os itens obtidos
         },
         error => console.error('Erro ao buscar dados:', error)
       );
@@ -115,16 +125,11 @@ export class ListsItensScreenPage implements OnInit {
       .subscribe(
         response => {
           console.log("Status atualizado: ", response);
-
-          const item = this.items.find(i => i.id_item === itemId);
-          if (item) {
-            item.id_status = statusId;
-          }
+          this.itemService.updateItemStatus(itemId, status); // Atualize o serviço com o novo status
         },
         error => {
           console.error("Erro ao atualizar status do item: ", error);
         }
       )
   }
-
 }

@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
+import { ItemService } from '../service/item.service';
 
 @Component({
   selector: 'app-create-item',
@@ -13,19 +12,19 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class CreateItemPage implements OnInit {
 
-  apiMeasures = "http://localhost:3001/api/measures"
-  measures!:any[];
-  medidaSelecionada!:string;
+  apiMeasures = "http://localhost:3001/api/measures";
+  apiItems = 'http://localhost:3001/api/items'; // Certifique-se de que a URL está correta
+  measures!: any[];
+  medidaSelecionada!: string;
 
-  name!:string;
-  price!:number;
-  quantity!:number;
-  quantity_measure!:number;
+  name!: string;
+  price!: number;
+  quantity!: number;
+  quantity_measure!: number;
 
-  listaId!:number;
+  listaId!: number;
 
-
-  constructor(private route: ActivatedRoute,private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService, private itemService: ItemService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -36,7 +35,7 @@ export class CreateItemPage implements OnInit {
     });
   }
 
-  getMeasures():Observable<any[]>{
+  getMeasures(): Observable<any[]> {
     return this.http.get<any[]>(this.apiMeasures);
   }
 
@@ -49,15 +48,20 @@ export class CreateItemPage implements OnInit {
 
     try {
       const response: any = await this.http.post(
-        'http://localhost:3001/api/items',
-        { nm_item: this.name, vl_uni:this.price,id_medida:this.medidaSelecionada,qtde_medida_item:this.quantity_measure, qtde_item:this.quantity,id_lista:this.listaId }
+        this.apiItems,
+        { nm_item: this.name, vl_uni: this.price, id_medida: this.medidaSelecionada, qtde_medida_item: this.quantity_measure, qtde_item: this.quantity, id_lista: this.listaId }
       ).toPromise();
 
-      console.log('Lista criada com sucesso:', response);
+      console.log('Item criado com sucesso:', response);
+      
+      // Requisição adicional para buscar detalhes completos do item recém-criado, se necessário
+      const itemDetails: any = await this.http.get(`${this.apiItems}/${response.id_item}`).toPromise();
+      
+      console.log('Detalhes do item:', itemDetails);
+      this.itemService.addItem(itemDetails); // Adicione o novo item ao serviço com detalhes completos
       this.router.navigate(['/lists-items', this.listaId]);
     } catch (err) {
-      console.error('Erro ao criar lista:', err);
+      console.error('Erro ao criar item:', err);
     }
   }
-
 }
