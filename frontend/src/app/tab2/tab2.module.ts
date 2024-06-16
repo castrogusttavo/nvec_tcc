@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { SharedModule } from 'src/components/shared/shared.module';
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { ReactiveFormsModule } from '@angular/forms'; // Importe o ReactiveFormsModule
@@ -14,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     Tab2PageRoutingModule,
     SharedModule,
     ReactiveFormsModule,
