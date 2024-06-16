@@ -113,14 +113,15 @@ router.patch("/varItemLocal/:userId/:communityId/:listId", async (req, res) => {
             'SELECT * FROM tb_item_variavel WHERE id_lista_variavel = ? AND id_item_fixo = ?',
             [lista.id_lista_variavel, itemId]
           );
-      
-          if (item_variavel.length === 0) {
+
+          if (item_variavel.length === 0 && lista.id_lista === communityId) {
             await db_query(
               'INSERT INTO tb_item_variavel (id_lista_variavel, id_item_fixo, vl_uni) VALUES (?, ?, NULL)',
               [lista.id_lista_variavel, itemId]
             );
           }
         }
+
       }
           
       res.status(200).json({ message: 'Itens variáveis atualizados para o usuário na comunidade' });
