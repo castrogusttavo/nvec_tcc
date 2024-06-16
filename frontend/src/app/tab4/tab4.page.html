@@ -27,7 +27,7 @@
 
     <div *ngIf="filteredCommunities.length > 0">
       <app-card-list-search
-      *ngFor="let community of communities" name="community"
+      *ngFor="let community of filteredCommunities"
       (click)="navigateToCommunityPage(community.id_comunidade, community.id_criador)"
       [title]="community.nm_comunidade"
       ></app-card-list-search>

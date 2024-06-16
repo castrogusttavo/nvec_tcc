@@ -29,7 +29,7 @@ export class Tab4Page implements OnInit {
   state: string = 'Offline';  // Initialize the state as Offline
 
   communities: any[] = [];
-  filteredCommunities: any[] = [];  // Add this line
+  filteredCommunities: any[] = [];
   private apiCommunity = 'http://localhost:3001/api/communities';
 
   constructor(
