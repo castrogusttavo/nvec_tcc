@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -14,12 +15,12 @@ export class UpdateComunnityPage implements OnInit {
   userId!: number;
   communityId!: number;
   
-  name: string = '';
+  name!: string;
   oldName: string = '';
-  category: any[] = [];
-  about: string = '';
+  category!: any[];
+  about!: string;
   oldAbout: string = '';
-  address: string = '';
+  address!: string;
   oldAddress: string = '';
   oldCategoria: string = '';
 
@@ -41,16 +42,19 @@ export class UpdateComunnityPage implements OnInit {
       this.communityId = params['communityId'];
       this.getCommunityDetails(this.communityId);
     });
+    this.getUserId();
     this.getCategories().subscribe(categories => {
       this.category = categories;
     });
   }
 
   async updateCommunity(event: { preventDefault: () => void; }) {
+
     event.preventDefault();
+
     try {
       const response: any = await this.http.patch(
-        `${this.apiCommunity}/${this.communityId}`,
+        `http://localhost:3001/api/communities/${this.communityId}`,
         { 
           nm_comunidade: this.name, 
           id_categoria: this.categoriaSelecionada, 
@@ -60,7 +64,8 @@ export class UpdateComunnityPage implements OnInit {
       ).toPromise();
 
       console.log('Comunidade atualizada com sucesso:', response);
-      this.router.navigate(['/list-adm-community', this.userId, this.communityId]);
+
+      this.router.navigate(['/tabs/tab4']);
     } catch (err) {
       console.error('Erro ao atualizar comunidade:', err);
     }
@@ -92,6 +97,14 @@ export class UpdateComunnityPage implements OnInit {
     const counter = input.parentElement.querySelector('.counter');
     if (counter) {
       counter.textContent = currentLength > 0 ? `${currentLength} / ${maxLength}` : '';
+    }
+  }
+
+  getUserId(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      this.userId = decodedToken.userId;
     }
   }
 
