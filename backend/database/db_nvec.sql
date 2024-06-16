@@ -42,7 +42,7 @@ create table if not exists tb_assinatura (
 
 create table if not exists tb_medida_item(
 	id_medida int auto_increment not null,
-	ds_medida enum('kg', 'g', 'L', 'mL', 'm', 'cm', 'NA') not null,
+	ds_medida enum('kg', 'g', 'L', 'mL', 'm', 'cm', 'unid.') not null,
     primary key (id_medida)
 ) default character set utf8;
         
@@ -147,17 +147,17 @@ create table if not exists tb_lista (
         references tb_categoria(id_categoria)
 ) default character set utf8;
 
-create table if not exists tb_comunidade_usuario (
+CREATE TABLE IF NOT EXISTS tb_comunidade_usuario (
     id_comunidade int not null,
     id_usuario int not null,
-    primary key (id_comunidade,id_usuario),
-    index comunidade_usuario(id_comunidade asc) visible,
-    constraint comunidade_usuario
-		foreign key (id_comunidade)
+    primary key (id_comunidade, id_usuario),
+    index comunidade_usuario (id_comunidade asc) visible,
+    constraint fk_comunidade_usuario
+        foreign key (id_comunidade)
         references tb_comunidade(id_comunidade),
-	index usuario (id_usuario asc) visible,
-	constraint usuario
-		foreign key (id_usuario)
+    index usuario (id_usuario asc) visible,
+    constraint fk_usuario
+        foreign key (id_usuario)
         references tb_usuario(id_usuario)
 ) default character set utf8;
 
