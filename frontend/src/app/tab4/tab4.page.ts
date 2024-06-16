@@ -133,7 +133,7 @@ export class Tab4Page implements OnInit {
       params: { userId: this.userId }
     }).subscribe(
       (data) => {
-        this.createdCommunitiesCount = data.length > 0 ? data[0].communities : 0;
+        this.createdCommunitiesCount = data;
       },
       (error) => {
         console.error('Erro ao buscar o número de comunidades criadas', error);
@@ -146,13 +146,14 @@ export class Tab4Page implements OnInit {
       params: { userId: this.userId }
     }).subscribe(
       (data) => {
-        this.loginCommunitiesCount = data.length > 0 ? data[0]['comunidades entradas'] : 0;
+        this.loginCommunitiesCount = data;
       },
       (error) => {
         console.error('Erro ao buscar o número de comunidades acessadas', error);
       }
     );
   }
+  
 
   fetchInvitationCommunitiesCount(): void {
     this.http.get<any>(`http://localhost:3001/api/invitationCommunitiesCount`, {

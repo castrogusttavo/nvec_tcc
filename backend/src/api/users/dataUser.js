@@ -81,74 +81,59 @@ router.get("/recentCommunitiesUser", async (req, res) => {
   }
 });
 
-// Count User Created Communities
 router.get("/createdCommunitiesCount", async (req, res) => {
   try {
     const { userId } = req.query;
 
     if (!userId) {
-      res.status(400).json({ error: "ID do usuário não fornecido" });
-      return;
+      return res.status(400).json({ error: "ID do usuário não fornecido" });
     }
-
-    let createdCommunities = [];
 
     const communitiesCount = await db_query(
       `
       SELECT 
-        COUNT(*) as communities
+        COUNT(*) as count
       FROM 
-        tb_comunidade_usuario AS cu
-      JOIN 
-        tb_comunidade AS c ON cu.id_comunidade = c.id_comunidade
-      WHERE 
-        cu.id_usuario = ?
+        tb_comunidade AS c
+      JOIN tb_comunidade_usuario AS cu
+      ON c.id_comunidade = cu.id_comunidade
+      WHERE cu.id_usuario=? AND c.id_criador = cu.id_usuario
       `,
       [userId]
     );
 
-    if (communitiesCount.length > 0) {
-      createdCommunities = communitiesCount;
-    }
+    const createdCommunitiesCount = communitiesCount.length > 0 ? communitiesCount[0].count : 0;
 
-    res.status(200).json(createdCommunities);
+    res.status(200).json(createdCommunitiesCount);
   } catch (err) {
     console.error("Erro ao buscar comunidades criadas", err);
     res.status(500).send("Erro ao buscar comunidades criadas");
   }
 });
 
-// Count User Login Communities
+
 router.get("/loginCommunitiesCount", async (req, res) => {
   try {
     const { userId } = req.query;
 
     if (!userId) {
-      res.status(400).json({ error: "ID do usuário não fornecido" });
-      return;
+      return res.status(400).json({ error: "ID do usuário não fornecido" });
     }
-
-    let loginCommunities = [];
 
     const communitiesCount = await db_query(
       `
-        SELECT 
-          COUNT(*) as 'comunidades entradas'
-        FROM 
-          tb_comunidade AS c
-        WHERE 
-          NOT EXISTS (
-            SELECT 1
-            FROM tb_comunidade_usuario AS cu
-            WHERE cu.id_usuario = ? AND cu.id_comunidade = c.id_comunidade
-          );
-        `,
+      SELECT 
+        COUNT(*) as count
+      FROM 
+        tb_comunidade AS c
+      JOIN tb_comunidade_usuario AS cu
+      ON c.id_comunidade = cu.id_comunidade
+      WHERE cu.id_usuario=? AND c.id_criador != cu.id_usuario
+      `,
       [userId]
     );
 
-    if (communitiesCount.length > 0) {
-      loginCommunities = communitiesCount;
-    }
+    const loginCommunities = communitiesCount.length > 0 ? communitiesCount[0].count : 0;
 
     res.status(200).json(loginCommunities);
   } catch (err) {
@@ -156,6 +141,7 @@ router.get("/loginCommunitiesCount", async (req, res) => {
     res.status(500).send("Erro ao buscar comunidades acessadas");
   }
 });
+
 
 // Count User Invitations
 router.get("/invitationCommunitiesCount", async (req, res) => {
