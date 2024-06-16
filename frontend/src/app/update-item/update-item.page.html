@@ -1,6 +1,11 @@
 <ion-content *ngIf="item">
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/select-item',item.id_lista, item.id_item]">
 
+
+  <div class="imageIlustrator">
+    <img width="200px" height="200px" src="../../assets/svg/defaultImgList.svg" alt="">
+  </div>
+  
   <div> <!-- Conteúdo da modal -->
     <div class="modal-content">
       <form (ngSubmit)="updateItem($event)">
