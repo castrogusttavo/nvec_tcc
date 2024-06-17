@@ -43,12 +43,12 @@
 }
 .compare-lists,
 .participantes{
-    border-radius: 24px 24px 0 0  ;
-    padding: 10px 10px;;
+    border-radius: 24px;
+    padding: 10px 16px 20px 16px;
     background: #F1F2F4;
     width: 100%;
     height: fit-content;
-    margin-top: 50px;
+    margin-top: 24px;
 }
 .grey-text{
     color: #B3B9C4;
@@ -60,7 +60,10 @@
 .lists-users{
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 16px;
+    padding: 16px;
+
+    border-bottom: 1.8px solid #DCDFE4;
 }
 .name-address{
     height: fit-content;
@@ -93,6 +96,13 @@ h4, h3, h5{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.text-desc {
+    color: var(--Color-Neutral-Dark-N500, #596773);
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
 }
 .title{
     font-size: 20px;
@@ -144,9 +154,37 @@ h4, h3, h5{
 .info{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;  
+}
+
+.info h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #006EFF; 
+    line-height: 35.2px;
+}
+
+.title {
+    color: var(--Color-brand2, #FFAC4A);
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25.2px;
 }
 
 .rs-comp {
     padding: 10px;
+}
+
+.t-part {
+    margin-top: 32px !important;
+}
+
+hr {
+    width: 100%;
+    margin-top: 16px;
+    height: 1.8px;
+    border-radius: 7.2px;
+    background: var(--Color-inverted-inverted300, #DCDFE4);
 }

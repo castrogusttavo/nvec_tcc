@@ -131,15 +131,19 @@
             </h6>
           </div>
 
+          <hr>
+
           <div class="divider"></div>
 
           <div class="description">
             <h6><b class="title">Descrição:</b></h6>
-            <h6>{{community.sb_comunidade}}</h6>
+            <h6 class="text-desc">{{community.sb_comunidade}}</h6>
           </div>
 
+          <hr>
+
+          <h5 class="title t-part">Participantes:</h5>
           <div class="participantes">
-            <h5 class="title">Participantes</h5>
 
             <div class="guests">
               <div class="creator">
@@ -159,6 +163,8 @@
                 </div>
               </div>
 
+              <hr>
+
               <div
                 *ngFor="let user of usersCommunity"
                 name="usersCommunity"
@@ -166,6 +172,7 @@
                 style="margin-top: 20px"
               >
                 <h5>{{user.nm_usuario}}</h5>
+                <hr>
               </div>
             </div>
           </div>

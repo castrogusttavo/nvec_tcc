@@ -12,28 +12,27 @@ router.get("/recentListUser", async (req, res) => {
       return;
     }
 
-    const recentLists = await db_query(
-      `SELECT 
-        l.id_lista,
-        l.nm_lista,
-        l.dt_criacao,
-        l.ds_lista,
-        l.rd_lista,
-        l.end_lista,
-        l.id_categoria,
-        l.id_usuario,
-        (SELECT SUM(i.vl_uni * i.qtde_item) 
-      FROM 
-        tb_item i 
-      WHERE 
-        i.id_lista = l.id_lista AND i.id_status = 2) AS vl_gasto
-      FROM 
-        tb_lista l
-      WHERE 
-        l.id_usuario = ?
-      ORDER BY 
-        l.dt_criacao DESC
-      LIMIT 4
+    const recentLists = await db_query(`
+    SELECT 
+      l.id_lista,
+      l.nm_lista,
+      l.dt_criacao,
+      l.ds_lista,
+      l.rd_lista,
+      l.end_lista,
+      l.id_categoria,
+      l.id_usuario,
+      (SELECT SUM(i.vl_uni * i.qtde_item) 
+    FROM tb_item i 
+      WHERE i.id_lista = l.id_lista AND i.id_status = 2) AS vl_gasto
+    FROM 
+      tb_lista l
+    WHERE 
+      l.id_usuario = ?
+    ORDER BY 
+      l.dt_criacao DESC, 
+      l.id_lista DESC
+    LIMIT 4;
       `,
       [userId]
     );
@@ -102,7 +101,8 @@ router.get("/createdCommunitiesCount", async (req, res) => {
       [userId]
     );
 
-    const createdCommunitiesCount = communitiesCount.length > 0 ? communitiesCount[0].count : 0;
+    const createdCommunitiesCount =
+      communitiesCount.length > 0 ? communitiesCount[0].count : 0;
 
     res.status(200).json(createdCommunitiesCount);
   } catch (err) {
@@ -110,7 +110,6 @@ router.get("/createdCommunitiesCount", async (req, res) => {
     res.status(500).send("Erro ao buscar comunidades criadas");
   }
 });
-
 
 router.get("/loginCommunitiesCount", async (req, res) => {
   try {
@@ -133,7 +132,8 @@ router.get("/loginCommunitiesCount", async (req, res) => {
       [userId]
     );
 
-    const loginCommunities = communitiesCount.length > 0 ? communitiesCount[0].count : 0;
+    const loginCommunities =
+      communitiesCount.length > 0 ? communitiesCount[0].count : 0;
 
     res.status(200).json(loginCommunities);
   } catch (err) {
@@ -141,7 +141,6 @@ router.get("/loginCommunitiesCount", async (req, res) => {
     res.status(500).send("Erro ao buscar comunidades acessadas");
   }
 });
-
 
 // Count User Invitations
 router.get("/invitationCommunitiesCount", async (req, res) => {
