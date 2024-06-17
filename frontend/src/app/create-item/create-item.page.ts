@@ -50,7 +50,14 @@ export class CreateItemPage implements OnInit {
     try {
       const response: any = await this.http.post(
         this.apiItems,
-        { nm_item: this.name, vl_uni: this.price.replace(/\D/g, ''), id_medida: this.medidaSelecionada, qtde_medida_item: this.quantity_measure, qtde_item: this.quantity, id_lista: this.listaId }
+        { 
+          nm_item: this.name, 
+          vl_uni: parseFloat(this.price.replace(/[^\d.,]/g, '').replace(',', '.')),
+          id_medida: this.medidaSelecionada, 
+          qtde_medida_item: this.quantity_measure, 
+          qtde_item: this.quantity, 
+          id_lista: this.listaId 
+        }
       ).toPromise();
 
       console.log('Item criado com sucesso:', response);
