@@ -18,7 +18,7 @@
         </ion-select>
       </ion-item>
 
-      <input name="expense" [(ngModel)]="expense" placeholder="Valor máximo" class="inputText" (input)="formatCurrency($event)">
+      <input name="expense" [(ngModel)]="formattedExpense" placeholder="Valor máximo" class="inputText" (input)="formatCurrency($event)">
 
       <input name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText">
       <div>

@@ -15,6 +15,7 @@ export class Tab3Page {
   category!: any[];
   description!: string;
   expense!: string;
+  formattedExpense!: string;  // Variável para armazenar o valor formatado
   address!: string;
   user!: string;
   date: string = new Date().toISOString().split('T')[0];
@@ -47,7 +48,14 @@ export class Tab3Page {
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/lists',
-        { nm_lista: this.name, rd_lista: this.expense, ds_lista: this.description, id_categoria: this.categoriaSelecionada, id_usuario: this.user, end_lista: this.address }
+        { 
+          nm_lista: this.name, 
+          rd_lista: this.expense,  // Use o valor não formatado
+          ds_lista: this.description, 
+          id_categoria: this.categoriaSelecionada, 
+          id_usuario: this.user, 
+          end_lista: this.address 
+        }
       ).toPromise();
 
       console.log('Lista criada com sucesso:', response);
@@ -88,11 +96,12 @@ export class Tab3Page {
     let value = event.target.value.replace(/\D/g, '');
     if (value === '') {
       event.target.value = '';
+      this.expense = '';  // Reset the expense value
       return;
     }
-    value = (Number(value) / 100).toFixed(2).toString();
-    value = value.replace('.', ',');
-    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    event.target.value = `R$ ${value}`;
+    const numericValue = (Number(value) / 100).toFixed(2).toString();
+    this.expense = numericValue;  // Store the numeric value
+    const formattedValue = numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    event.target.value = `R$ ${formattedValue}`;
   }
 }
