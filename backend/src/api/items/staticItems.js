@@ -154,6 +154,10 @@ router.delete("/staticItems/:listId/:itemId", async (req, res) => {
     const listId = req.params.listId;
     const itemId = req.params.itemId;
 
+    await db_query("DELETE FROM tb_item_variavel WHERE id_item_fixo = ? AND id_lista_variavel IN (SELECT id_lista_variavel FROM tb_lista_variavel WHERE id_lista_fixa = ?)",
+      [itemId, listId]
+    )
+
     await db_query("DELETE FROM tb_item_fixo WHERE id_item_fixo = ? AND id_lista_fixa=?", [itemId,listId]);
 
     res.sendStatus(200);

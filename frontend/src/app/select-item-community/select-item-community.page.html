@@ -27,9 +27,9 @@
   <!-- ARRUMAR EIN TATAVO -->
   <div class="options">
     <!-- Botão Cancelar -->
-    <a style="text-decoration: none;" [routerLink]="" class="cancelar">Cancelar</a>
+    <a style="text-decoration: none;" [routerLink]="" class="cancelar" [routerLink]="['/list-adm-community', userId, communityId]">Cancelar</a>
     <!-- Botão Excluir -->
-    <div class="excluir">
+    <div (click)="deleteItem()" class="excluir">
       <p>Excluir</p>
     </div>
   </div>

@@ -76,4 +76,17 @@ export class SelectItemCommunityPage implements OnInit {
       );
   }
 
+  deleteItem(): void {
+    try {
+      const response: any = this.http.delete(
+        `http://localhost:3001/api/staticItems/${this.communityId}/${this.itemId}`
+      ).toPromise();
+
+      console.log('Item deletado com sucesso:', response);
+      this.router.navigate(['/list-adm-community', this.userId, this.communityId]);
+    } catch (err) {
+      console.error('Erro ao deletar item: ', err);
+    }
+  }
+
 }
