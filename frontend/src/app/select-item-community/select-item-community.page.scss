@@ -1,5 +1,9 @@
 @import "../../global.scss";
 
+*{
+    --padding-start: 0px;
+}
+
 .forward{
     padding-left:  5%;
     padding-top: 5%;
@@ -19,8 +23,6 @@
     justify-content: center;
 }
 
-
-
 input{
     margin: 10px;
     width: 183px;
@@ -29,6 +31,23 @@ input{
     border-radius: var(--Space-8, 8px);
     border: var(--Space-space-025, 2px) solid $N300;
     background: transparent;
+}
+
+.inputName{
+    width: 386px;
+    height: 55px;
+}
+
+.inputName::placeholder{
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    text-align: top;
+}
+
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
 }
   
 ::placeholder {
@@ -44,7 +63,37 @@ input{
     padding-top: 8%;
     display: flex;
     justify-content: center;
-    align-items: center;
+}
+
+.cancelar{
+    padding: 0px 32px 0px 32px;
+    font-weight: 600;
+    color: #006eff9e;
+    align-self: center;
+}
+
+.excluir{
+    background-color: #FF554A;
+    padding: 0px 32px 0px 32px;
+    font-size: 16px;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.excluir p{
+    padding: 0px;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    padding: 0px 24px 40px 24px;
 }
 
 .inputText::placeholder{
@@ -187,20 +236,6 @@ ion-row {
     border-radius: var(--Space-12, 12px);
     background: #D6DFFF;
     z-index: 0;
-}
-
-p{
-    display: flex;
-    position: absolute; 
-    left: 15px; 
-    bottom: -15px; 
-    color: var(--Color-Neutral-Dark-N400, #454F59);
-    font-family: Poppins;
-    font-size: 10.8px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15.12px; 
-    z-index: 2;
 }
 
 .quant{

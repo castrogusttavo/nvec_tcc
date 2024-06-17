@@ -54,7 +54,6 @@ input,
     padding-top: 8%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .inputText::placeholder{
@@ -79,13 +78,11 @@ input,
     text-align: top;
 }
 
-.options{
-    display: flex;
-    justify-content: space-between;
-    bottom: 0;
-    position: fixed;
-    width: 100%;
-    padding: 0px 24px 40px 24px;
+.cancelar{
+    padding: 0px 32px 0px 32px;
+    font-weight: 600;
+    color: #006eff9e;
+    align-self: center;
 }
 
 .excluir{
@@ -97,6 +94,19 @@ input,
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+}
+
+.excluir p{
+    padding: 0px;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    padding: 0px 24px 40px 24px;
 }
 
 *{

@@ -1,6 +1,10 @@
 @import '../../../../global.scss';
 
 .buttonArrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     width: 56.25px;
     height: 56.25px;
     flex-shrink: 0;
@@ -8,9 +12,8 @@
     border-radius: 100%;
 }
 
-img{
-    width: 30px;
-    height: 30px;
+.buttonArrow img {
+    display: block;
 }
 
 :host.buttonArrow button{
@@ -18,5 +21,4 @@ img{
     background: #{$brand1};
     width: 35px;
     height: 35px;
-    // margin-left: 70%;
 }

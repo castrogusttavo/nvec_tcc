@@ -1,5 +1,9 @@
 @import "../../global.scss";
 
+*{
+    --padding-start: 0px;
+}
+
 .forward{
     padding-left:  5%;
     padding-top: 5%;
@@ -17,6 +21,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.item{
+    --inner-padding-end: 0 !important;
+    --inner-border-width: 0px 0px 0px 0px;
 }
 
 input{
@@ -53,7 +62,7 @@ input{
 }
 
 .inputName{
-    width: 382px;
+    width: 386px;
     height: 55px;
 }
 

@@ -119,10 +119,9 @@ ion-grid{
 }
 
 .logoutAccount{
-  opacity: 0.6;
-  text-decoration-line: none;
+    opacity: 0.6;
+    text-decoration-line: none;
 }
-
 
 .plan-container {
     display: flex;
@@ -135,4 +134,9 @@ ion-grid{
     height: 100%;
     z-index: 1000; 
     background-color: rgba(0, 0, 0, 0.5);
-  }
+}
+.buttonBig{
+    padding-top: 8%;
+    display: flex;
+    justify-content: center;
+}

@@ -19,6 +19,13 @@
     justify-content: center;
 }
 
+.cancelar{
+    padding: 0px 32px 0px 32px;
+    font-weight: 600;
+    color: #006eff9e;
+    align-self: center;
+}
+
 input{
     margin: 10px;
     width: 183px;
@@ -42,7 +49,6 @@ input{
     padding-top: 8%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .textButton{

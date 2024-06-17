@@ -27,15 +27,16 @@
     </div>
 
     <div class="buttonBig">
-      <app-button-big>Alterar Lista</app-button-big>
+      <app-button-big>Salvar Alterações</app-button-big>
     </div>
-
   </form>
-  
+
   <div class="options">
-    <app-button-small *ngIf="listaId" [routerLink]="['/lists-items', listaId]" class="textButton">Cancelar</app-button-small>
+    <!-- Botão Cancelar -->
+    <a style="text-decoration: none;" *ngIf="listaId" [routerLink]="['/lists-items', listaId]" class="cancelar">Cancelar</a>
+    <!-- Botão Excluir -->
     <div (click)="deleteList()" class="excluir">
-      <p class="excluir">Excluir</p>
+      <p>Excluir</p>
     </div>
   </div>
 </ion-content>
