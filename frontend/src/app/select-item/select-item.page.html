@@ -15,7 +15,7 @@
         <h1>{{item.nm_item}}</h1>
       </ion-col>
       <ion-col size="auto" class="ion-text-center">
-        <span>{{item.ds_medida}}</span>
+        <span>{{item.qtde_medida_item}} {{item.ds_medida}}</span>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -33,14 +33,14 @@
           <div class="backTwoTwo">
           </div>
           <p class="quant">{{item.qtde_item}}x quant:</p>
-          <div class="backOneOne">{{item.qtde_medida_item}}</div>
+          <div class="backOneOne">{{item.qtde_medida_item * item.qtde_item}} {{item.ds_medida}}</div>
         </ion-col>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <div class="valor">
-    Total: R$ 4,80
+    Total: {{item.vl_uni * item.qtde_item}}
   </div>
 
   <div class="buttonBig">

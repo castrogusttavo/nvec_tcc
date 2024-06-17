@@ -75,6 +75,4 @@ export class SelectItemPage implements OnInit {
 
    // FormGroup para validação dos campos de texto
    textForm: FormGroup;
-
-
 }
