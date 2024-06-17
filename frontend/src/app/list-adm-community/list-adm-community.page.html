@@ -35,6 +35,7 @@
     
     <app-card-box action="Criar" description="Adicionar um novo item" [routerLink]="['/create-item-comunnity', userId,communityId]"></app-card-box>
     <app-card-item-community 
+    class="no-price"
     *ngFor="let item of items"  
     [itemName]="item.nm_item" 
     [itemId]="item.id_item_fixo"
@@ -43,15 +44,7 @@
     [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
     [routerLink]="['/select-item-community',userId, communityId, item.id_item_fixo]"
     ></app-card-item-community>
-    <!-- <app-card-item 
-    *ngFor="let item of items"  
-    [itemName]="item.nm_item" 
-    [itemId]="item.id_item"
-    [listaId]="item.id_lista"
-    [status]="item.id_status"
-    (statusChange)="onStatusChange(item.id_item, $event)"
-    [imagePath]="'../../../../assets/svg/defaultImgItem.svg'"
-    ></app-card-item> -->
+
   </div>
 </div>
 </ion-content>

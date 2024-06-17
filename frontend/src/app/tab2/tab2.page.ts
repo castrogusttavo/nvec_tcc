@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, forkJoin, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { ListDataService } from '../service/list.service';
 
 @Component({
   selector: 'app-tab2',
@@ -34,16 +35,27 @@ export class Tab2Page implements OnInit {
 
   textForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private jwtHelper: JwtHelperService, private cdr: ChangeDetectorRef) {
+  constructor(
+    private formBuilder: FormBuilder, 
+    private http: HttpClient, 
+    private jwtHelper: JwtHelperService, 
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    private listDataService: ListDataService
+  ) {
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       valor: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
     });
+
+    this.listDataService.newList$.subscribe(newList => {
+      this.addNewList(newList);
+    });
   }
 
-  getRecentLists(): void {
-    forkJoin({
+  getRecentLists(): Observable<any[]> {
+    return forkJoin({
       lists: this.http.get<any[]>(this.apiRecentLists, { params: { userId: this.userId } }),
       categories: this.http.get<any[]>(this.apiCategories)
     }).pipe(
@@ -56,9 +68,6 @@ export class Tab2Page implements OnInit {
           };
         });
       })
-    ).subscribe(
-      data => this.recentLists = data,
-      error => console.error('Erro ao buscar dados: ', error)
     );
   }
 
@@ -79,7 +88,6 @@ export class Tab2Page implements OnInit {
   }
 
   filterItems() {
-    // Normalize the search text: remove extra spaces
     const normalizedSearchText = this.searchText.trim().replace(/\s+/g, ' ').toLowerCase();
 
     if (normalizedSearchText === '') {
@@ -94,11 +102,7 @@ export class Tab2Page implements OnInit {
 
   ngOnInit(): void {
     this.getUserName();
-    this.getLists().subscribe(lists => {
-      this.lists = lists;
-      this.filteredLists = lists; // Initialize filteredLists with all lists
-    });
-    this.getRecentLists();
+    this.loadAllLists();
   }
 
   getUserName(): void {
@@ -108,5 +112,23 @@ export class Tab2Page implements OnInit {
       this.userName = decodedToken.userName;
       this.userId = decodedToken.userId;
     }
+  }
+
+  loadAllLists() {
+    forkJoin([this.getLists(), this.getRecentLists()]).subscribe(
+      ([lists, recentLists]) => {
+        this.lists = lists;
+        this.filteredLists = lists;
+        this.recentLists = recentLists;
+      },
+      error => console.error('Erro ao buscar dados: ', error)
+    );
+  }
+
+  addNewList(newList: any) {
+    console.log('Adicionando nova lista:', newList); // Adicione este log
+    this.lists.push(newList);
+    this.filteredLists = this.lists;
+    this.cdr.detectChanges();
   }
 }

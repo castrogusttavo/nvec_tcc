@@ -21,24 +21,23 @@ $
 delimiter ;
 
 -- trigger para inserir na tabela tb_lista_variavel após inserção em tb_comunidade_usuario
-delimiter $
-create trigger insert_comunidade_usuario
-after insert on tb_comunidade_usuario
-for each row
-begin
-    declare lista_fixa_exists int;
+DELIMITER $
 
-    select count(*)
-    into lista_fixa_exists
-    from tb_lista_fixa 
-    where id_comunidade = new.id_comunidade;
+CREATE TRIGGER after_insert_comunidade_usuario
+AFTER INSERT ON tb_comunidade_usuario
+FOR EACH ROW
+BEGIN
+    DECLARE lista_fixa_exists INT;
 
-    if lista_fixa_exists > 0 then
-        insert into tb_lista_variavel (id_usuario, id_lista_fixa, end_lista)
-        values (new.id_usuario, 
-               (select id_lista_fixa from tb_lista_fixa where id_comunidade = new.id_comunidade limit 1), 
-               '');
-    end if;
-end;
+    SELECT COUNT(*) INTO lista_fixa_exists
+    FROM tb_lista_fixa 
+    WHERE id_lista_fixa = NEW.id_comunidade;
+
+    IF lista_fixa_exists > 0 THEN
+        INSERT INTO tb_lista_variavel (id_usuario, id_lista_fixa, end_lista)
+        VALUES (NEW.id_usuario, NEW.id_comunidade, '');
+    END IF;
+END;
 $
-delimiter ;
+
+DELIMITER ;

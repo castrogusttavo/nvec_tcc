@@ -9,9 +9,11 @@ ion-card{
     margin: 0px 50px 40px 50px;
     min-height: 500px;
     border-radius: 16px;
+    position: relative;
 }
 .content{
     margin: 64px 30px 64px 30px;
+    position: relative;
 }
 .spanPlan{
     color: #000;
@@ -54,3 +56,8 @@ li span{
     font-size: 12px;
 }
 
+.icon-right {
+    position: absolute;
+    top: 0; /* ajuste conforme necessário */
+    right: 0; /* ajuste conforme necessário */
+  }

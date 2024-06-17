@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
-
+import { ListDataService } from '../service/list.service'; 
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab3',
@@ -14,30 +12,29 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class Tab3Page {
 
-  name!:string;
-  category!:any[];
-  description!:string;
-  expense!:string;
-  address!:string;
-  user!:string;
-  date:string = new Date().toISOString().split('T')[0];;
+  name!: string;
+  category!: any[];
+  description!: string;
+  expense!: string;
+  address!: string;
+  user!: string;
+  date: string = new Date().toISOString().split('T')[0];
 
   inputTextValue: string | undefined;
-  categoriaSelecionada!:string;
-  private apiCategories = 'http://localhost:3001/api/categories'
+  categoriaSelecionada!: string;
+  private apiCategories = 'http://localhost:3001/api/categories';
+  private apiListDetails = 'http://localhost:3001/api/lists'; // Adicione esta linha
 
-  getCategories():Observable<any[]>{
+  getCategories(): Observable<any[]> {
     return this.http.get<any[]>(this.apiCategories);
   }
 
-  // dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
-  // selectedOption: string | undefined = 'Kg';
-  // dropdownVisible: boolean = false;
-  // toggleDropdown() {
-  //   this.dropdownVisible = !this.dropdownVisible;
-  // }
-
-  constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private jwtHelper: JwtHelperService,
+    private listDataService: ListDataService
+  ) { }
 
   ngOnInit(): void {
     this.getCategories().subscribe(categories => {
@@ -46,32 +43,22 @@ export class Tab3Page {
     this.getUserName();
   }
 
-  // Função para formatar o contador de caracteres
-  customCounterFormatter(inputLength: number, maxLength: number) {
-    return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
-  }
-
-  // Atualiza o contador de caracteres
-  updateCounter(event: any) {
-    const input = event.target;
-    const maxLength = parseInt(input.getAttribute('maxlength'), 10);
-    const currentLength = input.value.length;
-    const counter = input.parentElement.querySelector('.counter');
-    if (counter) {
-      counter.textContent = currentLength > 0 ? `${currentLength} / ${maxLength}` : '';
-    }
-  }
-
   async createList(event: { preventDefault: () => void; }) {
     event.preventDefault();
     try {
       const response: any = await this.http.post(
         'http://localhost:3001/api/lists',
-        { nm_lista: this.name, rd_lista:this.expense, ds_lista:this.description,id_categoria:this.categoriaSelecionada, id_usuario:this.user, end_lista:this.address }
+        { nm_lista: this.name, rd_lista: this.expense, ds_lista: this.description, id_categoria: this.categoriaSelecionada, id_usuario: this.user, end_lista: this.address }
       ).toPromise();
 
       console.log('Lista criada com sucesso:', response);
-      this.router.navigate(['/tabs/tab1']);
+      
+      // Requisição adicional para buscar detalhes completos da lista
+      const listDetails = await this.http.get(`${this.apiListDetails}/${response.id_lista}`).toPromise();
+
+      console.log('Detalhes da lista:', listDetails);
+      this.listDataService.addNewList(listDetails);
+      this.router.navigate(['/tabs/tab2']);
     } catch (err) {
       console.error('Erro ao criar lista:', err);
     }
@@ -81,54 +68,21 @@ export class Tab3Page {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      this.user = decodedToken.userId; // Supondo que o email do usuário esteja no token com a chave 'userEmail'
+      this.user = decodedToken.userId;
     }
   }
-  // // Dropdown medida
-  // inputTextValue: string | undefined;
-  // dropdownOptions: string[] = ['Kg', 'g', 'L', 'mL', 'M', 'cm'];
-  // selectedOption: string | undefined = 'Kg';
-  // dropdownVisible: boolean = false;
-  // toggleDropdown() {
-  //   this.dropdownVisible = !this.dropdownVisible;
-  // }
 
-  // // Função para formatar o contador de caracteres
-  // customCounterFormatter(inputLength: number, maxLength: number) {
-  //   return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
-  // }
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
+  }
 
-  // // Atualiza o contador de caracteres
-  // updateCounter(event: any) {
-  //   const input = event.target;
-  //   const maxLength = parseInt(input.getAttribute('maxlength'), 10);
-  //   const currentLength = input.value.length;
-  //   const counter = input.parentElement.querySelector('.counter');
-  //   if (counter) {
-  //     counter.textContent = currentLength > 0 ? `${currentLength} / ${maxLength}` : '';
-  //   }
-  // }
-
-  // // FormGroup para validação dos campos de texto
-  // textForm: FormGroup;
-
-  // constructor(private formBuilder: FormBuilder) {
-  //   // Inicialização do FormGroup para validação dos campos de texto
-  //   this.textForm = this.formBuilder.group({
-  //     valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-  //     valor: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-  //     medida: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-  //     quantidade: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-  //   });
-  // }
-
-  // // Formata o valor do campo de texto para o formato de moeda
-  // formatCurrency(event: any) {
-  //   let input = event.target;
-  //   let value = input.value.replace(/\D/g, '');
-  //   value = value.replace(/^0+/, '');
-  //   value = value.replace(/(\d)(\d{2})$/, '$1,$2');
-  //   value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
-  //   input.value = value;
-  // }
+  updateCounter(event: any) {
+    const input = event.target;
+    const maxLength = parseInt(input.getAttribute('maxlength'), 10);
+    const currentLength = input.value.length;
+    const counter = input.parentElement.querySelector('.counter');
+    if (counter) {
+      counter.textContent = currentLength > 0 ? `${currentLength} / ${maxLength}` : '';
+    }
+  }
 }

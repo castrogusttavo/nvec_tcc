@@ -4,6 +4,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { ComunidadeService } from '../service/comunidade.service'; // Import the shared service
+
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -26,15 +28,16 @@ export class Tab4Page implements OnInit {
   invitationCommunitiesCount: number = 0;
   state: string = 'Offline';  // Initialize the state as Offline
 
-  communities!: any[];
-  filteredCommunities: any[] = [];  // Add this line
+  communities: any[] = [];
+  filteredCommunities: any[] = [];
   private apiCommunity = 'http://localhost:3001/api/communities';
 
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private comunidadeService: ComunidadeService  // Inject the shared service
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +52,14 @@ export class Tab4Page implements OnInit {
       this.filteredCommunities = communities;  // Initialize filteredCommunities with all communities
       console.log(this.communities);
     });
+
+    // Subscribe to community changes
+    this.comunidadeService.comunidades$.subscribe(comunidades => {
+      this.communities = comunidades;
+      this.filterItems();  // Ensure filtering logic is applied to updated communities
+    });
+
+    this.fetchCommunities();
   }
 
   fetchCommunities(): Observable<any[]> {
@@ -173,11 +184,10 @@ export class Tab4Page implements OnInit {
   }
 
   navigateToCommunityPage(communityId: number, creatorId: number): void {
-
     if (this.userId === creatorId) {
         this.router.navigate(['/list-adm-community', this.userId, communityId]);
     } else {
         this.router.navigate(['/community-lists-sobre', communityId]);
     }
-}
+  }
 }

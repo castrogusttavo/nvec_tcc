@@ -6,7 +6,7 @@
         [limite]="lista.rd_lista"
         [nomeLista]="lista.nm_lista" 
         [categoriaLista]="lista.ds_categoria" 
-        [gasto]="lista.vl_gasto" 
+        [gasto]="vlGasto.toString()" 
         [dataLista]="formatDate(lista.dt_criacao)">
       </app-card-list-all>
       <button [routerLink]="['/update-list', lista.id_lista]" class="btn-edit">
@@ -22,7 +22,7 @@
     <div class="itens-div">
       <app-card-box action="Criar" description="Adicionar um novo item" [routerLink]="['/create-item', lista.id_lista]"></app-card-box>
 
-      <app-card-item 
+      <app-card-item
       *ngFor="let item of items" 
       [price]="item.vl_uni" 
       [itemName]="item.nm_item" 

@@ -39,7 +39,7 @@
           [routerLink]="['/lists-items', list.id_lista]">
         </app-card-list>
         <p class="no-recent-data" *ngIf="recentLists.length === 0">
-          Você ainda não criou nenhuma lista.
+          Você ainda não criou sua lista de compras. <br> Que tal começar agora?
         </p>
       </div>
     </div>
@@ -80,9 +80,9 @@
             (click)="navigateToCommunityPage(community.id_comunidade, community.id_criador)"
             ></app-card-home-community>
         </ng-container>
-        <ng-template #noRecentCommunities>
-          <p class="no-recent-data">Você ainda não está em nenhuma comunidade.</p>
-        </ng-template>
+        <p class="no-recent-data" *ngIf="recentCommunities.length === 0">
+          Você ainda não faz parte de nenhuma comunidade. <br> Que tal explorar e encontrar a sua?
+        </p>
       </div>
     </div>
   </div>
