@@ -8,6 +8,10 @@
         border-radius: 16px;
         color: #{$N0};
         background: #{$brand1};
+
+        &:nth-child(n+2) {
+            margin: 0;
+        }
     }
     img{
         width: 50px;

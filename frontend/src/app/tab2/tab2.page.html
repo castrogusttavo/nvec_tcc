@@ -22,15 +22,16 @@
       <h1>Listas Recentes</h1>
       <div class="lists scroll-horizontal">
         <app-card-box [routerLink]="['/tabs/tab3']" action="Criar" description="Adicionar uma nova lista" (click)="setOpen(true)"></app-card-box>
-        <app-card-list-recent
-          *ngFor="let list of recentLists"
-          name="list"
-          class="card-blue list"
-          [category]="list.ds_categoria"
-          [name]="list.nm_lista"
-          [description]="list.ds_lista"
-          [routerLink]="['/lists-items', list.id_lista]">
-        </app-card-list-recent>
+        <ng-container *ngFor="let list of recentLists; let i = index">
+          <app-card-list-recent
+            name="list"
+            class="card-{{ i % 2 === 0 ? 'blue' : 'orange' }}"
+            [category]="list.ds_categoria"
+            [name]="list.nm_lista"
+            [description]="list.ds_lista"
+            [routerLink]="['/lists-items', list.id_lista]">
+          </app-card-list-recent>
+        </ng-container>
       </div>
 
       <div class="title-filter">
