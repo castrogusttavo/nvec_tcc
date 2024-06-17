@@ -26,6 +26,8 @@ export class UpdateItemPage implements OnInit {
   measures!: any[];
   status!: any[];
   item: any = {};
+  quantity_measure!: number;
+
 
   medidaSelecionada!: string;
   name: string = '';
@@ -114,7 +116,8 @@ export class UpdateItemPage implements OnInit {
           qtde_item: this.quantity,
           id_status: this.icStatus,
           id_medida: this.medidaSelecionada,
-          id_lista: this.listaId
+          id_lista: this.listaId,
+          qtde_medida_item: this.quantity_measure
         }
       ).toPromise();
   

@@ -23,7 +23,7 @@
 
             <!-- Dropdown medida -->
             <ion-item class="item">
-              <input [placeholder]="(item.qtde_medida_item && item.ds_medida) ? (item.qtde_medida_item + ' ' + item.ds_medida) : 'Medida'">
+              <input name="quantity_measure" [(ngModel)]="quantity_measure" [placeholder]="(item.qtde_medida_item && item.ds_medida) ? (item.qtde_medida_item + ' ' + item.ds_medida) : 'Medida'">
 
               <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;">
                 <ion-select-option *ngFor="let measure of measures" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
