@@ -29,7 +29,9 @@
   </form>
 
   <div class="options">
-    <app-button-small *ngIf="communityId" [routerLink]="['/list-adm-community', userId, communityId]" class="textButton">Cancelar</app-button-small>
+    <!-- Botão Cancelar -->
+    <a style="text-decoration: none;" *ngIf="communityId" [routerLink]="['/list-adm-community', userId, communityId]" class="cancelar">Cancelar</a>
+    <!-- Botão Excluir -->
     <div (click)="deleteCommunity()" class="excluir">
       <p>Excluir</p>
     </div>

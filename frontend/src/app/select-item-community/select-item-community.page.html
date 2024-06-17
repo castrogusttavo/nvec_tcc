@@ -7,10 +7,10 @@
 
   <form (ngSubmit)="updateItemCommunity($event)" class="inputs">
 
-    <input name="name" [(ngModel)]="name" [placeholder]="item?.nm_item || 'Nome'" class="inputText" >
+    <input name="name" [(ngModel)]="name" [placeholder]="item?.nm_item || 'Nome'" class="inputName">
     
     <ion-item class="item">
-      <input class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" [placeholder]="item?.qtde_medida || 'Medida'" >
+      <input type="number" class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" [placeholder]="item?.qtde_medida || 'Medida'" >
       <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
         <ion-select-option *ngFor="let measure of measure" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
       </ion-select>
@@ -20,8 +20,18 @@
 
     
     <div class="buttonBig">
-      <app-button-big >Atualizar item</app-button-big>
+      <app-button-big >Salvar Alterações</app-button-big>
     </div>
   </form>
+
+  <!-- ARRUMAR EIN TATAVO -->
+  <div class="options">
+    <!-- Botão Cancelar -->
+    <a style="text-decoration: none;" [routerLink]="" class="cancelar">Cancelar</a>
+    <!-- Botão Excluir -->
+    <div class="excluir">
+      <p>Excluir</p>
+    </div>
+  </div>
 
 </ion-content>

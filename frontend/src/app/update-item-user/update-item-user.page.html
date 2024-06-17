@@ -11,16 +11,12 @@
     <input [(ngModel)]="formattedPrice"  name="vl_uni" placeholder="Valor Unitario" class="inputText" (input)="formatCurrency($event)">
     
     <div class="buttonBig">
-      <app-button-big>Adicionar item</app-button-big>
+      <app-button-big>Salvar Alterações</app-button-big>
     </div>
   </form>
 
-
-
   <div class="options">
-    <app-button-small [routerLink]="['/comunnity-lists-item', userId, communityId,listId]" class="textButton">Cancelar</app-button-small>
+    <a style="text-decoration: none;" [routerLink]="['/comunnity-lists-item', userId, communityId,listId]" class="cancelar">Cancelar</a>
   </div>
-  
-
 </ion-content>
 
