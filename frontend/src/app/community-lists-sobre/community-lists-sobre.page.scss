@@ -24,6 +24,7 @@
 .yellow-text{
     color: #{$brand2};
     font-weight: 600;
+    font-size: 20px;
 }
 .btn-lists{
     background: #{$brand1};
@@ -144,4 +145,8 @@ h4, h3, h5{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.rs-comp {
+    padding: 10px;
 }
