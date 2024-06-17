@@ -1,6 +1,10 @@
 <ion-content  *ngIf="item" [fullscreen]="true" scrollY="false">
   <img class="forward" src="../../assets/svg/arrow_forward_ios.svg" [routerLink]="['/lists-items', item.id_lista]">
 
+  <div class="imageIlustrator">
+    <img  src="../../assets/svg/defaultImgItem.svg" alt="" style="width: 200px; height: auto;">
+  </div>
+
   <div class="status">
     {{item.ds_status}}
   </div>
