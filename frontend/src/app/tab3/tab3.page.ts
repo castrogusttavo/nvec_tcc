@@ -1,5 +1,5 @@
+import { Component, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ListDataService } from '../service/list.service'; 
@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-
   name!: string;
   category!: any[];
   description!: string;
@@ -19,21 +18,17 @@ export class Tab3Page {
   address!: string;
   user!: string;
   date: string = new Date().toISOString().split('T')[0];
-
   inputTextValue: string | undefined;
   categoriaSelecionada!: string;
   private apiCategories = 'http://localhost:3001/api/categories';
-  private apiListDetails = 'http://localhost:3001/api/lists'; // Adicione esta linha
-
-  getCategories(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiCategories);
-  }
+  private apiListDetails = 'http://localhost:3001/api/lists';
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private jwtHelper: JwtHelperService,
-    private listDataService: ListDataService
+    private listDataService: ListDataService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +36,10 @@ export class Tab3Page {
       this.category = categories;
     });
     this.getUserName();
+  }
+
+  getCategories(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiCategories);
   }
 
   async createList(event: { preventDefault: () => void; }) {
@@ -53,7 +52,6 @@ export class Tab3Page {
 
       console.log('Lista criada com sucesso:', response);
       
-      // Requisição adicional para buscar detalhes completos da lista
       const listDetails = await this.http.get(`${this.apiListDetails}/${response.id_lista}`).toPromise();
 
       console.log('Detalhes da lista:', listDetails);
@@ -84,5 +82,17 @@ export class Tab3Page {
     if (counter) {
       counter.textContent = currentLength > 0 ? `${currentLength} / ${maxLength}` : '';
     }
+  }
+
+  formatCurrency(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value === '') {
+      event.target.value = '';
+      return;
+    }
+    value = (Number(value) / 100).toFixed(2).toString();
+    value = value.replace('.', ',');
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    event.target.value = `R$ ${value}`;
   }
 }
