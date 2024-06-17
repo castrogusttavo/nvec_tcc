@@ -83,12 +83,12 @@
             </div>
 
             <button
-              (click)="procedureComparacao()"
-              class="btn-lists"
-              style="color: #ffffff"
-            >
-              Comparar Listas
-            </button>
+            (click)="usersLists.length >= 2 && procedureComparacao()"
+            class="btn-lists"
+            style="color: #ffffff"
+          >
+            Comparar Listas
+          </button>
 
             <div class="lists-component">
               <div *ngFor="let lists of usersLists" class="lists-users">
