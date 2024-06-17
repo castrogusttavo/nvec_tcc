@@ -6,7 +6,7 @@
         [limite]="lista.rd_lista"
         [nomeLista]="lista.nm_lista" 
         [categoriaLista]="lista.ds_categoria" 
-        [gasto]="vlGasto.toString()" 
+        [gasto]="vlGasto.toFixed(2)" 
         [dataLista]="formatDate(lista.dt_criacao)">
       </app-card-list-all>
       <button [routerLink]="['/update-list', lista.id_lista]" class="btn-edit">
