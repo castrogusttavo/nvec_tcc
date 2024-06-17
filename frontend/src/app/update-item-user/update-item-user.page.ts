@@ -18,9 +18,8 @@ export class UpdateItemUserPage implements OnInit {
   communityId!:string;
   listId!:string;
   itemId!:string;
-
-  vl_uni!:number
-
+  vl_uni: string = '';
+  formattedPrice!: string;
   item:any={};
 
   ngOnInit() {
@@ -60,6 +59,24 @@ export class UpdateItemUserPage implements OnInit {
     } catch (err) {
       console.error('Erro ao atualizar item: ', err);
     }
+  }
+
+  formatCurrency(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value === '') {
+     event.target.value = '';
+     this.vl_uni = '';
+     return
+    }
+    const numericValue = (Number(value) / 100).toFixed(2).toString();
+    this.vl_uni = numericValue;
+    const formattedValue = numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    event.target.value = `R$ ${formattedValue}`;
+  }
+
+  formatValueForDisplay(value: string) {
+    const numericValue = parseFloat(value).toFixed(2);
+    return `R$ ${numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
   }
   
 }

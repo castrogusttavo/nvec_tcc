@@ -30,6 +30,7 @@ export class UpdateItemPage implements OnInit {
   medidaSelecionada!: string;
   name: string = '';
   price: string = '';
+  formattedPrice!: string;  // Variável para armazenar o valor formatado
   quantity: number | null = null;
   icStatus!: string;
 
@@ -99,23 +100,31 @@ export class UpdateItemPage implements OnInit {
     }
   }
 
-  updateItem(event: { preventDefault: () => void; }) {
+  updateItem(event: any) {
     event.preventDefault();
-
+  
     console.log('Name:', this.listaId);
-
+  
     try {
       const response: any = this.http.patch(
         `http://localhost:3001/api/items/${this.itemId}`,
-        { nm_item: this.name, vl_uni: this.price, qtde_item: this.quantity, id_status: this.icStatus, id_medida: this.medidaSelecionada, id_lista: this.listaId }
+        {
+          nm_item: this.name,
+          vl_uni: parseFloat(this.price.replace(/[^\d.,]/g, '').replace(',', '.')),
+          qtde_item: this.quantity,
+          id_status: this.icStatus,
+          id_medida: this.medidaSelecionada,
+          id_lista: this.listaId
+        }
       ).toPromise();
-
+  
       console.log('Item atualizado com sucesso:', response);
       this.router.navigate([`/lists-items/${this.listaId}`]);
     } catch (err) {
       console.error('Erro ao atualizar item: ', err);
     }
   }
+  
 
   deleteItem(): void {
     try {
@@ -128,6 +137,24 @@ export class UpdateItemPage implements OnInit {
     } catch (err) {
       console.error('Erro ao deletar item: ', err);
     }
+  }
+
+  formatCurrency(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value === '') {
+      event.target.value = '';
+      this.price = '';  // Reset the price value
+      return;
+    }
+    const numericValue = (Number(value) / 100).toFixed(2).toString();
+    this.price = numericValue;  // Store the numeric value
+    const formattedValue = numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    event.target.value = `R$ ${formattedValue}`;
+  }
+
+  formatValueForDisplay(value: string): string {
+    const numericValue = parseFloat(value).toFixed(2);
+    return `R$ ${numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
   }
 
   textForm: FormGroup;

@@ -17,7 +17,7 @@
         </ion-select>
       </ion-item>
 
-      <input name="expense" [(ngModel)]="expense" [placeholder]="oldExpense" class="inputText">
+      <input name="expense" [(ngModel)]="formattedExpense" [placeholder]="oldExpense" class="inputText" (input)="formatCurrency($event)">
 
       <input name="address" [(ngModel)]="address" [placeholder]="oldAddress" class="inputText">
       <div>
@@ -29,7 +29,6 @@
     <div class="buttonBig">
       <app-button-big>Alterar Lista</app-button-big>
     </div>
-
   </form>
   
   <div class="options">

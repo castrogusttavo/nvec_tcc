@@ -18,7 +18,8 @@ export class CreateItemPage implements OnInit {
   medidaSelecionada!: string;
 
   name!: string;
-  price!: number;
+  price!: string;  // Modifique para string para lidar com a formatação
+  formattedPrice!: string;  // Variável para armazenar o valor formatado
   quantity!: number;
   quantity_measure!: number;
 
@@ -49,7 +50,7 @@ export class CreateItemPage implements OnInit {
     try {
       const response: any = await this.http.post(
         this.apiItems,
-        { nm_item: this.name, vl_uni: this.price, id_medida: this.medidaSelecionada, qtde_medida_item: this.quantity_measure, qtde_item: this.quantity, id_lista: this.listaId }
+        { nm_item: this.name, vl_uni: this.price.replace(/\D/g, ''), id_medida: this.medidaSelecionada, qtde_medida_item: this.quantity_measure, qtde_item: this.quantity, id_lista: this.listaId }
       ).toPromise();
 
       console.log('Item criado com sucesso:', response);
@@ -63,5 +64,23 @@ export class CreateItemPage implements OnInit {
     } catch (err) {
       console.error('Erro ao criar item:', err);
     }
+  }
+
+  formatCurrency(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value === '') {
+      event.target.value = '';
+      this.price = '';  // Reset the price value
+      return;
+    }
+    const numericValue = (Number(value) / 100).toFixed(2).toString();
+    this.price = numericValue;  // Store the numeric value
+    const formattedValue = numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    event.target.value = `R$ ${formattedValue}`;
+  }
+
+  formatValueForDisplay(value: string): string {
+    const numericValue = parseFloat(value).toFixed(2);
+    return `R$ ${numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
   }
 }
