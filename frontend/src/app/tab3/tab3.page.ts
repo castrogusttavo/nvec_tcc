@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ListDataService } from '../service/list.service'; 
 import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-tab3',
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  insertForm: FormGroup;
   name!: string;
   category!: any[];
   description!: string;
@@ -29,8 +31,17 @@ export class Tab3Page {
     private router: Router,
     private jwtHelper: JwtHelperService,
     private listDataService: ListDataService,
-    private renderer: Renderer2
-  ) { }
+    private renderer: Renderer2,
+    private fb: FormBuilder
+  ) {
+    this.insertForm = this.fb.group({
+      name: ['', [Validators.required]],
+      categoriaSelecionada: ['', [Validators.required]],
+      expense: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      address: ['', [Validators.required]]
+    });
+   }
 
   ngOnInit(): void {
     this.getCategories().subscribe(categories => {

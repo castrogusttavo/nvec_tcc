@@ -5,27 +5,27 @@
     <img width="200px" height="200px" src="../../assets/svg/defaultImgComunnity.svg" alt="">
   </div>
 
-  <form (ngSubmit)="createCommunity($event)">
+  <form [formGroup]="insertForm" (ngSubmit)="createCommunity($event)">
     <div class="inputs">  
-      <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" required>
+      <input formControlName="name" name="name" [(ngModel)]="name" placeholder="Nome" class="inputText" required>
 
       <ion-item class="input item">
-        <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category" required>
+        <ion-select placeholder="Categoria" formControlName="categoriaSelecionada" [(ngModel)]="categoriaSelecionada" name="category" required>
           <ion-select-option *ngFor="let category of category" [value]="category.id_categoria">
             {{ category.ds_categoria }}
           </ion-select-option>
         </ion-select>
       </ion-item>
 
-      <input style="width: 382px;" name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText" required>
+      <input style="width: 382px;" name="address" formControlName="address" [(ngModel)]="address" placeholder="Endereço" class="inputText" required>
       <div>
-        <textarea name="about" [(ngModel)]="about" placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100" required></textarea>
+        <textarea name="about" formControlName="about" [(ngModel)]="about" placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100" required></textarea>
         <div class="counter">{{ customCounterFormatter(about?.length || 0, 100) }}</div>
       </div>
     </div>
 
     <div class="buttonBig">
-      <app-button-big>Criar Comunidade</app-button-big>
+      <app-button-big [disabled]="insertForm.invalid">Criar Comunidade</app-button-big>
     </div>
   </form>
 </ion-content>

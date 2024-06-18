@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ItemService } from '../service/item.service';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-create-item',
@@ -16,6 +17,7 @@ export class CreateItemPage implements OnInit {
   apiItems = 'http://localhost:3001/api/items'; // Certifique-se de que a URL está correta
   measures!: any[];
   medidaSelecionada!: string;
+  insertForm: FormGroup;
 
   name!: string;
   price!: string;  // Modifique para string para lidar com a formatação
@@ -25,7 +27,15 @@ export class CreateItemPage implements OnInit {
 
   listaId!: number;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService, private itemService: ItemService) { }
+  constructor( private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService, private itemService: ItemService) { 
+    this.insertForm = this.fb.group({
+      name: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      quantity: ['', [Validators.required]],
+      quantity_measure: ['', [Validators.required]],
+      medidaSelecionada: ['', [Validators.required]]
+    });
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -45,7 +55,7 @@ export class CreateItemPage implements OnInit {
 
     console.log('Name:', this.name);
     console.log('Valor Unitário:', this.price);
-    console.log('Quantidade:', this.quantity);
+    console.log('Quantidade:', this.medidaSelecionada);
 
     try {
       const response: any = await this.http.post(

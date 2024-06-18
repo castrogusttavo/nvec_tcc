@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, forkJoin, map } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-create-item-comunnity',
@@ -14,10 +14,8 @@ export class CreateItemComunnityPage implements OnInit {
 
   userId!:number;
   communityId!:number;
-
-  apiMeasures = "http://localhost:3001/api/measures"
-
-  constructor(private jwtHelper: JwtHelperService,private route: ActivatedRoute, private http: HttpClient, private router: Router,private formBuilder: FormBuilder) {}
+  
+  insertForm: FormGroup;
 
   name!:string;
   medidaSelecionada!:string;
@@ -25,6 +23,16 @@ export class CreateItemComunnityPage implements OnInit {
   quantity!:number;
   measure_quantity!:number;
 
+  apiMeasures = "http://localhost:3001/api/measures"
+
+  constructor(private fb: FormBuilder, private jwtHelper: JwtHelperService,private route: ActivatedRoute, private http: HttpClient, private router: Router,private formBuilder: FormBuilder) {
+    this.insertForm = this.fb.group({
+      name: ['', [Validators.required]],
+      quantity: ['', [Validators.required]],
+      measure_quantity: ['', [Validators.required]],
+      medidaSelecionada: ['', [Validators.required]]
+        });
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

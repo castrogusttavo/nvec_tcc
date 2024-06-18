@@ -5,30 +5,30 @@
     <img width="200px" height="200px" src="../../assets/svg/defaultImgList.svg" alt="">
   </div>
 
-  <form (ngSubmit)="createList($event)">
+  <form (ngSubmit)="createList($event)"[formGroup]="insertForm">
     <div class="inputs">  
 
-      <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputText">      
+      <input formControlName="name" name="name" [(ngModel)]="name" placeholder="Nome" class="inputText">      
       
       <ion-item class="item input">
-        <ion-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
+        <ion-select formControlName="categoriaSelecionada" placeholder="Categoria" [(ngModel)]="categoriaSelecionada" name="category">
           <ion-select-option *ngFor="let category of category" [value]="category.id_categoria">
             {{ category.ds_categoria }}
           </ion-select-option>
         </ion-select>
       </ion-item>
 
-      <input name="expense" [(ngModel)]="formattedExpense" placeholder="Valor máximo" class="inputText" (input)="formatCurrency($event)">
+      <input name="expense" formControlName="expense" [(ngModel)]="formattedExpense" placeholder="Valor máximo" class="inputText" (input)="formatCurrency($event)">
 
-      <input name="address" [(ngModel)]="address" placeholder="Endereço" class="inputText">
+      <input name="address" formControlName="address" [(ngModel)]="address" placeholder="Endereço" class="inputText">
       <div>
-        <textarea name="description" [(ngModel)]="description" placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
+        <textarea name="description" formControlName="description" [(ngModel)]="description" placeholder="Descrição" class="description" (input)="updateCounter($event)" maxlength="100"></textarea>
         <div class="counter"></div>
       </div>
     </div>
 
     <div class="buttonBig">
-      <app-button-big>Criar Lista</app-button-big>
+      <app-button-big [disabled]="insertForm.invalid">Criar Lista</app-button-big>
     </div>
   </form>
 </ion-content>

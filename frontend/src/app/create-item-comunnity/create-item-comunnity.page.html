@@ -5,22 +5,22 @@
     <img width="200px" height="200px" src="../../assets/svg/defaultImgItem.svg" alt="">
   </div>
 
-  <form (ngSubmit)="createItemCommunity($event)" class="inputs">
+  <form (ngSubmit)="createItemCommunity($event)" [formGroup]="insertForm" class="inputs">
 
-    <input name="name" [(ngModel)]="name" placeholder="Nome" class="inputName">
+    <input formControlName="name" name="name" [(ngModel)]="name" placeholder="Nome" class="inputName">
     
     <ion-item class="item">
-      <input type="number" class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" placeholder="Medida" >
-      <ion-select [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
+      <input formControlName="measure_quantity" type="number" class="inputText" name="measure_quantity" [(ngModel)]="measure_quantity" placeholder="Medida" >
+      <ion-select formControlName="medidaSelecionada" [(ngModel)]="medidaSelecionada" name="measures" style="position: absolute; margin-left: 140px;" >
         <ion-select-option *ngFor="let measure of measure" [value]="measure.id_medida">{{ measure.ds_medida }}</ion-select-option>
       </ion-select>
     </ion-item>
     
-    <input name="quantity" [(ngModel)]="quantity" placeholder="Quantidade" class="inputText" type="number">
+    <input formControlName="quantity" name="quantity" [(ngModel)]="quantity" placeholder="Quantidade" class="inputText" type="number">
 
     
   <div class="buttonBig">
-    <app-button-big >Adicionar item</app-button-big>
+    <app-button-big [disabled]="insertForm.invalid">Adicionar item</app-button-big>
   </div>
   </form>
 

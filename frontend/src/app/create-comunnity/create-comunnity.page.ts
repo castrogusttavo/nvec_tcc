@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ComunidadeService } from '../service/comunidade.service';
 import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-create-comunnity',
@@ -12,6 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class CreateComunnityPage implements OnInit {
   userId!: number;
+  insertForm: FormGroup;
+
 
   name!: string;
   category!: any[];
@@ -25,8 +28,16 @@ export class CreateComunnityPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private jwtHelper: JwtHelperService,
-    private comunidadeService: ComunidadeService
-  ) {}
+    private comunidadeService: ComunidadeService,
+    private fb: FormBuilder
+  ) {
+    this.insertForm = this.fb.group({
+      name: ['', [Validators.required]],
+      about: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      categoriaSelecionada: ['', [Validators.required]]
+        });
+  }
 
   ngOnInit(): void {
     this.getUserName();
