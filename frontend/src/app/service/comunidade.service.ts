@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ComunidadeService {
   private communitiesSubject = new BehaviorSubject<any[]>([]);
-  communities$ = this.communitiesSubject.asObservable();
+  public communities$: Observable<any[]> = this.communitiesSubject.asObservable();
   private apiCommunity = 'http://localhost:3001/api/communities';
 
   constructor(private http: HttpClient) {}
@@ -23,11 +23,8 @@ export class ComunidadeService {
 
   updateCommunity(updatedCommunity: any): void {
     const currentCommunities = this.communitiesSubject.getValue();
-    const communityIndex = currentCommunities.findIndex(c => c.id === updatedCommunity.id);
-    if (communityIndex !== -1) {
-      currentCommunities[communityIndex] = updatedCommunity;
-      this.communitiesSubject.next([...currentCommunities]);
-    }
+    const updatedCommunities = currentCommunities.map(c => c.id_comunidade === updatedCommunity.id_comunidade ? updatedCommunity : c);
+    this.communitiesSubject.next([...updatedCommunities]);
   }
 
   deleteCommunity(communityId: number): void {
