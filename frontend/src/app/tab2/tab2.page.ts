@@ -52,7 +52,11 @@ export class Tab2Page implements OnInit {
     });
 
     this.listDataService.newList$.subscribe(newList => {
-      this.addNewList(newList);
+      console.log('Subscription newList:', newList);  // Log for debugging
+      this.lists = newList;
+      this.filteredLists = newList; // Ensure filtered lists are updated
+      this.filterItems();
+      this.cdr.detectChanges();
     });
   }
 
@@ -103,6 +107,11 @@ export class Tab2Page implements OnInit {
   ngOnInit(): void {
     this.getUserName();
     this.loadAllLists();
+
+    this.listDataService.newList$.subscribe(newList => {
+      console.log('Lists updated, reloading...');  // Log for debugging
+      this.loadAllLists(); // Reload lists on change
+    });
   }
 
   getUserName(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +17,7 @@ export class UpdateListPage implements OnInit {
   description!: string;
   oldDescription!: string;
   expense!: string;
-  formattedExpense!: string;  // Variável para armazenar o valor formatado
+  formattedExpense!: string; // Variável para armazenar o valor formatado
   oldExpense!: string;
   address!: string;
   oldAddress!: string;
@@ -63,7 +63,7 @@ export class UpdateListPage implements OnInit {
       this.oldCategoria = list.id_categoria;
       this.categoriaSelecionada = list.id_categoria;
       this.user = list.id_usuario;
-      this.formattedExpense = this.formatValueForDisplay(list.rd_lista);  // Format the expense value for display
+      this.formattedExpense = this.formatValueForDisplay(list.rd_lista); // Format the expense value for display
     });
   }
 
@@ -84,7 +84,7 @@ export class UpdateListPage implements OnInit {
   async updateList(event: { preventDefault: () => void; }) {
     if (this.listaId) {
       event.preventDefault();
-
+  
       try {
         const response: any = await this.http.patch(
           `${this.apiList}/${this.listaId}`,
@@ -97,14 +97,16 @@ export class UpdateListPage implements OnInit {
             end_lista: this.address
           }
         ).toPromise();
-
-        this.listDataService.updateList(response); // Notify the service
+  
+        this.listDataService.updateList(response);
+        this.listDataService.reloadLists();
         this.router.navigate(['/tabs/tab2']);
       } catch (err) {
         console.error('Erro ao atualizar lista:', err);
       }
     }
   }
+  
 
   getUserId(): void {
     const token = localStorage.getItem('token');
@@ -132,11 +134,11 @@ export class UpdateListPage implements OnInit {
     let value = event.target.value.replace(/\D/g, '');
     if (value === '') {
       event.target.value = '';
-      this.expense = '';  // Reset the expense value
+      this.expense = ''; // Reset the expense value
       return;
     }
     const numericValue = (Number(value) / 100).toFixed(2).toString();
-    this.expense = numericValue;  // Store the numeric value
+    this.expense = numericValue; // Store the numeric value
     const formattedValue = numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     event.target.value = `R$ ${formattedValue}`;
   }
