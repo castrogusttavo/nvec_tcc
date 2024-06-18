@@ -29,7 +29,7 @@ export class ComunidadeService {
 
   deleteCommunity(communityId: number): void {
     const currentCommunities = this.communitiesSubject.getValue();
-    const updatedCommunities = currentCommunities.filter(c => c.id !== communityId);
+    const updatedCommunities = currentCommunities.filter(c => c.id_comunidade !== communityId);
     this.communitiesSubject.next([...updatedCommunities]);
   }
 
