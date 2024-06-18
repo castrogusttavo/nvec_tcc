@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ComunidadeService {
   private communitiesSubject = new BehaviorSubject<any[]>([]);
   communities$ = this.communitiesSubject.asObservable();
+  private apiCommunity = 'http://localhost:3001/api/communities';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   setCommunities(communities: any[]): void {
     this.communitiesSubject.next(communities);
@@ -32,5 +34,9 @@ export class ComunidadeService {
     const currentCommunities = this.communitiesSubject.getValue();
     const updatedCommunities = currentCommunities.filter(c => c.id !== communityId);
     this.communitiesSubject.next([...updatedCommunities]);
+  }
+
+  loadCommunity(communityId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiCommunity}/${communityId}`);
   }
 }

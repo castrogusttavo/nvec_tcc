@@ -11,7 +11,6 @@ import { ComunidadeService } from '../service/comunidade.service';
   styleUrls: ['./update-comunnity.page.scss'],
 })
 export class UpdateComunnityPage implements OnInit {
-
   userId!: number;
   communityId!: number;
   
@@ -77,7 +76,12 @@ export class UpdateComunnityPage implements OnInit {
 
       this.comunidadeService.updateCommunity(updatedCommunity);
 
-      this.router.navigate(['/tabs/tab4']);
+      // Load the updated community to refresh the data in Tab4Page
+      this.comunidadeService.loadCommunity(this.communityId).subscribe(updatedCommunity => {
+        this.comunidadeService.updateCommunity(updatedCommunity);
+      });
+
+      this.router.navigate(['/tabs/tab4'], { replaceUrl: true });
     } catch (err) {
       console.error('Erro ao atualizar comunidade:', err);
     }
@@ -125,7 +129,7 @@ export class UpdateComunnityPage implements OnInit {
       response => {
         console.log('Comunidade excluída com sucesso:', response);
         this.comunidadeService.deleteCommunity(this.communityId);
-        this.router.navigate(['/tabs/tab4']);
+        this.router.navigate(['/tabs/tab4'], { replaceUrl: true });
       },
       error => {
         console.error('Erro ao excluir comunidade:', error);

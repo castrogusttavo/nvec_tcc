@@ -60,7 +60,7 @@ export class Tab4Page implements OnInit {
   }
 
   fetchCommunities(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiCommunity, { params: { userId: this.userId } });
+    return this.http.get<any[]>(this.apiCommunity, { params: { userId: this.userId.toString() } });
   }
 
   onSearchInput(event: any) {
@@ -139,7 +139,7 @@ export class Tab4Page implements OnInit {
 
   fetchCreatedCommunitiesCount(): void {
     this.http.get<any>(`http://localhost:3001/api/createdCommunitiesCount`, {
-      params: { userId: this.userId }
+      params: { userId: this.userId.toString() }
     }).subscribe(
       (data) => {
         this.createdCommunitiesCount = data;
@@ -153,7 +153,7 @@ export class Tab4Page implements OnInit {
 
   fetchLoginCommunitiesCount(): void {
     this.http.get<any>(`http://localhost:3001/api/loginCommunitiesCount`, {
-      params: { userId: this.userId }
+      params: { userId: this.userId.toString() }
     }).subscribe(
       (data) => {
         this.loginCommunitiesCount = data;
@@ -167,7 +167,7 @@ export class Tab4Page implements OnInit {
 
   fetchInvitationCommunitiesCount(): void {
     this.http.get<any>(`http://localhost:3001/api/invitationCommunitiesCount`, {
-      params: { userId: this.userId }
+      params: { userId: this.userId.toString() }
     }).subscribe(
       (data) => {
         this.invitationCommunitiesCount = data.invitationCount;
@@ -191,3 +191,4 @@ export class Tab4Page implements OnInit {
     }
   }
 }
+
