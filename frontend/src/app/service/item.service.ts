@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class ItemService {
   private vlGastoSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public vlGasto$: Observable<number> = this.vlGastoSubject.asObservable();
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   setItems(items: any[]): void {
     console.log('Configurando itens:', items);
@@ -32,6 +32,13 @@ export class ItemService {
     this.calculateVlGasto(updatedItems);
   }
 
+  updateItem(updatedItem: any): void {
+    const currentItems = this.itemsSubject.getValue();
+    const updatedItems = currentItems.map(item => item.id_item === updatedItem.id_item ? updatedItem : item);
+    this.itemsSubject.next(updatedItems);
+    this.calculateVlGasto(updatedItems);
+  }
+
   updateItemStatus(itemId: number, status: boolean): void {
     const currentItems = this.itemsSubject.getValue();
     const updatedItems = currentItems.map(item => {
@@ -42,6 +49,15 @@ export class ItemService {
     });
     this.itemsSubject.next(updatedItems);
     this.calculateVlGasto(updatedItems);
+  }
+
+  loadListAndItems(listId: number) {
+    forkJoin({
+      list: this.http.get<any>(`http://localhost:3001/api/list/${listId}`),
+      items: this.http.get<any[]>(`http://localhost:3001/api/items`, { params: { listId: listId.toString() } })
+    }).subscribe(({ list, items }) => {
+      this.setItems(items);
+    });
   }
 
   private calculateVlGasto(items: any[]): void {

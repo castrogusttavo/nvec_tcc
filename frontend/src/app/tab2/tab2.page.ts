@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ListDataService } from '../service/list.service';
@@ -34,11 +35,12 @@ export class Tab2Page implements OnInit {
   private apiCategories = "http://localhost:3001/api/categories";
 
   textForm: FormGroup;
+  searchText: string = '';
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private http: HttpClient, 
-    private jwtHelper: JwtHelperService, 
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
     private cdr: ChangeDetectorRef,
     private router: Router,
     private listDataService: ListDataService
@@ -80,8 +82,6 @@ export class Tab2Page implements OnInit {
     this.filteredLists = this.lists;
   }
 
-  searchText: string = '';
-
   onSearchInput(event: any) {
     this.searchText = event.target.value;
     this.filterItems();
@@ -120,13 +120,14 @@ export class Tab2Page implements OnInit {
         this.lists = lists;
         this.filteredLists = lists;
         this.recentLists = recentLists;
+        
+        this.cdr.detectChanges();
       },
       error => console.error('Erro ao buscar dados: ', error)
     );
   }
 
   addNewList(newList: any) {
-    console.log('Adicionando nova lista:', newList); // Adicione este log
     this.lists.push(newList);
     this.filteredLists = this.lists;
     this.cdr.detectChanges();

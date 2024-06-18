@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ComunidadeService } from '../service/comunidade.service';
 
 @Component({
   selector: 'app-update-comunnity',
@@ -33,7 +33,8 @@ export class UpdateComunnityPage implements OnInit {
     private jwtHelper: JwtHelperService,
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private comunidadeService: ComunidadeService
   ) {}
 
   ngOnInit() {
@@ -49,7 +50,6 @@ export class UpdateComunnityPage implements OnInit {
   }
 
   async updateCommunity(event: { preventDefault: () => void; }) {
-
     event.preventDefault();
 
     try {
@@ -64,6 +64,19 @@ export class UpdateComunnityPage implements OnInit {
       ).toPromise();
 
       console.log('Comunidade atualizada com sucesso:', response);
+
+      // Atualizar o serviço com os novos dados da comunidade
+      const updatedCommunity = {
+        id: this.communityId,
+        nm_comunidade: this.name,
+        id_categoria: this.categoriaSelecionada,
+        sb_comunidade: this.about,
+        end_comunidade: this.address,
+        userId: this.userId,
+        ...response  // Inclua quaisquer outros dados retornados pela API
+      };
+
+      this.comunidadeService.updateCommunity(updatedCommunity);
 
       this.router.navigate(['/tabs/tab4']);
     } catch (err) {
@@ -111,7 +124,11 @@ export class UpdateComunnityPage implements OnInit {
   deleteCommunity(): void {
     this.http.delete<any>(`${this.apiCommunity}/${this.userId}/${this.communityId}`).subscribe(
       response => {
-        console.log('Comnunidade excluída com sucesso:', response);
+        console.log('Comunidade excluída com sucesso:', response);
+
+        // Remover a comunidade do serviço
+        this.comunidadeService.deleteCommunity(this.communityId);
+
         this.router.navigate(['/tabs/tab4']);
       },
       error => {

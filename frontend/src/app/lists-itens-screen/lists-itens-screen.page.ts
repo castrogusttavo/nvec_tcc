@@ -11,19 +11,17 @@ import { ItemService } from '../service/item.service';
   styleUrls: ['./lists-itens-screen.page.scss'],
 })
 export class ListsItensScreenPage implements OnInit {
-
   public listaId!: string;
   items!: any[];
   lista: any = {};
   categories!: any[];
   vlGasto: number = 0;
+
   apiList = `http://localhost:3001/api/list`;
   apiCategories = "http://localhost:3001/api/categories";
   apiItems = 'http://localhost:3001/api/items';
   apiMeasures = "http://localhost:3001/api/measures";
   apiStatus = "http://localhost:3001/api/status";
-  measures!: any[];
-  status!: any[];
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private itemService: ItemService) { }
 
@@ -33,10 +31,10 @@ export class ListsItensScreenPage implements OnInit {
     });
     this.getList();
     this.getItems();
-    this.itemService.items$.subscribe(items => {
+    this.itemService.items$.subscribe((items: any[]) => {
       this.items = items;
     });
-    this.itemService.vlGasto$.subscribe(vlGasto => {
+    this.itemService.vlGasto$.subscribe((vlGasto: number) => {
       this.vlGasto = vlGasto;
     });
   }
@@ -56,14 +54,10 @@ export class ListsItensScreenPage implements OnInit {
         measures: this.http.get<any[]>(this.apiMeasures),
         status: this.http.get<any[]>(this.apiStatus)
       }).pipe(
-        map(({ items, measures, status }) => {
+        map(({ items, measures, status }: { items: any[], measures: any[], status: any[] }) => {
           return items.map(item => {
-            const measure = measures.find(
-              medida => medida.id_medida === item.id_medida
-            );
-            const ic_status = status.find(
-              status => status.id_status === item.id_status
-            );
+            const measure = measures.find(medida => medida.id_medida === item.id_medida);
+            const ic_status = status.find(status => status.id_status === item.id_status);
             return {
               ...item,
               ds_medida: measure ? measure.ds_medida : 'Medida Desconhecida',
@@ -93,8 +87,8 @@ export class ListsItensScreenPage implements OnInit {
         categories: this.http.get<any[]>(this.apiCategories)
       }).subscribe(
         ({ list, categories }) => {
-          console.log('Dados da lista:', list); // Adiciona este console.log para exibir os dados da lista
-          console.log('Dados das categorias:', categories); // Adiciona este console.log para exibir os dados das categorias
+          console.log('Dados da lista:', list);
+          console.log('Dados das categorias:', categories);
 
           this.categories = categories;
 
@@ -120,8 +114,7 @@ export class ListsItensScreenPage implements OnInit {
 
     const statusId = status ? 2 : 1;
 
-    this.http.patch(`http://localhost:3001/api/items/${itemId}`,
-      { id_status: statusId })
+    this.http.patch(`http://localhost:3001/api/items/${itemId}`, { id_status: statusId })
       .subscribe(
         response => {
           console.log("Status atualizado: ", response);
@@ -130,6 +123,16 @@ export class ListsItensScreenPage implements OnInit {
         error => {
           console.error("Erro ao atualizar status do item: ", error);
         }
-      )
+      );
+  }
+
+  loadListAndItems(listId: number) {
+    forkJoin({
+      list: this.http.get<any>(`http://localhost:3001/api/list/${listId}`),
+      items: this.http.get<any[]>(`http://localhost:3001/api/items`, { params: { listId: listId.toString() } })
+    }).subscribe(({ list, items }) => {
+      this.itemService.setItems(items);
+      this.items = items; // Atualizar localmente também, se necessário
+    });
   }
 }

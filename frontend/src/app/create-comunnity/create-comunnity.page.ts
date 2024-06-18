@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ComunidadeService } from '../service/comunidade.service';  // Import the shared service
+import { ComunidadeService } from '../service/comunidade.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-comunnity',
@@ -11,6 +12,7 @@ import { ComunidadeService } from '../service/comunidade.service';  // Import th
 })
 export class CreateComunnityPage implements OnInit {
   userId!: number;
+
   name!: string;
   category!: any[];
   about!: string;
@@ -18,13 +20,12 @@ export class CreateComunnityPage implements OnInit {
   inputTextValue: string | undefined;
   categoriaSelecionada!: string;
   private apiCategories = 'http://localhost:3001/api/categories';
-  private apiCommunities = 'http://localhost:3001/api/communities';  // Add API endpoint for communities
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private jwtHelper: JwtHelperService,
-    private comunidadeService: ComunidadeService  // Inject the shared service
+    private comunidadeService: ComunidadeService
   ) {}
 
   ngOnInit(): void {
@@ -34,16 +35,14 @@ export class CreateComunnityPage implements OnInit {
     });
   }
 
-  getCategories() {
+  getCategories(): Observable<any[]> {
     return this.http.get<any[]>(this.apiCategories);
   }
 
-  // Função para formatar o contador de caracteres
   customCounterFormatter(inputLength: number, maxLength: number) {
     return inputLength > 0 ? `${inputLength} / ${maxLength}` : '';
   }
 
-  // Atualiza o contador de caracteres
   updateCounter(event: any) {
     const input = event.target;
     const maxLength = parseInt(input.getAttribute('maxlength'), 10);
@@ -56,29 +55,38 @@ export class CreateComunnityPage implements OnInit {
 
   async createCommunity(event: { preventDefault: () => void; }) {
     event.preventDefault();
-
+  
     try {
       const response: any = await this.http.post(
-        this.apiCommunities,
+        'http://localhost:3001/api/communities',
         {
           nm_comunidade: this.name,
           id_categoria: this.categoriaSelecionada,
           sb_comunidade: this.about,
           end_comunidade: this.address,
-          userId: this.userId
+          userId: this.userId,
         }
       ).toPromise();
-
-      // Fetch the complete details of the newly created community
-      const communityDetails: any = await this.http.get(`${this.apiCommunities}/${response.id_comunidade}`).toPromise();
-
-      console.log('Comunidade criada com sucesso:', communityDetails);
-      this.comunidadeService.addComunidade(communityDetails);  // Notify the service about the new community
+  
+      console.log('Comunidade criada com sucesso:', response);
+  
+      // Assegure-se de que a nova comunidade tenha todos os dados necessários
+      const newCommunity = {
+        nm_comunidade: this.name,
+        id_categoria: this.categoriaSelecionada,
+        sb_comunidade: this.about,
+        end_comunidade: this.address,
+        userId: this.userId,
+        ...response  // Inclua quaisquer outros dados retornados pela API
+      };
+  
+      this.comunidadeService.addCommunity(newCommunity);
       this.router.navigate(['/tabs/tab4']);
     } catch (err) {
       console.error('Erro ao criar comunidade:', err);
     }
   }
+  
 
   getUserName(): void {
     const token = localStorage.getItem('token');

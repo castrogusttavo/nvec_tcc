@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ListDataService } from '../service/list.service';
 
 @Component({
   selector: 'app-update-list',
@@ -33,7 +34,7 @@ export class UpdateListPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private jwtHelper: JwtHelperService,
-    private renderer: Renderer2
+    private listDataService: ListDataService
   ) { }
 
   ngOnInit(): void {
@@ -84,18 +85,12 @@ export class UpdateListPage implements OnInit {
     if (this.listaId) {
       event.preventDefault();
 
-      console.log('Name:', this.name);
-      console.log('Categoria:', this.categoriaSelecionada);
-      console.log('Descrição:', this.description);
-      console.log('Endereço:', this.address);
-      console.log('Valor máximo:', this.expense);
-
       try {
         const response: any = await this.http.patch(
           `${this.apiList}/${this.listaId}`,
           {
             nm_lista: this.name,
-            rd_lista: this.expense,  // Use the unformatted value
+            rd_lista: this.expense,
             ds_lista: this.description,
             id_categoria: this.categoriaSelecionada,
             id_usuario: this.user,
@@ -103,8 +98,8 @@ export class UpdateListPage implements OnInit {
           }
         ).toPromise();
 
-        console.log('Lista atualizada com sucesso:', response);
-        this.router.navigate(['/tabs/tab1']);
+        this.listDataService.updateList(response); // Notify the service
+        this.router.navigate(['/tabs/tab2']);
       } catch (err) {
         console.error('Erro ao atualizar lista:', err);
       }

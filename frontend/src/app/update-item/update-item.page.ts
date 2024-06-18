@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ItemService } from '../service/item.service';
 
 @Component({
   selector: 'app-update-item',
@@ -28,19 +29,21 @@ export class UpdateItemPage implements OnInit {
   item: any = {};
   quantity_measure!: number;
 
-
   medidaSelecionada!: string;
   name: string = '';
   price: string = '';
-  formattedPrice!: string;  // Variável para armazenar o valor formatado
+  formattedPrice!: string;
   quantity: number | null = null;
   icStatus!: string;
+
+  textForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private itemService: ItemService
   ) {
     this.textForm = this.formBuilder.group({
       valorMaximo: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
@@ -104,11 +107,11 @@ export class UpdateItemPage implements OnInit {
 
   updateItem(event: any) {
     event.preventDefault();
-  
+
     console.log('Name:', this.listaId);
-  
+
     try {
-      const response: any = this.http.patch(
+      this.http.patch(
         `http://localhost:3001/api/items/${this.itemId}`,
         {
           nm_item: this.name,
@@ -119,24 +122,27 @@ export class UpdateItemPage implements OnInit {
           id_lista: this.listaId,
           qtde_medida_item: this.quantity_measure
         }
-      ).toPromise();
-  
-      console.log('Item atualizado com sucesso:', response);
-      this.router.navigate([`/lists-items/${this.listaId}`]);
+      ).toPromise().then((response: any) => {
+        console.log('Item atualizado com sucesso:', response);
+        this.itemService.updateItem(response);
+        this.router.navigate([`/lists-items/${this.listaId}`])
+          .then(() => {
+            this.itemService.loadListAndItems(this.listaId);
+          });
+      });
     } catch (err) {
       console.error('Erro ao atualizar item: ', err);
     }
   }
-  
 
   deleteItem(): void {
     try {
-      const response: any = this.http.delete(
+      this.http.delete(
         `http://localhost:3001/api/items/${this.itemId}`
-      ).toPromise();
-
-      console.log('Item deletado com sucesso:', response);
-      this.router.navigate(['/tabs/tab1']);
+      ).toPromise().then((response: any) => {
+        console.log('Item deletado com sucesso:', response);
+        this.router.navigate(['/tabs/tab1']);
+      });
     } catch (err) {
       console.error('Erro ao deletar item: ', err);
     }
@@ -159,6 +165,4 @@ export class UpdateItemPage implements OnInit {
     const numericValue = parseFloat(value).toFixed(2);
     return `R$ ${numericValue.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
   }
-
-  textForm: FormGroup;
 }
