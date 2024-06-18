@@ -65,7 +65,6 @@ export class UpdateComunnityPage implements OnInit {
 
       console.log('Comunidade atualizada com sucesso:', response);
 
-      // Atualizar o serviço com os novos dados da comunidade
       const updatedCommunity = {
         id: this.communityId,
         nm_comunidade: this.name,
@@ -73,7 +72,7 @@ export class UpdateComunnityPage implements OnInit {
         sb_comunidade: this.about,
         end_comunidade: this.address,
         userId: this.userId,
-        ...response  // Inclua quaisquer outros dados retornados pela API
+        ...response
       };
 
       this.comunidadeService.updateCommunity(updatedCommunity);
@@ -93,7 +92,7 @@ export class UpdateComunnityPage implements OnInit {
       this.oldName = community.nm_comunidade;
       this.oldAbout = community.sb_comunidade;
       this.oldAddress = community.end_comunidade;
-      this.oldCategoria = community.ds_categoria; // Assuming ds_categoria is the display name of the category
+      this.oldCategoria = community.ds_categoria; 
       this.categoriaSelecionada = community.id_categoria;
       this.userId = community.id_usuario;
     });
@@ -125,10 +124,7 @@ export class UpdateComunnityPage implements OnInit {
     this.http.delete<any>(`${this.apiCommunity}/${this.userId}/${this.communityId}`).subscribe(
       response => {
         console.log('Comunidade excluída com sucesso:', response);
-
-        // Remover a comunidade do serviço
         this.comunidadeService.deleteCommunity(this.communityId);
-
         this.router.navigate(['/tabs/tab4']);
       },
       error => {

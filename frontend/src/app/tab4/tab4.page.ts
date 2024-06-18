@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ComunidadeService } from '../service/comunidade.service';
 import { Observable } from 'rxjs';
@@ -28,7 +27,7 @@ export class Tab4Page implements OnInit {
   invitationCommunitiesCount: number = 0;
   state: string = 'Offline';
 
-  communities: any[] = [];
+  communities!: any[];
   filteredCommunities: any[] = [];
   private apiCommunity = 'http://localhost:3001/api/communities';
 
@@ -51,6 +50,7 @@ export class Tab4Page implements OnInit {
       this.communities = communities;
       this.filteredCommunities = communities;
       this.filterItems(); // Ensure the items are filtered based on the current search text
+      this.cdr.detectChanges(); // Detect changes after updating communities
     });
 
     // Fetch initial communities
@@ -84,6 +84,8 @@ export class Tab4Page implements OnInit {
     this.filteredCommunities = this.communities.filter(community =>
       community.nm_comunidade.toLowerCase().includes(normalizedSearchText)
     );
+
+    this.cdr.detectChanges(); // Detect changes after filtering
   }
 
   getUserName(): void {
@@ -92,7 +94,7 @@ export class Tab4Page implements OnInit {
       const decodedToken = this.jwtHelper.decodeToken(token);
       this.userName = decodedToken.userName;
       this.userId = decodedToken.userId;
-      this.cdr.detectChanges();
+      this.cdr.detectChanges(); // Detect changes after updating username and userId
     }
   }
 
@@ -104,6 +106,7 @@ export class Tab4Page implements OnInit {
       this.fetchCreatedCommunitiesCount();
       this.fetchLoginCommunitiesCount();
       this.fetchInvitationCommunitiesCount();
+      this.cdr.detectChanges(); // Detect changes after updating userId and counts
     }
   }
 
@@ -116,10 +119,11 @@ export class Tab4Page implements OnInit {
       } catch (error) {
         this.state = 'Offline';
       }
+      this.cdr.detectChanges(); // Detect changes after updating user state
     } else {
       this.state = 'Offline';
+      this.cdr.detectChanges(); // Detect changes after updating user state
     }
-    this.cdr.detectChanges();
   }
 
   checkTokenChanges(): void {
@@ -139,6 +143,7 @@ export class Tab4Page implements OnInit {
     }).subscribe(
       (data) => {
         this.createdCommunitiesCount = data;
+        this.cdr.detectChanges(); // Detect changes after updating counts
       },
       (error) => {
         console.error('Erro ao buscar o número de comunidades criadas', error);
@@ -152,6 +157,7 @@ export class Tab4Page implements OnInit {
     }).subscribe(
       (data) => {
         this.loginCommunitiesCount = data;
+        this.cdr.detectChanges(); // Detect changes after updating counts
       },
       (error) => {
         console.error('Erro ao buscar o número de comunidades acessadas', error);
@@ -165,6 +171,7 @@ export class Tab4Page implements OnInit {
     }).subscribe(
       (data) => {
         this.invitationCommunitiesCount = data.invitationCount;
+        this.cdr.detectChanges(); // Detect changes after updating counts
       },
       (error) => {
         console.error('Erro ao buscar o número de convites de comunidades', error);
