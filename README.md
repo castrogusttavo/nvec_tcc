@@ -25,22 +25,13 @@ https://github.com/castrogusttavo/nvec_tcc
         ```bash
         npm install
         ```
-        ```bash
-        npm init -y
-        ```
    2. Na pasta frontend (instalar o Angular e Node_Modules):
         ```bash
-        ionic serve
+        npm i 
         ```
    3. Na pasta backend:
         ```bash
-        npm init -y
-        ```
-        ```bash
-        npm install express mysql body-parser
-        ```
-        ```bash
-        npm install mysql2 axios
+        npm i
         ```
 
 ## Uso
@@ -50,7 +41,7 @@ https://github.com/castrogusttavo/nvec_tcc
         ```
    2. Na pasta backend:
         ```bash
-        npm run dev
+        npm run dev ou node src/server.js
         ```
     
 
